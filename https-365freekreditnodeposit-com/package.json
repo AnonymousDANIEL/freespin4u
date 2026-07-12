@@ -1,0 +1,10 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "node work/secure-server.mjs",
+    "preview": "node work/static-server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
