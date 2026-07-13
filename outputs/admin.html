@@ -1,0 +1,2728 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Offer Admin | Free Credit Slot Malaysia</title>
+    <style>
+      :root {
+        --bg: #0b0d12;
+        --panel: #141922;
+        --panel-2: #1b222e;
+        --paper: #f7f3e6;
+        --muted: #aeb7c5;
+        --line: #303948;
+        --gold: #f5c45a;
+        --gold-2: #d79c32;
+        --teal: #20c4b2;
+        --red: #e6534a;
+        --green: #5bd38a;
+        --white: #ffffff;
+        --ink: #151515;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--white);
+        font-family: Arial, "Microsoft YaHei", "PingFang SC", sans-serif;
+        line-height: 1.5;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      input,
+      textarea,
+      select {
+        font: inherit;
+      }
+
+      .shell {
+        width: min(1240px, calc(100% - 36px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(11, 13, 18, 0.94);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+        backdrop-filter: blur(14px);
+      }
+
+      .nav {
+        min-height: 66px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 900;
+        color: var(--paper);
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        border: 2px solid var(--gold);
+        color: var(--gold);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .btn {
+        min-height: 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 900;
+        line-height: 1.1;
+      }
+
+      .btn-primary {
+        color: #1b1201;
+        background: linear-gradient(180deg, var(--gold), var(--gold-2));
+      }
+
+      .btn-secondary {
+        color: var(--paper);
+        border-color: rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.07);
+      }
+
+      .btn-danger {
+        color: var(--white);
+        background: rgba(230, 83, 74, 0.18);
+        border-color: rgba(230, 83, 74, 0.44);
+      }
+
+      .btn-small {
+        min-height: 34px;
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+
+      main {
+        padding: 28px 0 44px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 8px;
+        color: var(--paper);
+        font-size: 34px;
+        line-height: 1.1;
+      }
+
+      .hero p {
+        margin-bottom: 0;
+        color: var(--muted);
+        max-width: 700px;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        min-width: 360px;
+      }
+
+      .stat {
+        min-height: 78px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+
+      .stat strong {
+        display: block;
+        color: var(--gold);
+        font-size: 22px;
+        line-height: 1.1;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(360px, 430px) 1fr;
+        gap: 18px;
+        align-items: start;
+      }
+
+      .site-panel {
+        margin-bottom: 18px;
+      }
+
+      .social-layout {
+        margin-top: 18px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+
+      .panel-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .panel-head h2 {
+        margin-bottom: 0;
+        color: var(--paper);
+        font-size: 18px;
+      }
+
+      .panel-body {
+        padding: 16px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .field {
+        display: grid;
+        gap: 6px;
+      }
+
+      .field.full {
+        grid-column: 1 / -1;
+      }
+
+      label {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .hint {
+        color: var(--muted);
+        font-size: 12px;
+        margin: 0;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        min-height: 40px;
+        padding: 9px 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #0f141d;
+        color: var(--white);
+        outline: none;
+      }
+
+      textarea {
+        min-height: 78px;
+        resize: vertical;
+      }
+
+      input:focus,
+      textarea:focus,
+      select:focus {
+        border-color: rgba(245, 196, 90, 0.7);
+      }
+
+      input[type="color"] {
+        min-height: 46px;
+        padding: 4px;
+        cursor: pointer;
+      }
+
+      .color-settings {
+        margin-top: 14px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+
+      .color-settings h3 {
+        margin-bottom: 12px;
+        color: var(--paper);
+        font-size: 15px;
+      }
+
+      .check-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 40px;
+      }
+
+      .check-row input {
+        width: 18px;
+        min-height: 18px;
+      }
+
+      .file-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        align-items: end;
+      }
+
+      .image-preview {
+        min-height: 76px;
+        display: grid;
+        place-items: center;
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        color: var(--muted);
+        background: #0f141d;
+        overflow: hidden;
+        font-size: 12px;
+        text-align: center;
+      }
+
+      .image-preview img {
+        width: 100%;
+        max-height: 170px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .logo-preview {
+        width: 76px;
+        min-height: 76px;
+      }
+
+      .language-group {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-left-width: 5px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+
+      .language-group h3 {
+        margin-bottom: 0;
+        color: var(--paper);
+        font-size: 15px;
+      }
+
+      .language-group.lang-zh {
+        border-left-color: var(--gold);
+        background: rgba(245, 196, 90, 0.08);
+      }
+
+      .language-group.lang-en {
+        border-left-color: #64a8ff;
+        background: rgba(100, 168, 255, 0.08);
+      }
+
+      .language-group.lang-ms {
+        border-left-color: var(--teal);
+        background: rgba(32, 196, 178, 0.08);
+      }
+
+      .language-tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 24px;
+        width: fit-content;
+        padding: 4px 8px;
+        border-radius: 7px;
+        color: #06120b;
+        font-size: 12px;
+        font-weight: 900;
+        background: var(--gold);
+      }
+
+      .lang-en .language-tag {
+        color: #07101d;
+        background: #64a8ff;
+      }
+
+      .lang-ms .language-tag {
+        color: #06120b;
+        background: var(--teal);
+      }
+
+      .advanced-copy {
+        display: grid;
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .copy-section {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(15, 20, 29, 0.72);
+        overflow: hidden;
+      }
+
+      .copy-section summary {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        padding: 11px 13px;
+        cursor: pointer;
+        color: var(--paper);
+        font-weight: 900;
+      }
+
+      .copy-section-body {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        padding: 0 13px 13px;
+      }
+
+      .form-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .company-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .company-row {
+        display: grid;
+        grid-template-columns: 54px 1fr auto;
+        align-items: center;
+        gap: 12px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel-2);
+      }
+
+      .badge {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border: 2px solid var(--gold);
+        border-radius: 8px;
+        color: var(--ink);
+        background: var(--paper);
+        font-weight: 900;
+        overflow: hidden;
+      }
+
+      .badge img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .company-main h3 {
+        margin-bottom: 4px;
+        color: var(--paper);
+        font-size: 18px;
+      }
+
+      .company-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        min-height: 24px;
+        padding: 4px 8px;
+        border-radius: 7px;
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .chip.active {
+        color: #06120b;
+        background: var(--green);
+      }
+
+      .chip.off {
+        color: var(--white);
+        background: rgba(230, 83, 74, 0.72);
+      }
+
+      .row-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: end;
+        gap: 8px;
+        max-width: 300px;
+      }
+
+      .data-tools {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .data-tools textarea {
+        min-height: 150px;
+        font-family: Consolas, monospace;
+        font-size: 12px;
+      }
+
+      .domain-panel {
+        margin-top: 18px;
+      }
+
+      .domain-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .domain-table-wrap {
+        width: 100%;
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel-2);
+      }
+
+      .domain-table {
+        width: 100%;
+        min-width: 980px;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+
+      .domain-table th,
+      .domain-table td {
+        padding: 11px 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        text-align: left;
+        vertical-align: middle;
+      }
+
+      .domain-table th {
+        color: var(--paper);
+        background: #2c3138;
+        font-size: 13px;
+      }
+
+      .domain-table td:last-child,
+      .domain-table th:last-child {
+        border-right: 0;
+      }
+
+      .domain-table tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .domain-table a {
+        color: #7fb2ff;
+        text-decoration: underline;
+      }
+
+      .domain-row-ok td {
+        background: rgba(73, 214, 130, 0.13);
+      }
+
+      .domain-row-warning td {
+        background: rgba(245, 196, 90, 0.15);
+      }
+
+      .domain-row-danger td {
+        background: rgba(230, 83, 74, 0.17);
+      }
+
+      .domain-row-muted td {
+        background: rgba(255, 255, 255, 0.035);
+      }
+
+      .domain-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .notice {
+        margin-top: 18px;
+        padding: 12px;
+        border: 1px solid rgba(245, 196, 90, 0.32);
+        border-radius: 8px;
+        color: #e9d7a7;
+        background: rgba(245, 196, 90, 0.08);
+        font-size: 13px;
+      }
+
+      .empty {
+        min-height: 160px;
+        display: grid;
+        place-items: center;
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        color: var(--muted);
+      }
+
+      @media (max-width: 980px) {
+        .hero,
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .stats {
+          min-width: 0;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .shell {
+          width: min(100% - 28px, 1240px);
+        }
+
+        .nav {
+          align-items: start;
+          flex-direction: column;
+          padding: 12px 0;
+        }
+
+        .nav-actions {
+          width: 100%;
+        }
+
+        .nav-actions .btn {
+          flex: 1;
+        }
+
+        h1 {
+          font-size: 28px;
+        }
+
+        .stats,
+        .form-grid,
+        .file-row,
+        .copy-section-body,
+        .company-row {
+          grid-template-columns: 1fr;
+        }
+
+        .company-row {
+          align-items: start;
+        }
+
+        .row-actions {
+          justify-content: start;
+          max-width: none;
+        }
+
+        .btn {
+          width: 100%;
+        }
+
+        .btn-small {
+          width: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="shell nav">
+        <a class="brand" href="admin.html" aria-label="Offer Admin">
+          <span class="brand-mark">AD</span>
+          <span>Offer Admin 后台</span>
+        </a>
+        <div class="nav-actions">
+          <a class="btn btn-secondary" href="index.html" target="_blank" rel="noopener">前台预览</a>
+          <button class="btn btn-primary" type="button" data-export>导出资料</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="shell">
+        <section class="hero">
+          <div>
+            <h1>公司优惠管理</h1>
+            <p>这里可以新增公司、修改奖金金额、注册链接、排序和三语优惠文案。保存后，前台页面刷新就会读取最新资料。</p>
+          </div>
+          <div class="stats" aria-label="Company status">
+            <div class="stat">
+              <strong data-total>0</strong>
+              <span>总公司</span>
+            </div>
+            <div class="stat">
+              <strong data-active>0</strong>
+              <span>启用中</span>
+            </div>
+            <div class="stat">
+              <strong data-hidden>0</strong>
+              <span>已停用</span>
+            </div>
+          </div>
+        </section>
+
+        <form class="panel site-panel" id="site-form">
+          <div class="panel-head">
+            <h2>网站整体设置</h2>
+            <button class="btn btn-secondary btn-small" type="button" data-reset-site>恢复网站默认</button>
+          </div>
+          <div class="panel-body">
+            <div class="form-grid">
+              <div class="field full">
+                <label for="background-image">首页背景图 URL</label>
+                <input id="background-image" placeholder="assets/slot-hero.png 或上传图片" />
+              </div>
+              <div class="field full">
+                <label for="background-file">上传首页背景图</label>
+                <div class="file-row">
+                  <input id="background-file" type="file" accept="image/*" />
+                  <button class="btn btn-secondary" type="button" data-clear-background>清除背景图</button>
+                </div>
+              </div>
+              <div class="field full">
+                <label>背景图预览</label>
+                <div class="image-preview" data-background-preview>暂无图片</div>
+              </div>
+              <div class="field">
+                <label for="brand-mark-text">顶部 logo 文字</label>
+                <input id="brand-mark-text" placeholder="例如 RM" />
+              </div>
+              <div class="field">
+                <label for="site-logo-url">网站 logo 图片</label>
+                <input id="site-logo-url" placeholder="上传图片后自动填入" />
+              </div>
+              <div class="field full">
+                <label for="site-logo-file">上传网站 logo</label>
+                <div class="file-row">
+                  <input id="site-logo-file" type="file" accept="image/*" />
+                  <button class="btn btn-secondary" type="button" data-clear-site-logo>清除网站 logo</button>
+                </div>
+              </div>
+              <div class="field full">
+                <label>网站 logo 预览</label>
+                <div class="image-preview logo-preview" data-site-logo-preview>暂无 logo</div>
+              </div>
+            </div>
+
+            <div class="color-settings">
+              <h3>网页颜色设置</h3>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="color-page-background">网页背景颜色</label>
+                  <input id="color-page-background" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-header-background">顶部导航背景</label>
+                  <input id="color-header-background" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-card-background">卡片背景颜色</label>
+                  <input id="color-card-background" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-card-alt-background">深一点卡片背景</label>
+                  <input id="color-card-alt-background" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-border-color">边框颜色</label>
+                  <input id="color-border-color" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-main-text">主要文字颜色</label>
+                  <input id="color-main-text" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-body-text">普通文字颜色</label>
+                  <input id="color-body-text" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-muted-text">副文字颜色</label>
+                  <input id="color-muted-text" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-primary-color">主按钮颜色</label>
+                  <input id="color-primary-color" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-primary-dark-color">主按钮深色</label>
+                  <input id="color-primary-dark-color" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-accent-color">强调颜色</label>
+                  <input id="color-accent-color" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-button-text">按钮文字颜色</label>
+                  <input id="color-button-text" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-community-background">Join Our 背景</label>
+                  <input id="color-community-background" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-final-background">底部 CTA 背景</label>
+                  <input id="color-final-background" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-footer-background">页脚背景</label>
+                  <input id="color-footer-background" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-sticky-background">固定底部条背景</label>
+                  <input id="color-sticky-background" type="color" />
+                </div>
+              </div>
+            </div>
+
+            <div class="language-group">
+              <h3>华语首页字眼</h3>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="site-name-zh">品牌名字</label>
+                  <input id="site-name-zh" />
+                </div>
+                <div class="field">
+                  <label for="meta-title-zh">浏览器标题</label>
+                  <input id="meta-title-zh" />
+                </div>
+                <div class="field full">
+                  <label for="meta-description-zh">SEO 描述</label>
+                  <textarea id="meta-description-zh"></textarea>
+                </div>
+                <div class="field">
+                  <label for="hero-eyebrow-zh">小标题</label>
+                  <input id="hero-eyebrow-zh" />
+                </div>
+                <div class="field">
+                  <label for="hero-title-zh">首页大标题</label>
+                  <input id="hero-title-zh" />
+                </div>
+                <div class="field full">
+                  <label for="hero-copy-zh">首页说明</label>
+                  <textarea id="hero-copy-zh"></textarea>
+                </div>
+                <div class="field">
+                  <label for="primary-button-zh">主按钮文字</label>
+                  <input id="primary-button-zh" />
+                </div>
+                <div class="field">
+                  <label for="secondary-button-zh">副按钮文字</label>
+                  <input id="secondary-button-zh" />
+                </div>
+                <div class="field">
+                  <label for="offers-title-zh">优惠区标题</label>
+                  <input id="offers-title-zh" />
+                </div>
+                <div class="field">
+                  <label for="sticky-button-zh">底部按钮文字</label>
+                  <input id="sticky-button-zh" />
+                </div>
+                <div class="field full">
+                  <label for="offers-description-zh">优惠区说明</label>
+                  <textarea id="offers-description-zh"></textarea>
+                </div>
+                <div class="field">
+                  <label for="community-title-zh">社群区标题</label>
+                  <input id="community-title-zh" />
+                </div>
+                <div class="field full">
+                  <label for="community-description-zh">社群区说明</label>
+                  <textarea id="community-description-zh"></textarea>
+                </div>
+                <div class="field">
+                  <label for="final-title-zh">底部区标题</label>
+                  <input id="final-title-zh" />
+                </div>
+                <div class="field">
+                  <label for="sticky-title-zh">固定条标题</label>
+                  <input id="sticky-title-zh" />
+                </div>
+                <div class="field full">
+                  <label for="final-text-zh">底部区说明</label>
+                  <textarea id="final-text-zh"></textarea>
+                </div>
+                <div class="field full">
+                  <label for="sticky-text-zh">固定条说明</label>
+                  <input id="sticky-text-zh" />
+                </div>
+              </div>
+            </div>
+
+            <div class="language-group">
+              <h3>English Homepage Copy</h3>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="site-name-en">Brand name</label>
+                  <input id="site-name-en" />
+                </div>
+                <div class="field">
+                  <label for="meta-title-en">Page title</label>
+                  <input id="meta-title-en" />
+                </div>
+                <div class="field full">
+                  <label for="meta-description-en">SEO description</label>
+                  <textarea id="meta-description-en"></textarea>
+                </div>
+                <div class="field">
+                  <label for="hero-eyebrow-en">Eyebrow</label>
+                  <input id="hero-eyebrow-en" />
+                </div>
+                <div class="field">
+                  <label for="hero-title-en">Hero title</label>
+                  <input id="hero-title-en" />
+                </div>
+                <div class="field full">
+                  <label for="hero-copy-en">Hero copy</label>
+                  <textarea id="hero-copy-en"></textarea>
+                </div>
+                <div class="field">
+                  <label for="primary-button-en">Primary button</label>
+                  <input id="primary-button-en" />
+                </div>
+                <div class="field">
+                  <label for="secondary-button-en">Secondary button</label>
+                  <input id="secondary-button-en" />
+                </div>
+                <div class="field">
+                  <label for="offers-title-en">Offer title</label>
+                  <input id="offers-title-en" />
+                </div>
+                <div class="field">
+                  <label for="sticky-button-en">Sticky button</label>
+                  <input id="sticky-button-en" />
+                </div>
+                <div class="field full">
+                  <label for="offers-description-en">Offer description</label>
+                  <textarea id="offers-description-en"></textarea>
+                </div>
+                <div class="field">
+                  <label for="community-title-en">Join section title</label>
+                  <input id="community-title-en" />
+                </div>
+                <div class="field full">
+                  <label for="community-description-en">Join section description</label>
+                  <textarea id="community-description-en"></textarea>
+                </div>
+                <div class="field">
+                  <label for="final-title-en">Final title</label>
+                  <input id="final-title-en" />
+                </div>
+                <div class="field">
+                  <label for="sticky-title-en">Sticky title</label>
+                  <input id="sticky-title-en" />
+                </div>
+                <div class="field full">
+                  <label for="final-text-en">Final text</label>
+                  <textarea id="final-text-en"></textarea>
+                </div>
+                <div class="field full">
+                  <label for="sticky-text-en">Sticky text</label>
+                  <input id="sticky-text-en" />
+                </div>
+              </div>
+            </div>
+
+            <div class="language-group">
+              <h3>Bahasa Melayu Homepage Copy</h3>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="site-name-ms">Nama jenama</label>
+                  <input id="site-name-ms" />
+                </div>
+                <div class="field">
+                  <label for="meta-title-ms">Tajuk halaman</label>
+                  <input id="meta-title-ms" />
+                </div>
+                <div class="field full">
+                  <label for="meta-description-ms">SEO description</label>
+                  <textarea id="meta-description-ms"></textarea>
+                </div>
+                <div class="field">
+                  <label for="hero-eyebrow-ms">Eyebrow</label>
+                  <input id="hero-eyebrow-ms" />
+                </div>
+                <div class="field">
+                  <label for="hero-title-ms">Hero title</label>
+                  <input id="hero-title-ms" />
+                </div>
+                <div class="field full">
+                  <label for="hero-copy-ms">Hero copy</label>
+                  <textarea id="hero-copy-ms"></textarea>
+                </div>
+                <div class="field">
+                  <label for="primary-button-ms">Primary button</label>
+                  <input id="primary-button-ms" />
+                </div>
+                <div class="field">
+                  <label for="secondary-button-ms">Secondary button</label>
+                  <input id="secondary-button-ms" />
+                </div>
+                <div class="field">
+                  <label for="offers-title-ms">Offer title</label>
+                  <input id="offers-title-ms" />
+                </div>
+                <div class="field">
+                  <label for="sticky-button-ms">Sticky button</label>
+                  <input id="sticky-button-ms" />
+                </div>
+                <div class="field full">
+                  <label for="offers-description-ms">Offer description</label>
+                  <textarea id="offers-description-ms"></textarea>
+                </div>
+                <div class="field">
+                  <label for="community-title-ms">Join section title</label>
+                  <input id="community-title-ms" />
+                </div>
+                <div class="field full">
+                  <label for="community-description-ms">Join section description</label>
+                  <textarea id="community-description-ms"></textarea>
+                </div>
+                <div class="field">
+                  <label for="final-title-ms">Final title</label>
+                  <input id="final-title-ms" />
+                </div>
+                <div class="field">
+                  <label for="sticky-title-ms">Sticky title</label>
+                  <input id="sticky-title-ms" />
+                </div>
+                <div class="field full">
+                  <label for="final-text-ms">Final text</label>
+                  <textarea id="final-text-ms"></textarea>
+                </div>
+                <div class="field full">
+                  <label for="sticky-text-ms">Sticky text</label>
+                  <input id="sticky-text-ms" />
+                </div>
+              </div>
+            </div>
+
+            <div class="advanced-copy" data-advanced-copy></div>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">保存网站设置</button>
+            </div>
+          </div>
+        </form>
+
+        <section class="layout">
+          <form class="panel" id="offer-form">
+            <div class="panel-head">
+              <h2 data-form-title>新增公司</h2>
+              <span class="chip" data-editing-chip>New</span>
+            </div>
+            <div class="panel-body">
+              <input type="hidden" id="offer-id" />
+              <div class="form-grid">
+                <div class="field">
+                  <label for="name">公司名字</label>
+                  <input id="name" required placeholder="例如 M2Cuci" />
+                </div>
+                <div class="field">
+                  <label for="badge">Logo 简写</label>
+                  <input id="badge" maxlength="5" placeholder="例如 M2" />
+                </div>
+                <div class="field full">
+                  <label for="logo-url">公司 logo 图片 URL</label>
+                  <input id="logo-url" placeholder="上传图片后自动填入，或填写自己的图片路径" />
+                </div>
+                <div class="field full">
+                  <label for="logo-file">上传公司 logo</label>
+                  <div class="file-row">
+                    <input id="logo-file" type="file" accept="image/*" />
+                    <button class="btn btn-secondary" type="button" data-clear-logo>清除 logo</button>
+                  </div>
+                </div>
+                <div class="field full">
+                  <label>Logo 预览</label>
+                  <div class="image-preview logo-preview" data-logo-preview>暂无 logo</div>
+                </div>
+                <div class="field">
+                  <label for="amount">奖金金额</label>
+                  <input id="amount" required placeholder="例如 RM50" />
+                </div>
+                <div class="field">
+                  <label for="order">排序</label>
+                  <input id="order" type="number" min="1" step="1" />
+                </div>
+                <div class="field">
+                  <label for="star-rating">星星数量 (0-5)</label>
+                  <input id="star-rating" type="number" min="0" max="5" step="1" placeholder="例如 5" />
+                  <p class="hint">填 1-5 会显示 ⭐；填 0 就显示下面的标签文字。</p>
+                </div>
+                <div class="field full">
+                  <label for="url">注册链接</label>
+                  <input id="url" required placeholder="例如 https://syabas99.com" />
+                  <p class="hint">请填完整链接；系统不会自动修改。站内位置才用 #join。</p>
+                </div>
+                <div class="field">
+                  <label for="rank-zh">标签 / 排名 中文</label>
+                  <input id="rank-zh" placeholder="Top 1 / Hot" />
+                </div>
+                <div class="field">
+                  <label for="rank-en">标签 / 排名 EN</label>
+                  <input id="rank-en" placeholder="Top 1 / Hot" />
+                </div>
+                <div class="field">
+                  <label for="rank-ms">标签 / 排名 BM</label>
+                  <input id="rank-ms" placeholder="Top 1 / Pantas" />
+                </div>
+                <label class="check-row">
+                  <input id="active" type="checkbox" checked />
+                  <span>启用在前台显示</span>
+                </label>
+              </div>
+
+              <div class="language-group">
+                <h3>华语文案</h3>
+                <div class="field">
+                  <label for="bonus-zh">奖金说明</label>
+                  <input id="bonus-zh" placeholder="新注册免费信用" />
+                </div>
+                <div class="field">
+                  <label for="button-zh">按钮文字</label>
+                  <input id="button-zh" placeholder="例如 马上领取" />
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="bullet-zh-1">卖点 1</label>
+                    <input id="bullet-zh-1" />
+                  </div>
+                  <div class="field">
+                    <label for="bullet-zh-2">卖点 2</label>
+                    <input id="bullet-zh-2" />
+                  </div>
+                  <div class="field full">
+                    <label for="bullet-zh-3">卖点 3</label>
+                    <input id="bullet-zh-3" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="language-group">
+                <h3>English Copy</h3>
+                <div class="field">
+                  <label for="bonus-en">Bonus label</label>
+                  <input id="bonus-en" placeholder="New register free credit" />
+                </div>
+                <div class="field">
+                  <label for="button-en">Button text</label>
+                  <input id="button-en" placeholder="Claim Now" />
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="bullet-en-1">Point 1</label>
+                    <input id="bullet-en-1" />
+                  </div>
+                  <div class="field">
+                    <label for="bullet-en-2">Point 2</label>
+                    <input id="bullet-en-2" />
+                  </div>
+                  <div class="field full">
+                    <label for="bullet-en-3">Point 3</label>
+                    <input id="bullet-en-3" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="language-group">
+                <h3>Bahasa Melayu Copy</h3>
+                <div class="field">
+                  <label for="bonus-ms">Label bonus</label>
+                  <input id="bonus-ms" placeholder="Free credit daftar ahli baru" />
+                </div>
+                <div class="field">
+                  <label for="button-ms">Teks butang</label>
+                  <input id="button-ms" placeholder="Claim Sekarang" />
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="bullet-ms-1">Point 1</label>
+                    <input id="bullet-ms-1" />
+                  </div>
+                  <div class="field">
+                    <label for="bullet-ms-2">Point 2</label>
+                    <input id="bullet-ms-2" />
+                  </div>
+                  <div class="field full">
+                    <label for="bullet-ms-3">Point 3</label>
+                    <input id="bullet-ms-3" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">保存公司</button>
+                <button class="btn btn-secondary" type="button" data-new>清空新增</button>
+              </div>
+            </div>
+          </form>
+
+          <section class="panel">
+            <div class="panel-head">
+              <h2>公司列表</h2>
+              <button class="btn btn-secondary btn-small" type="button" data-reset>恢复默认</button>
+            </div>
+            <div class="panel-body">
+              <div class="company-list" data-list></div>
+
+              <div class="data-tools">
+                <div class="field">
+                  <label for="json-data">JSON 备份 / 导入</label>
+                  <textarea id="json-data" placeholder="点击导出资料，或把备份 JSON 放这里再导入"></textarea>
+                </div>
+                <div class="form-actions">
+                  <button class="btn btn-secondary" type="button" data-copy>复制 JSON</button>
+                  <button class="btn btn-secondary" type="button" data-import>导入 JSON</button>
+                  <button class="btn btn-danger" type="button" data-clear>清除本机资料</button>
+                </div>
+              </div>
+
+              <p class="notice">
+                目前这个后台是本机管理版本，资料存放在当前浏览器。之后要上线给多人管理时，可以把同样的资料格式接到登录后台、数据库和 API。
+              </p>
+            </div>
+          </section>
+        </section>
+
+        <section class="layout social-layout">
+          <form class="panel" id="social-form">
+            <div class="panel-head">
+              <h2 data-social-form-title>新增社群入口</h2>
+              <span class="chip" data-social-editing-chip>New</span>
+            </div>
+            <div class="panel-body">
+              <input type="hidden" id="social-id" />
+              <div class="form-grid">
+                <div class="field">
+                  <label for="social-name">入口名字</label>
+                  <input id="social-name" required placeholder="例如 Telegram" />
+                </div>
+                <div class="field">
+                  <label for="social-badge">Logo 简写</label>
+                  <input id="social-badge" maxlength="5" placeholder="例如 TG" />
+                </div>
+                <div class="field full">
+                  <label for="social-logo-url">社群 logo 图片 URL</label>
+                  <input id="social-logo-url" placeholder="上传图片后自动填入，或填写自己的图片路径" />
+                </div>
+                <div class="field full">
+                  <label for="social-logo-file">上传社群 logo</label>
+                  <div class="file-row">
+                    <input id="social-logo-file" type="file" accept="image/*" />
+                    <button class="btn btn-secondary" type="button" data-clear-social-logo>清除 logo</button>
+                  </div>
+                </div>
+                <div class="field full">
+                  <label>Logo 预览</label>
+                  <div class="image-preview logo-preview" data-social-logo-preview>暂无 logo</div>
+                </div>
+                <div class="field">
+                  <label for="social-order">排序</label>
+                  <input id="social-order" type="number" min="1" step="1" />
+                </div>
+                <div class="field full">
+                  <label for="social-url">完整链接</label>
+                  <input id="social-url" required placeholder="例如 https://t.me/yourchannel" />
+                  <p class="hint">请填完整链接；系统不会自动修改。站内位置才用 #join。</p>
+                </div>
+                <label class="check-row">
+                  <input id="social-active" type="checkbox" checked />
+                  <span>启用在前台显示</span>
+                </label>
+              </div>
+
+              <div class="language-group">
+                <h3>华语文案</h3>
+                <div class="field">
+                  <label for="social-title-zh">标题</label>
+                  <input id="social-title-zh" placeholder="例如 加入 Telegram" />
+                </div>
+                <div class="field full">
+                  <label for="social-description-zh">说明</label>
+                  <textarea id="social-description-zh"></textarea>
+                </div>
+                <div class="field">
+                  <label for="social-button-zh">按钮文字</label>
+                  <input id="social-button-zh" placeholder="例如 马上加入" />
+                </div>
+              </div>
+
+              <div class="language-group">
+                <h3>English Copy</h3>
+                <div class="field">
+                  <label for="social-title-en">Title</label>
+                  <input id="social-title-en" placeholder="Join Telegram" />
+                </div>
+                <div class="field full">
+                  <label for="social-description-en">Description</label>
+                  <textarea id="social-description-en"></textarea>
+                </div>
+                <div class="field">
+                  <label for="social-button-en">Button text</label>
+                  <input id="social-button-en" placeholder="Join Now" />
+                </div>
+              </div>
+
+              <div class="language-group">
+                <h3>Bahasa Melayu Copy</h3>
+                <div class="field">
+                  <label for="social-title-ms">Title</label>
+                  <input id="social-title-ms" placeholder="Join Telegram" />
+                </div>
+                <div class="field full">
+                  <label for="social-description-ms">Description</label>
+                  <textarea id="social-description-ms"></textarea>
+                </div>
+                <div class="field">
+                  <label for="social-button-ms">Teks butang</label>
+                  <input id="social-button-ms" placeholder="Join Now" />
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">保存社群入口</button>
+                <button class="btn btn-secondary" type="button" data-new-social>清空新增</button>
+              </div>
+            </div>
+          </form>
+
+          <section class="panel">
+            <div class="panel-head">
+              <h2>社群入口列表</h2>
+              <button class="btn btn-secondary btn-small" type="button" data-reset-social>恢复默认</button>
+            </div>
+            <div class="panel-body">
+              <div class="company-list" data-social-list></div>
+            </div>
+          </section>
+        </section>
+
+        <section class="panel domain-panel" id="domain-manager">
+          <div class="panel-head">
+            <h2>Domain 网页管理</h2>
+            <div class="domain-toolbar">
+              <button class="btn btn-secondary btn-small" type="button" data-update-domains>Update All Domain</button>
+              <button class="btn btn-primary btn-small" type="button" data-new-domain>+ Create</button>
+              <button class="btn btn-secondary btn-small" type="button" data-reset-domains>恢复默认</button>
+            </div>
+          </div>
+          <div class="panel-body">
+            <form id="domain-form">
+              <input type="hidden" id="domain-id" />
+              <div class="form-grid">
+                <div class="field">
+                  <label for="domain-name">Domain *</label>
+                  <input id="domain-name" required placeholder="例如 yourdomain.com" />
+                </div>
+                <div class="field">
+                  <label for="domain-type">Type</label>
+                  <select id="domain-type">
+                    <option value="PRIMARY">PRIMARY</option>
+                    <option value="BACKUP">BACKUP</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="domain-target-server">Target Server</label>
+                  <input id="domain-target-server" placeholder="例如 your-app.up.railway.app" />
+                </div>
+                <div class="field">
+                  <label for="domain-cf-proxy">CF Proxy</label>
+                  <select id="domain-cf-proxy">
+                    <option value="OFF">OFF</option>
+                    <option value="ON">ON</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="domain-status">Status</label>
+                  <select id="domain-status">
+                    <option value="OK">OK</option>
+                    <option value="PENDING">PENDING</option>
+                    <option value="EXPIRING">EXPIRING</option>
+                    <option value="EXPIRED">EXPIRED</option>
+                    <option value="ERROR">ERROR</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="domain-expiry">Expiry</label>
+                  <input id="domain-expiry" type="date" />
+                </div>
+                <div class="field full">
+                  <label for="domain-remark">Remark</label>
+                  <input id="domain-remark" placeholder="例如 Railway / Cloudflare / 备用域名说明" />
+                </div>
+                <div class="field full">
+                  <label for="domain-api-token">Cloudflare API Token</label>
+                  <input id="domain-api-token" type="password" placeholder="不会保存；请放服务器环境变量 CLOUDFLARE_API_TOKEN" autocomplete="off" />
+                  <p class="hint">为了安全，后台不会保存 Token。正式自动连接会从服务器环境变量 CLOUDFLARE_API_TOKEN 读取。</p>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">保存 Domain</button>
+                <button class="btn btn-secondary" type="button" data-connect-current-domain>自动连接 Cloudflare</button>
+                <button class="btn btn-secondary" type="button" data-clear-domain-form>清空新增</button>
+              </div>
+            </form>
+
+            <div class="domain-table-wrap">
+              <table class="domain-table">
+                <thead>
+                  <tr>
+                    <th>Domain</th>
+                    <th>Type</th>
+                    <th>Target Server</th>
+                    <th>CF Proxy</th>
+                    <th>Status</th>
+                    <th>Expiry</th>
+                    <th>Remark</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody data-domain-list></tbody>
+              </table>
+            </div>
+            <p class="notice">
+              自动连接需要用安全服务器启动，并在 Railway 环境变量设置 ADMIN_PASSWORD、SESSION_SECRET、CLOUDFLARE_API_TOKEN。Token 不会进入网页或浏览器。
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="assets/offers-data.js"></script>
+    <script>
+      const offerStorageKey = window.offerStorageKey || "landingOffers";
+      const siteSettingsStorageKey = window.siteSettingsStorageKey || "landingSiteSettings";
+      const socialStorageKey = window.socialStorageKey || "landingSocialLinks";
+      const domainStorageKey = window.domainStorageKey || "landingDomains";
+      const defaultOffers = Array.isArray(window.defaultOffers) ? window.defaultOffers : [];
+      const defaultSocialLinks = Array.isArray(window.defaultSocialLinks) ? window.defaultSocialLinks : [];
+      const defaultDomains = Array.isArray(window.defaultDomains) ? window.defaultDomains : [];
+      const defaultSiteSettings = window.defaultSiteSettings || {};
+      const languages = ["zh", "en", "ms"];
+      const languageLabels = {
+        zh: "华语",
+        en: "English",
+        ms: "Bahasa Melayu"
+      };
+      const colorFields = {
+        pageBackground: "color-page-background",
+        headerBackground: "color-header-background",
+        cardBackground: "color-card-background",
+        cardAltBackground: "color-card-alt-background",
+        borderColor: "color-border-color",
+        mainText: "color-main-text",
+        bodyText: "color-body-text",
+        mutedText: "color-muted-text",
+        primaryColor: "color-primary-color",
+        primaryDarkColor: "color-primary-dark-color",
+        accentColor: "color-accent-color",
+        buttonText: "color-button-text",
+        communityBackground: "color-community-background",
+        finalBackground: "color-final-background",
+        footerBackground: "color-footer-background",
+        stickyBackground: "color-sticky-background"
+      };
+      const basicCopyFields = {
+        heroEyebrow: "hero-eyebrow",
+        heroTitle: "hero-title",
+        heroCopy: "hero-copy",
+        primaryButton: "primary-button",
+        secondaryButton: "secondary-button",
+        offersTitle: "offers-title",
+        offersDescription: "offers-description",
+        communityTitle: "community-title",
+        communityDescription: "community-description",
+        finalTitle: "final-title",
+        finalText: "final-text",
+        stickyTitle: "sticky-title",
+        stickyText: "sticky-text",
+        stickyButton: "sticky-button"
+      };
+      const advancedCopySections = [
+        {
+          title: "第一屏数据卡",
+          fields: [
+            ["stat1Value", "数据 1 数值", "stat-1-value"],
+            ["stat1Text", "数据 1 说明", "stat-1-text"],
+            ["stat2Value", "数据 2 数值", "stat-2-value"],
+            ["stat2Text", "数据 2 说明", "stat-2-text"],
+            ["stat3Value", "数据 3 数值", "stat-3-value"],
+            ["stat3Text", "数据 3 说明", "stat-3-text"]
+          ]
+        },
+        {
+          title: "网页判断区",
+          fields: [
+            ["comparisonTitle", "区块标题", "comparison-title"],
+            ["comparisonDescription", "区块说明", "comparison-description", "textarea"],
+            ["comparisonLeftLabel", "左卡标签", "comparison-left-label"],
+            ["comparisonLeftTitle", "左卡标题", "comparison-left-title"],
+            ["comparisonLeftText", "左卡说明", "comparison-left-text", "textarea"],
+            ["comparisonLeftBullet1", "左卡卖点 1", "comparison-left-bullet-1"],
+            ["comparisonLeftBullet2", "左卡卖点 2", "comparison-left-bullet-2"],
+            ["comparisonLeftBullet3", "左卡卖点 3", "comparison-left-bullet-3"],
+            ["comparisonRightLabel", "右卡标签", "comparison-right-label"],
+            ["comparisonRightTitle", "右卡标题", "comparison-right-title"],
+            ["comparisonRightText", "右卡说明", "comparison-right-text", "textarea"],
+            ["comparisonRightBullet1", "右卡卖点 1", "comparison-right-bullet-1"],
+            ["comparisonRightBullet2", "右卡卖点 2", "comparison-right-bullet-2"],
+            ["comparisonRightBullet3", "右卡卖点 3", "comparison-right-bullet-3"]
+          ]
+        },
+        {
+          title: "3 步领取区",
+          fields: [
+            ["stepsTitle", "区块标题", "steps-title"],
+            ["stepsDescription", "区块说明", "steps-description", "textarea"],
+            ["step1Title", "步骤 1 标题", "step-1-title"],
+            ["step1Text", "步骤 1 说明", "step-1-text", "textarea"],
+            ["step2Title", "步骤 2 标题", "step-2-title"],
+            ["step2Text", "步骤 2 说明", "step-2-text", "textarea"],
+            ["step3Title", "步骤 3 标题", "step-3-title"],
+            ["step3Text", "步骤 3 说明", "step-3-text", "textarea"]
+          ]
+        },
+        {
+          title: "为什么加入区",
+          fields: [
+            ["whyTitle", "区块标题", "why-title"],
+            ["whyDescription", "区块说明", "why-description", "textarea"],
+            ["feature1Title", "特点 1 标题", "feature-1-title"],
+            ["feature1Text", "特点 1 说明", "feature-1-text", "textarea"],
+            ["feature2Title", "特点 2 标题", "feature-2-title"],
+            ["feature2Text", "特点 2 说明", "feature-2-text", "textarea"],
+            ["feature3Title", "特点 3 标题", "feature-3-title"],
+            ["feature3Text", "特点 3 说明", "feature-3-text", "textarea"],
+            ["feature4Title", "特点 4 标题", "feature-4-title"],
+            ["feature4Text", "特点 4 说明", "feature-4-text", "textarea"]
+          ]
+        },
+        {
+          title: "FAQ 与底部",
+          fields: [
+            ["faqTitle", "FAQ 标题", "faq-title"],
+            ["faqDescription", "FAQ 说明", "faq-description", "textarea"],
+            ["faq1Question", "问题 1", "faq-1-question"],
+            ["faq1Answer", "答案 1", "faq-1-answer", "textarea"],
+            ["faq2Question", "问题 2", "faq-2-question"],
+            ["faq2Answer", "答案 2", "faq-2-answer", "textarea"],
+            ["faq3Question", "问题 3", "faq-3-question"],
+            ["faq3Answer", "答案 3", "faq-3-answer", "textarea"],
+            ["faq4Question", "问题 4", "faq-4-question"],
+            ["faq4Answer", "答案 4", "faq-4-answer", "textarea"],
+            ["footerLeft", "页脚左边", "footer-left"],
+            ["footerRight", "页脚右边", "footer-right"]
+          ]
+        }
+      ];
+      const advancedCopyFields = Object.fromEntries(
+        advancedCopySections.flatMap((section) => section.fields.map(([key, label, id]) => [key, id]))
+      );
+      const copyFields = { ...basicCopyFields, ...advancedCopyFields };
+
+      let offers = loadOffers();
+      let socialLinks = loadSocialLinks();
+      let domains = loadDomains();
+      let siteSettings = loadSiteSettings();
+
+      const offerForm = document.querySelector("#offer-form");
+      const socialForm = document.querySelector("#social-form");
+      const domainForm = document.querySelector("#domain-form");
+      const siteForm = document.querySelector("#site-form");
+      const list = document.querySelector("[data-list]");
+      const socialList = document.querySelector("[data-social-list]");
+      const domainList = document.querySelector("[data-domain-list]");
+      const jsonData = document.querySelector("#json-data");
+
+      function clone(value) {
+        return JSON.parse(JSON.stringify(value || {}));
+      }
+
+      function mergeDeep(base, override) {
+        const merged = clone(base);
+        if (!override || typeof override !== "object") {
+          return merged;
+        }
+
+        Object.entries(override).forEach(([key, value]) => {
+          if (value && typeof value === "object" && !Array.isArray(value)) {
+            merged[key] = mergeDeep(merged[key] || {}, value);
+          } else if (value !== undefined && value !== null) {
+            merged[key] = value;
+          }
+        });
+
+        return merged;
+      }
+
+      function loadOffers() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(offerStorageKey) || "null");
+          if (Array.isArray(saved)) {
+            return saved.map((offer, index) => normalizeOffer(mergeDefaultOffer(offer), index));
+          }
+        } catch (error) {
+          console.warn("Cannot read saved offers.", error);
+        }
+
+        return clone(defaultOffers).map(normalizeOffer);
+      }
+
+      function mergeDefaultOffer(offer) {
+        const defaultOffer = defaultOffers.find((item) => item.id === offer.id) || {};
+        return mergeDeep(defaultOffer, offer);
+      }
+
+      function loadSocialLinks() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(socialStorageKey) || "null");
+          if (Array.isArray(saved)) {
+            return saved.map((link, index) => normalizeSocialLink(mergeDefaultSocialLink(link), index));
+          }
+        } catch (error) {
+          console.warn("Cannot read saved social links.", error);
+        }
+
+        return clone(defaultSocialLinks).map(normalizeSocialLink);
+      }
+
+      function mergeDefaultSocialLink(link) {
+        const defaultLink = defaultSocialLinks.find((item) => item.id === link.id) || {};
+        return mergeDeep(defaultLink, link);
+      }
+
+      function loadDomains() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(domainStorageKey) || "null");
+          if (Array.isArray(saved)) {
+            return saved.map(normalizeDomain);
+          }
+        } catch (error) {
+          console.warn("Cannot read saved domains.", error);
+        }
+
+        return clone(defaultDomains).map(normalizeDomain);
+      }
+
+      function loadSiteSettings() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(siteSettingsStorageKey) || "null");
+          return mergeDeep(defaultSiteSettings, saved);
+        } catch (error) {
+          console.warn("Cannot read site settings.", error);
+          return mergeDeep(defaultSiteSettings, {});
+        }
+      }
+
+      function normalizeOffer(offer, index = 0) {
+        const name = offer.name || "New Company";
+        return {
+          id: offer.id || createId(name),
+          active: offer.active !== false,
+          order: Number(offer.order || index + 1),
+          name,
+          badge: offer.badge || name.slice(0, 2).toUpperCase(),
+          logoUrl: offer.logoUrl || "",
+          amount: offer.amount || "RM0",
+          url: normalizeLink(offer.url || "#join"),
+          starRating: normalizeStars(offer.starRating),
+          rank: {
+            zh: offer.rank?.zh || offer.rank?.en || "New",
+            en: offer.rank?.en || offer.rank?.zh || "New",
+            ms: offer.rank?.ms || offer.rank?.en || "New"
+          },
+          bonusLabel: {
+            zh: offer.bonusLabel?.zh || "",
+            en: offer.bonusLabel?.en || "",
+            ms: offer.bonusLabel?.ms || ""
+          },
+          buttonText: {
+            zh: offer.buttonText?.zh || `领取 ${name}`,
+            en: offer.buttonText?.en || `Claim ${name}`,
+            ms: offer.buttonText?.ms || `Claim ${name}`
+          },
+          bullets: {
+            zh: normalizeBullets(offer.bullets?.zh),
+            en: normalizeBullets(offer.bullets?.en),
+            ms: normalizeBullets(offer.bullets?.ms)
+          }
+        };
+      }
+
+      function normalizeSocialLink(link, index = 0) {
+        const name = link.name || "New Channel";
+        return {
+          id: link.id || createId(name),
+          active: link.active !== false,
+          order: Number(link.order || index + 1),
+          name,
+          badge: link.badge || name.slice(0, 2).toUpperCase(),
+          logoUrl: link.logoUrl || "",
+          url: normalizeLink(link.url || "#join"),
+          title: {
+            zh: link.title?.zh || link.title?.en || name,
+            en: link.title?.en || link.title?.zh || name,
+            ms: link.title?.ms || link.title?.en || name
+          },
+          description: {
+            zh: link.description?.zh || "",
+            en: link.description?.en || "",
+            ms: link.description?.ms || ""
+          },
+          buttonText: {
+            zh: link.buttonText?.zh || "马上加入",
+            en: link.buttonText?.en || "Join Now",
+            ms: link.buttonText?.ms || "Join Now"
+          }
+        };
+      }
+
+      function normalizeDomain(domain, index = 0) {
+        const name = domain.domain || domain.name || "";
+        return {
+          id: domain.id || createId(name || "domain"),
+          order: Number(domain.order || index + 1),
+          domain: name,
+          type: domain.type || "BACKUP",
+          targetServer: domain.targetServer || "",
+          cfProxy: domain.cfProxy || "OFF",
+          status: domain.status || "OK",
+          expiry: domain.expiry || "",
+          remark: domain.remark || ""
+        };
+      }
+
+      function normalizeBullets(items) {
+        return Array.isArray(items) ? items.slice(0, 3) : ["", "", ""];
+      }
+
+      function normalizeLink(value) {
+        const link = String(value || "").trim();
+        return link || "#join";
+      }
+
+      function normalizeStars(value) {
+        const count = Number(value || 0);
+        if (!Number.isFinite(count)) {
+          return 0;
+        }
+
+        return Math.max(0, Math.min(5, Math.round(count)));
+      }
+
+      function getStars(value) {
+        return "⭐".repeat(normalizeStars(value));
+      }
+
+      function createId(name) {
+        const base = String(name || "company")
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-|-$/g, "");
+        return `${base || "company"}-${Date.now().toString(36)}`;
+      }
+
+      function saveOffers() {
+        offers = offers
+          .map(normalizeOffer)
+          .sort((a, b) => Number(a.order || 0) - Number(b.order || 0))
+          .map((offer, index) => ({ ...offer, order: index + 1 }));
+        localStorage.setItem(offerStorageKey, JSON.stringify(offers));
+        render();
+      }
+
+      function saveSocialLinks() {
+        socialLinks = socialLinks
+          .map(normalizeSocialLink)
+          .sort((a, b) => Number(a.order || 0) - Number(b.order || 0))
+          .map((link, index) => ({ ...link, order: index + 1 }));
+        localStorage.setItem(socialStorageKey, JSON.stringify(socialLinks));
+        render();
+      }
+
+      function saveDomains() {
+        domains = domains
+          .map(normalizeDomain)
+          .sort((a, b) => Number(a.order || 0) - Number(b.order || 0))
+          .map((domain, index) => ({ ...domain, order: index + 1 }));
+        localStorage.setItem(domainStorageKey, JSON.stringify(domains));
+        render();
+      }
+
+      function saveSiteSettings() {
+        localStorage.setItem(siteSettingsStorageKey, JSON.stringify(siteSettings));
+        fillSiteForm();
+      }
+
+      function escapeHtml(value) {
+        return String(value || "").replace(/[&<>"']/g, (character) => {
+          const map = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+          };
+          return map[character];
+        });
+      }
+
+      function renderAdvancedCopyFields() {
+        const container = document.querySelector("[data-advanced-copy]");
+        if (!container) {
+          return;
+        }
+
+        container.innerHTML = languages
+          .map((language) => {
+            const sections = advancedCopySections
+              .map((section, sectionIndex) => {
+                const fields = section.fields
+                  .map(([key, label, id, type]) => {
+                    const fieldId = `${id}-${language}`;
+                    const control =
+                      type === "textarea"
+                        ? `<textarea id="${fieldId}"></textarea>`
+                        : `<input id="${fieldId}" />`;
+                    return `
+                      <div class="field ${type === "textarea" ? "full" : ""}">
+                        <label for="${fieldId}">${escapeHtml(label)}</label>
+                        ${control}
+                      </div>
+                    `;
+                  })
+                  .join("");
+
+                return `
+                  <details class="copy-section" ${sectionIndex === 0 ? "open" : ""}>
+                    <summary>${escapeHtml(section.title)}</summary>
+                    <div class="copy-section-body">${fields}</div>
+                  </details>
+                `;
+              })
+              .join("");
+
+            return `
+              <section class="language-group lang-${language}">
+                <span class="language-tag">${languageLabels[language]}</span>
+                <h3>${languageLabels[language]} 更多页面字眼</h3>
+                ${sections}
+              </section>
+            `;
+          })
+          .join("");
+      }
+
+      function colorLanguageGroups() {
+        document.querySelectorAll(".language-group").forEach((group) => {
+          const title = group.querySelector("h3")?.textContent || "";
+          let language = "zh";
+          if (group.classList.contains("lang-en") || /english/i.test(title)) {
+            language = "en";
+          } else if (group.classList.contains("lang-ms") || /bahasa|melayu/i.test(title)) {
+            language = "ms";
+          }
+
+          group.classList.add(`lang-${language}`);
+          if (!group.querySelector(".language-tag")) {
+            group.insertAdjacentHTML("afterbegin", `<span class="language-tag">${languageLabels[language]}</span>`);
+          }
+        });
+      }
+
+      function render() {
+        renderStats();
+        renderList();
+        renderSocialList();
+        renderDomainList();
+      }
+
+      function renderStats() {
+        const total = offers.length;
+        const active = offers.filter((offer) => offer.active).length;
+        document.querySelector("[data-total]").textContent = total;
+        document.querySelector("[data-active]").textContent = active;
+        document.querySelector("[data-hidden]").textContent = total - active;
+      }
+
+      function renderList() {
+        const sortedOffers = [...offers].sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
+        if (!sortedOffers.length) {
+          list.innerHTML = '<div class="empty">还没有公司资料</div>';
+          return;
+        }
+
+        list.innerHTML = sortedOffers
+          .map((offer) => {
+            const statusClass = offer.active ? "active" : "off";
+            const statusText = offer.active ? "启用" : "停用";
+            const rankDisplay = getStars(offer.starRating) || offer.rank.zh || offer.rank.en;
+            const logo = offer.logoUrl
+              ? `<img src="${escapeHtml(offer.logoUrl)}" alt="${escapeHtml(offer.name)} logo" loading="lazy" />`
+              : escapeHtml(offer.badge);
+            return `
+              <article class="company-row">
+                <div class="badge">${logo}</div>
+                <div class="company-main">
+                  <h3>${escapeHtml(offer.name)}</h3>
+                  <div class="company-meta">
+                    <span class="chip">${escapeHtml(offer.amount)}</span>
+                    <span class="chip">${escapeHtml(rankDisplay)}</span>
+                    <span class="chip ${statusClass}">${statusText}</span>
+                    <span>排序 ${escapeHtml(offer.order)}</span>
+                  </div>
+                </div>
+                <div class="row-actions">
+                  <button class="btn btn-secondary btn-small" type="button" data-action="edit" data-id="${offer.id}">编辑</button>
+                  <button class="btn btn-secondary btn-small" type="button" data-action="toggle" data-id="${offer.id}">${offer.active ? "停用" : "启用"}</button>
+                  <button class="btn btn-secondary btn-small" type="button" data-action="up" data-id="${offer.id}">上移</button>
+                  <button class="btn btn-secondary btn-small" type="button" data-action="down" data-id="${offer.id}">下移</button>
+                  <button class="btn btn-danger btn-small" type="button" data-action="delete" data-id="${offer.id}">删除</button>
+                </div>
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      function renderSocialList() {
+        const sortedLinks = [...socialLinks].sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
+        if (!sortedLinks.length) {
+          socialList.innerHTML = '<div class="empty">还没有社群入口</div>';
+          return;
+        }
+
+        socialList.innerHTML = sortedLinks
+          .map((link) => {
+            const statusClass = link.active ? "active" : "off";
+            const statusText = link.active ? "启用" : "停用";
+            const logo = link.logoUrl
+              ? `<img src="${escapeHtml(link.logoUrl)}" alt="${escapeHtml(link.name)} logo" loading="lazy" />`
+              : escapeHtml(link.badge);
+            return `
+              <article class="company-row">
+                <div class="badge">${logo}</div>
+                <div class="company-main">
+                  <h3>${escapeHtml(link.name)}</h3>
+                  <div class="company-meta">
+                    <span class="chip">${escapeHtml(link.title.zh || link.title.en || link.name)}</span>
+                    <span class="chip ${statusClass}">${statusText}</span>
+                    <span>排序 ${escapeHtml(link.order)}</span>
+                  </div>
+                </div>
+                <div class="row-actions">
+                  <button class="btn btn-secondary btn-small" type="button" data-social-action="edit" data-id="${link.id}">编辑</button>
+                  <button class="btn btn-secondary btn-small" type="button" data-social-action="toggle" data-id="${link.id}">${link.active ? "停用" : "启用"}</button>
+                  <button class="btn btn-secondary btn-small" type="button" data-social-action="up" data-id="${link.id}">上移</button>
+                  <button class="btn btn-secondary btn-small" type="button" data-social-action="down" data-id="${link.id}">下移</button>
+                  <button class="btn btn-danger btn-small" type="button" data-social-action="delete" data-id="${link.id}">删除</button>
+                </div>
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      function getDomainHref(domainName) {
+        const value = String(domainName || "").trim();
+        if (!value) {
+          return "#";
+        }
+
+        if (/^[a-z][a-z0-9+.-]*:/i.test(value)) {
+          return value;
+        }
+
+        return `https://${value}`;
+      }
+
+      function getExpiryState(expiry) {
+        if (!expiry) {
+          return "muted";
+        }
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const expiryDate = new Date(`${expiry}T00:00:00`);
+        const daysLeft = Math.ceil((expiryDate - today) / 86400000);
+        if (daysLeft < 0) {
+          return "danger";
+        }
+        if (daysLeft <= 45) {
+          return "warning";
+        }
+        return "ok";
+      }
+
+      function getUpdatedDomainStatus(domain) {
+        const expiryState = getExpiryState(domain.expiry);
+        if (expiryState === "danger") {
+          return "EXPIRED";
+        }
+        if (expiryState === "warning") {
+          return "EXPIRING";
+        }
+        return domain.status || "OK";
+      }
+
+      function getDomainRowClass(domain) {
+        const status = String(domain.status || "").toUpperCase();
+        if (status === "EXPIRED" || status === "ERROR") {
+          return "domain-row-danger";
+        }
+        if (status === "EXPIRING" || status === "PENDING") {
+          return "domain-row-warning";
+        }
+        if (status === "OK") {
+          return "domain-row-ok";
+        }
+        return "domain-row-muted";
+      }
+
+      function renderDomainList() {
+        const sortedDomains = [...domains].sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
+        if (!sortedDomains.length) {
+          domainList.innerHTML = '<tr><td colspan="8"><div class="empty">还没有 Domain 资料</div></td></tr>';
+          return;
+        }
+
+        domainList.innerHTML = sortedDomains
+          .map((domain) => {
+            const domainName = escapeHtml(domain.domain);
+            const href = escapeHtml(getDomainHref(domain.domain));
+            return `
+              <tr class="${getDomainRowClass(domain)}">
+                <td><a href="${href}" target="_blank" rel="noopener">${domainName}</a></td>
+                <td>${escapeHtml(domain.type)}</td>
+                <td>${escapeHtml(domain.targetServer)}</td>
+                <td>${escapeHtml(domain.cfProxy)}</td>
+                <td>${escapeHtml(domain.status)}</td>
+                <td>${escapeHtml(domain.expiry)}</td>
+                <td>${escapeHtml(domain.remark)}</td>
+                <td>
+                  <div class="domain-actions">
+                    <button class="btn btn-secondary btn-small" type="button" data-domain-action="edit" data-id="${domain.id}">编辑</button>
+                    <button class="btn btn-primary btn-small" type="button" data-domain-action="connect" data-id="${domain.id}">自动连接</button>
+                    <button class="btn btn-secondary btn-small" type="button" data-domain-action="up" data-id="${domain.id}">上移</button>
+                    <button class="btn btn-secondary btn-small" type="button" data-domain-action="down" data-id="${domain.id}">下移</button>
+                    <button class="btn btn-danger btn-small" type="button" data-domain-action="delete" data-id="${domain.id}">删除</button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          })
+          .join("");
+      }
+
+      function setValue(id, value) {
+        const element = document.querySelector(`#${id}`);
+        if (element) {
+          element.value = value || "";
+        }
+      }
+
+      function getValue(id) {
+        return document.querySelector(`#${id}`)?.value.trim() || "";
+      }
+
+      function setPreview(selector, value, emptyText) {
+        const preview = document.querySelector(selector);
+        if (!preview) {
+          return;
+        }
+        preview.innerHTML = value ? `<img src="${escapeHtml(value)}" alt="" />` : emptyText;
+      }
+
+      function fillOfferForm(offer) {
+        document.querySelector("[data-form-title]").textContent = "编辑公司";
+        document.querySelector("[data-editing-chip]").textContent = offer.name;
+        setValue("offer-id", offer.id);
+        setValue("name", offer.name);
+        setValue("badge", offer.badge);
+        setValue("logo-url", offer.logoUrl);
+        setPreview("[data-logo-preview]", offer.logoUrl, "暂无 logo");
+        setValue("amount", offer.amount);
+        setValue("order", offer.order);
+        setValue("star-rating", offer.starRating);
+        setValue("url", offer.url);
+        document.querySelector("#active").checked = offer.active;
+        setValue("rank-zh", offer.rank.zh);
+        setValue("rank-en", offer.rank.en);
+        setValue("rank-ms", offer.rank.ms);
+        setValue("bonus-zh", offer.bonusLabel.zh);
+        setValue("bonus-en", offer.bonusLabel.en);
+        setValue("bonus-ms", offer.bonusLabel.ms);
+        setValue("button-zh", offer.buttonText.zh);
+        setValue("button-en", offer.buttonText.en);
+        setValue("button-ms", offer.buttonText.ms);
+        languages.forEach((language) => {
+          [0, 1, 2].forEach((index) => setValue(`bullet-${language}-${index + 1}`, offer.bullets[language]?.[index]));
+        });
+      }
+
+      function resetOfferForm() {
+        offerForm.reset();
+        document.querySelector("[data-form-title]").textContent = "新增公司";
+        document.querySelector("[data-editing-chip]").textContent = "New";
+        setValue("offer-id", "");
+        setValue("logo-url", "");
+        setPreview("[data-logo-preview]", "", "暂无 logo");
+        setValue("order", offers.length + 1);
+        setValue("star-rating", 0);
+        document.querySelector("#active").checked = true;
+      }
+
+      function readOfferForm() {
+        const id = getValue("offer-id") || createId(getValue("name"));
+        return normalizeOffer({
+          id,
+          active: document.querySelector("#active").checked,
+          order: Number(getValue("order") || offers.length + 1),
+          name: getValue("name"),
+          badge: getValue("badge"),
+          logoUrl: getValue("logo-url"),
+          amount: getValue("amount"),
+          url: getValue("url"),
+          starRating: getValue("star-rating"),
+          rank: {
+            zh: getValue("rank-zh"),
+            en: getValue("rank-en"),
+            ms: getValue("rank-ms")
+          },
+          bonusLabel: {
+            zh: getValue("bonus-zh"),
+            en: getValue("bonus-en"),
+            ms: getValue("bonus-ms")
+          },
+          buttonText: {
+            zh: getValue("button-zh"),
+            en: getValue("button-en"),
+            ms: getValue("button-ms")
+          },
+          bullets: {
+            zh: [getValue("bullet-zh-1"), getValue("bullet-zh-2"), getValue("bullet-zh-3")],
+            en: [getValue("bullet-en-1"), getValue("bullet-en-2"), getValue("bullet-en-3")],
+            ms: [getValue("bullet-ms-1"), getValue("bullet-ms-2"), getValue("bullet-ms-3")]
+          }
+        });
+      }
+
+      function fillSocialForm(link) {
+        document.querySelector("[data-social-form-title]").textContent = "编辑社群入口";
+        document.querySelector("[data-social-editing-chip]").textContent = link.name;
+        setValue("social-id", link.id);
+        setValue("social-name", link.name);
+        setValue("social-badge", link.badge);
+        setValue("social-logo-url", link.logoUrl);
+        setPreview("[data-social-logo-preview]", link.logoUrl, "暂无 logo");
+        setValue("social-order", link.order);
+        setValue("social-url", link.url);
+        document.querySelector("#social-active").checked = link.active;
+        languages.forEach((language) => {
+          setValue(`social-title-${language}`, link.title?.[language]);
+          setValue(`social-description-${language}`, link.description?.[language]);
+          setValue(`social-button-${language}`, link.buttonText?.[language]);
+        });
+      }
+
+      function resetSocialForm() {
+        socialForm.reset();
+        document.querySelector("[data-social-form-title]").textContent = "新增社群入口";
+        document.querySelector("[data-social-editing-chip]").textContent = "New";
+        setValue("social-id", "");
+        setValue("social-logo-url", "");
+        setPreview("[data-social-logo-preview]", "", "暂无 logo");
+        setValue("social-order", socialLinks.length + 1);
+        document.querySelector("#social-active").checked = true;
+      }
+
+      function readSocialForm() {
+        const id = getValue("social-id") || createId(getValue("social-name"));
+        return normalizeSocialLink({
+          id,
+          active: document.querySelector("#social-active").checked,
+          order: Number(getValue("social-order") || socialLinks.length + 1),
+          name: getValue("social-name"),
+          badge: getValue("social-badge"),
+          logoUrl: getValue("social-logo-url"),
+          url: getValue("social-url"),
+          title: {
+            zh: getValue("social-title-zh"),
+            en: getValue("social-title-en"),
+            ms: getValue("social-title-ms")
+          },
+          description: {
+            zh: getValue("social-description-zh"),
+            en: getValue("social-description-en"),
+            ms: getValue("social-description-ms")
+          },
+          buttonText: {
+            zh: getValue("social-button-zh"),
+            en: getValue("social-button-en"),
+            ms: getValue("social-button-ms")
+          }
+        });
+      }
+
+      function fillDomainForm(domain) {
+        setValue("domain-id", domain.id);
+        setValue("domain-name", domain.domain);
+        setValue("domain-type", domain.type);
+        setValue("domain-target-server", domain.targetServer);
+        setValue("domain-cf-proxy", domain.cfProxy);
+        setValue("domain-status", domain.status);
+        setValue("domain-expiry", domain.expiry);
+        setValue("domain-remark", domain.remark);
+        setValue("domain-api-token", "");
+      }
+
+      function resetDomainForm() {
+        domainForm.reset();
+        setValue("domain-id", "");
+        setValue("domain-type", "BACKUP");
+        setValue("domain-cf-proxy", "OFF");
+        setValue("domain-status", "OK");
+        setValue("domain-api-token", "");
+      }
+
+      function readDomainForm() {
+        const id = getValue("domain-id") || createId(getValue("domain-name"));
+        return normalizeDomain({
+          id,
+          order: domains.find((domain) => domain.id === id)?.order || domains.length + 1,
+          domain: getValue("domain-name"),
+          type: getValue("domain-type"),
+          targetServer: getValue("domain-target-server"),
+          cfProxy: getValue("domain-cf-proxy"),
+          status: getValue("domain-status"),
+          expiry: getValue("domain-expiry"),
+          remark: getValue("domain-remark")
+        });
+      }
+
+      function fillSiteForm() {
+        setValue("background-image", siteSettings.backgroundImage);
+        setPreview("[data-background-preview]", siteSettings.backgroundImage, "暂无图片");
+        setValue("brand-mark-text", siteSettings.brandMarkText);
+        setValue("site-logo-url", siteSettings.siteLogoUrl);
+        setPreview("[data-site-logo-preview]", siteSettings.siteLogoUrl, "暂无 logo");
+
+        Object.entries(colorFields).forEach(([key, id]) => {
+          setValue(id, siteSettings.colors?.[key]);
+        });
+
+        languages.forEach((language) => {
+          setValue(`site-name-${language}`, siteSettings.siteName?.[language]);
+          setValue(`meta-title-${language}`, siteSettings.metaTitle?.[language]);
+          setValue(`meta-description-${language}`, siteSettings.metaDescription?.[language]);
+
+          Object.entries(copyFields).forEach(([key, id]) => {
+            setValue(`${id}-${language}`, siteSettings.copy?.[language]?.[key]);
+          });
+        });
+      }
+
+      function readSiteForm() {
+        const nextSettings = mergeDeep(defaultSiteSettings, {
+          backgroundImage: getValue("background-image"),
+          brandMarkText: getValue("brand-mark-text"),
+          siteLogoUrl: getValue("site-logo-url"),
+          colors: {},
+          siteName: {},
+          metaTitle: {},
+          metaDescription: {},
+          copy: {}
+        });
+
+        Object.entries(colorFields).forEach(([key, id]) => {
+          nextSettings.colors[key] = getValue(id);
+        });
+
+        languages.forEach((language) => {
+          nextSettings.siteName[language] = getValue(`site-name-${language}`);
+          nextSettings.metaTitle[language] = getValue(`meta-title-${language}`);
+          nextSettings.metaDescription[language] = getValue(`meta-description-${language}`);
+          nextSettings.copy[language] = {};
+
+          Object.entries(copyFields).forEach(([key, id]) => {
+            nextSettings.copy[language][key] = getValue(`${id}-${language}`);
+          });
+        });
+
+        return nextSettings;
+      }
+
+      function findIndex(id) {
+        return offers.findIndex((offer) => offer.id === id);
+      }
+
+      function findSocialIndex(id) {
+        return socialLinks.findIndex((link) => link.id === id);
+      }
+
+      function findDomainIndex(id) {
+        return domains.findIndex((domain) => domain.id === id);
+      }
+
+      function moveOffer(id, direction) {
+        const sorted = [...offers].sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
+        const index = sorted.findIndex((offer) => offer.id === id);
+        const targetIndex = index + direction;
+        if (index < 0 || targetIndex < 0 || targetIndex >= sorted.length) {
+          return;
+        }
+
+        [sorted[index], sorted[targetIndex]] = [sorted[targetIndex], sorted[index]];
+        offers = sorted.map((offer, offerIndex) => ({ ...offer, order: offerIndex + 1 }));
+        saveOffers();
+      }
+
+      function moveSocialLink(id, direction) {
+        const sorted = [...socialLinks].sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
+        const index = sorted.findIndex((link) => link.id === id);
+        const targetIndex = index + direction;
+        if (index < 0 || targetIndex < 0 || targetIndex >= sorted.length) {
+          return;
+        }
+
+        [sorted[index], sorted[targetIndex]] = [sorted[targetIndex], sorted[index]];
+        socialLinks = sorted.map((link, linkIndex) => ({ ...link, order: linkIndex + 1 }));
+        saveSocialLinks();
+      }
+
+      function moveDomain(id, direction) {
+        const sorted = [...domains].sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
+        const index = sorted.findIndex((domain) => domain.id === id);
+        const targetIndex = index + direction;
+        if (index < 0 || targetIndex < 0 || targetIndex >= sorted.length) {
+          return;
+        }
+
+        [sorted[index], sorted[targetIndex]] = [sorted[targetIndex], sorted[index]];
+        domains = sorted.map((domain, domainIndex) => ({ ...domain, order: domainIndex + 1 }));
+        saveDomains();
+      }
+
+      function updateAllDomainStatus() {
+        domains = domains.map((domain) => ({
+          ...domain,
+          status: getUpdatedDomainStatus(domain)
+        }));
+        saveDomains();
+      }
+
+      async function connectDomainToCloudflare(domain) {
+        const nextDomain = normalizeDomain(domain);
+        if (!nextDomain.domain || !nextDomain.targetServer) {
+          alert("请先填写 Domain 和 Target Server。");
+          return;
+        }
+
+        try {
+          const response = await fetch("/api/cloudflare/connect-domain", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              domain: nextDomain.domain,
+              targetServer: nextDomain.targetServer,
+              cfProxy: nextDomain.cfProxy,
+              recordType: "CNAME"
+            })
+          });
+          const result = await response.json();
+          if (!response.ok || !result.ok) {
+            throw new Error(result.error || "Cloudflare 连接失败。");
+          }
+
+          const index = findDomainIndex(nextDomain.id);
+          const updatedRemark = `Cloudflare ${result.action}: ${result.record.type} -> ${result.record.content}`;
+          const updatedDomain = {
+            ...nextDomain,
+            status: "OK",
+            remark: nextDomain.remark ? `${nextDomain.remark} | ${updatedRemark}` : updatedRemark
+          };
+          if (index >= 0) {
+            domains[index] = updatedDomain;
+          } else {
+            domains.push(updatedDomain);
+          }
+          saveDomains();
+          fillDomainForm(updatedDomain);
+          alert(`Cloudflare 已自动连接：${result.record.name}`);
+        } catch (error) {
+          alert(error.message || "Cloudflare 连接失败。");
+        }
+      }
+
+      function readImageFile(input, targetId, previewSelector) {
+        const file = input.files?.[0];
+        if (!file) {
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+          setValue(targetId, reader.result);
+          setPreview(previewSelector, reader.result, "暂无图片");
+        });
+        reader.readAsDataURL(file);
+      }
+
+      function exportBundle() {
+        jsonData.value = JSON.stringify({ siteSettings, offers, socialLinks, domains }, null, 2);
+      }
+
+      offerForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const offer = readOfferForm();
+        const existingIndex = findIndex(offer.id);
+        if (existingIndex >= 0) {
+          offers[existingIndex] = offer;
+        } else {
+          offers.push(offer);
+        }
+        saveOffers();
+        fillOfferForm(offer);
+      });
+
+      socialForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const link = readSocialForm();
+        const existingIndex = findSocialIndex(link.id);
+        if (existingIndex >= 0) {
+          socialLinks[existingIndex] = link;
+        } else {
+          socialLinks.push(link);
+        }
+        saveSocialLinks();
+        fillSocialForm(link);
+      });
+
+      domainForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const domain = readDomainForm();
+        const existingIndex = findDomainIndex(domain.id);
+        if (existingIndex >= 0) {
+          domains[existingIndex] = domain;
+        } else {
+          domains.push(domain);
+        }
+        saveDomains();
+        fillDomainForm(domain);
+      });
+
+      siteForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        siteSettings = readSiteForm();
+        saveSiteSettings();
+      });
+
+      document.querySelector("[data-new]").addEventListener("click", resetOfferForm);
+      document.querySelector("[data-new-social]").addEventListener("click", resetSocialForm);
+      document.querySelector("[data-new-domain]").addEventListener("click", () => {
+        resetDomainForm();
+        window.scrollTo({ top: document.querySelector("#domain-manager").offsetTop - 80, behavior: "smooth" });
+      });
+      document.querySelector("[data-clear-domain-form]").addEventListener("click", resetDomainForm);
+      document.querySelector("[data-update-domains]").addEventListener("click", updateAllDomainStatus);
+      document.querySelector("[data-connect-current-domain]").addEventListener("click", () => connectDomainToCloudflare(readDomainForm()));
+      document.querySelector("#logo-file").addEventListener("change", (event) => readImageFile(event.target, "logo-url", "[data-logo-preview]"));
+      document.querySelector("#social-logo-file").addEventListener("change", (event) => readImageFile(event.target, "social-logo-url", "[data-social-logo-preview]"));
+      document.querySelector("#background-file").addEventListener("change", (event) => readImageFile(event.target, "background-image", "[data-background-preview]"));
+      document.querySelector("#site-logo-file").addEventListener("change", (event) => readImageFile(event.target, "site-logo-url", "[data-site-logo-preview]"));
+      document.querySelector("[data-clear-logo]").addEventListener("click", () => {
+        setValue("logo-url", "");
+        setPreview("[data-logo-preview]", "", "暂无 logo");
+        document.querySelector("#logo-file").value = "";
+      });
+      document.querySelector("[data-clear-social-logo]").addEventListener("click", () => {
+        setValue("social-logo-url", "");
+        setPreview("[data-social-logo-preview]", "", "暂无 logo");
+        document.querySelector("#social-logo-file").value = "";
+      });
+      document.querySelector("[data-clear-site-logo]").addEventListener("click", () => {
+        setValue("site-logo-url", "");
+        setPreview("[data-site-logo-preview]", "", "暂无 logo");
+        document.querySelector("#site-logo-file").value = "";
+      });
+      document.querySelector("[data-clear-background]").addEventListener("click", () => {
+        setValue("background-image", "");
+        setPreview("[data-background-preview]", "", "暂无图片");
+        document.querySelector("#background-file").value = "";
+      });
+
+      list.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-action]");
+        if (!button) {
+          return;
+        }
+
+        const { action, id } = button.dataset;
+        const index = findIndex(id);
+        if (index < 0) {
+          return;
+        }
+
+        if (action === "edit") {
+          fillOfferForm(offers[index]);
+          window.scrollTo({ top: document.querySelector("#offer-form").offsetTop - 80, behavior: "smooth" });
+        }
+
+        if (action === "toggle") {
+          offers[index].active = !offers[index].active;
+          saveOffers();
+        }
+
+        if (action === "up") {
+          moveOffer(id, -1);
+        }
+
+        if (action === "down") {
+          moveOffer(id, 1);
+        }
+
+        if (action === "delete" && confirm(`删除 ${offers[index].name}？`)) {
+          offers.splice(index, 1);
+          saveOffers();
+          resetOfferForm();
+        }
+      });
+
+      socialList.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-social-action]");
+        if (!button) {
+          return;
+        }
+
+        const { socialAction: action, id } = button.dataset;
+        const index = findSocialIndex(id);
+        if (index < 0) {
+          return;
+        }
+
+        if (action === "edit") {
+          fillSocialForm(socialLinks[index]);
+          window.scrollTo({ top: document.querySelector("#social-form").offsetTop - 80, behavior: "smooth" });
+        }
+
+        if (action === "toggle") {
+          socialLinks[index].active = !socialLinks[index].active;
+          saveSocialLinks();
+        }
+
+        if (action === "up") {
+          moveSocialLink(id, -1);
+        }
+
+        if (action === "down") {
+          moveSocialLink(id, 1);
+        }
+
+        if (action === "delete" && confirm(`删除 ${socialLinks[index].name}？`)) {
+          socialLinks.splice(index, 1);
+          saveSocialLinks();
+          resetSocialForm();
+        }
+      });
+
+      domainList.addEventListener("click", async (event) => {
+        const button = event.target.closest("[data-domain-action]");
+        if (!button) {
+          return;
+        }
+
+        const { domainAction: action, id } = button.dataset;
+        const index = findDomainIndex(id);
+        if (index < 0) {
+          return;
+        }
+
+        if (action === "edit") {
+          fillDomainForm(domains[index]);
+          window.scrollTo({ top: document.querySelector("#domain-manager").offsetTop - 80, behavior: "smooth" });
+        }
+
+        if (action === "connect") {
+          await connectDomainToCloudflare(domains[index]);
+        }
+
+        if (action === "up") {
+          moveDomain(id, -1);
+        }
+
+        if (action === "down") {
+          moveDomain(id, 1);
+        }
+
+        if (action === "delete" && confirm(`删除 ${domains[index].domain}？`)) {
+          domains.splice(index, 1);
+          saveDomains();
+          resetDomainForm();
+        }
+      });
+
+      document.querySelector("[data-export]").addEventListener("click", exportBundle);
+
+      document.querySelector("[data-copy]").addEventListener("click", async () => {
+        if (!jsonData.value.trim()) {
+          exportBundle();
+        }
+        try {
+          await navigator.clipboard.writeText(jsonData.value);
+        } catch (error) {
+          jsonData.select();
+        }
+      });
+
+      document.querySelector("[data-import]").addEventListener("click", () => {
+        try {
+          const imported = JSON.parse(jsonData.value);
+          if (Array.isArray(imported)) {
+            offers = imported.map(normalizeOffer);
+          } else {
+            if (!Array.isArray(imported.offers)) {
+              throw new Error("Missing offers array.");
+            }
+            offers = imported.offers.map(normalizeOffer);
+            socialLinks = Array.isArray(imported.socialLinks)
+              ? imported.socialLinks.map(normalizeSocialLink)
+              : clone(defaultSocialLinks).map(normalizeSocialLink);
+            domains = Array.isArray(imported.domains)
+              ? imported.domains.map(normalizeDomain)
+              : clone(defaultDomains).map(normalizeDomain);
+            siteSettings = mergeDeep(defaultSiteSettings, imported.siteSettings || {});
+            saveSiteSettings();
+            saveSocialLinks();
+            saveDomains();
+          }
+          saveOffers();
+          fillSiteForm();
+          resetOfferForm();
+          resetSocialForm();
+          resetDomainForm();
+        } catch (error) {
+          alert("JSON 格式不正确，无法导入。");
+        }
+      });
+
+      document.querySelector("[data-reset]").addEventListener("click", () => {
+        if (!confirm("恢复默认公司资料？目前后台修改会被覆盖。")) {
+          return;
+        }
+        offers = clone(defaultOffers).map(normalizeOffer);
+        saveOffers();
+        resetOfferForm();
+      });
+
+      document.querySelector("[data-reset-social]").addEventListener("click", () => {
+        if (!confirm("恢复默认社群入口？目前后台社群修改会被覆盖。")) {
+          return;
+        }
+        socialLinks = clone(defaultSocialLinks).map(normalizeSocialLink);
+        saveSocialLinks();
+        resetSocialForm();
+      });
+
+      document.querySelector("[data-reset-domains]").addEventListener("click", () => {
+        if (!confirm("恢复默认 Domain 资料？目前后台 Domain 修改会被覆盖。")) {
+          return;
+        }
+        domains = clone(defaultDomains).map(normalizeDomain);
+        saveDomains();
+        resetDomainForm();
+      });
+
+      document.querySelector("[data-reset-site]").addEventListener("click", () => {
+        if (!confirm("恢复默认网站设置？目前标题、字眼和背景图修改会被覆盖。")) {
+          return;
+        }
+        siteSettings = mergeDeep(defaultSiteSettings, {});
+        saveSiteSettings();
+      });
+
+      document.querySelector("[data-clear]").addEventListener("click", () => {
+        if (!confirm("清除本机保存资料？前台会回到默认公司、社群入口、Domain 和网站设置。")) {
+          return;
+        }
+        localStorage.removeItem(offerStorageKey);
+        localStorage.removeItem(siteSettingsStorageKey);
+        localStorage.removeItem(socialStorageKey);
+        localStorage.removeItem(domainStorageKey);
+        offers = clone(defaultOffers).map(normalizeOffer);
+        socialLinks = clone(defaultSocialLinks).map(normalizeSocialLink);
+        domains = clone(defaultDomains).map(normalizeDomain);
+        siteSettings = mergeDeep(defaultSiteSettings, {});
+        render();
+        fillSiteForm();
+        resetOfferForm();
+        resetSocialForm();
+        resetDomainForm();
+      });
+
+      renderAdvancedCopyFields();
+      colorLanguageGroups();
+      render();
+      fillSiteForm();
+      resetOfferForm();
+      resetSocialForm();
+      resetDomainForm();
+    </script>
+  </body>
+</html>
