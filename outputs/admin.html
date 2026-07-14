@@ -1664,6 +1664,7 @@
       let socialLinks = loadSocialLinks();
       let domains = loadDomains();
       let siteSettings = loadSiteSettings();
+      let serverSaveTimer = null;
 
       const offerForm = document.querySelector("#offer-form");
       const socialForm = document.querySelector("#social-form");
@@ -1914,6 +1915,7 @@
           .sort((a, b) => Number(a.order || 0) - Number(b.order || 0))
           .map((offer, index) => ({ ...offer, order: index + 1 }));
         localStorage.setItem(offerStorageKey, JSON.stringify(offers));
+        scheduleServerSave();
         render();
       }
 
@@ -1923,6 +1925,7 @@
           .sort((a, b) => Number(a.order || 0) - Number(b.order || 0))
           .map((link, index) => ({ ...link, order: index + 1 }));
         localStorage.setItem(socialStorageKey, JSON.stringify(socialLinks));
+        scheduleServerSave();
         render();
       }
 
@@ -1932,12 +1935,82 @@
           .sort((a, b) => Number(a.order || 0) - Number(b.order || 0))
           .map((domain, index) => ({ ...domain, order: index + 1 }));
         localStorage.setItem(domainStorageKey, JSON.stringify(domains));
+        scheduleServerSave();
         render();
       }
 
       function saveSiteSettings() {
         localStorage.setItem(siteSettingsStorageKey, JSON.stringify(siteSettings));
+        scheduleServerSave();
         fillSiteForm();
+      }
+
+      function getDataBundle() {
+        return { siteSettings, offers, socialLinks, domains };
+      }
+
+      function scheduleServerSave() {
+        clearTimeout(serverSaveTimer);
+        serverSaveTimer = setTimeout(saveServerBundle, 250);
+      }
+
+      async function saveServerBundle() {
+        try {
+          const response = await fetch("/api/site-data", {
+            method: "PUT",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(getDataBundle())
+          });
+
+          if (!response.ok) {
+            console.warn("Server data save failed.");
+          }
+        } catch (error) {
+          console.warn("Server data could not be saved.", error);
+        }
+      }
+
+      async function loadServerBundle() {
+        try {
+          const response = await fetch("/api/admin-data", { cache: "no-store" });
+          if (!response.ok) {
+            return;
+          }
+
+          const result = await response.json();
+          if (!result.ok) {
+            return;
+          }
+
+          if (!result.hasServerData || !result.data) {
+            scheduleServerSave();
+            return;
+          }
+
+          siteSettings = mergeDeep(defaultSiteSettings, result.data.siteSettings || {});
+          offers = Array.isArray(result.data.offers)
+            ? result.data.offers.map(normalizeOffer)
+            : clone(defaultOffers).map(normalizeOffer);
+          socialLinks = Array.isArray(result.data.socialLinks)
+            ? result.data.socialLinks.map(normalizeSocialLink)
+            : clone(defaultSocialLinks).map(normalizeSocialLink);
+          domains = Array.isArray(result.data.domains)
+            ? result.data.domains.map(normalizeDomain)
+            : clone(defaultDomains).map(normalizeDomain);
+
+          localStorage.setItem(siteSettingsStorageKey, JSON.stringify(siteSettings));
+          localStorage.setItem(offerStorageKey, JSON.stringify(offers));
+          localStorage.setItem(socialStorageKey, JSON.stringify(socialLinks));
+          localStorage.setItem(domainStorageKey, JSON.stringify(domains));
+
+          render();
+          fillSiteForm();
+          resetOfferForm();
+          resetSocialForm();
+          resetDomainForm();
+        } catch (error) {
+          console.warn("Server data could not be loaded.", error);
+        }
       }
 
       function escapeHtml(value) {
@@ -2870,6 +2943,7 @@
       resetOfferForm();
       resetSocialForm();
       resetDomainForm();
+      loadServerBundle();
     </script>
   </body>
 </html>

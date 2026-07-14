@@ -1780,6 +1780,7 @@
       };
       let activeLanguage = "zh";
       let liveTransactionsEnabled = true;
+      let serverSiteData = null;
       const liveTransactionRows = new Map();
       const liveTickerTimers = new Map();
 
@@ -1801,6 +1802,10 @@
       }
 
       function getSavedSiteSettings() {
+        if (serverSiteData) {
+          return mergeSettings(window.defaultSiteSettings || {}, serverSiteData.siteSettings || {});
+        }
+
         try {
           const savedSettings = JSON.parse(localStorage.getItem(siteSettingsStorageKey) || "null");
           return mergeSettings(window.defaultSiteSettings || {}, savedSettings);
@@ -1811,6 +1816,10 @@
       }
 
       function getSavedOffers() {
+        if (serverSiteData && Array.isArray(serverSiteData.offers)) {
+          return normalizePublicOffers(serverSiteData.offers);
+        }
+
         try {
           const savedOffers = JSON.parse(localStorage.getItem(offerStorageKey) || "null");
           if (Array.isArray(savedOffers)) {
@@ -1860,6 +1869,10 @@
       }
 
       function getSavedSocialLinks() {
+        if (serverSiteData && Array.isArray(serverSiteData.socialLinks)) {
+          return normalizePublicSocialLinks(serverSiteData.socialLinks);
+        }
+
         try {
           const savedLinks = JSON.parse(localStorage.getItem(socialStorageKey) || "null");
           if (Array.isArray(savedLinks)) {
@@ -2293,6 +2306,25 @@
           .join("");
       }
 
+      async function loadServerSiteData() {
+        try {
+          const response = await fetch("/api/site-data", { cache: "no-store" });
+          if (!response.ok) {
+            return;
+          }
+
+          const result = await response.json();
+          if (result.ok && result.hasServerData && result.data) {
+            serverSiteData = result.data;
+            applySiteSettings(activeLanguage);
+            renderOffers(activeLanguage);
+            renderSocialLinks(activeLanguage);
+          }
+        } catch (error) {
+          console.warn("Server site data could not be loaded.", error);
+        }
+      }
+
       function getInitialLanguage() {
         const saved = localStorage.getItem("landingLanguage");
         return languageCopy[saved] ? saved : "zh";
@@ -2345,6 +2377,7 @@
       });
 
       setLanguage(getInitialLanguage());
+      loadServerSiteData();
     </script>
   </body>
 </html>

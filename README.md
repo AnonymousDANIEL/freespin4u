@@ -66,11 +66,14 @@ CLOUDFLARE_API_TOKEN=你的 Cloudflare API Token
 可选：
 
 ```text
+DATA_DIR=
 CLOUDFLARE_ZONE_ID=
 CLOUDFLARE_ZONE_NAME=
 ```
 
 如果不填 `CLOUDFLARE_ZONE_ID`，系统会尝试根据你输入的 domain 自动寻找 Cloudflare zone。
+
+如果之后 Railway 有加 Volume，可以把 `DATA_DIR` 设成 Volume 的路径，例如 `/data`，后台资料会保存到 Volume 里面。
 
 ## 后台功能
 
@@ -90,6 +93,7 @@ CLOUDFLARE_ZONE_NAME=
 - 背景颜色、按钮颜色、边框颜色、文字颜色
 - Domain 管理
 - Cloudflare DNS 自动连接
+- 服务器保存资料，后台修改后前台会读取同一份公司 / Live / 颜色资料
 
 ## Domain 自动连接说明
 
@@ -112,6 +116,8 @@ CLOUDFLARE_ZONE_NAME=
 - 备用 Live 资料
 
 系统会先尝试从 Live 网页连接抓公开文字资料。如果对方网页不允许抓取、需要登录、或资料是特殊脚本加载，就会显示后台填写的备用资料。
+
+后台保存公司、Live Transaction、颜色和社群入口后，会同步到服务器。前台会优先读取服务器资料，所以同一个 domain 下会一起更新。
 
 ## 重要安全提醒
 

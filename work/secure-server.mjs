@@ -1,13 +1,15 @@
 import crypto from "node:crypto";
 import http from "node:http";
 import { existsSync, readFileSync } from "node:fs";
-import { readFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "../outputs");
 const localEnvPath = path.resolve(here, "../.env");
+const dataRoot = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : here;
+const dataPath = path.resolve(dataRoot, "site-data.json");
 
 if (existsSync(localEnvPath)) {
   const localEnv = readFileSync(localEnvPath, "utf8");
@@ -134,14 +136,22 @@ function isValidSession(req) {
 }
 
 function requiresAdmin(pathname) {
-  return pathname === "/admin.html" || (pathname.startsWith("/api/") && pathname !== "/api/live-transactions");
+  if (pathname === "/admin.html") {
+    return true;
+  }
+
+  if (pathname === "/api/site-data" || pathname === "/api/live-transactions") {
+    return false;
+  }
+
+  return pathname.startsWith("/api/");
 }
 
 async function readJson(req) {
   const chunks = [];
   for await (const chunk of req) {
     chunks.push(chunk);
-    if (Buffer.concat(chunks).length > 64 * 1024) {
+    if (Buffer.concat(chunks).length > 8 * 1024 * 1024) {
       throw new Error("Request too large.");
     }
   }
@@ -219,6 +229,41 @@ function cleanLiveRows(value) {
   }
 
   return Math.max(2, Math.min(10, Math.round(rows)));
+}
+
+async function readSiteData() {
+  try {
+    const raw = await readFile(dataPath, "utf8");
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function cleanSiteData(body) {
+  const source = body && typeof body === "object" ? body : {};
+  return {
+    siteSettings: source.siteSettings && typeof source.siteSettings === "object" ? source.siteSettings : {},
+    offers: Array.isArray(source.offers) ? source.offers : [],
+    socialLinks: Array.isArray(source.socialLinks) ? source.socialLinks : [],
+    domains: Array.isArray(source.domains) ? source.domains : [],
+    updatedAt: new Date().toISOString(),
+  };
+}
+
+function publicSiteData(data) {
+  return {
+    siteSettings: data.siteSettings || {},
+    offers: Array.isArray(data.offers) ? data.offers : [],
+    socialLinks: Array.isArray(data.socialLinks) ? data.socialLinks : [],
+    updatedAt: data.updatedAt || "",
+  };
+}
+
+async function writeSiteData(data) {
+  await mkdir(path.dirname(dataPath), { recursive: true });
+  await writeFile(dataPath, `${JSON.stringify(data, null, 2)}\n`, "utf8");
 }
 
 function stripHtmlToLines(html) {
@@ -393,6 +438,39 @@ async function upsertDnsRecord({ zoneId, name, type, content, proxied }) {
 }
 
 async function handleApi(req, res, pathname) {
+  if (pathname === "/api/site-data" && req.method === "GET") {
+    const data = await readSiteData();
+    json(res, 200, {
+      ok: true,
+      hasServerData: Boolean(data.updatedAt),
+      data: publicSiteData(data),
+    });
+    return;
+  }
+
+  if (pathname === "/api/site-data" && req.method === "PUT") {
+    if (!adminPassword || !isValidSession(req)) {
+      json(res, 401, { ok: false, error: "Admin login required." });
+      return;
+    }
+
+    const body = await readJson(req);
+    const data = cleanSiteData(body);
+    await writeSiteData(data);
+    json(res, 200, { ok: true, data: publicSiteData(data) });
+    return;
+  }
+
+  if (pathname === "/api/admin-data" && req.method === "GET") {
+    const data = await readSiteData();
+    json(res, 200, {
+      ok: true,
+      hasServerData: Boolean(data.updatedAt),
+      data,
+    });
+    return;
+  }
+
   if (pathname === "/api/live-transactions" && req.method === "GET") {
     const url = new URL(req.url, `http://${req.headers.host}`);
     const liveUrl = cleanLiveUrl(url.searchParams.get("url"));
