@@ -346,7 +346,17 @@
 
       .logo-preview {
         width: 76px;
+        height: 76px;
         min-height: 76px;
+      }
+
+      .logo-preview img {
+        height: 100%;
+        max-height: none;
+        object-fit: contain;
+        padding: 6px;
+        box-sizing: border-box;
+        background: #fff;
       }
 
       .language-group {
@@ -473,7 +483,10 @@
       .badge img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        padding: 4px;
+        box-sizing: border-box;
+        background: #fff;
       }
 
       .company-main h3 {
@@ -2652,6 +2665,15 @@
           };
         }
 
+        if (targetId === "logo-url" || targetId === "social-logo-url" || targetId === "site-logo-url") {
+          return {
+            width: 640,
+            height: 640,
+            quality: 0.9,
+            mode: "contain"
+          };
+        }
+
         return {
           width: 640,
           height: 640,
@@ -2685,6 +2707,18 @@
         const context = canvas.getContext("2d");
         context.imageSmoothingEnabled = true;
         context.imageSmoothingQuality = "high";
+
+        if (profile.mode === "contain") {
+          const scale = Math.min(profile.width / image.naturalWidth, profile.height / image.naturalHeight);
+          const targetWidth = image.naturalWidth * scale;
+          const targetHeight = image.naturalHeight * scale;
+          const targetX = (profile.width - targetWidth) / 2;
+          const targetY = (profile.height - targetHeight) / 2;
+
+          context.clearRect(0, 0, profile.width, profile.height);
+          context.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight, targetX, targetY, targetWidth, targetHeight);
+          return canvas.toDataURL("image/webp", profile.quality);
+        }
 
         const sourceRatio = image.naturalWidth / image.naturalHeight;
         const targetRatio = profile.width / profile.height;
@@ -2772,7 +2806,8 @@
           outputHeight: profile.height,
           originalBytes: file.size,
           outputBytes: dataUrlBytes(dataUrl),
-          mode: "processed"
+          mode: "processed",
+          profileMode: profile.mode
         };
       }
 
@@ -2794,9 +2829,10 @@
               `GIF 动图已保留，不会自动裁切 | 原图 ${formatBytes(processedImage.originalBytes)} | ${processedImage.width}x${processedImage.height} | 保存 ${formatBytes(processedImage.outputBytes)}${gifNote}`
             );
           } else {
+            const actionText = processedImage.profileMode === "contain" ? "已自动保留完整 logo 和压缩" : "已自动对焦裁切和压缩";
             setUploadInfo(
               input,
-              `已自动对焦裁切和压缩 | 原图 ${formatBytes(processedImage.originalBytes)} | ${processedImage.width}x${processedImage.height} | 保存 ${formatBytes(processedImage.outputBytes)} | ${processedImage.outputWidth}x${processedImage.outputHeight}`
+              `${actionText} | 原图 ${formatBytes(processedImage.originalBytes)} | ${processedImage.width}x${processedImage.height} | 保存 ${formatBytes(processedImage.outputBytes)} | ${processedImage.outputWidth}x${processedImage.outputHeight}`
             );
           }
         } catch (error) {
