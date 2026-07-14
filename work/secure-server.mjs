@@ -34,6 +34,7 @@ const cloudflareToken = process.env.CLOUDFLARE_API_TOKEN || "";
 const cloudflareZoneId = process.env.CLOUDFLARE_ZONE_ID || "";
 const cloudflareZoneName = process.env.CLOUDFLARE_ZONE_NAME || "";
 const sessionSecret = process.env.SESSION_SECRET || crypto.randomBytes(32).toString("hex");
+const liveCache = new Map();
 
 const types = {
   ".html": "text/html; charset=utf-8",
@@ -72,6 +73,31 @@ function json(res, status, value) {
   write(res, status, JSON.stringify(value), { "content-type": "application/json; charset=utf-8" });
 }
 
+function missingAdminPasswordPage() {
+  return `<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Setup Required</title>
+    <style>
+      body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #0b0f17; color: #f8fafc; font-family: Arial, sans-serif; }
+      main { width: min(560px, calc(100% - 32px)); border: 1px solid #283244; border-radius: 12px; padding: 28px; background: #121826; }
+      h1 { margin: 0 0 12px; font-size: 24px; }
+      p { color: #cbd5e1; line-height: 1.6; }
+      code { color: #fbbf24; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>后台还没有设置密码</h1>
+      <p>请去 Railway 的 <strong>Variables</strong> 加入 <code>ADMIN_PASSWORD</code>，然后 Redeploy。</p>
+      <p>Admin password is missing. Add <code>ADMIN_PASSWORD</code> in Railway Variables, then redeploy.</p>
+    </main>
+  </body>
+</html>`;
+}
+
 function parseCookies(req) {
   return Object.fromEntries(
     String(req.headers.cookie || "")
@@ -108,7 +134,7 @@ function isValidSession(req) {
 }
 
 function requiresAdmin(pathname) {
-  return pathname === "/admin.html" || pathname.startsWith("/api/");
+  return pathname === "/admin.html" || (pathname.startsWith("/api/") && pathname !== "/api/live-transactions");
 }
 
 async function readJson(req) {
@@ -150,6 +176,145 @@ function cleanTarget(value) {
   }
 
   return target;
+}
+
+function isPrivateHost(hostname) {
+  const host = String(hostname || "").toLowerCase();
+  if (!host || host === "localhost" || host.endsWith(".localhost")) {
+    return true;
+  }
+
+  if (/^\d{1,3}(?:\.\d{1,3}){3}$/.test(host)) {
+    const parts = host.split(".").map(Number);
+    return (
+      parts[0] === 10 ||
+      parts[0] === 127 ||
+      (parts[0] === 172 && parts[1] >= 16 && parts[1] <= 31) ||
+      (parts[0] === 192 && parts[1] === 168) ||
+      (parts[0] === 169 && parts[1] === 254) ||
+      parts[0] === 0
+    );
+  }
+
+  return false;
+}
+
+function cleanLiveUrl(value) {
+  const liveUrl = new URL(String(value || "").trim());
+  if (!["http:", "https:"].includes(liveUrl.protocol)) {
+    throw new Error("Live URL must start with http:// or https://.");
+  }
+
+  if (liveUrl.username || liveUrl.password || isPrivateHost(liveUrl.hostname)) {
+    throw new Error("Live URL is not allowed.");
+  }
+
+  return liveUrl.toString();
+}
+
+function cleanLiveRows(value) {
+  const rows = Number(value || 3);
+  if (!Number.isFinite(rows)) {
+    return 3;
+  }
+
+  return Math.max(2, Math.min(3, Math.round(rows)));
+}
+
+function stripHtmlToLines(html) {
+  return String(html || "")
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<\/(?:tr|p|li|div|section|article|table|tbody|thead|h[1-6])>/gi, "\n")
+    .replace(/<\/t[dh]>/gi, " | ")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&#x27;|&#39;/gi, "'")
+    .replace(/&quot;/gi, '"');
+}
+
+function normalizeLiveAmount(value) {
+  const amount = String(value || "").replace(/\s+/g, "");
+  return amount.toUpperCase().startsWith("RM") ? amount.toUpperCase() : amount;
+}
+
+function parseLiveRowsFromText(text, limit) {
+  const accountPattern = /(?:\+?60|0)\d*[*xX•●]{3,}\d{2,4}/g;
+  const amountPattern = /RM\s*\d+(?:\.\d{1,2})?/gi;
+  const lines = stripHtmlToLines(text)
+    .split(/\r?\n/)
+    .map((line) => line.replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+  const rows = [];
+
+  for (const line of lines) {
+    const accounts = line.match(accountPattern) || [];
+    const amounts = line.match(amountPattern) || [];
+    if (accounts.length < 2 || amounts.length < 2) {
+      continue;
+    }
+
+    const secondAmountIndex = line.toLowerCase().lastIndexOf(amounts[1].toLowerCase()) + amounts[1].length;
+    const game = line
+      .slice(secondAmountIndex)
+      .replace(/[|:,\-]+/g, " ")
+      .trim()
+      .split(/\s+/)
+      .slice(0, 2)
+      .join(" ");
+
+    rows.push({
+      topUser: accounts[0],
+      topAmount: normalizeLiveAmount(amounts[0]),
+      withdrawUser: accounts[1],
+      withdrawAmount: normalizeLiveAmount(amounts[1]),
+      game,
+    });
+
+    if (rows.length >= limit) {
+      break;
+    }
+  }
+
+  return rows;
+}
+
+async function fetchLiveTransactions(url, limit) {
+  const cacheKey = `${url}|${limit}`;
+  const cached = liveCache.get(cacheKey);
+  if (cached && Date.now() - cached.time < 20000) {
+    return cached.rows;
+  }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 6500);
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      headers: {
+        accept: "text/html,text/plain;q=0.9,*/*;q=0.8",
+        "user-agent": "Mozilla/5.0 LiveTransactionPreview/1.0",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Live page HTTP ${response.status}.`);
+    }
+
+    const length = Number(response.headers.get("content-length") || 0);
+    if (length > 600000) {
+      throw new Error("Live page is too large.");
+    }
+
+    const body = await response.text();
+    const rows = parseLiveRowsFromText(body.slice(0, 600000), limit);
+    liveCache.set(cacheKey, { time: Date.now(), rows });
+    return rows;
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 async function cloudflare(pathname, options = {}) {
@@ -228,6 +393,19 @@ async function upsertDnsRecord({ zoneId, name, type, content, proxied }) {
 }
 
 async function handleApi(req, res, pathname) {
+  if (pathname === "/api/live-transactions" && req.method === "GET") {
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    const liveUrl = cleanLiveUrl(url.searchParams.get("url"));
+    const rows = cleanLiveRows(url.searchParams.get("rows"));
+    const liveRows = await fetchLiveTransactions(liveUrl, rows);
+    json(res, 200, {
+      ok: liveRows.length > 0,
+      rows: liveRows,
+      fetchedAt: new Date().toISOString(),
+    });
+    return;
+  }
+
   if (pathname === "/api/security/status" && req.method === "GET") {
     json(res, 200, {
       ok: true,
@@ -307,7 +485,7 @@ function loginPage(error = "") {
 
 async function handleLogin(req, res) {
   if (!adminPassword) {
-    write(res, 503, "请先在服务器环境变量设置 ADMIN_PASSWORD。");
+    write(res, 503, missingAdminPasswordPage(), { "content-type": "text/html; charset=utf-8" });
     return;
   }
 
@@ -364,7 +542,7 @@ const server = http.createServer(async (req, res) => {
 
     if (requiresAdmin(rawPath)) {
       if (!adminPassword) {
-        write(res, 503, "请先在服务器环境变量设置 ADMIN_PASSWORD。");
+        write(res, 503, missingAdminPasswordPage(), { "content-type": "text/html; charset=utf-8" });
         return;
       }
 

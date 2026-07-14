@@ -395,6 +395,24 @@ window.defaultOffers = [
   }
 ];
 
+window.defaultOffers = window.defaultOffers.map((offer, index) => {
+  const samples = [
+    `60******${803 + index} | RM${(12 + index * 3).toFixed(2)} | 60******${495 + index} | RM${(30 + index * 5).toFixed(2)} | ${offer.name}`,
+    `60******${432 + index} | RM${(8 + index * 2).toFixed(2)} | 60******${821 + index} | RM${(70 + index * 4).toFixed(2)} | LIVE`,
+    `60******${391 + index} | RM${(5 + index).toFixed(2)} | 60******${685 + index} | RM${(5 + index * 2).toFixed(2)} | SLOT`
+  ];
+
+  return {
+    ...offer,
+    live: offer.live || {
+      enabled: true,
+      url: "",
+      rows: 3,
+      fallback: samples.join("\n")
+    }
+  };
+});
+
 window.defaultSocialLinks = [
   {
     id: "telegram",

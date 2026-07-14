@@ -493,6 +493,90 @@
         background: var(--teal);
       }
 
+      .live-panel {
+        margin: 0 0 14px;
+        border: 1px solid rgba(56, 189, 248, 0.42);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #05080d;
+      }
+
+      .live-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 7px 9px;
+        background: #020304;
+        color: #38c9ff;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .live-title small {
+        color: var(--teal);
+        font-size: 11px;
+      }
+
+      .live-head,
+      .live-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+
+      .live-head span {
+        padding: 5px 8px;
+        color: #fff;
+        font-weight: 900;
+        background: #1a3ba3;
+      }
+
+      .live-head span:nth-child(2) {
+        color: #11314b;
+        background: #57c4ee;
+      }
+
+      .live-row {
+        border-top: 1px solid rgba(255, 255, 255, 0.72);
+      }
+
+      .live-side {
+        min-width: 0;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 6px;
+        align-items: center;
+        padding: 5px 8px;
+        border-right: 1px solid rgba(255, 255, 255, 0.72);
+        color: #fff;
+        font-weight: 900;
+      }
+
+      .live-side:last-child {
+        border-right: 0;
+      }
+
+      .live-user,
+      .live-game {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .live-amount {
+        color: #28c9ff;
+        white-space: nowrap;
+      }
+
+      .live-game {
+        grid-column: 1 / -1;
+        color: #f8fafc;
+        font-size: 11px;
+      }
+
       .offer-card .btn {
         width: 100%;
         margin-top: auto;
@@ -1697,8 +1781,23 @@
 
         return offers.map((offer) => {
           const defaultOffer = defaults.find((item) => item.id === offer.id) || {};
-          return mergeSettings(defaultOffer, offer);
+          const mergedOffer = mergeSettings(defaultOffer, offer);
+          return {
+            ...mergedOffer,
+            live: normalizeLiveConfig(mergedOffer.live)
+          };
         });
+      }
+
+      function normalizeLiveConfig(live) {
+        const config = live && typeof live === "object" ? live : {};
+        const rows = Number(config.rows || 3);
+        return {
+          enabled: config.enabled === true,
+          url: String(config.url || "").trim(),
+          rows: Number.isFinite(rows) ? Math.max(2, Math.min(3, Math.round(rows))) : 3,
+          fallback: config.fallback || ""
+        };
       }
 
       function getSavedSocialLinks() {
@@ -1887,6 +1986,97 @@
         return "⭐".repeat(getStarRating(value));
       }
 
+      function parseLiveFallback(value) {
+        if (Array.isArray(value)) {
+          return value;
+        }
+
+        return String(value || "")
+          .split(/\r?\n/)
+          .map((line) => {
+            const parts = line.split("|").map((part) => part.trim());
+            return {
+              topUser: parts[0] || "",
+              topAmount: parts[1] || "",
+              withdrawUser: parts[2] || "",
+              withdrawAmount: parts[3] || "",
+              game: parts[4] || ""
+            };
+          })
+          .filter((row) => row.topUser || row.topAmount || row.withdrawUser || row.withdrawAmount);
+      }
+
+      function getLiveRows(offer) {
+        const live = normalizeLiveConfig(offer.live);
+        return parseLiveFallback(live.fallback).slice(0, live.rows);
+      }
+
+      function renderLiveRows(rows) {
+        return rows
+          .map((row) => {
+            const topUser = escapeHtml(row.topUser || "-");
+            const topAmount = escapeHtml(row.topAmount || "-");
+            const withdrawUser = escapeHtml(row.withdrawUser || "-");
+            const withdrawAmount = escapeHtml(row.withdrawAmount || "-");
+            const game = escapeHtml(row.game || "");
+            return `
+              <div class="live-row">
+                <div class="live-side">
+                  <span class="live-user">${topUser}</span>
+                  <strong class="live-amount">${topAmount}</strong>
+                </div>
+                <div class="live-side">
+                  <span class="live-user">${withdrawUser}</span>
+                  <strong class="live-amount">${withdrawAmount}</strong>
+                  ${game ? `<span class="live-game">${game}</span>` : ""}
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      function renderLivePanel(offer) {
+        const live = normalizeLiveConfig(offer.live);
+        if (!live.enabled) {
+          return "";
+        }
+
+        const fallbackRows = getLiveRows({ live });
+        const rows = fallbackRows.length
+          ? renderLiveRows(fallbackRows)
+          : `<div class="live-row"><div class="live-side"><span class="live-user">LIVE</span><strong class="live-amount">...</strong></div><div class="live-side"><span class="live-user">LIVE</span><strong class="live-amount">...</strong></div></div>`;
+        return `
+          <div class="live-panel" data-live-card="${escapeHtml(offer.id)}" data-live-url="${escapeHtml(live.url)}" data-live-rows="${live.rows}">
+            <div class="live-title"><span>LIVE TRANSACTION</span><small>LIVE</small></div>
+            <div class="live-head"><span>TOP UP</span><span>WITHDRAW</span></div>
+            <div class="live-body">${rows}</div>
+          </div>
+        `;
+      }
+
+      async function hydrateLiveTransactions() {
+        const panels = document.querySelectorAll("[data-live-card][data-live-url]");
+        panels.forEach(async (panel) => {
+          const url = panel.dataset.liveUrl;
+          const liveBody = panel.querySelector(".live-body");
+          if (!url || !/^https?:\/\//i.test(url) || !liveBody) {
+            return;
+          }
+
+          try {
+            const rows = Math.max(2, Math.min(3, Number(panel.dataset.liveRows || 3)));
+            const response = await fetch(`/api/live-transactions?url=${encodeURIComponent(url)}&rows=${rows}`);
+            const result = await response.json();
+            if (result.ok && Array.isArray(result.rows) && result.rows.length) {
+              liveBody.innerHTML = renderLiveRows(result.rows.slice(0, rows));
+            }
+          } catch (error) {
+            console.warn("Live transactions could not be loaded.", error);
+          }
+        });
+      }
+
       function renderOffers(language) {
         const offerGrid = document.querySelector(".offer-grid");
         if (!offerGrid) {
@@ -1917,6 +2107,7 @@
             const buttonText = escapeHtml(getOfferButtonText(offer, language));
             const offerUrl = escapeHtml(getOfferUrl(offer));
             const bullets = getLocalizedValue(offer.bullets, language);
+            const livePanel = renderLivePanel(offer);
             const logo = offer.logoUrl
               ? `<img src="${escapeHtml(offer.logoUrl)}" alt="${name} logo" loading="lazy" />`
               : escapeHtml(offer.badge || name.slice(0, 2).toUpperCase());
@@ -1942,11 +2133,13 @@
                   <span>${bonusLabel}</span>
                 </div>
                 <ul class="ticks">${bulletItems}</ul>
+                ${livePanel}
                 <a class="btn btn-primary" href="${offerUrl}">${buttonText}</a>
               </article>
             `;
           })
           .join("");
+        hydrateLiveTransactions();
       }
 
       function getSocialButtonText(link, language) {

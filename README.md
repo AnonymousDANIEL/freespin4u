@@ -84,6 +84,7 @@ CLOUDFLARE_ZONE_NAME=
 - 公司 Logo
 - 完整注册链接
 - 星星评分，最多 5 粒
+- Live Transaction，每家公司可设置不同 live 网页链接、显示 2 或 3 行、备用资料
 - Telegram / Facebook / WhatsApp 等 Join Our 资料
 - 背景颜色、按钮颜色、边框颜色、文字颜色
 - Domain 管理
@@ -99,6 +100,17 @@ CLOUDFLARE_ZONE_NAME=
 - `CLOUDFLARE_API_TOKEN` 必须放在服务器环境变量。
 - Token 不会保存到网页，也不会进入浏览器。
 - GitHub 只保存代码，不保存密码和 Token。
+
+## Live Transaction 说明
+
+后台每家公司都可以设置：
+
+- 是否显示 Live Transaction
+- Live 网页连接
+- 显示 2 或 3 行
+- 备用 Live 资料
+
+系统会先尝试从 Live 网页连接抓公开文字资料。如果对方网页不允许抓取、需要登录、或资料是特殊脚本加载，就会显示后台填写的备用资料。
 
 ## 重要安全提醒
 

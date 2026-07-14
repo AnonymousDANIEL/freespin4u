@@ -1111,6 +1111,25 @@
                   <input id="url" required placeholder="例如 https://syabas99.com" />
                   <p class="hint">请填完整链接；系统不会自动修改。站内位置才用 #join。</p>
                 </div>
+                <label class="check-row">
+                  <input id="live-enabled" type="checkbox" />
+                  <span>显示 Live Transaction</span>
+                </label>
+                <div class="field">
+                  <label for="live-rows">Live 显示行数 (2-3)</label>
+                  <input id="live-rows" type="number" min="2" max="3" step="1" placeholder="3" />
+                  <p class="hint">前台只会显示 2 或 3 行，避免卡片太长。</p>
+                </div>
+                <div class="field full">
+                  <label for="live-url">Live 网页连接</label>
+                  <input id="live-url" placeholder="例如 https://company.com/live-transaction" />
+                  <p class="hint">每家公司可以填不同 live 网页。能否自动抓取取决于对方网页是否开放文字资料。</p>
+                </div>
+                <div class="field full">
+                  <label for="live-fallback">备用 Live 资料</label>
+                  <textarea id="live-fallback" placeholder="60******803 | RM12.00 | 60******495 | RM30.07 | PUSSY3"></textarea>
+                  <p class="hint">一行一条：Top Up 账号 | Top Up 金额 | Withdraw 账号 | Withdraw 金额 | 游戏名。自动抓不到时会显示这里。</p>
+                </div>
                 <div class="field">
                   <label for="rank-zh">标签 / 排名 中文</label>
                   <input id="rank-zh" placeholder="Top 1 / Hot" />
@@ -1683,6 +1702,7 @@
           amount: offer.amount || "RM0",
           url: normalizeLink(offer.url || "#join"),
           starRating: normalizeStars(offer.starRating),
+          live: normalizeLiveConfig(offer.live),
           rank: {
             zh: offer.rank?.zh || offer.rank?.en || "New",
             en: offer.rank?.en || offer.rank?.zh || "New",
@@ -1751,6 +1771,39 @@
 
       function normalizeBullets(items) {
         return Array.isArray(items) ? items.slice(0, 3) : ["", "", ""];
+      }
+
+      function normalizeLiveConfig(live) {
+        const config = live && typeof live === "object" ? live : {};
+        return {
+          enabled: config.enabled === true,
+          url: String(config.url || "").trim(),
+          rows: normalizeLiveRows(config.rows),
+          fallback: normalizeLiveFallback(config.fallback)
+        };
+      }
+
+      function normalizeLiveRows(value) {
+        const count = Number(value || 3);
+        if (!Number.isFinite(count)) {
+          return 3;
+        }
+
+        return Math.max(2, Math.min(3, Math.round(count)));
+      }
+
+      function normalizeLiveFallback(value) {
+        if (Array.isArray(value)) {
+          return value
+            .map((row) =>
+              [row.topUser, row.topAmount, row.withdrawUser, row.withdrawAmount, row.game]
+                .filter((item) => item !== undefined && item !== null && item !== "")
+                .join(" | ")
+            )
+            .join("\n");
+        }
+
+        return String(value || "").trim();
       }
 
       function normalizeLink(value) {
@@ -1914,6 +1967,7 @@
             const statusClass = offer.active ? "active" : "off";
             const statusText = offer.active ? "启用" : "停用";
             const rankDisplay = getStars(offer.starRating) || offer.rank.zh || offer.rank.en;
+            const liveText = offer.live?.enabled ? `Live ${offer.live.rows || 3} 行` : "Live OFF";
             const logo = offer.logoUrl
               ? `<img src="${escapeHtml(offer.logoUrl)}" alt="${escapeHtml(offer.name)} logo" loading="lazy" />`
               : escapeHtml(offer.badge);
@@ -1926,6 +1980,7 @@
                     <span class="chip">${escapeHtml(offer.amount)}</span>
                     <span class="chip">${escapeHtml(rankDisplay)}</span>
                     <span class="chip ${statusClass}">${statusText}</span>
+                    <span class="chip">${escapeHtml(liveText)}</span>
                     <span>排序 ${escapeHtml(offer.order)}</span>
                   </div>
                 </div>
@@ -2102,6 +2157,10 @@
         setValue("order", offer.order);
         setValue("star-rating", offer.starRating);
         setValue("url", offer.url);
+        document.querySelector("#live-enabled").checked = offer.live?.enabled === true;
+        setValue("live-rows", offer.live?.rows || 3);
+        setValue("live-url", offer.live?.url || "");
+        setValue("live-fallback", offer.live?.fallback || "");
         document.querySelector("#active").checked = offer.active;
         setValue("rank-zh", offer.rank.zh);
         setValue("rank-en", offer.rank.en);
@@ -2126,6 +2185,10 @@
         setPreview("[data-logo-preview]", "", "暂无 logo");
         setValue("order", offers.length + 1);
         setValue("star-rating", 0);
+        setValue("live-rows", 3);
+        setValue("live-url", "");
+        setValue("live-fallback", "");
+        document.querySelector("#live-enabled").checked = false;
         document.querySelector("#active").checked = true;
       }
 
@@ -2141,6 +2204,12 @@
           amount: getValue("amount"),
           url: getValue("url"),
           starRating: getValue("star-rating"),
+          live: {
+            enabled: document.querySelector("#live-enabled").checked,
+            url: getValue("live-url"),
+            rows: getValue("live-rows"),
+            fallback: getValue("live-fallback")
+          },
           rank: {
             zh: getValue("rank-zh"),
             en: getValue("rank-en"),
