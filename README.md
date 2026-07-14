@@ -85,6 +85,7 @@ CLOUDFLARE_ZONE_NAME=
 - 完整注册链接
 - 星星评分，最多 5 粒
 - Live Transaction，每家公司可设置不同 live 网页链接、显示 2 或 3 行、备用资料
+- Live Transaction 总开关，以及 Live 表格颜色设置
 - Telegram / Facebook / WhatsApp 等 Join Our 资料
 - 背景颜色、按钮颜色、边框颜色、文字颜色
 - Domain 管理

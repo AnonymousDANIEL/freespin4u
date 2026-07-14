@@ -27,6 +27,18 @@
         --final-bg: #10151d;
         --footer-bg: #07090d;
         --sticky-bg: #07090d;
+        --live-bg: #05080d;
+        --live-border: #38bdf8;
+        --live-title-bg: #020304;
+        --live-title-text: #38c9ff;
+        --live-badge-bg: #ff1f2d;
+        --live-badge-text: #ffffff;
+        --live-top-head-bg: #1a3ba3;
+        --live-top-head-text: #ffffff;
+        --live-withdraw-head-bg: #57c4ee;
+        --live-withdraw-head-text: #11314b;
+        --live-row-text: #ffffff;
+        --live-amount-text: #28c9ff;
         --shadow: 0 20px 60px rgba(0, 0, 0, 0.38);
         --hero-image: url("assets/slot-hero.png");
       }
@@ -495,10 +507,10 @@
 
       .live-panel {
         margin: 0 0 14px;
-        border: 1px solid rgba(56, 189, 248, 0.42);
+        border: 1px solid var(--live-border);
         border-radius: 8px;
         overflow: hidden;
-        background: #05080d;
+        background: var(--live-bg);
       }
 
       .live-title {
@@ -507,8 +519,8 @@
         justify-content: space-between;
         gap: 10px;
         padding: 7px 9px;
-        background: #020304;
-        color: #38c9ff;
+        background: var(--live-title-bg);
+        color: var(--live-title-text);
         font-size: 12px;
         font-weight: 900;
         letter-spacing: 0;
@@ -516,65 +528,85 @@
       }
 
       .live-title small {
-        color: var(--teal);
+        padding: 1px 6px;
+        border-radius: 999px;
+        background: var(--live-badge-bg);
+        color: var(--live-badge-text);
         font-size: 11px;
       }
 
       .live-head,
       .live-row {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-columns: minmax(0, 1.1fr) minmax(70px, 0.72fr) minmax(0, 1.1fr) minmax(70px, 0.72fr) minmax(64px, 0.64fr);
       }
 
       .live-head span {
         padding: 5px 8px;
-        color: #fff;
+        color: var(--live-top-head-text);
         font-weight: 900;
-        background: #1a3ba3;
+        background: var(--live-top-head-bg);
+      }
+
+      .live-head span:first-child {
+        grid-column: span 2;
       }
 
       .live-head span:nth-child(2) {
-        color: #11314b;
-        background: #57c4ee;
+        grid-column: span 3;
+        color: var(--live-withdraw-head-text);
+        background: var(--live-withdraw-head-bg);
       }
 
       .live-row {
-        border-top: 1px solid rgba(255, 255, 255, 0.72);
+        border-top: 1px solid var(--live-border);
+        animation: liveRowIn 0.28s ease both;
       }
 
-      .live-side {
+      .live-cell {
         min-width: 0;
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 6px;
-        align-items: center;
         padding: 5px 8px;
-        border-right: 1px solid rgba(255, 255, 255, 0.72);
-        color: #fff;
+        border-right: 1px solid var(--live-border);
+        color: var(--live-row-text);
         font-weight: 900;
-      }
-
-      .live-side:last-child {
-        border-right: 0;
-      }
-
-      .live-user,
-      .live-game {
-        min-width: 0;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
 
-      .live-amount {
-        color: #28c9ff;
-        white-space: nowrap;
+      .live-cell:nth-child(2),
+      .live-cell:nth-child(4) {
+        color: var(--live-amount-text);
+        text-align: right;
       }
 
-      .live-game {
-        grid-column: 1 / -1;
-        color: #f8fafc;
-        font-size: 11px;
+      .live-cell:last-child {
+        border-right: 0;
+      }
+
+      @keyframes liveRowIn {
+        from {
+          opacity: 0.35;
+          transform: translateY(6px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 520px) {
+        .live-head,
+        .live-row {
+          grid-template-columns: minmax(0, 1fr) minmax(58px, 0.68fr) minmax(0, 1fr) minmax(58px, 0.68fr) minmax(52px, 0.58fr);
+        }
+
+        .live-cell,
+        .live-head span {
+          padding-inline: 5px;
+          font-size: 11px;
+        }
       }
 
       .offer-card .btn {
@@ -1732,9 +1764,24 @@
         communityBackground: "--community-bg",
         finalBackground: "--final-bg",
         footerBackground: "--footer-bg",
-        stickyBackground: "--sticky-bg"
+        stickyBackground: "--sticky-bg",
+        liveBackground: "--live-bg",
+        liveBorderColor: "--live-border",
+        liveTitleBackground: "--live-title-bg",
+        liveTitleText: "--live-title-text",
+        liveBadgeBackground: "--live-badge-bg",
+        liveBadgeText: "--live-badge-text",
+        liveTopHeaderBackground: "--live-top-head-bg",
+        liveTopHeaderText: "--live-top-head-text",
+        liveWithdrawHeaderBackground: "--live-withdraw-head-bg",
+        liveWithdrawHeaderText: "--live-withdraw-head-text",
+        liveRowText: "--live-row-text",
+        liveAmountText: "--live-amount-text"
       };
       let activeLanguage = "zh";
+      let liveTransactionsEnabled = true;
+      const liveTransactionRows = new Map();
+      const liveTickerTimers = new Map();
 
       function mergeSettings(defaultSettings, savedSettings) {
         const merged = JSON.parse(JSON.stringify(defaultSettings || {}));
@@ -1784,19 +1831,31 @@
           const mergedOffer = mergeSettings(defaultOffer, offer);
           return {
             ...mergedOffer,
-            live: normalizeLiveConfig(mergedOffer.live)
+            live: normalizeLiveConfig(mergedOffer.live, mergedOffer.name)
           };
         });
       }
 
-      function normalizeLiveConfig(live) {
+      function createDefaultLiveFallback(name) {
+        const label = String(name || "LIVE").replace(/\s+/g, "").slice(0, 10) || "LIVE";
+        return [
+          `60******803 | RM12.00 | 60******495 | RM30.07 | ${label}`,
+          `60******432 | RM8.00 | 60******821 | RM70.19 | LIVE`,
+          `60******391 | RM5.00 | 60******685 | RM5.03 | SLOT`,
+          `60******239 | RM15.00 | 60******669 | RM90.26 | MEGA888`,
+          `60******281 | RM10.00 | 60******328 | RM5.00 | JILI3`,
+          `60******437 | RM5.00 | 60******961 | RM140.04 | JILI3`
+        ].join("\n");
+      }
+
+      function normalizeLiveConfig(live, name = "LIVE") {
         const config = live && typeof live === "object" ? live : {};
         const rows = Number(config.rows || 3);
         return {
           enabled: config.enabled === true,
           url: String(config.url || "").trim(),
           rows: Number.isFinite(rows) ? Math.max(2, Math.min(3, Math.round(rows))) : 3,
-          fallback: config.fallback || ""
+          fallback: config.fallback || createDefaultLiveFallback(name)
         };
       }
 
@@ -1860,6 +1919,7 @@
         const siteName = getLocalizedValue(settings.siteName, language);
         const metaTitle = getLocalizedValue(settings.metaTitle, language);
         const metaDescription = getLocalizedValue(settings.metaDescription, language);
+        liveTransactionsEnabled = settings.liveTransactionsEnabled !== false;
 
         Object.entries(settings.colors || {}).forEach(([key, value]) => {
           const variable = colorVariableMap[key];
@@ -1986,6 +2046,12 @@
         return "⭐".repeat(getStarRating(value));
       }
 
+      function clearLiveTickerTimers() {
+        liveTickerTimers.forEach((timer) => clearInterval(timer));
+        liveTickerTimers.clear();
+        liveTransactionRows.clear();
+      }
+
       function parseLiveFallback(value) {
         if (Array.isArray(value)) {
           return value;
@@ -2021,15 +2087,11 @@
             const game = escapeHtml(row.game || "");
             return `
               <div class="live-row">
-                <div class="live-side">
-                  <span class="live-user">${topUser}</span>
-                  <strong class="live-amount">${topAmount}</strong>
-                </div>
-                <div class="live-side">
-                  <span class="live-user">${withdrawUser}</span>
-                  <strong class="live-amount">${withdrawAmount}</strong>
-                  ${game ? `<span class="live-game">${game}</span>` : ""}
-                </div>
+                <span class="live-cell">${topUser}</span>
+                <strong class="live-cell">${topAmount}</strong>
+                <span class="live-cell">${withdrawUser}</span>
+                <strong class="live-cell">${withdrawAmount}</strong>
+                <span class="live-cell">${game || "-"}</span>
               </div>
             `;
           })
@@ -2037,39 +2099,77 @@
       }
 
       function renderLivePanel(offer) {
+        if (!liveTransactionsEnabled) {
+          return "";
+        }
+
         const live = normalizeLiveConfig(offer.live);
         if (!live.enabled) {
           return "";
         }
 
         const fallbackRows = getLiveRows({ live });
+        liveTransactionRows.set(offer.id, fallbackRows);
         const rows = fallbackRows.length
-          ? renderLiveRows(fallbackRows)
-          : `<div class="live-row"><div class="live-side"><span class="live-user">LIVE</span><strong class="live-amount">...</strong></div><div class="live-side"><span class="live-user">LIVE</span><strong class="live-amount">...</strong></div></div>`;
+          ? renderLiveRows(fallbackRows.slice(0, live.rows))
+          : `<div class="live-row"><span class="live-cell">LIVE</span><strong class="live-cell">...</strong><span class="live-cell">LIVE</span><strong class="live-cell">...</strong><span class="live-cell">...</span></div>`;
         return `
           <div class="live-panel" data-live-card="${escapeHtml(offer.id)}" data-live-url="${escapeHtml(live.url)}" data-live-rows="${live.rows}">
-            <div class="live-title"><span>LIVE TRANSACTION</span><small>LIVE</small></div>
+            <div class="live-title"><span>LIVE TRANSACTION</span><small>LANGSUNG</small></div>
             <div class="live-head"><span>TOP UP</span><span>WITHDRAW</span></div>
             <div class="live-body">${rows}</div>
           </div>
         `;
       }
 
+      function startLiveTicker(panel, rows, visibleRows) {
+        const liveBody = panel.querySelector(".live-body");
+        const panelId = panel.dataset.liveCard;
+        if (!liveBody || !panelId || !Array.isArray(rows) || !rows.length) {
+          return;
+        }
+
+        if (liveTickerTimers.has(panelId)) {
+          clearInterval(liveTickerTimers.get(panelId));
+          liveTickerTimers.delete(panelId);
+        }
+
+        const limit = Math.max(2, Math.min(3, Number(visibleRows || 3)));
+        let offset = 0;
+        const draw = () => {
+          const visible = Array.from({ length: Math.min(limit, rows.length) }, (_, index) => rows[(offset + index) % rows.length]);
+          liveBody.innerHTML = renderLiveRows(visible);
+        };
+
+        draw();
+
+        if (rows.length > limit) {
+          const timer = setInterval(() => {
+            offset = (offset + 1) % rows.length;
+            draw();
+          }, 1800);
+          liveTickerTimers.set(panelId, timer);
+        }
+      }
+
       async function hydrateLiveTransactions() {
         const panels = document.querySelectorAll("[data-live-card][data-live-url]");
         panels.forEach(async (panel) => {
           const url = panel.dataset.liveUrl;
-          const liveBody = panel.querySelector(".live-body");
-          if (!url || !/^https?:\/\//i.test(url) || !liveBody) {
+          const visibleRows = Math.max(2, Math.min(3, Number(panel.dataset.liveRows || 3)));
+          const fallbackRows = liveTransactionRows.get(panel.dataset.liveCard) || [];
+          startLiveTicker(panel, fallbackRows, visibleRows);
+
+          if (!url || !/^https?:\/\//i.test(url)) {
             return;
           }
 
           try {
-            const rows = Math.max(2, Math.min(3, Number(panel.dataset.liveRows || 3)));
-            const response = await fetch(`/api/live-transactions?url=${encodeURIComponent(url)}&rows=${rows}`);
+            const fetchRows = Math.max(8, visibleRows);
+            const response = await fetch(`/api/live-transactions?url=${encodeURIComponent(url)}&rows=${fetchRows}`);
             const result = await response.json();
             if (result.ok && Array.isArray(result.rows) && result.rows.length) {
-              liveBody.innerHTML = renderLiveRows(result.rows.slice(0, rows));
+              startLiveTicker(panel, result.rows, visibleRows);
             }
           } catch (error) {
             console.warn("Live transactions could not be loaded.", error);
@@ -2082,6 +2182,8 @@
         if (!offerGrid) {
           return;
         }
+
+        clearLiveTickerTimers();
 
         const offers = getSavedOffers()
           .filter((offer) => offer && offer.active !== false)

@@ -759,6 +759,10 @@
                 <label>网站 logo 预览</label>
                 <div class="image-preview logo-preview" data-site-logo-preview>暂无 logo</div>
               </div>
+              <label class="check-row">
+                <input id="live-transactions-enabled" type="checkbox" checked />
+                <span>全站显示 Live Transaction</span>
+              </label>
             </div>
 
             <div class="color-settings">
@@ -827,6 +831,54 @@
                 <div class="field">
                   <label for="color-sticky-background">固定底部条背景</label>
                   <input id="color-sticky-background" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-live-background">Live 表格背景</label>
+                  <input id="color-live-background" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-live-border-color">Live 表格边框</label>
+                  <input id="color-live-border-color" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-live-title-background">Live 标题背景</label>
+                  <input id="color-live-title-background" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-live-title-text">Live 标题文字</label>
+                  <input id="color-live-title-text" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-live-badge-background">Live 红色标签背景</label>
+                  <input id="color-live-badge-background" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-live-badge-text">Live 红色标签文字</label>
+                  <input id="color-live-badge-text" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-live-top-header-background">TOP UP 背景</label>
+                  <input id="color-live-top-header-background" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-live-top-header-text">TOP UP 文字</label>
+                  <input id="color-live-top-header-text" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-live-withdraw-header-background">WITHDRAW 背景</label>
+                  <input id="color-live-withdraw-header-background" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-live-withdraw-header-text">WITHDRAW 文字</label>
+                  <input id="color-live-withdraw-header-text" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-live-row-text">Live 普通文字</label>
+                  <input id="color-live-row-text" type="color" />
+                </div>
+                <div class="field">
+                  <label for="color-live-amount-text">Live 金额文字</label>
+                  <input id="color-live-amount-text" type="color" />
                 </div>
               </div>
             </div>
@@ -1128,7 +1180,7 @@
                 <div class="field full">
                   <label for="live-fallback">备用 Live 资料</label>
                   <textarea id="live-fallback" placeholder="60******803 | RM12.00 | 60******495 | RM30.07 | PUSSY3"></textarea>
-                  <p class="hint">一行一条：Top Up 账号 | Top Up 金额 | Withdraw 账号 | Withdraw 金额 | 游戏名。自动抓不到时会显示这里。</p>
+                  <p class="hint">一行一条：Top Up 账号 | Top Up 金额 | Withdraw 账号 | Withdraw 金额 | 游戏名。想要它会跑，资料行数要多过显示行数，例如显示 3 行就填 5-6 行。</p>
                 </div>
                 <div class="field">
                   <label for="rank-zh">标签 / 排名 中文</label>
@@ -1496,7 +1548,19 @@
         communityBackground: "color-community-background",
         finalBackground: "color-final-background",
         footerBackground: "color-footer-background",
-        stickyBackground: "color-sticky-background"
+        stickyBackground: "color-sticky-background",
+        liveBackground: "color-live-background",
+        liveBorderColor: "color-live-border-color",
+        liveTitleBackground: "color-live-title-background",
+        liveTitleText: "color-live-title-text",
+        liveBadgeBackground: "color-live-badge-background",
+        liveBadgeText: "color-live-badge-text",
+        liveTopHeaderBackground: "color-live-top-header-background",
+        liveTopHeaderText: "color-live-top-header-text",
+        liveWithdrawHeaderBackground: "color-live-withdraw-header-background",
+        liveWithdrawHeaderText: "color-live-withdraw-header-text",
+        liveRowText: "color-live-row-text",
+        liveAmountText: "color-live-amount-text"
       };
       const basicCopyFields = {
         heroEyebrow: "hero-eyebrow",
@@ -1702,7 +1766,7 @@
           amount: offer.amount || "RM0",
           url: normalizeLink(offer.url || "#join"),
           starRating: normalizeStars(offer.starRating),
-          live: normalizeLiveConfig(offer.live),
+          live: normalizeLiveConfig(offer.live, name),
           rank: {
             zh: offer.rank?.zh || offer.rank?.en || "New",
             en: offer.rank?.en || offer.rank?.zh || "New",
@@ -1773,13 +1837,25 @@
         return Array.isArray(items) ? items.slice(0, 3) : ["", "", ""];
       }
 
-      function normalizeLiveConfig(live) {
+      function createDefaultLiveFallback(name) {
+        const label = String(name || "LIVE").replace(/\s+/g, "").slice(0, 10) || "LIVE";
+        return [
+          `60******803 | RM12.00 | 60******495 | RM30.07 | ${label}`,
+          `60******432 | RM8.00 | 60******821 | RM70.19 | LIVE`,
+          `60******391 | RM5.00 | 60******685 | RM5.03 | SLOT`,
+          `60******239 | RM15.00 | 60******669 | RM90.26 | MEGA888`,
+          `60******281 | RM10.00 | 60******328 | RM5.00 | JILI3`,
+          `60******437 | RM5.00 | 60******961 | RM140.04 | JILI3`
+        ].join("\n");
+      }
+
+      function normalizeLiveConfig(live, name = "LIVE") {
         const config = live && typeof live === "object" ? live : {};
         return {
           enabled: config.enabled === true,
           url: String(config.url || "").trim(),
           rows: normalizeLiveRows(config.rows),
-          fallback: normalizeLiveFallback(config.fallback)
+          fallback: normalizeLiveFallback(config.fallback) || createDefaultLiveFallback(name)
         };
       }
 
@@ -2332,6 +2408,7 @@
         setValue("brand-mark-text", siteSettings.brandMarkText);
         setValue("site-logo-url", siteSettings.siteLogoUrl);
         setPreview("[data-site-logo-preview]", siteSettings.siteLogoUrl, "暂无 logo");
+        document.querySelector("#live-transactions-enabled").checked = siteSettings.liveTransactionsEnabled !== false;
 
         Object.entries(colorFields).forEach(([key, id]) => {
           setValue(id, siteSettings.colors?.[key]);
@@ -2353,6 +2430,7 @@
           backgroundImage: getValue("background-image"),
           brandMarkText: getValue("brand-mark-text"),
           siteLogoUrl: getValue("site-logo-url"),
+          liveTransactionsEnabled: document.querySelector("#live-transactions-enabled").checked,
           colors: {},
           siteName: {},
           metaTitle: {},

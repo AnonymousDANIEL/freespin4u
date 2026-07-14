@@ -7,6 +7,7 @@ window.defaultSiteSettings = {
   backgroundImage: "assets/slot-hero.png",
   siteLogoUrl: "",
   brandMarkText: "RM",
+  liveTransactionsEnabled: true,
   colors: {
     pageBackground: "#090b10",
     headerBackground: "#090b10",
@@ -23,7 +24,19 @@ window.defaultSiteSettings = {
     communityBackground: "#0b1018",
     finalBackground: "#10151d",
     footerBackground: "#07090d",
-    stickyBackground: "#07090d"
+    stickyBackground: "#07090d",
+    liveBackground: "#05080d",
+    liveBorderColor: "#38bdf8",
+    liveTitleBackground: "#020304",
+    liveTitleText: "#38c9ff",
+    liveBadgeBackground: "#ff1f2d",
+    liveBadgeText: "#ffffff",
+    liveTopHeaderBackground: "#1a3ba3",
+    liveTopHeaderText: "#ffffff",
+    liveWithdrawHeaderBackground: "#57c4ee",
+    liveWithdrawHeaderText: "#11314b",
+    liveRowText: "#ffffff",
+    liveAmountText: "#28c9ff"
   },
   siteName: {
     zh: "Free Credit Slot Malaysia",
@@ -399,7 +412,10 @@ window.defaultOffers = window.defaultOffers.map((offer, index) => {
   const samples = [
     `60******${803 + index} | RM${(12 + index * 3).toFixed(2)} | 60******${495 + index} | RM${(30 + index * 5).toFixed(2)} | ${offer.name}`,
     `60******${432 + index} | RM${(8 + index * 2).toFixed(2)} | 60******${821 + index} | RM${(70 + index * 4).toFixed(2)} | LIVE`,
-    `60******${391 + index} | RM${(5 + index).toFixed(2)} | 60******${685 + index} | RM${(5 + index * 2).toFixed(2)} | SLOT`
+    `60******${391 + index} | RM${(5 + index).toFixed(2)} | 60******${685 + index} | RM${(5 + index * 2).toFixed(2)} | SLOT`,
+    `60******${239 + index} | RM${(15 + index * 2).toFixed(2)} | 60******${669 + index} | RM${(90 + index * 3).toFixed(2)} | MEGA888`,
+    `60******${281 + index} | RM${(10 + index).toFixed(2)} | 60******${328 + index} | RM${(5 + index).toFixed(2)} | JILI3`,
+    `60******${437 + index} | RM${(5 + index).toFixed(2)} | 60******${961 + index} | RM${(140 + index).toFixed(2)} | JILI3`
   ];
 
   return {

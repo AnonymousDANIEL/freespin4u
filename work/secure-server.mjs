@@ -218,7 +218,7 @@ function cleanLiveRows(value) {
     return 3;
   }
 
-  return Math.max(2, Math.min(3, Math.round(rows)));
+  return Math.max(2, Math.min(10, Math.round(rows)));
 }
 
 function stripHtmlToLines(html) {
