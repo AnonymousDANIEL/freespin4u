@@ -254,6 +254,13 @@
         margin: 0;
       }
 
+      .upload-info {
+        color: #9fe7d8;
+        font-size: 12px;
+        font-weight: 700;
+        margin: 4px 0 0;
+      }
+
       input,
       textarea,
       select {
@@ -2700,11 +2707,73 @@
         return canvas.toDataURL("image/webp", profile.quality);
       }
 
+      function formatBytes(bytes) {
+        const size = Number(bytes || 0);
+        if (size >= 1024 * 1024) {
+          return `${(size / 1024 / 1024).toFixed(2)} MB`;
+        }
+
+        if (size >= 1024) {
+          return `${(size / 1024).toFixed(1)} KB`;
+        }
+
+        return `${size} B`;
+      }
+
+      function dataUrlBytes(dataUrl) {
+        const raw = String(dataUrl || "");
+        const commaIndex = raw.indexOf(",");
+        if (commaIndex < 0) {
+          return raw.length;
+        }
+
+        const payload = raw.slice(commaIndex + 1);
+        const padding = payload.endsWith("==") ? 2 : payload.endsWith("=") ? 1 : 0;
+        return Math.max(0, Math.floor((payload.length * 3) / 4) - padding);
+      }
+
+      function setUploadInfo(input, message) {
+        const field = input.closest(".field");
+        if (!field) {
+          return;
+        }
+
+        let info = field.querySelector(".upload-info");
+        if (!info) {
+          info = document.createElement("p");
+          info.className = "upload-info";
+          field.appendChild(info);
+        }
+        info.textContent = message;
+      }
+
       async function processImageFile(file, targetId) {
         const originalDataUrl = await readFileAsDataUrl(file);
         const image = await loadImageFromDataUrl(originalDataUrl);
+
+        if (file.type === "image/gif" || file.name.toLowerCase().endsWith(".gif")) {
+          return {
+            dataUrl: originalDataUrl,
+            width: image.naturalWidth,
+            height: image.naturalHeight,
+            originalBytes: file.size,
+            outputBytes: dataUrlBytes(originalDataUrl),
+            mode: "gif"
+          };
+        }
+
         const profile = getUploadProfile(targetId);
-        return cropImageToProfile(image, profile);
+        const dataUrl = cropImageToProfile(image, profile);
+        return {
+          dataUrl,
+          width: image.naturalWidth,
+          height: image.naturalHeight,
+          outputWidth: profile.width,
+          outputHeight: profile.height,
+          originalBytes: file.size,
+          outputBytes: dataUrlBytes(dataUrl),
+          mode: "processed"
+        };
       }
 
       async function readImageFile(input, targetId, previewSelector) {
@@ -2715,13 +2784,27 @@
 
         try {
           const processedImage = await processImageFile(file, targetId);
-          setValue(targetId, processedImage);
-          setPreview(previewSelector, processedImage, "暂无图片");
+          setValue(targetId, processedImage.dataUrl);
+          setPreview(previewSelector, processedImage.dataUrl, "暂无图片");
+
+          if (processedImage.mode === "gif") {
+            const gifNote = processedImage.outputBytes > 3 * 1024 * 1024 ? " | GIF 偏大，建议压到 3 MB 以下" : "";
+            setUploadInfo(
+              input,
+              `GIF 动图已保留，不会自动裁切 | 原图 ${formatBytes(processedImage.originalBytes)} | ${processedImage.width}x${processedImage.height} | 保存 ${formatBytes(processedImage.outputBytes)}${gifNote}`
+            );
+          } else {
+            setUploadInfo(
+              input,
+              `已自动对焦裁切和压缩 | 原图 ${formatBytes(processedImage.originalBytes)} | ${processedImage.width}x${processedImage.height} | 保存 ${formatBytes(processedImage.outputBytes)} | ${processedImage.outputWidth}x${processedImage.outputHeight}`
+            );
+          }
         } catch (error) {
           console.warn("Image could not be processed automatically.", error);
           const fallbackImage = await readFileAsDataUrl(file);
           setValue(targetId, fallbackImage);
           setPreview(previewSelector, fallbackImage, "暂无图片");
+          setUploadInfo(input, `保留原图 | 原图 ${formatBytes(file.size)} | 保存 ${formatBytes(dataUrlBytes(fallbackImage))}`);
         }
       }
 
