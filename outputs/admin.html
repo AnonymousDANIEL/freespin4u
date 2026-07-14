@@ -345,16 +345,16 @@
       }
 
       .logo-preview {
-        width: 76px;
-        height: 76px;
-        min-height: 76px;
+        width: 160px;
+        height: 84px;
+        min-height: 84px;
       }
 
       .logo-preview img {
         height: 100%;
         max-height: none;
         object-fit: contain;
-        padding: 6px;
+        padding: 4px;
         box-sizing: border-box;
         background: #fff;
       }
@@ -2667,10 +2667,10 @@
 
         if (targetId === "logo-url" || targetId === "social-logo-url" || targetId === "site-logo-url") {
           return {
-            width: 640,
-            height: 640,
+            maxWidth: 900,
+            maxHeight: 360,
             quality: 0.9,
-            mode: "contain"
+            mode: "fit"
           };
         }
 
@@ -2701,12 +2701,30 @@
       }
 
       function cropImageToProfile(image, profile) {
+        let outputWidth = profile.width;
+        let outputHeight = profile.height;
+
+        if (profile.mode === "fit") {
+          const scale = Math.min(1, profile.maxWidth / image.naturalWidth, profile.maxHeight / image.naturalHeight);
+          outputWidth = Math.max(1, Math.round(image.naturalWidth * scale));
+          outputHeight = Math.max(1, Math.round(image.naturalHeight * scale));
+        }
+
         const canvas = document.createElement("canvas");
-        canvas.width = profile.width;
-        canvas.height = profile.height;
+        canvas.width = outputWidth;
+        canvas.height = outputHeight;
         const context = canvas.getContext("2d");
         context.imageSmoothingEnabled = true;
         context.imageSmoothingQuality = "high";
+
+        if (profile.mode === "fit") {
+          context.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight, 0, 0, outputWidth, outputHeight);
+          return {
+            dataUrl: canvas.toDataURL("image/webp", profile.quality),
+            outputWidth,
+            outputHeight
+          };
+        }
 
         if (profile.mode === "contain") {
           const scale = Math.min(profile.width / image.naturalWidth, profile.height / image.naturalHeight);
@@ -2717,7 +2735,11 @@
 
           context.clearRect(0, 0, profile.width, profile.height);
           context.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight, targetX, targetY, targetWidth, targetHeight);
-          return canvas.toDataURL("image/webp", profile.quality);
+          return {
+            dataUrl: canvas.toDataURL("image/webp", profile.quality),
+            outputWidth,
+            outputHeight
+          };
         }
 
         const sourceRatio = image.naturalWidth / image.naturalHeight;
@@ -2738,7 +2760,11 @@
         }
 
         context.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, profile.width, profile.height);
-        return canvas.toDataURL("image/webp", profile.quality);
+        return {
+          dataUrl: canvas.toDataURL("image/webp", profile.quality),
+          outputWidth,
+          outputHeight
+        };
       }
 
       function formatBytes(bytes) {
@@ -2797,15 +2823,15 @@
         }
 
         const profile = getUploadProfile(targetId);
-        const dataUrl = cropImageToProfile(image, profile);
+        const processed = cropImageToProfile(image, profile);
         return {
-          dataUrl,
+          dataUrl: processed.dataUrl,
           width: image.naturalWidth,
           height: image.naturalHeight,
-          outputWidth: profile.width,
-          outputHeight: profile.height,
+          outputWidth: processed.outputWidth,
+          outputHeight: processed.outputHeight,
           originalBytes: file.size,
-          outputBytes: dataUrlBytes(dataUrl),
+          outputBytes: dataUrlBytes(processed.dataUrl),
           mode: "processed",
           profileMode: profile.mode
         };
@@ -2829,7 +2855,7 @@
               `GIF 动图已保留，不会自动裁切 | 原图 ${formatBytes(processedImage.originalBytes)} | ${processedImage.width}x${processedImage.height} | 保存 ${formatBytes(processedImage.outputBytes)}${gifNote}`
             );
           } else {
-            const actionText = processedImage.profileMode === "contain" ? "已自动保留完整 logo 和压缩" : "已自动对焦裁切和压缩";
+            const actionText = processedImage.profileMode === "fit" || processedImage.profileMode === "contain" ? "已自动保留完整 logo 和压缩" : "已自动对焦裁切和压缩";
             setUploadInfo(
               input,
               `${actionText} | 原图 ${formatBytes(processedImage.originalBytes)} | ${processedImage.width}x${processedImage.height} | 保存 ${formatBytes(processedImage.outputBytes)} | ${processedImage.outputWidth}x${processedImage.outputHeight}`
