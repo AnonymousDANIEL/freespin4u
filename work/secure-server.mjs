@@ -50,6 +50,7 @@ const types = {
 };
 
 const securityHeaders = {
+  "cache-control": "no-store, max-age=0",
   "x-content-type-options": "nosniff",
   "x-frame-options": "DENY",
   "referrer-policy": "strict-origin-when-cross-origin",

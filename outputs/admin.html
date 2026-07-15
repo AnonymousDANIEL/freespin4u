@@ -1324,12 +1324,12 @@
                 <div class="form-actions">
                   <button class="btn btn-secondary" type="button" data-copy>复制 JSON</button>
                   <button class="btn btn-secondary" type="button" data-import>导入 JSON</button>
-                  <button class="btn btn-danger" type="button" data-clear>清除本机资料</button>
+                  <button class="btn btn-danger" type="button" data-clear>清除记录并同步</button>
                 </div>
               </div>
 
               <p class="notice">
-                目前这个后台是本机管理版本，资料存放在当前浏览器。之后要上线给多人管理时，可以把同样的资料格式接到登录后台、数据库和 API。
+                后台资料会保存在当前浏览器，也会同步到服务器。清除后请使用“清除记录并同步”，刷新才不会从服务器读回旧 record。
               </p>
             </div>
           </section>
@@ -1997,9 +1997,13 @@
 
           if (!response.ok) {
             console.warn("Server data save failed.");
+            return false;
           }
+
+          return true;
         } catch (error) {
           console.warn("Server data could not be saved.", error);
+          return false;
         }
       }
 
@@ -3151,10 +3155,11 @@
         saveSiteSettings();
       });
 
-      document.querySelector("[data-clear]").addEventListener("click", () => {
-        if (!confirm("清除本机保存资料？前台会回到默认公司、社群入口、Domain 和网站设置。")) {
+      document.querySelector("[data-clear]").addEventListener("click", async () => {
+        if (!confirm("清除本机和服务器保存资料？前台会回到默认公司、社群入口、Domain 和网站设置。")) {
           return;
         }
+        clearTimeout(serverSaveTimer);
         localStorage.removeItem(offerStorageKey);
         localStorage.removeItem(siteSettingsStorageKey);
         localStorage.removeItem(socialStorageKey);
@@ -3163,11 +3168,17 @@
         socialLinks = clone(defaultSocialLinks).map(normalizeSocialLink);
         domains = clone(defaultDomains).map(normalizeDomain);
         siteSettings = mergeDeep(defaultSiteSettings, {});
+        localStorage.setItem(offerStorageKey, JSON.stringify(offers));
+        localStorage.setItem(siteSettingsStorageKey, JSON.stringify(siteSettings));
+        localStorage.setItem(socialStorageKey, JSON.stringify(socialLinks));
+        localStorage.setItem(domainStorageKey, JSON.stringify(domains));
         render();
         fillSiteForm();
         resetOfferForm();
         resetSocialForm();
         resetDomainForm();
+        const synced = await saveServerBundle();
+        alert(synced ? "已清除并同步服务器，刷新不会再读回旧 record。" : "本机已清除，但服务器同步失败。请确认已经登录后台后再试一次。");
       });
 
       renderAdvancedCopyFields();

@@ -99,6 +99,7 @@ CLOUDFLARE_ZONE_NAME=
 - Domain 管理
 - Cloudflare DNS 自动连接
 - 服务器保存资料，后台修改后前台会读取同一份公司 / Live / 颜色资料
+- 如果刷新又看到旧 record，去后台点击 `清除记录并同步`，它会同时更新浏览器和服务器资料
 
 ## Domain 自动连接说明
 
