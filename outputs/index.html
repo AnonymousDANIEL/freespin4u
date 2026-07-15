@@ -8,6 +8,28 @@
       name="description"
       content="Malaysia free credit slot landing page with no deposit offers, fast e-wallet claim flow, and mobile-ready registration buttons."
     />
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var release = function () {
+          root.classList.remove("language-pending");
+          root.classList.add("language-ready");
+        };
+
+        try {
+          var saved = localStorage.getItem("landingLanguage");
+          var language = saved === "en" || saved === "ms" || saved === "zh" ? saved : "zh";
+          root.dataset.savedLanguage = language;
+          root.lang = language === "en" ? "en" : language === "ms" ? "ms" : "zh-Hans";
+        } catch (error) {
+          root.dataset.savedLanguage = "zh";
+        }
+
+        root.classList.add("language-pending");
+        window.releaseLandingLanguage = release;
+        setTimeout(release, 2500);
+      })();
+    </script>
     <style>
       :root {
         --bg: #090b10;
@@ -48,7 +70,17 @@
       }
 
       html {
+        background: var(--bg);
         scroll-behavior: smooth;
+      }
+
+      html.language-pending body {
+        opacity: 0;
+      }
+
+      html.language-ready body {
+        opacity: 1;
+        transition: opacity 0.12s ease;
       }
 
       body {
@@ -2258,6 +2290,11 @@
       }
 
       function getInitialLanguage() {
+        const earlyLanguage = document.documentElement.dataset.savedLanguage;
+        if (languageCopy[earlyLanguage]) {
+          return earlyLanguage;
+        }
+
         const saved = localStorage.getItem("landingLanguage");
         return languageCopy[saved] ? saved : "zh";
       }
@@ -2312,6 +2349,12 @@
         activeLanguage = getInitialLanguage();
         await loadServerSiteData();
         setLanguage(activeLanguage);
+        if (typeof window.releaseLandingLanguage === "function") {
+          window.releaseLandingLanguage();
+        } else {
+          document.documentElement.classList.remove("language-pending");
+          document.documentElement.classList.add("language-ready");
+        }
       }
 
       initializePage();
