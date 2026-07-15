@@ -1176,137 +1176,7 @@
             <p>把用户最关心的金额、每日奖励、领取方式放在同一张卡里，让访客不用滚很久就能决定加入。</p>
           </div>
           <div class="offer-grid">
-            <article class="offer-card">
-              <div class="offer-top">
-                <div>
-                  <div class="brand-badge">M2</div>
-                </div>
-                <div>
-                  <h3>M2Cuci</h3>
-                  <div class="rank is-stars">⭐⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <div class="bonus">
-                <strong>RM50</strong>
-                <span>New register free credit</span>
-              </div>
-              <ul class="ticks">
-                <li>Daily free credit up to RM30</li>
-                <li>Mobile friendly claim flow</li>
-                <li>适合主打高金额优惠</li>
-              </ul>
-              <a class="btn btn-primary" href="#join">领取 M2Cuci</a>
-            </article>
-
-            <article class="offer-card">
-              <div class="offer-top">
-                <div>
-                  <div class="brand-badge">447</div>
-                </div>
-                <div>
-                  <h3>447Duit</h3>
-                  <div class="rank is-stars">⭐⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <div class="bonus">
-                <strong>RM50</strong>
-                <span>Free register new member</span>
-              </div>
-              <ul class="ticks">
-                <li>Free credit no deposit up to RM20</li>
-                <li>E-wallet withdrawal focus</li>
-                <li>适合作为第一屏主推</li>
-              </ul>
-              <a class="btn btn-primary" href="#join">领取 447Duit</a>
-            </article>
-
-            <article class="offer-card">
-              <div class="offer-top">
-                <div>
-                  <div class="brand-badge">MY</div>
-                </div>
-                <div>
-                  <h3>Mykad99</h3>
-                  <div class="rank is-stars">⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <div class="bonus">
-                <strong>RM30</strong>
-                <span>New member free credit</span>
-              </div>
-              <ul class="ticks">
-                <li>Daily free credit listed</li>
-                <li>Instant e-wallet angle</li>
-                <li>适合强调简单注册</li>
-              </ul>
-              <a class="btn btn-primary" href="#join">领取 Mykad99</a>
-            </article>
-
-            <article class="offer-card">
-              <div class="offer-top">
-                <div>
-                  <div class="brand-badge">D44</div>
-                </div>
-                <div>
-                  <h3>Dadu44</h3>
-                  <div class="rank is-stars">⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <div class="bonus">
-                <strong>RM44</strong>
-                <span>Free register new member</span>
-              </div>
-              <ul class="ticks">
-                <li>Daily app free credit angle</li>
-                <li>Good mobile compatibility</li>
-                <li>金额有记忆点，容易点击</li>
-              </ul>
-              <a class="btn btn-primary" href="#join">领取 Dadu44</a>
-            </article>
-
-            <article class="offer-card">
-              <div class="offer-top">
-                <div>
-                  <div class="brand-badge">C88</div>
-                </div>
-                <div>
-                  <h3>Chagee88</h3>
-                  <div class="rank is-stars">⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <div class="bonus">
-                <strong>RM40</strong>
-                <span>New register free credit</span>
-              </div>
-              <ul class="ticks">
-                <li>Free credit 365 Hari up to RM20</li>
-                <li>Low entry barrier message</li>
-                <li>适合每日回访玩家</li>
-              </ul>
-              <a class="btn btn-primary" href="#join">领取 Chagee88</a>
-            </article>
-
-            <article class="offer-card">
-              <div class="offer-top">
-                <div>
-                  <div class="brand-badge">SQ</div>
-                </div>
-                <div>
-                  <h3>Squeen668</h3>
-                  <div class="rank is-stars">⭐⭐⭐</div>
-                </div>
-              </div>
-              <div class="bonus">
-                <strong>RM20</strong>
-                <span>Free register new member</span>
-              </div>
-              <ul class="ticks">
-                <li>365 days free credit rewards</li>
-                <li>Welcome bonus up to 180%</li>
-                <li>适合做备用推荐位</li>
-              </ul>
-              <a class="btn btn-primary" href="#join">领取 Squeen668</a>
-            </article>
+            <p class="empty-offers">正在读取后台资料...</p>
           </div>
         </div>
       </section>
@@ -2372,19 +2242,19 @@
         try {
           const response = await fetch("/api/site-data", { cache: "no-store" });
           if (!response.ok) {
-            return;
+            return false;
           }
 
           const result = await response.json();
           if (result.ok && result.hasServerData && result.data) {
             serverSiteData = result.data;
-            applySiteSettings(activeLanguage);
-            renderOffers(activeLanguage);
-            renderSocialLinks(activeLanguage);
+            return true;
           }
         } catch (error) {
           console.warn("Server site data could not be loaded.", error);
         }
+
+        return false;
       }
 
       function getInitialLanguage() {
@@ -2438,8 +2308,13 @@
         }
       });
 
-      setLanguage(getInitialLanguage());
-      loadServerSiteData();
+      async function initializePage() {
+        activeLanguage = getInitialLanguage();
+        await loadServerSiteData();
+        setLanguage(activeLanguage);
+      }
+
+      initializePage();
     </script>
   </body>
 </html>

@@ -1324,12 +1324,12 @@
                 <div class="form-actions">
                   <button class="btn btn-secondary" type="button" data-copy>复制 JSON</button>
                   <button class="btn btn-secondary" type="button" data-import>导入 JSON</button>
-                  <button class="btn btn-danger" type="button" data-clear>清除记录并同步</button>
+                  <button class="btn btn-danger" type="button" data-clear>清空所有记录并同步</button>
                 </div>
               </div>
 
               <p class="notice">
-                后台资料会保存在当前浏览器，也会同步到服务器。清除后请使用“清除记录并同步”，刷新才不会从服务器读回旧 record。
+                后台资料会保存在当前浏览器，也会同步到服务器。清空后请使用“清空所有记录并同步”，刷新才不会从服务器读回旧 record。需要默认资料时才按“恢复默认”。
               </p>
             </div>
           </section>
@@ -2011,17 +2011,17 @@
         try {
           const response = await fetch("/api/admin-data", { cache: "no-store" });
           if (!response.ok) {
-            return;
+            return false;
           }
 
           const result = await response.json();
           if (!result.ok) {
-            return;
+            return false;
           }
 
           if (!result.hasServerData || !result.data) {
             scheduleServerSave();
-            return;
+            return false;
           }
 
           siteSettings = mergeDeep(defaultSiteSettings, result.data.siteSettings || {});
@@ -2045,8 +2045,10 @@
           resetOfferForm();
           resetSocialForm();
           resetDomainForm();
+          return true;
         } catch (error) {
           console.warn("Server data could not be loaded.", error);
+          return false;
         }
       }
 
@@ -3156,7 +3158,7 @@
       });
 
       document.querySelector("[data-clear]").addEventListener("click", async () => {
-        if (!confirm("清除本机和服务器保存资料？前台会回到默认公司、社群入口、Domain 和网站设置。")) {
+        if (!confirm("清空本机和服务器所有记录？公司、社群入口和 Domain 会变成空列表。需要默认资料时可以再按“恢复默认”。")) {
           return;
         }
         clearTimeout(serverSaveTimer);
@@ -3164,9 +3166,9 @@
         localStorage.removeItem(siteSettingsStorageKey);
         localStorage.removeItem(socialStorageKey);
         localStorage.removeItem(domainStorageKey);
-        offers = clone(defaultOffers).map(normalizeOffer);
-        socialLinks = clone(defaultSocialLinks).map(normalizeSocialLink);
-        domains = clone(defaultDomains).map(normalizeDomain);
+        offers = [];
+        socialLinks = [];
+        domains = [];
         siteSettings = mergeDeep(defaultSiteSettings, {});
         localStorage.setItem(offerStorageKey, JSON.stringify(offers));
         localStorage.setItem(siteSettingsStorageKey, JSON.stringify(siteSettings));
@@ -3178,17 +3180,24 @@
         resetSocialForm();
         resetDomainForm();
         const synced = await saveServerBundle();
-        alert(synced ? "已清除并同步服务器，刷新不会再读回旧 record。" : "本机已清除，但服务器同步失败。请确认已经登录后台后再试一次。");
+        alert(synced ? "已清空并同步服务器，刷新不会再读回旧 record。" : "本机已清空，但服务器同步失败。请确认已经登录后台后再试一次。");
       });
 
       renderAdvancedCopyFields();
       colorLanguageGroups();
-      render();
-      fillSiteForm();
-      resetOfferForm();
-      resetSocialForm();
-      resetDomainForm();
-      loadServerBundle();
+
+      async function initializeAdmin() {
+        const loadedServerData = await loadServerBundle();
+        if (!loadedServerData) {
+          render();
+          fillSiteForm();
+          resetOfferForm();
+          resetSocialForm();
+          resetDomainForm();
+        }
+      }
+
+      initializeAdmin();
     </script>
   </body>
 </html>
