@@ -83,6 +83,7 @@ CLOUDFLARE_ZONE_NAME=
 - 背景图上传会自动裁切、居中对焦和压缩
 - Logo 上传会保留完整比例，不会裁掉左右或上下
 - 前台公司 Logo 使用较大的横向展示位，方便客人一眼看到公司
+- 前台公司卡片不显示 Best / Hot / Top 字眼，只显示 Logo 和星星评分
 - GIF 动图上传会保留动画，并显示图片大小
 - 网站名字
 - 前台字眼
@@ -90,7 +91,7 @@ CLOUDFLARE_ZONE_NAME=
 - 公司资料
 - 公司 Logo
 - 完整注册链接
-- 星星评分，最多 5 粒
+- 星星评分支持 0.1 小数，例如 1.1 / 4.2 / 4.9，最多 5 粒
 - Live Transaction，每家公司可设置不同 live 网页链接、显示 2 或 3 行、备用资料
 - Live Transaction 总开关，以及 Live 表格颜色设置
 - Telegram / Facebook / WhatsApp 等 Join Our 资料

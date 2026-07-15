@@ -414,23 +414,21 @@
       }
 
       .offer-top {
-        display: flex;
-        align-items: start;
-        justify-content: space-between;
-        gap: 12px;
-        min-height: 108px;
+        display: grid;
+        gap: 10px;
+        min-height: 176px;
       }
 
       .brand-badge {
-        width: clamp(138px, 46vw, 178px);
-        height: clamp(76px, 24vw, 92px);
-        flex: 0 0 clamp(138px, 46vw, 178px);
+        width: 100%;
+        height: clamp(132px, 34vw, 166px);
         display: grid;
         place-items: center;
         border-radius: 8px;
         background: var(--paper);
         color: var(--ink);
         font-weight: 900;
+        font-size: clamp(32px, 8vw, 48px);
         border: 2px solid var(--gold);
       }
 
@@ -452,16 +450,55 @@
 
       .rank {
         min-width: 46px;
-        text-align: right;
+        text-align: left;
         color: var(--gold);
         font-weight: 900;
       }
 
-      .rank.is-stars {
-        min-width: 92px;
-        font-size: 18px;
-        line-height: 1.2;
+      .offer-meta {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
+      .rank-label {
+        display: none;
+      }
+
+      .offer-rating {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .rating-stars {
+        --rating-width: 0%;
+        position: relative;
+        display: inline-block;
+        color: rgba(245, 196, 90, 0.24);
+        font-size: 22px;
+        line-height: 1;
         letter-spacing: 0;
+        white-space: nowrap;
+      }
+
+      .rating-stars .stars-fill {
+        position: absolute;
+        inset: 0 auto auto 0;
+        width: var(--rating-width);
+        color: var(--gold);
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .rating-score {
+        color: var(--gold);
+        font-size: 14px;
+        font-weight: 900;
+        line-height: 1;
         white-space: nowrap;
       }
 
@@ -2061,11 +2098,32 @@
           return 0;
         }
 
-        return Math.max(0, Math.min(5, Math.round(count)));
+        return Math.max(0, Math.min(5, Math.round(count * 10) / 10));
       }
 
-      function getStars(value) {
-        return "⭐".repeat(getStarRating(value));
+      function formatRating(value) {
+        const rating = getStarRating(value);
+        return Number.isInteger(rating) ? String(rating) : rating.toFixed(1);
+      }
+
+      function renderRatingStars(value) {
+        const rating = getStarRating(value);
+        if (rating <= 0) {
+          return "";
+        }
+
+        const width = Math.max(0, Math.min(100, (rating / 5) * 100));
+        const label = formatRating(rating);
+        return `<div class="rating-stars" style="--rating-width: ${width}%" aria-label="${label} / 5"><span aria-hidden="true">★★★★★</span><span class="stars-fill" aria-hidden="true">★★★★★</span></div>`;
+      }
+
+      function renderRatingBlock(value) {
+        const stars = renderRatingStars(value);
+        if (!stars) {
+          return "";
+        }
+
+        return `<div class="offer-rating">${stars}<span class="rating-score">${formatRating(value)}/5</span></div>`;
       }
 
       function clearLiveTickerTimers() {
@@ -2224,9 +2282,7 @@
         offerGrid.innerHTML = offers
           .map((offer) => {
             const name = escapeHtml(offer.name);
-            const stars = getStars(offer.starRating);
-            const rank = stars || escapeHtml(getLocalizedValue(offer.rank, language));
-            const rankClass = stars ? "rank is-stars" : "rank";
+            const ratingBlock = renderRatingBlock(offer.starRating);
             const bonusLabel = escapeHtml(getLocalizedValue(offer.bonusLabel, language));
             const buttonText = escapeHtml(getOfferButtonText(offer, language));
             const offerUrl = escapeHtml(getOfferUrl(offer));
@@ -2244,16 +2300,13 @@
             return `
               <article class="offer-card">
                 <div class="offer-top">
-                  <div>
-                    <div class="brand-badge">${logo}</div>
-                  </div>
-                  <div>
-                    <h3>${name}</h3>
-                    <div class="${rankClass}">${rank}</div>
+                  <div class="brand-badge">${logo}</div>
+                  <div class="offer-meta">
+                    ${ratingBlock}
                   </div>
                 </div>
                 <div class="bonus">
-                  <strong>${escapeHtml(offer.amount)}</strong>
+                  <strong>${name}</strong>
                   <span>${bonusLabel}</span>
                 </div>
                 <ul class="ticks">${bulletItems}</ul>

@@ -775,7 +775,7 @@
                   <input id="site-logo-file" type="file" accept="image/*" />
                   <button class="btn btn-secondary" type="button" data-clear-site-logo>清除网站 logo</button>
                 </div>
-                <p class="hint">上传后会自动裁切成正方形，居中对焦。</p>
+                <p class="hint">上传后会保留完整 logo 比例，不会裁掉左右或上下。</p>
               </div>
               <div class="field full">
                 <label>网站 logo 预览</label>
@@ -1162,7 +1162,7 @@
                     <input id="logo-file" type="file" accept="image/*" />
                     <button class="btn btn-secondary" type="button" data-clear-logo>清除 logo</button>
                   </div>
-                  <p class="hint">上传后会自动裁切成正方形，居中对焦。</p>
+                  <p class="hint">上传后会保留完整 logo 比例，不会裁掉左右或上下。</p>
                 </div>
                 <div class="field full">
                   <label>Logo 预览</label>
@@ -1178,8 +1178,8 @@
                 </div>
                 <div class="field">
                   <label for="star-rating">星星数量 (0-5)</label>
-                  <input id="star-rating" type="number" min="0" max="5" step="1" placeholder="例如 5" />
-                  <p class="hint">填 1-5 会显示 ⭐；填 0 就显示下面的标签文字。</p>
+                  <input id="star-rating" type="number" min="0" max="5" step="0.1" placeholder="例如 4.9" />
+                  <p class="hint">可以填 0.1-5，例如 1.1 / 4.2 / 4.9；满星最高 5。前台只显示星星和分数，不显示 Best / Hot 标签。</p>
                 </div>
                 <div class="field full">
                   <label for="url">注册链接</label>
@@ -1206,15 +1206,15 @@
                   <p class="hint">一行一条：Top Up 账号 | Top Up 金额 | Withdraw 账号 | Withdraw 金额 | 游戏名。想要它会跑，资料行数要多过显示行数，例如显示 3 行就填 5-6 行。</p>
                 </div>
                 <div class="field">
-                  <label for="rank-zh">标签 / 排名 中文</label>
+                  <label for="rank-zh">备用标签 / 排名 中文（前台不显示）</label>
                   <input id="rank-zh" placeholder="Top 1 / Hot" />
                 </div>
                 <div class="field">
-                  <label for="rank-en">标签 / 排名 EN</label>
+                  <label for="rank-en">备用标签 / 排名 EN（前台不显示）</label>
                   <input id="rank-en" placeholder="Top 1 / Hot" />
                 </div>
                 <div class="field">
-                  <label for="rank-ms">标签 / 排名 BM</label>
+                  <label for="rank-ms">备用标签 / 排名 BM（前台不显示）</label>
                   <input id="rank-ms" placeholder="Top 1 / Pantas" />
                 </div>
                 <label class="check-row">
@@ -1362,7 +1362,7 @@
                     <input id="social-logo-file" type="file" accept="image/*" />
                     <button class="btn btn-secondary" type="button" data-clear-social-logo>清除 logo</button>
                   </div>
-                  <p class="hint">上传后会自动裁切成正方形，居中对焦。</p>
+                  <p class="hint">上传后会保留完整 logo 比例，不会裁掉左右或上下。</p>
                 </div>
                 <div class="field full">
                   <label>Logo 预览</label>
@@ -1918,11 +1918,20 @@
           return 0;
         }
 
-        return Math.max(0, Math.min(5, Math.round(count)));
+        return Math.max(0, Math.min(5, Math.round(count * 10) / 10));
       }
 
       function getStars(value) {
-        return "⭐".repeat(normalizeStars(value));
+        const rating = normalizeStars(value);
+        if (rating <= 0) {
+          return "";
+        }
+
+        const full = Math.floor(rating);
+        const partial = rating % 1 > 0 ? 1 : 0;
+        const empty = Math.max(0, 5 - full - partial);
+        const label = Number.isInteger(rating) ? String(rating) : rating.toFixed(1);
+        return `${"★".repeat(full)}${partial ? "☆" : ""}${"☆".repeat(empty)} ${label}/5`;
       }
 
       function createId(name) {
