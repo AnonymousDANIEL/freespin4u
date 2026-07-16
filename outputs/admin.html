@@ -305,6 +305,52 @@
         font-size: 15px;
       }
 
+      .color-section {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+
+      .color-section + .color-section {
+        margin-top: 10px;
+      }
+
+      .color-section summary {
+        min-height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 0 14px;
+        color: var(--paper);
+        cursor: pointer;
+        font-weight: 900;
+        list-style: none;
+      }
+
+      .color-section summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .color-section summary::after {
+        content: "展开";
+        min-width: 42px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: rgba(245, 196, 90, 0.14);
+        color: var(--gold);
+        text-align: center;
+        font-size: 12px;
+      }
+
+      .color-section[open] summary::after {
+        content: "收起";
+      }
+
+      .color-section .form-grid {
+        padding: 0 14px 14px;
+      }
+
       .check-row {
         display: flex;
         align-items: center;
@@ -789,128 +835,155 @@
 
             <div class="color-settings">
               <h3>网页颜色设置</h3>
-              <div class="form-grid">
-                <div class="field">
-                  <label for="color-page-background">网页背景颜色</label>
-                  <input id="color-page-background" type="color" />
+              <details class="color-section" open>
+                <summary>基础网页</summary>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="color-page-background">网页背景颜色</label>
+                    <input id="color-page-background" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-header-background">顶部导航背景</label>
+                    <input id="color-header-background" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-card-background">卡片背景颜色</label>
+                    <input id="color-card-background" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-card-alt-background">深一点卡片背景</label>
+                    <input id="color-card-alt-background" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-border-color">边框颜色</label>
+                    <input id="color-border-color" type="color" />
+                  </div>
                 </div>
-                <div class="field">
-                  <label for="color-header-background">顶部导航背景</label>
-                  <input id="color-header-background" type="color" />
+              </details>
+
+              <details class="color-section" open>
+                <summary>Logo / 公司卡片</summary>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="color-logo-frame-background">Logo 外框背景</label>
+                    <input id="color-logo-frame-background" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-logo-image-background">Logo 图片底色</label>
+                    <input id="color-logo-image-background" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-main-text">主要文字颜色</label>
+                    <input id="color-main-text" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-body-text">普通文字颜色</label>
+                    <input id="color-body-text" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-muted-text">副文字颜色</label>
+                    <input id="color-muted-text" type="color" />
+                  </div>
                 </div>
-                <div class="field">
-                  <label for="color-card-background">卡片背景颜色</label>
-                  <input id="color-card-background" type="color" />
+              </details>
+
+              <details class="color-section">
+                <summary>按钮 / 强调颜色</summary>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="color-primary-color">主按钮颜色</label>
+                    <input id="color-primary-color" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-primary-dark-color">主按钮深色</label>
+                    <input id="color-primary-dark-color" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-accent-color">强调颜色</label>
+                    <input id="color-accent-color" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-button-text">按钮文字颜色</label>
+                    <input id="color-button-text" type="color" />
+                  </div>
                 </div>
-                <div class="field">
-                  <label for="color-card-alt-background">深一点卡片背景</label>
-                  <input id="color-card-alt-background" type="color" />
+              </details>
+
+              <details class="color-section">
+                <summary>社群 / 底部区块</summary>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="color-community-background">Join Our 背景</label>
+                    <input id="color-community-background" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-final-background">底部 CTA 背景</label>
+                    <input id="color-final-background" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-footer-background">页脚背景</label>
+                    <input id="color-footer-background" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-sticky-background">固定底部条背景</label>
+                    <input id="color-sticky-background" type="color" />
+                  </div>
                 </div>
-                <div class="field">
-                  <label for="color-border-color">边框颜色</label>
-                  <input id="color-border-color" type="color" />
+              </details>
+
+              <details class="color-section">
+                <summary>Live Transaction</summary>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="color-live-background">Live 表格背景</label>
+                    <input id="color-live-background" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-live-border-color">Live 表格边框</label>
+                    <input id="color-live-border-color" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-live-title-background">Live 标题背景</label>
+                    <input id="color-live-title-background" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-live-title-text">Live 标题文字</label>
+                    <input id="color-live-title-text" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-live-badge-background">Live 红色标签背景</label>
+                    <input id="color-live-badge-background" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-live-badge-text">Live 红色标签文字</label>
+                    <input id="color-live-badge-text" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-live-top-header-background">TOP UP 背景</label>
+                    <input id="color-live-top-header-background" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-live-top-header-text">TOP UP 文字</label>
+                    <input id="color-live-top-header-text" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-live-withdraw-header-background">WITHDRAW 背景</label>
+                    <input id="color-live-withdraw-header-background" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-live-withdraw-header-text">WITHDRAW 文字</label>
+                    <input id="color-live-withdraw-header-text" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-live-row-text">Live 普通文字</label>
+                    <input id="color-live-row-text" type="color" />
+                  </div>
+                  <div class="field">
+                    <label for="color-live-amount-text">Live 金额文字</label>
+                    <input id="color-live-amount-text" type="color" />
+                  </div>
                 </div>
-                <div class="field">
-                  <label for="color-logo-frame-background">Logo 外框背景</label>
-                  <input id="color-logo-frame-background" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-logo-image-background">Logo 图片底色</label>
-                  <input id="color-logo-image-background" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-main-text">主要文字颜色</label>
-                  <input id="color-main-text" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-body-text">普通文字颜色</label>
-                  <input id="color-body-text" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-muted-text">副文字颜色</label>
-                  <input id="color-muted-text" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-primary-color">主按钮颜色</label>
-                  <input id="color-primary-color" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-primary-dark-color">主按钮深色</label>
-                  <input id="color-primary-dark-color" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-accent-color">强调颜色</label>
-                  <input id="color-accent-color" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-button-text">按钮文字颜色</label>
-                  <input id="color-button-text" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-community-background">Join Our 背景</label>
-                  <input id="color-community-background" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-final-background">底部 CTA 背景</label>
-                  <input id="color-final-background" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-footer-background">页脚背景</label>
-                  <input id="color-footer-background" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-sticky-background">固定底部条背景</label>
-                  <input id="color-sticky-background" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-live-background">Live 表格背景</label>
-                  <input id="color-live-background" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-live-border-color">Live 表格边框</label>
-                  <input id="color-live-border-color" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-live-title-background">Live 标题背景</label>
-                  <input id="color-live-title-background" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-live-title-text">Live 标题文字</label>
-                  <input id="color-live-title-text" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-live-badge-background">Live 红色标签背景</label>
-                  <input id="color-live-badge-background" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-live-badge-text">Live 红色标签文字</label>
-                  <input id="color-live-badge-text" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-live-top-header-background">TOP UP 背景</label>
-                  <input id="color-live-top-header-background" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-live-top-header-text">TOP UP 文字</label>
-                  <input id="color-live-top-header-text" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-live-withdraw-header-background">WITHDRAW 背景</label>
-                  <input id="color-live-withdraw-header-background" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-live-withdraw-header-text">WITHDRAW 文字</label>
-                  <input id="color-live-withdraw-header-text" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-live-row-text">Live 普通文字</label>
-                  <input id="color-live-row-text" type="color" />
-                </div>
-                <div class="field">
-                  <label for="color-live-amount-text">Live 金额文字</label>
-                  <input id="color-live-amount-text" type="color" />
-                </div>
-              </div>
+              </details>
             </div>
 
             <div class="language-group">
