@@ -25,6 +25,8 @@ window.defaultSiteSettings = {
     finalBackground: "#10151d",
     footerBackground: "#07090d",
     stickyBackground: "#07090d",
+    logoFrameBackground: "#0d1118",
+    logoImageBackground: "#ffffff",
     liveBackground: "#05080d",
     liveBorderColor: "#38bdf8",
     liveTitleBackground: "#020304",

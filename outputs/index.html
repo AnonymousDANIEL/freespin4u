@@ -49,6 +49,8 @@
         --final-bg: #10151d;
         --footer-bg: #07090d;
         --sticky-bg: #07090d;
+        --logo-frame-bg: #0d1118;
+        --logo-image-bg: #ffffff;
         --live-bg: #05080d;
         --live-border: #38bdf8;
         --live-title-bg: #020304;
@@ -158,7 +160,7 @@
         object-fit: contain;
         padding: 3px;
         box-sizing: border-box;
-        background: #fff;
+        background: var(--logo-image-bg);
       }
 
       .nav-links {
@@ -457,7 +459,7 @@
         display: grid;
         place-items: center;
         border-radius: 8px;
-        background: var(--paper);
+        background: var(--logo-frame-bg);
         color: var(--ink);
         font-weight: 900;
         font-size: clamp(32px, 8vw, 48px);
@@ -470,7 +472,7 @@
         object-fit: contain;
         padding: 2px;
         box-sizing: border-box;
-        background: #fff;
+        background: var(--logo-image-bg);
         border-radius: 6px;
       }
 
@@ -831,7 +833,7 @@
         place-items: center;
         border-radius: 8px;
         border: 2px solid var(--teal);
-        background: var(--paper);
+        background: var(--logo-frame-bg);
         color: var(--ink);
         font-weight: 900;
       }
@@ -842,7 +844,7 @@
         object-fit: contain;
         padding: 5px;
         box-sizing: border-box;
-        background: #fff;
+        background: var(--logo-image-bg);
         border-radius: 6px;
       }
 
@@ -1702,6 +1704,8 @@
         cardBackground: "--panel",
         cardAltBackground: "--panel-2",
         borderColor: "--line",
+        logoFrameBackground: "--logo-frame-bg",
+        logoImageBackground: "--logo-image-bg",
         mainText: "--paper",
         bodyText: "--white",
         mutedText: "--muted",
