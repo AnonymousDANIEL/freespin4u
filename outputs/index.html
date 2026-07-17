@@ -1912,6 +1912,7 @@
           const mergedOffer = mergeSettings(defaultOffer, offer);
           return {
             ...mergedOffer,
+            showStars: mergedOffer.showStars !== false,
             live: normalizeLiveConfig(mergedOffer.live, mergedOffer.name),
             bonusPage: normalizeBonusPageConfig(mergedOffer.bonusPage)
           };
@@ -2476,7 +2477,7 @@
         offerGrid.innerHTML = offers
           .map((offer) => {
             const name = escapeHtml(offer.name);
-            const ratingBlock = renderRatingBlock(offer.starRating);
+            const ratingBlock = offer.showStars === false ? "" : renderRatingBlock(offer.starRating);
             const bonusLabel = escapeHtml(getLocalizedValue(offer.bonusLabel, language));
             const buttonText = escapeHtml(getOfferButtonText(offer, language));
             const offerUrl = escapeHtml(getOfferUrl(offer));

@@ -1263,6 +1263,10 @@
                   <p class="hint">可以填 0.1-5，例如 1.1 / 4.2 / 4.9；满星最高 5。前台只显示星星和分数，不显示 Best / Hot 标签。</p>
                 </div>
                 <label class="check-row">
+                  <input id="show-stars" type="checkbox" checked />
+                  <span>显示星星评分</span>
+                </label>
+                <label class="check-row">
                   <input id="show-bonus-label" type="checkbox" checked />
                   <span>显示公司名下面小字</span>
                 </label>
@@ -1896,6 +1900,7 @@
           amount: offer.amount || "RM0",
           url: normalizeLink(offer.url || "#join"),
           starRating: normalizeStars(offer.starRating),
+          showStars: offer.showStars !== false,
           showBonusLabel: offer.showBonusLabel !== false,
           showBullets: offer.showBullets !== false,
           bulletLimit: normalizeBulletLimit(offer.bulletLimit),
@@ -2280,7 +2285,7 @@
           .map((offer) => {
             const statusClass = offer.active ? "active" : "off";
             const statusText = offer.active ? "启用" : "停用";
-            const rankDisplay = getStars(offer.starRating) || offer.rank.zh || offer.rank.en;
+            const rankDisplay = offer.showStars === false ? "星星隐藏" : getStars(offer.starRating) || offer.rank.zh || offer.rank.en;
             const liveText = offer.live?.enabled ? `Live ${offer.live.rows || 3} 行` : "Live OFF";
             const logo = offer.logoUrl
               ? `<img src="${escapeHtml(offer.logoUrl)}" alt="${escapeHtml(offer.name)} logo" loading="lazy" />`
@@ -2470,6 +2475,7 @@
         setValue("amount", offer.amount);
         setValue("order", offer.order);
         setValue("star-rating", offer.starRating);
+        document.querySelector("#show-stars").checked = offer.showStars !== false;
         document.querySelector("#show-bonus-label").checked = offer.showBonusLabel !== false;
         document.querySelector("#show-bullets").checked = offer.showBullets !== false;
         setValue("bullet-limit", normalizeBulletLimit(offer.bulletLimit));
@@ -2504,6 +2510,7 @@
         setPreview("[data-logo-preview]", "", "暂无 logo");
         setValue("order", offers.length + 1);
         setValue("star-rating", 0);
+        document.querySelector("#show-stars").checked = true;
         document.querySelector("#show-bonus-label").checked = true;
         document.querySelector("#show-bullets").checked = true;
         setValue("bullet-limit", 3);
@@ -2528,6 +2535,7 @@
           amount: getValue("amount"),
           url: getValue("url"),
           starRating: getValue("star-rating"),
+          showStars: document.querySelector("#show-stars").checked,
           showBonusLabel: document.querySelector("#show-bonus-label").checked,
           showBullets: document.querySelector("#show-bullets").checked,
           bulletLimit: getValue("bullet-limit"),
