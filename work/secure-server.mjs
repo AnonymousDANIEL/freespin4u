@@ -142,7 +142,12 @@ function requiresAdmin(pathname) {
     return true;
   }
 
-  if (pathname === "/api/site-data" || pathname === "/api/live-transactions" || pathname === "/api/bonus-page") {
+  if (
+    pathname === "/api/site-data" ||
+    pathname === "/api/live-transactions" ||
+    pathname === "/api/bonus-page" ||
+    pathname === "/api/bonus-image"
+  ) {
     return false;
   }
 
@@ -524,6 +529,72 @@ async function fetchBonusPageSlides(url) {
   }
 }
 
+async function readLimitedResponseBuffer(response, maxBytes) {
+  const reader = response.body?.getReader?.();
+  if (!reader) {
+    const arrayBuffer = await response.arrayBuffer();
+    if (arrayBuffer.byteLength > maxBytes) {
+      throw new Error("Image is too large.");
+    }
+    return Buffer.from(arrayBuffer);
+  }
+
+  const chunks = [];
+  let total = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) {
+      break;
+    }
+
+    const chunk = Buffer.from(value);
+    total += chunk.length;
+    if (total > maxBytes) {
+      throw new Error("Image is too large.");
+    }
+    chunks.push(chunk);
+  }
+
+  return Buffer.concat(chunks, total);
+}
+
+async function fetchBonusImage(url) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 7500);
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      headers: {
+        accept: "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+        referer: new URL(url).origin,
+        "user-agent": "Mozilla/5.0 BonusImagePreview/1.0",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Bonus image HTTP ${response.status}.`);
+    }
+
+    const length = Number(response.headers.get("content-length") || 0);
+    if (length > 2500000) {
+      throw new Error("Image is too large.");
+    }
+
+    const contentType = String(response.headers.get("content-type") || "image/jpeg").split(";")[0].trim().toLowerCase();
+    if (!contentType.startsWith("image/")) {
+      throw new Error("Bonus image is not an image.");
+    }
+
+    const body = await readLimitedResponseBuffer(response, 2500000);
+    return {
+      body,
+      contentType,
+    };
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 async function cloudflare(pathname, options = {}) {
   if (!cloudflareToken) {
     throw new Error("服务器没有设置 CLOUDFLARE_API_TOKEN。");
@@ -654,6 +725,18 @@ async function handleApi(req, res, pathname) {
       ok: slides.length > 0,
       slides,
       fetchedAt: new Date().toISOString(),
+    });
+    return;
+  }
+
+  if (pathname === "/api/bonus-image" && req.method === "GET") {
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    const imageUrl = cleanLiveUrl(url.searchParams.get("url"));
+    const image = await fetchBonusImage(imageUrl);
+    write(res, 200, image.body, {
+      "content-type": image.contentType,
+      "content-length": image.body.length,
+      "cache-control": "public, max-age=300",
     });
     return;
   }

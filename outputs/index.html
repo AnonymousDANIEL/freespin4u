@@ -2210,6 +2210,10 @@
         `;
       }
 
+      function getSlideSource(slide) {
+        return typeof slide === "string" ? slide : slide?.src || "";
+      }
+
       function startBonusSlider(panel, slides, url, labels) {
         const slider = panel.querySelector(".bonus-page-slider");
         const panelId = panel.dataset.bonusPage;
@@ -2223,37 +2227,77 @@
           bonusSliderTimers.delete(panelId);
         }
 
-        const safeSlides = slides.slice(0, 8);
-        slider.innerHTML = `
-          <div class="bonus-page-track">
-            ${safeSlides
-              .map((slide, index) => {
-                const src = typeof slide === "string" ? slide : slide.src;
-                const alt = typeof slide === "string" ? `${labels.title} ${index + 1}` : slide.alt || `${labels.title} ${index + 1}`;
-                return `<a class="bonus-page-slide" href="${escapeHtml(url)}" target="_blank" rel="noopener nofollow"><img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" loading="lazy" /></a>`;
-              })
-              .join("")}
-          </div>
-          <div class="bonus-page-dots">${safeSlides.map((_, index) => `<span class="bonus-page-dot${index === 0 ? " active" : ""}"></span>`).join("")}</div>
-        `;
-
-        const track = slider.querySelector(".bonus-page-track");
-        const dots = Array.from(slider.querySelectorAll(".bonus-page-dot"));
-        if (!track || safeSlides.length <= 1) {
-          return;
-        }
-
+        let safeSlides = slides.slice(0, 8).filter((slide) => /^https?:\/\//i.test(getSlideSource(slide)));
         let index = 0;
-        const draw = () => {
-          track.style.transform = `translateX(-${index * 100}%)`;
-          dots.forEach((dot, dotIndex) => dot.classList.toggle("active", dotIndex === index));
+        let timer = null;
+
+        const clearTimer = () => {
+          if (timer) {
+            clearInterval(timer);
+            timer = null;
+          }
+          if (bonusSliderTimers.get(panelId)) {
+            clearInterval(bonusSliderTimers.get(panelId));
+            bonusSliderTimers.delete(panelId);
+          }
         };
 
-        const timer = setInterval(() => {
-          index = (index + 1) % safeSlides.length;
+        const drawSlider = () => {
+          clearTimer();
+          if (!safeSlides.length) {
+            renderBonusPageFallback(panel, url, labels);
+            return;
+          }
+
+          index = Math.min(index, safeSlides.length - 1);
+          slider.innerHTML = `
+            <div class="bonus-page-track">
+              ${safeSlides
+                .map((slide, slideIndex) => {
+                  const src = getSlideSource(slide);
+                  const alt = typeof slide === "string" ? `${labels.title} ${slideIndex + 1}` : slide.alt || `${labels.title} ${slideIndex + 1}`;
+                  const imageSrc = `/api/bonus-image?url=${encodeURIComponent(src)}`;
+                  return `<a class="bonus-page-slide" href="${escapeHtml(url)}" target="_blank" rel="noopener nofollow"><img src="${escapeHtml(imageSrc)}" data-original-src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" loading="lazy" /></a>`;
+                })
+                .join("")}
+            </div>
+            <div class="bonus-page-dots">${safeSlides.map((_, dotIndex) => `<span class="bonus-page-dot${dotIndex === index ? " active" : ""}"></span>`).join("")}</div>
+          `;
+
+          const track = slider.querySelector(".bonus-page-track");
+          const dots = Array.from(slider.querySelectorAll(".bonus-page-dot"));
+          const draw = () => {
+            if (track) {
+              track.style.transform = `translateX(-${index * 100}%)`;
+            }
+            dots.forEach((dot, dotIndex) => dot.classList.toggle("active", dotIndex === index));
+          };
+
+          slider.querySelectorAll("img[data-original-src]").forEach((image) => {
+            image.addEventListener(
+              "error",
+              () => {
+                const failedSource = image.dataset.originalSrc || "";
+                safeSlides = safeSlides.filter((slide) => getSlideSource(slide) !== failedSource);
+                index = 0;
+                drawSlider();
+              },
+              { once: true }
+            );
+          });
+
           draw();
-        }, 2600);
-        bonusSliderTimers.set(panelId, timer);
+
+          if (safeSlides.length > 1) {
+            timer = setInterval(() => {
+              index = (index + 1) % safeSlides.length;
+              draw();
+            }, 2600);
+            bonusSliderTimers.set(panelId, timer);
+          }
+        };
+
+        drawSlider();
       }
 
       async function hydrateBonusPages(language = activeLanguage) {
