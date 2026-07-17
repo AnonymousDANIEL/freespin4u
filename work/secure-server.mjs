@@ -37,6 +37,7 @@ const cloudflareZoneId = process.env.CLOUDFLARE_ZONE_ID || "";
 const cloudflareZoneName = process.env.CLOUDFLARE_ZONE_NAME || "";
 const sessionSecret = process.env.SESSION_SECRET || crypto.randomBytes(32).toString("hex");
 const liveCache = new Map();
+const bonusPageCache = new Map();
 
 const types = {
   ".html": "text/html; charset=utf-8",
@@ -141,7 +142,7 @@ function requiresAdmin(pathname) {
     return true;
   }
 
-  if (pathname === "/api/site-data" || pathname === "/api/live-transactions") {
+  if (pathname === "/api/site-data" || pathname === "/api/live-transactions" || pathname === "/api/bonus-page") {
     return false;
   }
 
@@ -363,6 +364,166 @@ async function fetchLiveTransactions(url, limit) {
   }
 }
 
+function decodeHtmlEntities(value) {
+  const named = {
+    amp: "&",
+    quot: '"',
+    apos: "'",
+    lt: "<",
+    gt: ">",
+    nbsp: " ",
+  };
+
+  return String(value || "").replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, (match, entity) => {
+    const key = entity.toLowerCase();
+    if (key.startsWith("#x")) {
+      const code = Number.parseInt(key.slice(2), 16);
+      return Number.isFinite(code) && code >= 0 && code <= 0x10ffff ? String.fromCodePoint(code) : match;
+    }
+    if (key.startsWith("#")) {
+      const code = Number.parseInt(key.slice(1), 10);
+      return Number.isFinite(code) && code >= 0 && code <= 0x10ffff ? String.fromCodePoint(code) : match;
+    }
+    return named[key] || match;
+  });
+}
+
+function getTagAttribute(tag, attribute) {
+  const match = String(tag || "").match(new RegExp(`${attribute}\\s*=\\s*("([^"]*)"|'([^']*)'|([^\\s>]+))`, "i"));
+  return decodeHtmlEntities(match?.[2] || match?.[3] || match?.[4] || "");
+}
+
+function getSrcsetUrl(value) {
+  const items = String(value || "")
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+  const last = items.at(-1) || "";
+  return last.split(/\s+/)[0] || "";
+}
+
+function absolutePublicImageUrl(value, baseUrl) {
+  const raw = decodeHtmlEntities(value).trim();
+  if (!raw || raw.startsWith("data:") || raw.startsWith("blob:")) {
+    return "";
+  }
+
+  try {
+    const parsed = new URL(raw, baseUrl);
+    if (!["http:", "https:"].includes(parsed.protocol) || isPrivateHost(parsed.hostname)) {
+      return "";
+    }
+    return parsed.toString();
+  } catch {
+    return "";
+  }
+}
+
+function scoreBonusImage(src, tagText) {
+  const text = `${src} ${tagText}`.toLowerCase();
+  let score = 0;
+  if (/\.(?:png|jpe?g|webp|gif|svg)(?:$|[?#])/i.test(src)) {
+    score += 2;
+  }
+  if (/(promo|promotion|bonus|banner|campaign|event|reward|free|credit|slot|slide|offer)/i.test(text)) {
+    score += 4;
+  }
+  if (/(logo|icon|favicon|sprite|loader|avatar|facebook|telegram|whatsapp)/i.test(text)) {
+    score -= 3;
+  }
+  return score;
+}
+
+function extractBonusSlides(html, baseUrl) {
+  const candidates = [];
+  const seen = new Set();
+
+  const addCandidate = (src, tagText = "", alt = "") => {
+    const imageUrl = absolutePublicImageUrl(src, baseUrl);
+    if (!imageUrl || seen.has(imageUrl)) {
+      return;
+    }
+
+    const score = scoreBonusImage(imageUrl, `${tagText} ${alt}`);
+    if (score < 0) {
+      return;
+    }
+
+    seen.add(imageUrl);
+    candidates.push({
+      src: imageUrl,
+      alt: String(alt || "Bonus page").replace(/\s+/g, " ").trim().slice(0, 120),
+      score,
+      index: candidates.length,
+    });
+  };
+
+  for (const match of String(html || "").matchAll(/<img\b[^>]*>/gi)) {
+    const tag = match[0];
+    const alt = getTagAttribute(tag, "alt") || getTagAttribute(tag, "title");
+    const width = Number.parseInt(getTagAttribute(tag, "width").replace(/\D/g, ""), 10);
+    const height = Number.parseInt(getTagAttribute(tag, "height").replace(/\D/g, ""), 10);
+    if (Number.isFinite(width) && Number.isFinite(height) && width > 0 && height > 0 && width < 120 && height < 80) {
+      continue;
+    }
+
+    ["data-src", "data-original", "data-lazy", "data-lazy-src", "src"].forEach((attribute) => {
+      addCandidate(getTagAttribute(tag, attribute), tag, alt);
+    });
+    ["data-srcset", "srcset"].forEach((attribute) => {
+      addCandidate(getSrcsetUrl(getTagAttribute(tag, attribute)), tag, alt);
+    });
+  }
+
+  for (const match of String(html || "").matchAll(/<source\b[^>]*srcset\s*=\s*["']([^"']+)["'][^>]*>/gi)) {
+    addCandidate(getSrcsetUrl(match[1]), match[0], "Bonus page");
+  }
+
+  for (const match of String(html || "").matchAll(/url\((["']?)([^"')]+)\1\)/gi)) {
+    addCandidate(match[2], match[0], "Bonus page");
+  }
+
+  return candidates
+    .sort((a, b) => b.score - a.score || a.index - b.index)
+    .slice(0, 8)
+    .map(({ src, alt }) => ({ src, alt }));
+}
+
+async function fetchBonusPageSlides(url) {
+  const cached = bonusPageCache.get(url);
+  if (cached && Date.now() - cached.time < 60000) {
+    return cached.slides;
+  }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 7500);
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      headers: {
+        accept: "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+        "user-agent": "Mozilla/5.0 BonusPagePreview/1.0",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Bonus page HTTP ${response.status}.`);
+    }
+
+    const length = Number(response.headers.get("content-length") || 0);
+    if (length > 1000000) {
+      throw new Error("Bonus page is too large.");
+    }
+
+    const body = await response.text();
+    const slides = extractBonusSlides(body.slice(0, 1000000), url);
+    bonusPageCache.set(url, { time: Date.now(), slides });
+    return slides;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 async function cloudflare(pathname, options = {}) {
   if (!cloudflareToken) {
     throw new Error("服务器没有设置 CLOUDFLARE_API_TOKEN。");
@@ -480,6 +641,18 @@ async function handleApi(req, res, pathname) {
     json(res, 200, {
       ok: liveRows.length > 0,
       rows: liveRows,
+      fetchedAt: new Date().toISOString(),
+    });
+    return;
+  }
+
+  if (pathname === "/api/bonus-page" && req.method === "GET") {
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    const bonusUrl = cleanLiveUrl(url.searchParams.get("url"));
+    const slides = await fetchBonusPageSlides(bonusUrl);
+    json(res, 200, {
+      ok: slides.length > 0,
+      slides,
       fetchedAt: new Date().toISOString(),
     });
     return;

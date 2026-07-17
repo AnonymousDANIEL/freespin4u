@@ -86,6 +86,7 @@ CLOUDFLARE_ZONE_NAME=
 - 前台公司卡片不显示 Best / Hot / Top 字眼，只显示 Logo 和星星评分
 - Logo 外框背景和 Logo 图片底色都可以在后台颜色设置里更改
 - 每家公司可以开关公司名下面小字，并限制下面卖点文案显示 0-3 行
+- 每家公司可以开关 Bonus Page 自动滑动，并放不同 promotion 链接；如果对方网页禁止自动读取，前台会显示打开 Bonus Page 按钮
 - 后台颜色设置已拆成基础网页、Logo / 公司卡片、按钮、底部社群和 Live Transaction 分组
 - GIF 动图上传会保留动画，并显示图片大小
 - 网站名字

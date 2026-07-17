@@ -1281,6 +1281,15 @@
                   <p class="hint">请填完整链接；系统不会自动修改。站内位置才用 #join。</p>
                 </div>
                 <label class="check-row">
+                  <input id="bonus-page-enabled" type="checkbox" />
+                  <span>显示 Bonus Page 自动滑动</span>
+                </label>
+                <div class="field full">
+                  <label for="bonus-page-url">Bonus Page 链接</label>
+                  <input id="bonus-page-url" placeholder="例如 https://bintang44.asia/promotion" />
+                  <p class="hint">每家公司可以放不同 promotion / bonus page。系统会尝试自动抓公开图片来滑动；如果对方网站禁止读取，前台会显示打开 Bonus Page 按钮。</p>
+                </div>
+                <label class="check-row">
                   <input id="live-enabled" type="checkbox" />
                   <span>显示 Live Transaction</span>
                 </label>
@@ -1890,6 +1899,7 @@
           showBonusLabel: offer.showBonusLabel !== false,
           showBullets: offer.showBullets !== false,
           bulletLimit: normalizeBulletLimit(offer.bulletLimit),
+          bonusPage: normalizeBonusPageConfig(offer.bonusPage),
           live: normalizeLiveConfig(offer.live, name),
           rank: {
             zh: offer.rank?.zh || offer.rank?.en || "New",
@@ -1989,6 +1999,14 @@
           url: String(config.url || "").trim(),
           rows: normalizeLiveRows(config.rows),
           fallback: normalizeLiveFallback(config.fallback) || createDefaultLiveFallback(name)
+        };
+      }
+
+      function normalizeBonusPageConfig(bonusPage) {
+        const config = bonusPage && typeof bonusPage === "object" ? bonusPage : {};
+        return {
+          enabled: config.enabled === true,
+          url: String(config.url || "").trim()
         };
       }
 
@@ -2456,6 +2474,8 @@
         document.querySelector("#show-bullets").checked = offer.showBullets !== false;
         setValue("bullet-limit", normalizeBulletLimit(offer.bulletLimit));
         setValue("url", offer.url);
+        document.querySelector("#bonus-page-enabled").checked = offer.bonusPage?.enabled === true;
+        setValue("bonus-page-url", offer.bonusPage?.url || "");
         document.querySelector("#live-enabled").checked = offer.live?.enabled === true;
         setValue("live-rows", offer.live?.rows || 3);
         setValue("live-url", offer.live?.url || "");
@@ -2487,6 +2507,8 @@
         document.querySelector("#show-bonus-label").checked = true;
         document.querySelector("#show-bullets").checked = true;
         setValue("bullet-limit", 3);
+        document.querySelector("#bonus-page-enabled").checked = false;
+        setValue("bonus-page-url", "");
         setValue("live-rows", 3);
         setValue("live-url", "");
         setValue("live-fallback", "");
@@ -2509,6 +2531,10 @@
           showBonusLabel: document.querySelector("#show-bonus-label").checked,
           showBullets: document.querySelector("#show-bullets").checked,
           bulletLimit: getValue("bullet-limit"),
+          bonusPage: {
+            enabled: document.querySelector("#bonus-page-enabled").checked,
+            url: getValue("bonus-page-url")
+          },
           live: {
             enabled: document.querySelector("#live-enabled").checked,
             url: getValue("live-url"),
