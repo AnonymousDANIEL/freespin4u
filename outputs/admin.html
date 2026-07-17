@@ -1262,6 +1262,19 @@
                   <input id="star-rating" type="number" min="0" max="5" step="0.1" placeholder="例如 4.9" />
                   <p class="hint">可以填 0.1-5，例如 1.1 / 4.2 / 4.9；满星最高 5。前台只显示星星和分数，不显示 Best / Hot 标签。</p>
                 </div>
+                <label class="check-row">
+                  <input id="show-bonus-label" type="checkbox" checked />
+                  <span>显示公司名下面小字</span>
+                </label>
+                <label class="check-row">
+                  <input id="show-bullets" type="checkbox" checked />
+                  <span>显示下面卖点文案</span>
+                </label>
+                <div class="field">
+                  <label for="bullet-limit">卖点显示行数 (0-3)</label>
+                  <input id="bullet-limit" type="number" min="0" max="3" step="1" placeholder="3" />
+                  <p class="hint">填 0 就不显示；填 1/2/3 就限制显示几行。</p>
+                </div>
                 <div class="field full">
                   <label for="url">注册链接</label>
                   <input id="url" required placeholder="例如 https://syabas99.com" />
@@ -1874,6 +1887,9 @@
           amount: offer.amount || "RM0",
           url: normalizeLink(offer.url || "#join"),
           starRating: normalizeStars(offer.starRating),
+          showBonusLabel: offer.showBonusLabel !== false,
+          showBullets: offer.showBullets !== false,
+          bulletLimit: normalizeBulletLimit(offer.bulletLimit),
           live: normalizeLiveConfig(offer.live, name),
           rank: {
             zh: offer.rank?.zh || offer.rank?.en || "New",
@@ -1943,6 +1959,15 @@
 
       function normalizeBullets(items) {
         return Array.isArray(items) ? items.slice(0, 3) : ["", "", ""];
+      }
+
+      function normalizeBulletLimit(value) {
+        const count = Number(value ?? 3);
+        if (!Number.isFinite(count)) {
+          return 3;
+        }
+
+        return Math.max(0, Math.min(3, Math.round(count)));
       }
 
       function createDefaultLiveFallback(name) {
@@ -2427,6 +2452,9 @@
         setValue("amount", offer.amount);
         setValue("order", offer.order);
         setValue("star-rating", offer.starRating);
+        document.querySelector("#show-bonus-label").checked = offer.showBonusLabel !== false;
+        document.querySelector("#show-bullets").checked = offer.showBullets !== false;
+        setValue("bullet-limit", normalizeBulletLimit(offer.bulletLimit));
         setValue("url", offer.url);
         document.querySelector("#live-enabled").checked = offer.live?.enabled === true;
         setValue("live-rows", offer.live?.rows || 3);
@@ -2456,6 +2484,9 @@
         setPreview("[data-logo-preview]", "", "暂无 logo");
         setValue("order", offers.length + 1);
         setValue("star-rating", 0);
+        document.querySelector("#show-bonus-label").checked = true;
+        document.querySelector("#show-bullets").checked = true;
+        setValue("bullet-limit", 3);
         setValue("live-rows", 3);
         setValue("live-url", "");
         setValue("live-fallback", "");
@@ -2475,6 +2506,9 @@
           amount: getValue("amount"),
           url: getValue("url"),
           starRating: getValue("star-rating"),
+          showBonusLabel: document.querySelector("#show-bonus-label").checked,
+          showBullets: document.querySelector("#show-bullets").checked,
+          bulletLimit: getValue("bullet-limit"),
           live: {
             enabled: document.querySelector("#live-enabled").checked,
             url: getValue("live-url"),

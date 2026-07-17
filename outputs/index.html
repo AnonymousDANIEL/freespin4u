@@ -2194,14 +2194,19 @@
             const offerUrl = escapeHtml(getOfferUrl(offer));
             const bullets = getLocalizedValue(offer.bullets, language);
             const livePanel = renderLivePanel(offer);
+            const showBonusLabel = offer.showBonusLabel !== false;
+            const showBullets = offer.showBullets !== false;
+            const bulletLimit = Math.max(0, Math.min(3, Math.round(Number(offer.bulletLimit ?? 3) || 0)));
             const logo = offer.logoUrl
               ? `<img src="${escapeHtml(offer.logoUrl)}" alt="${name} logo" loading="lazy" />`
               : escapeHtml(offer.badge || name.slice(0, 2).toUpperCase());
-            const bulletItems = (Array.isArray(bullets) ? bullets : [])
+            const bulletItems = showBullets ? (Array.isArray(bullets) ? bullets : [])
               .filter(Boolean)
-              .slice(0, 3)
+              .slice(0, bulletLimit)
               .map((bullet) => `<li>${escapeHtml(bullet)}</li>`)
-              .join("");
+              .join("") : "";
+            const bonusText = showBonusLabel && bonusLabel ? `<span>${bonusLabel}</span>` : "";
+            const bulletList = bulletItems ? `<ul class="ticks">${bulletItems}</ul>` : "";
 
             return `
               <article class="offer-card">
@@ -2213,9 +2218,9 @@
                 </div>
                 <div class="bonus">
                   <strong>${name}</strong>
-                  <span>${bonusLabel}</span>
+                  ${bonusText}
                 </div>
-                <ul class="ticks">${bulletItems}</ul>
+                ${bulletList}
                 ${livePanel}
                 <a class="btn btn-primary" href="${offerUrl}">${buttonText}</a>
               </article>
