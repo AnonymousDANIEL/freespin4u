@@ -255,6 +255,7 @@ function cleanSiteData(body) {
     offers: Array.isArray(source.offers) ? source.offers : [],
     socialLinks: Array.isArray(source.socialLinks) ? source.socialLinks : [],
     domains: Array.isArray(source.domains) ? source.domains : [],
+    testIds: Array.isArray(source.testIds) ? source.testIds : [],
     updatedAt: new Date().toISOString(),
   };
 }

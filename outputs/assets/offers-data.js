@@ -2,6 +2,7 @@ window.offerStorageKey = "landingOffers";
 window.siteSettingsStorageKey = "landingSiteSettings";
 window.socialStorageKey = "landingSocialLinks";
 window.domainStorageKey = "landingDomains";
+window.testIdStorageKey = "landingTestIds";
 
 window.defaultSiteSettings = {
   backgroundImage: "assets/slot-hero.png",

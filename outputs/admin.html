@@ -571,6 +571,18 @@
         background: rgba(230, 83, 74, 0.72);
       }
 
+      .test-id-code {
+        color: var(--gold);
+        font-family: Consolas, "Courier New", monospace;
+        font-weight: 900;
+        word-break: break-all;
+      }
+
+      .test-note {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
       .row-actions {
         display: flex;
         flex-wrap: wrap;
@@ -1556,6 +1568,60 @@
           </section>
         </section>
 
+        <section class="layout social-layout" id="test-id-manager">
+          <form class="panel" id="test-id-form">
+            <div class="panel-head">
+              <h2>测试 ID 管理</h2>
+              <span class="chip" data-test-editing-chip>New</span>
+            </div>
+            <div class="panel-body">
+              <input type="hidden" id="test-original-id" />
+              <div class="form-grid">
+                <div class="field">
+                  <label for="test-id">Test ID</label>
+                  <input id="test-id" placeholder="点击生成，或自己填写" />
+                </div>
+                <div class="field">
+                  <label for="test-credit">Test Credit</label>
+                  <input id="test-credit" type="number" min="0" step="1" placeholder="5000" />
+                  <p class="hint">默认 5000。每个 test ID 分开保存，不会和公司资料混在一起。</p>
+                </div>
+                <div class="field full">
+                  <label for="test-game-url">游戏链接</label>
+                  <textarea id="test-game-url" placeholder="把游戏商给你的测试 / demo game link 放这里"></textarea>
+                  <p class="hint">不要把带真实玩家 token 的链接放进 GitHub。正式 5K credit 需要游戏商后台或 API 支持。</p>
+                </div>
+                <div class="field full">
+                  <label for="test-remark">备注</label>
+                  <input id="test-remark" placeholder="例如 Syabas99 META slot 测试账号" />
+                </div>
+                <label class="check-row">
+                  <input id="test-active" type="checkbox" checked />
+                  <span>启用这个 test ID</span>
+                </label>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-secondary" type="button" data-generate-test-id>生成新 Test ID</button>
+                <button class="btn btn-primary" type="submit">保存 Test ID</button>
+                <button class="btn btn-secondary" type="button" data-clear-test-form>清空新增</button>
+              </div>
+              <p class="notice">
+                这里是本地 / 后台测试 ID 管理，只负责帮你分开记录 ID 和 5000 test credit。要让外部游戏真的每次进入自动给 5K，需要游戏商提供 sandbox API 或后台权限。
+              </p>
+            </div>
+          </form>
+
+          <section class="panel">
+            <div class="panel-head">
+              <h2>测试 ID 列表</h2>
+              <button class="btn btn-secondary btn-small" type="button" data-reset-test-ids>清空测试 ID</button>
+            </div>
+            <div class="panel-body">
+              <div class="company-list" data-test-list></div>
+            </div>
+          </section>
+        </section>
+
         <section class="panel domain-panel" id="domain-manager">
           <div class="panel-head">
             <h2>Domain 网页管理</h2>
@@ -1653,6 +1719,7 @@
       const siteSettingsStorageKey = window.siteSettingsStorageKey || "landingSiteSettings";
       const socialStorageKey = window.socialStorageKey || "landingSocialLinks";
       const domainStorageKey = window.domainStorageKey || "landingDomains";
+      const testIdStorageKey = window.testIdStorageKey || "landingTestIds";
       const defaultOffers = Array.isArray(window.defaultOffers) ? window.defaultOffers : [];
       const defaultSocialLinks = Array.isArray(window.defaultSocialLinks) ? window.defaultSocialLinks : [];
       const defaultDomains = Array.isArray(window.defaultDomains) ? window.defaultDomains : [];
@@ -1796,16 +1863,19 @@
       let offers = loadOffers();
       let socialLinks = loadSocialLinks();
       let domains = loadDomains();
+      let testIds = loadTestIds();
       let siteSettings = loadSiteSettings();
       let serverSaveTimer = null;
 
       const offerForm = document.querySelector("#offer-form");
       const socialForm = document.querySelector("#social-form");
       const domainForm = document.querySelector("#domain-form");
+      const testIdForm = document.querySelector("#test-id-form");
       const siteForm = document.querySelector("#site-form");
       const list = document.querySelector("[data-list]");
       const socialList = document.querySelector("[data-social-list]");
       const domainList = document.querySelector("[data-domain-list]");
+      const testList = document.querySelector("[data-test-list]");
       const jsonData = document.querySelector("#json-data");
 
       function clone(value) {
@@ -1876,6 +1946,19 @@
         }
 
         return clone(defaultDomains).map(normalizeDomain);
+      }
+
+      function loadTestIds() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(testIdStorageKey) || "null");
+          if (Array.isArray(saved)) {
+            return saved.map(normalizeTestId);
+          }
+        } catch (error) {
+          console.warn("Cannot read saved test IDs.", error);
+        }
+
+        return [];
       }
 
       function loadSiteSettings() {
@@ -1969,6 +2052,37 @@
           status: domain.status || "OK",
           expiry: domain.expiry || "",
           remark: domain.remark || ""
+        };
+      }
+
+      function normalizeTestCredit(value) {
+        const credit = Number(value ?? 5000);
+        if (!Number.isFinite(credit)) {
+          return 5000;
+        }
+
+        return Math.max(0, Math.min(999999999, Math.round(credit)));
+      }
+
+      function createTestId() {
+        const date = new Date();
+        const ymd = date.toISOString().slice(2, 10).replace(/-/g, "");
+        const random = Math.random().toString(36).slice(2, 8).toUpperCase();
+        return `TEST-${ymd}-${random}`;
+      }
+
+      function normalizeTestId(test, index = 0) {
+        const source = test && typeof test === "object" ? test : {};
+        const id = String(source.id || source.testId || createTestId()).trim();
+        return {
+          id,
+          order: Number(source.order || index + 1),
+          active: source.active !== false,
+          credit: normalizeTestCredit(source.credit),
+          gameUrl: String(source.gameUrl || "").trim(),
+          remark: String(source.remark || "").trim(),
+          createdAt: source.createdAt || new Date().toISOString(),
+          updatedAt: source.updatedAt || source.createdAt || new Date().toISOString()
         };
       }
 
@@ -2103,6 +2217,16 @@
         render();
       }
 
+      function saveTestIds() {
+        testIds = testIds
+          .map(normalizeTestId)
+          .sort((a, b) => Number(a.order || 0) - Number(b.order || 0))
+          .map((test, index) => ({ ...test, order: index + 1, updatedAt: new Date().toISOString() }));
+        localStorage.setItem(testIdStorageKey, JSON.stringify(testIds));
+        scheduleServerSave();
+        render();
+      }
+
       function saveSiteSettings() {
         localStorage.setItem(siteSettingsStorageKey, JSON.stringify(siteSettings));
         scheduleServerSave();
@@ -2110,7 +2234,7 @@
       }
 
       function getDataBundle() {
-        return { siteSettings, offers, socialLinks, domains };
+        return { siteSettings, offers, socialLinks, domains, testIds };
       }
 
       function scheduleServerSave() {
@@ -2165,17 +2289,22 @@
           domains = Array.isArray(result.data.domains)
             ? result.data.domains.map(normalizeDomain)
             : clone(defaultDomains).map(normalizeDomain);
+          testIds = Array.isArray(result.data.testIds)
+            ? result.data.testIds.map(normalizeTestId)
+            : [];
 
           localStorage.setItem(siteSettingsStorageKey, JSON.stringify(siteSettings));
           localStorage.setItem(offerStorageKey, JSON.stringify(offers));
           localStorage.setItem(socialStorageKey, JSON.stringify(socialLinks));
           localStorage.setItem(domainStorageKey, JSON.stringify(domains));
+          localStorage.setItem(testIdStorageKey, JSON.stringify(testIds));
 
           render();
           fillSiteForm();
           resetOfferForm();
           resetSocialForm();
           resetDomainForm();
+          resetTestForm();
           return true;
         } catch (error) {
           console.warn("Server data could not be loaded.", error);
@@ -2263,6 +2392,7 @@
         renderStats();
         renderList();
         renderSocialList();
+        renderTestList();
         renderDomainList();
       }
 
@@ -2347,6 +2477,57 @@
                   <button class="btn btn-secondary btn-small" type="button" data-social-action="up" data-id="${link.id}">上移</button>
                   <button class="btn btn-secondary btn-small" type="button" data-social-action="down" data-id="${link.id}">下移</button>
                   <button class="btn btn-danger btn-small" type="button" data-social-action="delete" data-id="${link.id}">删除</button>
+                </div>
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      function formatDateTime(value) {
+        if (!value) {
+          return "";
+        }
+
+        try {
+          return new Date(value).toLocaleString();
+        } catch {
+          return String(value);
+        }
+      }
+
+      function renderTestList() {
+        const sortedTests = [...testIds].sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
+        if (!sortedTests.length) {
+          testList.innerHTML = '<div class="empty">还没有 Test ID</div>';
+          return;
+        }
+
+        testList.innerHTML = sortedTests
+          .map((test) => {
+            const statusClass = test.active ? "active" : "off";
+            const statusText = test.active ? "启用" : "停用";
+            const gameText = test.gameUrl ? "有游戏链接" : "未填游戏链接";
+            return `
+              <article class="company-row">
+                <div class="badge">TEST</div>
+                <div class="company-main">
+                  <h3 class="test-id-code">${escapeHtml(test.id)}</h3>
+                  <div class="company-meta">
+                    <span class="chip">${escapeHtml(test.credit)} credit</span>
+                    <span class="chip ${statusClass}">${statusText}</span>
+                    <span class="chip">${escapeHtml(gameText)}</span>
+                    <span>${escapeHtml(test.remark || "无备注")}</span>
+                    <span>${escapeHtml(formatDateTime(test.updatedAt))}</span>
+                  </div>
+                </div>
+                <div class="row-actions">
+                  <button class="btn btn-secondary btn-small" type="button" data-test-action="copy-id" data-id="${escapeHtml(test.id)}">复制 ID</button>
+                  <button class="btn btn-secondary btn-small" type="button" data-test-action="copy-link" data-id="${escapeHtml(test.id)}">复制链接</button>
+                  <button class="btn btn-secondary btn-small" type="button" data-test-action="open" data-id="${escapeHtml(test.id)}">打开游戏</button>
+                  <button class="btn btn-primary btn-small" type="button" data-test-action="reset-credit" data-id="${escapeHtml(test.id)}">重置 5K</button>
+                  <button class="btn btn-secondary btn-small" type="button" data-test-action="edit" data-id="${escapeHtml(test.id)}">编辑</button>
+                  <button class="btn btn-danger btn-small" type="button" data-test-action="delete" data-id="${escapeHtml(test.id)}">删除</button>
                 </div>
               </article>
             `;
@@ -2665,6 +2846,44 @@
         });
       }
 
+      function fillTestForm(test) {
+        const nextTest = normalizeTestId(test);
+        setValue("test-original-id", nextTest.id);
+        setValue("test-id", nextTest.id);
+        setValue("test-credit", nextTest.credit);
+        setValue("test-game-url", nextTest.gameUrl);
+        setValue("test-remark", nextTest.remark);
+        document.querySelector("#test-active").checked = nextTest.active;
+        document.querySelector("[data-test-editing-chip]").textContent = nextTest.id;
+      }
+
+      function resetTestForm() {
+        testIdForm.reset();
+        setValue("test-original-id", "");
+        setValue("test-id", createTestId());
+        setValue("test-credit", 5000);
+        setValue("test-game-url", "");
+        setValue("test-remark", "");
+        document.querySelector("#test-active").checked = true;
+        document.querySelector("[data-test-editing-chip]").textContent = "New";
+      }
+
+      function readTestForm() {
+        const originalId = getValue("test-original-id");
+        const id = getValue("test-id") || createTestId();
+        const existing = testIds.find((test) => test.id === originalId || test.id === id) || {};
+        return normalizeTestId({
+          ...existing,
+          id,
+          active: document.querySelector("#test-active").checked,
+          credit: getValue("test-credit") || 5000,
+          gameUrl: getValue("test-game-url"),
+          remark: getValue("test-remark"),
+          createdAt: existing.createdAt || new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        });
+      }
+
       function fillSiteForm() {
         setValue("background-image", siteSettings.backgroundImage);
         setPreview("[data-background-preview]", siteSettings.backgroundImage, "暂无图片");
@@ -2729,6 +2948,10 @@
 
       function findDomainIndex(id) {
         return domains.findIndex((domain) => domain.id === id);
+      }
+
+      function findTestIndex(id) {
+        return testIds.findIndex((test) => test.id === id);
       }
 
       function moveOffer(id, direction) {
@@ -3037,7 +3260,7 @@
       }
 
       function exportBundle() {
-        jsonData.value = JSON.stringify({ siteSettings, offers, socialLinks, domains }, null, 2);
+        jsonData.value = JSON.stringify({ siteSettings, offers, socialLinks, domains, testIds }, null, 2);
       }
 
       offerForm.addEventListener("submit", (event) => {
@@ -3079,6 +3302,21 @@
         fillDomainForm(domain);
       });
 
+      testIdForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const originalId = getValue("test-original-id");
+        const test = readTestForm();
+        const originalIndex = originalId ? findTestIndex(originalId) : -1;
+        const existingIndex = originalIndex >= 0 ? originalIndex : findTestIndex(test.id);
+        if (existingIndex >= 0) {
+          testIds[existingIndex] = test;
+        } else {
+          testIds.push(test);
+        }
+        saveTestIds();
+        fillTestForm(test);
+      });
+
       siteForm.addEventListener("submit", (event) => {
         event.preventDefault();
         siteSettings = readSiteForm();
@@ -3091,6 +3329,14 @@
         resetDomainForm();
         window.scrollTo({ top: document.querySelector("#domain-manager").offsetTop - 80, behavior: "smooth" });
       });
+      document.querySelector("[data-generate-test-id]").addEventListener("click", () => {
+        setValue("test-original-id", "");
+        setValue("test-id", createTestId());
+        setValue("test-credit", 5000);
+        document.querySelector("#test-active").checked = true;
+        document.querySelector("[data-test-editing-chip]").textContent = "New";
+      });
+      document.querySelector("[data-clear-test-form]").addEventListener("click", resetTestForm);
       document.querySelector("[data-clear-domain-form]").addEventListener("click", resetDomainForm);
       document.querySelector("[data-update-domains]").addEventListener("click", updateAllDomainStatus);
       document.querySelector("[data-connect-current-domain]").addEventListener("click", () => connectDomainToCloudflare(readDomainForm()));
@@ -3118,6 +3364,21 @@
         setPreview("[data-background-preview]", "", "暂无图片");
         document.querySelector("#background-file").value = "";
       });
+
+      async function copyText(value) {
+        const text = String(value || "");
+        if (!text) {
+          alert("没有可以复制的内容。");
+          return;
+        }
+
+        try {
+          await navigator.clipboard.writeText(text);
+          alert("已复制。");
+        } catch (error) {
+          window.prompt("复制这段文字", text);
+        }
+      }
 
       list.addEventListener("click", (event) => {
         const button = event.target.closest("[data-action]");
@@ -3193,6 +3454,54 @@
         }
       });
 
+      testList.addEventListener("click", async (event) => {
+        const button = event.target.closest("[data-test-action]");
+        if (!button) {
+          return;
+        }
+
+        const { testAction: action, id } = button.dataset;
+        const index = findTestIndex(id);
+        if (index < 0) {
+          return;
+        }
+
+        const test = testIds[index];
+
+        if (action === "copy-id") {
+          await copyText(test.id);
+        }
+
+        if (action === "copy-link") {
+          await copyText(test.gameUrl);
+        }
+
+        if (action === "open") {
+          if (!test.gameUrl) {
+            alert("这个 Test ID 还没有填写游戏链接。");
+            return;
+          }
+          window.open(test.gameUrl, "_blank", "noopener");
+        }
+
+        if (action === "reset-credit") {
+          testIds[index] = normalizeTestId({ ...test, credit: 5000, updatedAt: new Date().toISOString() });
+          saveTestIds();
+          fillTestForm(testIds[index]);
+        }
+
+        if (action === "edit") {
+          fillTestForm(test);
+          window.scrollTo({ top: document.querySelector("#test-id-manager").offsetTop - 80, behavior: "smooth" });
+        }
+
+        if (action === "delete" && confirm(`删除 ${test.id}？`)) {
+          testIds.splice(index, 1);
+          saveTestIds();
+          resetTestForm();
+        }
+      });
+
       domainList.addEventListener("click", async (event) => {
         const button = event.target.closest("[data-domain-action]");
         if (!button) {
@@ -3258,16 +3567,21 @@
             domains = Array.isArray(imported.domains)
               ? imported.domains.map(normalizeDomain)
               : clone(defaultDomains).map(normalizeDomain);
+            testIds = Array.isArray(imported.testIds)
+              ? imported.testIds.map(normalizeTestId)
+              : [];
             siteSettings = mergeDeep(defaultSiteSettings, imported.siteSettings || {});
             saveSiteSettings();
             saveSocialLinks();
             saveDomains();
+            saveTestIds();
           }
           saveOffers();
           fillSiteForm();
           resetOfferForm();
           resetSocialForm();
           resetDomainForm();
+          resetTestForm();
         } catch (error) {
           alert("JSON 格式不正确，无法导入。");
         }
@@ -3300,6 +3614,15 @@
         resetDomainForm();
       });
 
+      document.querySelector("[data-reset-test-ids]").addEventListener("click", () => {
+        if (!confirm("清空所有 Test ID？")) {
+          return;
+        }
+        testIds = [];
+        saveTestIds();
+        resetTestForm();
+      });
+
       document.querySelector("[data-reset-site]").addEventListener("click", () => {
         if (!confirm("恢复默认网站设置？目前标题、字眼和背景图修改会被覆盖。")) {
           return;
@@ -3309,7 +3632,7 @@
       });
 
       document.querySelector("[data-clear]").addEventListener("click", async () => {
-        if (!confirm("清空本机和服务器所有记录？公司、社群入口和 Domain 会变成空列表。需要默认资料时可以再按“恢复默认”。")) {
+        if (!confirm("清空本机和服务器所有记录？公司、社群入口、Domain 和 Test ID 会变成空列表。需要默认资料时可以再按“恢复默认”。")) {
           return;
         }
         clearTimeout(serverSaveTimer);
@@ -3317,19 +3640,23 @@
         localStorage.removeItem(siteSettingsStorageKey);
         localStorage.removeItem(socialStorageKey);
         localStorage.removeItem(domainStorageKey);
+        localStorage.removeItem(testIdStorageKey);
         offers = [];
         socialLinks = [];
         domains = [];
+        testIds = [];
         siteSettings = mergeDeep(defaultSiteSettings, {});
         localStorage.setItem(offerStorageKey, JSON.stringify(offers));
         localStorage.setItem(siteSettingsStorageKey, JSON.stringify(siteSettings));
         localStorage.setItem(socialStorageKey, JSON.stringify(socialLinks));
         localStorage.setItem(domainStorageKey, JSON.stringify(domains));
+        localStorage.setItem(testIdStorageKey, JSON.stringify(testIds));
         render();
         fillSiteForm();
         resetOfferForm();
         resetSocialForm();
         resetDomainForm();
+        resetTestForm();
         const synced = await saveServerBundle();
         alert(synced ? "已清空并同步服务器，刷新不会再读回旧 record。" : "本机已清空，但服务器同步失败。请确认已经登录后台后再试一次。");
       });
@@ -3345,6 +3672,7 @@
           resetOfferForm();
           resetSocialForm();
           resetDomainForm();
+          resetTestForm();
         }
       }
 
