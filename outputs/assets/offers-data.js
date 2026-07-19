@@ -6,6 +6,7 @@ window.testIdStorageKey = "landingTestIds";
 
 window.defaultSiteSettings = {
   backgroundImage: "assets/slot-hero.png",
+  hero3dImage: "",
   siteLogoUrl: "",
   brandMarkText: "RM",
   liveTransactionsEnabled: true,

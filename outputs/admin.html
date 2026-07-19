@@ -819,6 +819,22 @@
                 <label>背景图预览</label>
                 <div class="image-preview" data-background-preview>暂无图片</div>
               </div>
+              <div class="field full">
+                <label for="hero-3d-image">首页右边 3D 图片 / GIF URL</label>
+                <input id="hero-3d-image" placeholder="上传图片后自动填入，支持 JPG / PNG / GIF" />
+              </div>
+              <div class="field full">
+                <label for="hero-3d-file">上传首页右边 3D 图片 / GIF</label>
+                <div class="file-row">
+                  <input id="hero-3d-file" type="file" accept="image/*" />
+                  <button class="btn btn-secondary" type="button" data-clear-hero-3d>清除 3D 图片</button>
+                </div>
+                <p class="hint">这里可以放促销图、公司主图、slot GIF 动图或活动 banner。GIF 会保留动画。</p>
+              </div>
+              <div class="field full">
+                <label>首页右边 3D 图片预览</label>
+                <div class="image-preview" data-hero-3d-preview>暂无图片</div>
+              </div>
               <div class="field">
                 <label for="brand-mark-text">顶部 logo 文字</label>
                 <input id="brand-mark-text" placeholder="例如 RM" />
@@ -2887,6 +2903,8 @@
       function fillSiteForm() {
         setValue("background-image", siteSettings.backgroundImage);
         setPreview("[data-background-preview]", siteSettings.backgroundImage, "暂无图片");
+        setValue("hero-3d-image", siteSettings.hero3dImage);
+        setPreview("[data-hero-3d-preview]", siteSettings.hero3dImage, "暂无图片");
         setValue("brand-mark-text", siteSettings.brandMarkText);
         setValue("site-logo-url", siteSettings.siteLogoUrl);
         setPreview("[data-site-logo-preview]", siteSettings.siteLogoUrl, "暂无 logo");
@@ -2910,6 +2928,7 @@
       function readSiteForm() {
         const nextSettings = mergeDeep(defaultSiteSettings, {
           backgroundImage: getValue("background-image"),
+          hero3dImage: getValue("hero-3d-image"),
           brandMarkText: getValue("brand-mark-text"),
           siteLogoUrl: getValue("site-logo-url"),
           liveTransactionsEnabled: document.querySelector("#live-transactions-enabled").checked,
@@ -3050,6 +3069,15 @@
             width: 1600,
             height: 900,
             quality: 0.82,
+            mode: "cover"
+          };
+        }
+
+        if (targetId === "hero-3d-image") {
+          return {
+            width: 900,
+            height: 900,
+            quality: 0.86,
             mode: "cover"
           };
         }
@@ -3343,6 +3371,7 @@
       document.querySelector("#logo-file").addEventListener("change", (event) => readImageFile(event.target, "logo-url", "[data-logo-preview]"));
       document.querySelector("#social-logo-file").addEventListener("change", (event) => readImageFile(event.target, "social-logo-url", "[data-social-logo-preview]"));
       document.querySelector("#background-file").addEventListener("change", (event) => readImageFile(event.target, "background-image", "[data-background-preview]"));
+      document.querySelector("#hero-3d-file").addEventListener("change", (event) => readImageFile(event.target, "hero-3d-image", "[data-hero-3d-preview]"));
       document.querySelector("#site-logo-file").addEventListener("change", (event) => readImageFile(event.target, "site-logo-url", "[data-site-logo-preview]"));
       document.querySelector("[data-clear-logo]").addEventListener("click", () => {
         setValue("logo-url", "");
@@ -3363,6 +3392,11 @@
         setValue("background-image", "");
         setPreview("[data-background-preview]", "", "暂无图片");
         document.querySelector("#background-file").value = "";
+      });
+      document.querySelector("[data-clear-hero-3d]").addEventListener("click", () => {
+        setValue("hero-3d-image", "");
+        setPreview("[data-hero-3d-preview]", "", "暂无图片");
+        document.querySelector("#hero-3d-file").value = "";
       });
 
       async function copyText(value) {

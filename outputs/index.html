@@ -67,6 +67,7 @@
         --glass: rgba(255, 255, 255, 0.075);
         --glass-strong: rgba(255, 255, 255, 0.12);
         --hero-image: url("assets/slot-hero.png");
+        --hero-3d-image: url("assets/slot-hero.png");
       }
 
       * {
@@ -335,7 +336,7 @@
         background:
           linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.035)),
           linear-gradient(180deg, rgba(8, 12, 18, 0.46), rgba(8, 12, 18, 0.94)),
-          var(--hero-image);
+          var(--hero-3d-image);
         background-size: cover;
         background-position: center;
         box-shadow:
@@ -2368,9 +2369,9 @@
           }
         });
 
-        if (settings.backgroundImage) {
-          document.documentElement.style.setProperty("--hero-image", cssUrl(settings.backgroundImage));
-        }
+        const backgroundImage = settings.backgroundImage || "assets/slot-hero.png";
+        document.documentElement.style.setProperty("--hero-image", cssUrl(backgroundImage));
+        document.documentElement.style.setProperty("--hero-3d-image", cssUrl(settings.hero3dImage || backgroundImage));
 
         if (metaTitle) {
           document.title = metaTitle;
