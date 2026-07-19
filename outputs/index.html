@@ -245,18 +245,69 @@
       }
 
       .clock-flag {
-        width: 26px;
-        height: 26px;
-        display: grid;
-        place-items: center;
+        position: relative;
+        z-index: 1;
+        width: 28px;
+        height: 28px;
+        display: block;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.92);
+        background: repeating-linear-gradient(
+          180deg,
+          #d51f34 0,
+          #d51f34 2px,
+          #ffffff 2px,
+          #ffffff 4px
+        );
         box-shadow:
-          inset 0 1px 0 rgba(255, 255, 255, 0.9),
+          inset 0 1px 0 rgba(255, 255, 255, 0.72),
+          inset 0 -4px 8px rgba(0, 0, 0, 0.22),
           0 6px 14px rgba(0, 0, 0, 0.28);
-        font-size: 18px;
-        line-height: 1;
         transform: translateZ(18px);
+        overflow: hidden;
+      }
+
+      .clock-flag::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 55%;
+        height: 55%;
+        background: #123a8f;
+      }
+
+      .flag-crescent {
+        position: absolute;
+        z-index: 1;
+        left: 4px;
+        top: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #ffd34e;
+      }
+
+      .flag-crescent::after {
+        content: "";
+        position: absolute;
+        left: 3px;
+        top: 0;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #123a8f;
+      }
+
+      .flag-star {
+        position: absolute;
+        z-index: 1;
+        left: 12px;
+        top: 7px;
+        width: 7px;
+        height: 7px;
+        background: #ffd34e;
+        clip-path: polygon(50% 0, 61% 34%, 98% 34%, 68% 55%, 79% 91%, 50% 69%, 21% 91%, 32% 55%, 2% 34%, 39% 34%);
+        transform: rotate(18deg);
       }
 
       .clock-divider {
@@ -1500,9 +1551,29 @@
         }
 
         .clock-flag {
-          width: 22px;
-          height: 22px;
-          font-size: 15px;
+          width: 24px;
+          height: 24px;
+          background-size: auto;
+        }
+
+        .flag-crescent {
+          left: 3px;
+          top: 4px;
+          width: 9px;
+          height: 9px;
+        }
+
+        .flag-crescent::after {
+          left: 3px;
+          width: 9px;
+          height: 9px;
+        }
+
+        .flag-star {
+          left: 10px;
+          top: 6px;
+          width: 6px;
+          height: 6px;
         }
 
         .clock-divider {
@@ -1663,7 +1734,10 @@
             <a href="#community">Join Our</a>
           </nav>
           <time class="malaysia-clock" datetime="" data-malaysia-clock aria-label="Malaysia date and time">
-            <span class="clock-flag" aria-hidden="true">🇲🇾</span>
+            <span class="clock-flag" aria-hidden="true">
+              <span class="flag-crescent"></span>
+              <span class="flag-star"></span>
+            </span>
             <span class="clock-divider" aria-hidden="true"></span>
             <span class="clock-copy">
               <span class="clock-date" data-clock-date>19/07/2026</span>
