@@ -1,0 +1,9 @@
+.env
+node_modules/
+work/*.log
+work/*.err
+work/site-data.json
+github-upload-code*.zip
+github-upload-package*/
+github-upload-ready*/
+github-upload-complete*.zip

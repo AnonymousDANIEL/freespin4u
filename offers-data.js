@@ -1,0 +1,3677 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Free Credit Slot Malaysia | No Deposit Bonus 2026</title>
+    <meta
+      name="description"
+      content="Malaysia free credit slot landing page with no deposit offers, fast e-wallet claim flow, and mobile-ready registration buttons."
+    />
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var release = function () {
+          root.classList.remove("language-pending");
+          root.classList.add("language-ready");
+        };
+
+        root.dataset.savedLanguage = "zh";
+        root.lang = "zh-Hans";
+
+        root.classList.add("language-pending");
+        window.releaseLandingLanguage = release;
+        setTimeout(release, 2500);
+      })();
+    </script>
+    <style>
+      :root {
+        --bg: #07090d;
+        --panel: #111722;
+        --panel-2: #182130;
+        --paper: #f7f3e6;
+        --muted: #aab8c8;
+        --line: #29374a;
+        --gold: #ffd15c;
+        --gold-2: #cf8c20;
+        --teal: #1fe0c5;
+        --red: #e6534a;
+        --ink: #151515;
+        --white: #ffffff;
+        --topbar-bg: rgba(7, 9, 13, 0.82);
+        --community-bg: #0a111a;
+        --final-bg: #0e1722;
+        --footer-bg: #05070a;
+        --sticky-bg: rgba(5, 7, 10, 0.9);
+        --logo-frame-bg: #080c12;
+        --logo-image-bg: #ffffff;
+        --live-bg: #05080d;
+        --live-border: #38bdf8;
+        --live-title-bg: #020304;
+        --live-title-text: #38c9ff;
+        --live-badge-bg: #ff1f2d;
+        --live-badge-text: #ffffff;
+        --live-top-head-bg: #1a3ba3;
+        --live-top-head-text: #ffffff;
+        --live-withdraw-head-bg: #57c4ee;
+        --live-withdraw-head-text: #11314b;
+        --live-row-text: #ffffff;
+        --live-amount-text: #28c9ff;
+        --shadow: 0 28px 70px rgba(0, 0, 0, 0.48);
+        --glass: rgba(255, 255, 255, 0.075);
+        --glass-strong: rgba(255, 255, 255, 0.12);
+        --hero-image: url("assets/slot-hero.png");
+        --hero-3d-image: url("assets/slot-hero.png");
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: var(--bg);
+        scroll-behavior: smooth;
+      }
+
+      html.language-pending body {
+        opacity: 0;
+      }
+
+      html.language-ready body {
+        opacity: 1;
+        transition: opacity 0.12s ease;
+      }
+
+      body {
+        margin: 0;
+        position: relative;
+        isolation: isolate;
+        background:
+          linear-gradient(180deg, #05070a 0%, var(--bg) 34%, #0c1118 100%);
+        color: var(--white);
+        font-family: Arial, "Microsoft YaHei", "PingFang SC", sans-serif;
+        line-height: 1.55;
+        padding-bottom: 72px;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+          linear-gradient(135deg, rgba(31, 224, 197, 0.09), transparent 34%, rgba(255, 209, 92, 0.08) 72%, transparent);
+        background-size: 42px 42px, 42px 42px, 100% 100%;
+        mask-image: linear-gradient(180deg, black 0%, black 56%, transparent 100%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .shell {
+        width: min(1160px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: var(--topbar-bg);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+      }
+
+      .nav {
+        min-height: 66px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 22px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 900;
+        color: var(--paper);
+        min-width: 0;
+      }
+
+      .brand-name {
+        max-width: min(360px, 36vw);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        flex: 0 0 38px;
+        border: 1px solid rgba(255, 209, 92, 0.82);
+        color: var(--gold);
+        font-weight: 900;
+        border-radius: 10px;
+        background: linear-gradient(145deg, rgba(255, 209, 92, 0.18), rgba(31, 224, 197, 0.08));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 12px 28px rgba(255, 209, 92, 0.12);
+        overflow: hidden;
+      }
+
+      .brand-mark img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 3px;
+        box-sizing: border-box;
+        background: var(--logo-image-bg);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .nav-links a {
+        padding: 9px 10px;
+        border-radius: 999px;
+      }
+
+      .nav-links a:hover {
+        color: var(--gold);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .malaysia-clock {
+        position: relative;
+        display: grid;
+        grid-template-columns: auto 1px auto;
+        align-items: center;
+        gap: 10px;
+        min-height: 44px;
+        padding: 7px 12px;
+        border: 1px solid rgba(31, 224, 197, 0.28);
+        border-radius: 8px;
+        background:
+          linear-gradient(145deg, rgba(31, 224, 197, 0.15), rgba(255, 209, 92, 0.06)),
+          rgba(3, 29, 22, 0.7);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.18),
+          inset 0 -10px 24px rgba(0, 0, 0, 0.24),
+          0 16px 34px rgba(0, 0, 0, 0.34),
+          0 0 30px rgba(31, 224, 197, 0.08);
+        color: var(--paper);
+        transform: perspective(520px) rotateX(5deg);
+        transform-style: preserve-3d;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .malaysia-clock::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(115deg, rgba(255, 255, 255, 0.18), transparent 32%, transparent 72%, rgba(31, 224, 197, 0.14));
+        pointer-events: none;
+      }
+
+      .clock-flag {
+        position: relative;
+        z-index: 1;
+        width: 28px;
+        height: 28px;
+        display: block;
+        border-radius: 50%;
+        background: repeating-linear-gradient(
+          180deg,
+          #d51f34 0,
+          #d51f34 2px,
+          #ffffff 2px,
+          #ffffff 4px
+        );
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.72),
+          inset 0 -4px 8px rgba(0, 0, 0, 0.22),
+          0 6px 14px rgba(0, 0, 0, 0.28);
+        transform: translateZ(18px);
+        overflow: hidden;
+      }
+
+      .clock-flag::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 55%;
+        height: 55%;
+        background: #123a8f;
+      }
+
+      .flag-crescent {
+        position: absolute;
+        z-index: 1;
+        left: 4px;
+        top: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #ffd34e;
+      }
+
+      .flag-crescent::after {
+        content: "";
+        position: absolute;
+        left: 3px;
+        top: 0;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #123a8f;
+      }
+
+      .flag-star {
+        position: absolute;
+        z-index: 1;
+        left: 12px;
+        top: 7px;
+        width: 7px;
+        height: 7px;
+        background: #ffd34e;
+        clip-path: polygon(50% 0, 61% 34%, 98% 34%, 68% 55%, 79% 91%, 50% 69%, 21% 91%, 32% 55%, 2% 34%, 39% 34%);
+        transform: rotate(18deg);
+      }
+
+      .clock-divider {
+        width: 1px;
+        height: 30px;
+        background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+        opacity: 0.78;
+      }
+
+      .clock-copy {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        line-height: 1.05;
+        transform: translateZ(16px);
+      }
+
+      .clock-date {
+        font-size: 13px;
+        font-weight: 900;
+        color: var(--paper);
+        text-shadow: 0 2px 0 rgba(0, 0, 0, 0.45);
+      }
+
+      .clock-time {
+        font-size: 14px;
+        font-weight: 1000;
+        color: var(--gold);
+        text-shadow:
+          0 2px 0 rgba(0, 0, 0, 0.48),
+          0 0 18px rgba(255, 209, 92, 0.24);
+      }
+
+      .language-switch {
+        display: none;
+        align-items: center;
+        gap: 4px;
+        padding: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.075);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      }
+
+      .lang-btn {
+        min-width: 42px;
+        min-height: 32px;
+        padding: 7px 10px;
+        border: 0;
+        border-radius: 999px;
+        background: transparent;
+        color: var(--muted);
+        font: inherit;
+        font-size: 12px;
+        font-weight: 900;
+        cursor: pointer;
+        line-height: 1;
+      }
+
+      .lang-btn[aria-pressed="true"] {
+        color: var(--ink);
+        background: linear-gradient(180deg, var(--gold), var(--gold-2));
+        box-shadow: 0 8px 18px rgba(255, 209, 92, 0.2);
+      }
+
+      .hero {
+        min-height: 78vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        background:
+          linear-gradient(90deg, rgba(5, 7, 10, 0.98) 0%, rgba(8, 12, 18, 0.86) 42%, rgba(8, 12, 18, 0.32) 100%),
+          var(--hero-image);
+        background-size: cover;
+        background-position: center right;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: auto 0 0;
+        height: 38%;
+        background: linear-gradient(180deg, transparent, var(--bg));
+        pointer-events: none;
+      }
+
+      .hero .shell {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 0.94fr) minmax(320px, 0.62fr);
+        gap: 34px;
+        align-items: center;
+      }
+
+      .hero-content {
+        max-width: 760px;
+        padding: 58px 0 42px;
+      }
+
+      .eyebrow {
+        width: fit-content;
+        margin-bottom: 18px;
+        padding: 8px 12px;
+        border: 1px solid rgba(255, 209, 92, 0.55);
+        border-radius: 999px;
+        color: var(--gold);
+        background: rgba(255, 209, 92, 0.1);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 12px 34px rgba(255, 209, 92, 0.1);
+        font-size: 13px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 18px;
+        max-width: 720px;
+        font-size: 68px;
+        line-height: 1.02;
+        letter-spacing: 0;
+        color: var(--paper);
+        text-shadow: 0 16px 44px rgba(0, 0, 0, 0.58);
+      }
+
+      .hero-copy {
+        max-width: 620px;
+        color: #d9e3ef;
+        font-size: 18px;
+        margin-bottom: 28px;
+      }
+
+      .hero-stage {
+        perspective: 1100px;
+        display: grid;
+        place-items: center;
+      }
+
+      .hero-3d-card {
+        width: min(100%, 430px);
+        min-height: 430px;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 8px;
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.035)),
+          linear-gradient(180deg, rgba(8, 12, 18, 0.46), rgba(8, 12, 18, 0.94)),
+          var(--hero-3d-image);
+        background-size: cover;
+        background-position: center;
+        box-shadow:
+          0 44px 86px rgba(0, 0, 0, 0.58),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        transform: rotateX(8deg) rotateY(-12deg) translateY(0);
+        transform-style: preserve-3d;
+        overflow: hidden;
+        animation: heroFloat 5.2s ease-in-out infinite;
+      }
+
+      .hero-3d-card::before {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border: 1px solid rgba(255, 209, 92, 0.34);
+        border-radius: 8px;
+        transform: translateZ(42px);
+        pointer-events: none;
+      }
+
+      .hero-3d-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(115deg, rgba(255, 255, 255, 0.22), transparent 24%, transparent 62%, rgba(31, 224, 197, 0.14)),
+          linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.52));
+        pointer-events: none;
+      }
+
+      .hero-chip {
+        position: absolute;
+        left: 28px;
+        right: 28px;
+        bottom: 28px;
+        z-index: 1;
+        padding: 18px;
+        border: 1px solid rgba(255, 209, 92, 0.34);
+        border-radius: 8px;
+        background: rgba(5, 7, 10, 0.76);
+        backdrop-filter: blur(14px);
+        transform: translateZ(76px);
+        box-shadow: 0 22px 48px rgba(0, 0, 0, 0.34);
+      }
+
+      .hero-chip strong {
+        display: block;
+        color: var(--gold);
+        font-size: 34px;
+        line-height: 1;
+      }
+
+      .hero-chip span {
+        display: block;
+        margin-top: 7px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .hero-mini-card {
+        position: absolute;
+        z-index: 2;
+        width: 132px;
+        min-height: 84px;
+        padding: 12px;
+        border: 1px solid rgba(31, 224, 197, 0.34);
+        border-radius: 8px;
+        background: rgba(7, 12, 18, 0.82);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 20px 46px rgba(0, 0, 0, 0.38);
+        transform: translateZ(98px);
+      }
+
+      .hero-mini-card.top {
+        top: 34px;
+        right: -18px;
+      }
+
+      .hero-mini-card.bottom {
+        left: -18px;
+        bottom: 104px;
+        border-color: rgba(255, 209, 92, 0.42);
+      }
+
+      .hero-mini-card b {
+        display: block;
+        color: var(--paper);
+        font-size: 18px;
+        line-height: 1.1;
+      }
+
+      .hero-mini-card span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      @keyframes heroFloat {
+        0%,
+        100% {
+          transform: rotateX(8deg) rotateY(-12deg) translateY(0);
+        }
+
+        50% {
+          transform: rotateX(5deg) rotateY(-8deg) translateY(-10px);
+        }
+      }
+
+      .hero-actions,
+      .card-actions,
+      .final-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .btn {
+        min-height: 46px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 18px;
+        border-radius: 10px;
+        border: 1px solid transparent;
+        font-weight: 900;
+        line-height: 1.1;
+        cursor: pointer;
+        transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+      }
+
+      .btn-primary {
+        color: var(--ink);
+        background: linear-gradient(180deg, var(--gold), var(--gold-2));
+        box-shadow: 0 15px 32px rgba(255, 209, 92, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.42);
+      }
+
+      .btn-secondary {
+        color: var(--paper);
+        border-color: rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        max-width: 640px;
+        margin-top: 28px;
+        perspective: 900px;
+      }
+
+      .stat {
+        min-height: 88px;
+        padding: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        border-radius: 8px;
+        background: rgba(13, 18, 26, 0.72);
+        backdrop-filter: blur(14px);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 22px 42px rgba(0, 0, 0, 0.24);
+        transform: rotateX(0deg) translateZ(0);
+        transition: transform 0.18s ease, border-color 0.18s ease;
+      }
+
+      .stat:hover {
+        border-color: rgba(31, 224, 197, 0.42);
+        transform: translateY(-4px) rotateX(4deg);
+      }
+
+      .stat strong {
+        display: block;
+        color: var(--gold);
+        font-size: 22px;
+        line-height: 1.1;
+      }
+
+      .stat span {
+        display: block;
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      section {
+        position: relative;
+        padding: 74px 0;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        align-items: end;
+        margin-bottom: 24px;
+      }
+
+      .section-head h2 {
+        margin-bottom: 0;
+        color: var(--paper);
+        font-size: 36px;
+        line-height: 1.14;
+        letter-spacing: 0;
+      }
+
+      .section-head p {
+        max-width: 490px;
+        color: var(--muted);
+        margin-bottom: 0;
+      }
+
+      .comparison {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent),
+          #0c1118;
+      }
+
+      [data-section][hidden] {
+        display: none !important;
+      }
+
+      .quick-table-wrap {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        overflow: hidden;
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)),
+          var(--panel);
+        box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      }
+
+      .quick-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .quick-table th,
+      .quick-table td {
+        padding: 14px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--muted);
+        text-align: left;
+        vertical-align: middle;
+      }
+
+      .quick-table th {
+        color: var(--paper);
+        background: rgba(255, 255, 255, 0.055);
+        font-size: 13px;
+        text-transform: uppercase;
+      }
+
+      .quick-table tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .quick-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--paper);
+        font-weight: 900;
+      }
+
+      .quick-rank {
+        min-width: 34px;
+        color: var(--gold);
+      }
+
+      .quick-amount {
+        color: var(--gold);
+        font-weight: 900;
+      }
+
+      .quick-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 34px;
+        padding: 8px 12px;
+        border-radius: 7px;
+        color: var(--ink);
+        background: linear-gradient(180deg, var(--gold), var(--gold-2));
+        font-weight: 900;
+      }
+
+      .compare-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .compare-card {
+        min-height: 210px;
+        position: relative;
+        padding: 24px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.11);
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025)),
+          var(--panel);
+        box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        transform: translateZ(0);
+        transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+        overflow: hidden;
+      }
+
+      .compare-card.recommended {
+        border-color: rgba(255, 209, 92, 0.72);
+        background:
+          linear-gradient(145deg, rgba(255, 209, 92, 0.16), rgba(255, 255, 255, 0.025)),
+          var(--panel);
+      }
+
+      .compare-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(31, 224, 197, 0.4);
+        box-shadow: 0 34px 80px rgba(0, 0, 0, 0.54), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      }
+
+      .label {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        padding: 5px 10px;
+        border-radius: 999px;
+        color: #08110f;
+        background: linear-gradient(180deg, var(--teal), #0da894);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .label.warn {
+        background: var(--red);
+        color: var(--white);
+      }
+
+      .compare-card h3 {
+        margin: 15px 0 8px;
+        font-size: 24px;
+        letter-spacing: 0;
+      }
+
+      .compare-card p,
+      .compare-card li {
+        color: var(--muted);
+      }
+
+      .compare-card ul {
+        margin: 14px 0 0;
+        padding-left: 18px;
+      }
+
+      .offers {
+        background:
+          linear-gradient(180deg, rgba(31, 224, 197, 0.035), transparent 32%),
+          var(--bg);
+      }
+
+      .offer-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .offer-search {
+        width: min(100%, 360px);
+        min-height: 44px;
+        padding: 10px 13px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.07);
+        outline: 0;
+      }
+
+      .offer-search:focus {
+        border-color: rgba(31, 224, 197, 0.55);
+        box-shadow: 0 0 0 3px rgba(31, 224, 197, 0.12);
+      }
+
+      .offer-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .filter-btn {
+        min-height: 38px;
+        padding: 8px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.065);
+        font: inherit;
+        font-size: 13px;
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      .filter-btn[aria-pressed="true"] {
+        color: var(--ink);
+        border-color: rgba(255, 209, 92, 0.66);
+        background: linear-gradient(180deg, var(--gold), var(--gold-2));
+      }
+
+      .offer-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+        perspective: 1200px;
+      }
+
+      .empty-offers {
+        grid-column: 1 / -1;
+        min-height: 120px;
+        display: grid;
+        place-items: center;
+        margin: 0;
+        border: 1px dashed rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.055);
+      }
+
+      .offer-card {
+        display: flex;
+        flex-direction: column;
+        min-height: 336px;
+        position: relative;
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.025)),
+          var(--panel);
+        box-shadow:
+          0 26px 60px rgba(0, 0, 0, 0.42),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        transform: translateY(0) rotateX(0deg);
+        transform-style: preserve-3d;
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        overflow: hidden;
+      }
+
+      .offer-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(125deg, rgba(255, 255, 255, 0.14), transparent 30%, transparent 72%, rgba(31, 224, 197, 0.09));
+        pointer-events: none;
+      }
+
+      .offer-card:hover {
+        border-color: rgba(255, 209, 92, 0.48);
+        box-shadow:
+          0 38px 84px rgba(0, 0, 0, 0.56),
+          0 0 0 1px rgba(255, 209, 92, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.16);
+        transform: translateY(-8px) rotateX(2deg);
+      }
+
+      .offer-card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .offer-top {
+        display: grid;
+        gap: 10px;
+        min-height: 190px;
+      }
+
+      .brand-badge {
+        width: 100%;
+        height: 178px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
+          var(--logo-frame-bg);
+        color: var(--ink);
+        font-weight: 900;
+        font-size: 44px;
+        border: 1px solid rgba(255, 209, 92, 0.82);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.18),
+          0 18px 42px rgba(0, 0, 0, 0.32);
+      }
+
+      .brand-badge img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 8px;
+        box-sizing: border-box;
+        background: var(--logo-image-bg);
+        border-radius: 6px;
+      }
+
+      .offer-card h3 {
+        margin: 0;
+        font-size: 22px;
+        letter-spacing: 0;
+      }
+
+      .offer-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 2px;
+      }
+
+      .offer-tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 24px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        color: var(--ink);
+        background: linear-gradient(180deg, var(--gold), var(--gold-2));
+        font-size: 11px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .offer-tag.secondary {
+        color: var(--paper);
+        background: rgba(31, 224, 197, 0.18);
+        border: 1px solid rgba(31, 224, 197, 0.28);
+      }
+
+      .rank {
+        min-width: 46px;
+        text-align: left;
+        color: var(--gold);
+        font-weight: 900;
+      }
+
+      .offer-meta {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
+      .rank-label {
+        display: none;
+      }
+
+      .offer-rating {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .rating-stars {
+        --rating-width: 0%;
+        position: relative;
+        display: inline-block;
+        color: rgba(245, 196, 90, 0.24);
+        font-size: 22px;
+        line-height: 1;
+        letter-spacing: 0;
+        white-space: nowrap;
+      }
+
+      .rating-stars .stars-fill {
+        position: absolute;
+        inset: 0 auto auto 0;
+        width: var(--rating-width);
+        color: var(--gold);
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .rating-score {
+        color: var(--gold);
+        font-size: 14px;
+        font-weight: 900;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .bonus {
+        margin: 14px 0;
+        padding: 14px;
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(255, 209, 92, 0.16), rgba(255, 255, 255, 0.035));
+        border: 1px solid rgba(255, 209, 92, 0.3);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      }
+
+      .bonus strong {
+        display: block;
+        color: var(--gold);
+        font-size: 26px;
+        line-height: 1.1;
+      }
+
+      .bonus span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .ticks {
+        margin: 0 0 16px;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 8px;
+        color: #d7dee8;
+        font-size: 14px;
+      }
+
+      .ticks li {
+        display: grid;
+        grid-template-columns: 18px 1fr;
+        gap: 8px;
+        align-items: start;
+      }
+
+      .ticks li::before {
+        content: "";
+        width: 9px;
+        height: 9px;
+        margin-top: 7px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, var(--teal), #0da894);
+        box-shadow: 0 0 16px rgba(31, 224, 197, 0.42);
+      }
+
+      .live-panel {
+        margin: 0 0 14px;
+        border: 1px solid var(--live-border);
+        border-radius: 8px;
+        overflow: hidden;
+        background: var(--live-bg);
+        box-shadow: 0 18px 42px rgba(56, 201, 255, 0.12);
+      }
+
+      .live-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 7px 9px;
+        background: var(--live-title-bg);
+        color: var(--live-title-text);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .live-title small {
+        padding: 1px 6px;
+        border-radius: 999px;
+        background: var(--live-badge-bg);
+        color: var(--live-badge-text);
+        font-size: 11px;
+      }
+
+      .live-head,
+      .live-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(70px, 0.72fr) minmax(0, 1.1fr) minmax(70px, 0.72fr) minmax(64px, 0.64fr);
+      }
+
+      .live-head span {
+        padding: 5px 8px;
+        color: var(--live-top-head-text);
+        font-weight: 900;
+        background: var(--live-top-head-bg);
+      }
+
+      .live-head span:first-child {
+        grid-column: span 2;
+      }
+
+      .live-head span:nth-child(2) {
+        grid-column: span 3;
+        color: var(--live-withdraw-head-text);
+        background: var(--live-withdraw-head-bg);
+      }
+
+      .live-row {
+        border-top: 1px solid var(--live-border);
+        animation: liveRowIn 0.28s ease both;
+      }
+
+      .live-cell {
+        min-width: 0;
+        padding: 5px 8px;
+        border-right: 1px solid var(--live-border);
+        color: var(--live-row-text);
+        font-weight: 900;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .live-cell:nth-child(2),
+      .live-cell:nth-child(4) {
+        color: var(--live-amount-text);
+        text-align: right;
+      }
+
+      .live-cell:last-child {
+        border-right: 0;
+      }
+
+      @keyframes liveRowIn {
+        from {
+          opacity: 0.35;
+          transform: translateY(6px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 520px) {
+        .live-head,
+        .live-row {
+          grid-template-columns: minmax(0, 1fr) minmax(58px, 0.68fr) minmax(0, 1fr) minmax(58px, 0.68fr) minmax(52px, 0.58fr);
+        }
+
+        .live-cell,
+        .live-head span {
+          padding-inline: 5px;
+          font-size: 11px;
+        }
+      }
+
+      .bonus-page-panel {
+        margin: 0 0 14px;
+        border: 1px solid rgba(255, 209, 92, 0.46);
+        border-radius: 8px;
+        overflow: hidden;
+        background: rgba(5, 8, 13, 0.86);
+        box-shadow: 0 18px 42px rgba(255, 209, 92, 0.1);
+      }
+
+      .bonus-page-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 8px 10px;
+        color: var(--gold);
+        background: rgba(0, 0, 0, 0.45);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .bonus-page-head small {
+        color: var(--teal);
+        font-size: 11px;
+      }
+
+      .bonus-page-slider {
+        position: relative;
+        overflow: hidden;
+        min-height: 118px;
+      }
+
+      .bonus-page-track {
+        display: flex;
+        transition: transform 0.48s ease;
+        will-change: transform;
+      }
+
+      .bonus-page-slide {
+        min-width: 100%;
+        height: 130px;
+        display: grid;
+        place-items: center;
+        background: var(--logo-frame-bg);
+      }
+
+      .bonus-page-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: var(--logo-image-bg);
+      }
+
+      .bonus-page-state {
+        min-height: 130px;
+        display: grid;
+        place-items: center;
+        gap: 8px;
+        padding: 14px;
+        color: var(--muted);
+        text-align: center;
+        font-size: 13px;
+      }
+
+      .bonus-page-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 34px;
+        padding: 8px 12px;
+        border-radius: 7px;
+        color: var(--ink);
+        background: linear-gradient(180deg, var(--gold), var(--gold-2));
+        font-weight: 900;
+      }
+
+      .bonus-page-dots {
+        position: absolute;
+        right: 8px;
+        bottom: 8px;
+        display: flex;
+        gap: 5px;
+      }
+
+      .bonus-page-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.75);
+        background: rgba(0, 0, 0, 0.45);
+      }
+
+      .bonus-page-dot.active {
+        border-color: var(--gold);
+        background: var(--gold);
+      }
+
+      .offer-card .btn {
+        width: 100%;
+        margin-top: auto;
+      }
+
+      .steps {
+        background:
+          linear-gradient(180deg, rgba(247, 243, 230, 0.96), #e9dfc5);
+        color: var(--ink);
+      }
+
+      .steps .section-head h2 {
+        color: var(--ink);
+      }
+
+      .steps .section-head p {
+        color: #59606a;
+      }
+
+      .step-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .step {
+        min-height: 196px;
+        padding: 24px;
+        border-radius: 8px;
+        border: 1px solid rgba(21, 21, 21, 0.12);
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(255, 250, 240, 0.68));
+        box-shadow: 0 24px 50px rgba(21, 21, 21, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.72);
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .step:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 34px 70px rgba(21, 21, 21, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.78);
+      }
+
+      .step-num {
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: linear-gradient(145deg, #07090d, #242b35);
+        color: var(--gold);
+        font-weight: 900;
+        box-shadow: 0 14px 24px rgba(0, 0, 0, 0.24);
+      }
+
+      .step h3 {
+        margin: 16px 0 8px;
+        font-size: 22px;
+      }
+
+      .step p {
+        margin-bottom: 0;
+        color: #5b626c;
+      }
+
+      .why {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent),
+          #0d1118;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .feature {
+        min-height: 146px;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.11);
+        border-radius: 8px;
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)),
+          var(--panel-2);
+        box-shadow: 0 22px 46px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      }
+
+      .feature strong {
+        color: var(--paper);
+        display: block;
+        margin-bottom: 8px;
+        font-size: 17px;
+      }
+
+      .feature span {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .faq {
+        background: var(--bg);
+      }
+
+      details {
+        border: 1px solid rgba(255, 255, 255, 0.11);
+        border-radius: 8px;
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02)),
+          var(--panel);
+        margin-bottom: 10px;
+        overflow: hidden;
+        box-shadow: 0 18px 38px rgba(0, 0, 0, 0.22);
+      }
+
+      summary {
+        min-height: 58px;
+        display: flex;
+        align-items: center;
+        padding: 16px 18px;
+        cursor: pointer;
+        color: var(--paper);
+        font-weight: 900;
+      }
+
+      details p {
+        padding: 0 18px 18px;
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .community {
+        background:
+          linear-gradient(180deg, rgba(31, 224, 197, 0.045), transparent 42%),
+          var(--community-bg);
+      }
+
+      .social-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .social-card {
+        display: flex;
+        flex-direction: column;
+        min-height: 238px;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025)),
+          var(--panel);
+        box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        transition: transform 0.18s ease, border-color 0.18s ease;
+      }
+
+      .social-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(31, 224, 197, 0.42);
+      }
+
+      .social-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .social-icon {
+        width: 58px;
+        height: 58px;
+        flex: 0 0 58px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        border: 1px solid rgba(31, 224, 197, 0.78);
+        background:
+          linear-gradient(145deg, rgba(31, 224, 197, 0.14), rgba(255, 255, 255, 0.04)),
+          var(--logo-frame-bg);
+        color: var(--ink);
+        font-weight: 900;
+        box-shadow: 0 16px 34px rgba(31, 224, 197, 0.12);
+      }
+
+      .social-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 5px;
+        box-sizing: border-box;
+        background: var(--logo-image-bg);
+        border-radius: 6px;
+      }
+
+      .social-card h3 {
+        margin: 0;
+        color: var(--paper);
+        font-size: 21px;
+      }
+
+      .social-card p {
+        flex: 1;
+        margin: 0 0 18px;
+        color: var(--muted);
+      }
+
+      .final {
+        background:
+          linear-gradient(90deg, rgba(31, 224, 197, 0.18), rgba(255, 209, 92, 0.16)),
+          var(--final-bg);
+      }
+
+      .final-box {
+        padding: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.055);
+        box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(14px);
+      }
+
+      .final-box {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .final h2 {
+        margin-bottom: 10px;
+        color: var(--paper);
+        font-size: 34px;
+        line-height: 1.16;
+      }
+
+      .final p {
+        margin-bottom: 0;
+        color: var(--muted);
+      }
+
+      footer {
+        padding: 28px 0;
+        color: #8d96a5;
+        background: var(--footer-bg);
+        font-size: 13px;
+      }
+
+      .footer-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .sticky-cta {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 30;
+        background: var(--sticky-bg);
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 -18px 42px rgba(0, 0, 0, 0.38);
+      }
+
+      .sticky-inner {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .sticky-copy {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+
+      .sticky-copy strong {
+        color: var(--paper);
+        line-height: 1.2;
+      }
+
+      .sticky-copy span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .sticky-inner .btn {
+        flex: 0 0 auto;
+      }
+
+      @media (max-width: 900px) {
+        .nav-links {
+          display: none;
+        }
+
+        .nav-actions {
+          gap: 10px;
+        }
+
+        h1 {
+          font-size: 48px;
+        }
+
+        .hero-layout {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+
+        .hero {
+          min-height: 64vh;
+          background-position: 62% center;
+        }
+
+        .hero-stage {
+          display: none;
+        }
+
+        .section-head,
+        .final-box,
+        .footer-row {
+          display: block;
+        }
+
+        .section-head p,
+        .final p {
+          margin-top: 10px;
+        }
+
+        .compare-grid,
+        .offer-grid,
+        .step-grid,
+        .feature-grid,
+        .social-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .quick-table {
+          min-width: 0;
+        }
+
+        .quick-table-wrap {
+          overflow: hidden;
+        }
+
+        .quick-table thead {
+          display: none;
+        }
+
+        .quick-table,
+        .quick-table tbody,
+        .quick-table tr,
+        .quick-table td {
+          display: block;
+          width: 100%;
+        }
+
+        .quick-table tr {
+          padding: 12px 14px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .quick-table tr:last-child {
+          border-bottom: 0;
+        }
+
+        .quick-table td {
+          display: flex;
+          justify-content: space-between;
+          gap: 14px;
+          padding: 6px 0;
+          border-bottom: 0;
+        }
+
+        .quick-table td::before {
+          content: attr(data-label);
+          color: var(--muted);
+          font-size: 12px;
+          font-weight: 900;
+          text-transform: uppercase;
+        }
+        }
+
+        .final-actions {
+          margin-top: 18px;
+        }
+      }
+
+      @media (max-width: 620px) {
+        body {
+          padding-bottom: 88px;
+        }
+
+        .nav {
+          gap: 12px;
+        }
+
+        .brand-name {
+          max-width: 34vw;
+          font-size: 13px;
+        }
+
+        .brand-mark {
+          width: 32px;
+          height: 32px;
+          flex: 0 0 32px;
+        }
+
+        .language-switch {
+          gap: 3px;
+          padding: 3px;
+        }
+
+        .malaysia-clock {
+          gap: 7px;
+          min-height: 38px;
+          padding: 5px 8px;
+          transform: none;
+        }
+
+        .clock-flag {
+          width: 24px;
+          height: 24px;
+          background-size: auto;
+        }
+
+        .flag-crescent {
+          left: 3px;
+          top: 4px;
+          width: 9px;
+          height: 9px;
+        }
+
+        .flag-crescent::after {
+          left: 3px;
+          width: 9px;
+          height: 9px;
+        }
+
+        .flag-star {
+          left: 10px;
+          top: 6px;
+          width: 6px;
+          height: 6px;
+        }
+
+        .clock-divider {
+          height: 26px;
+        }
+
+        .clock-date {
+          font-size: 11px;
+        }
+
+        .clock-time {
+          font-size: 12px;
+        }
+
+        .lang-btn {
+          min-width: 32px;
+          min-height: 30px;
+          padding: 7px 8px;
+          font-size: 11px;
+        }
+
+        .shell {
+          width: min(100% - 28px, 1160px);
+        }
+
+        .hero {
+          min-height: auto;
+          background:
+            linear-gradient(180deg, rgba(5, 7, 10, 0.98) 0%, rgba(8, 12, 18, 0.82) 54%, rgba(8, 12, 18, 0.58) 100%),
+            var(--hero-image);
+          background-size: cover;
+          background-position: 69% center;
+        }
+
+        .hero-content {
+          padding: 34px 0 24px;
+        }
+
+        h1 {
+          font-size: 40px;
+          line-height: 1.06;
+        }
+
+        .hero-copy {
+          font-size: 16px;
+        }
+
+        .stats {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 6px;
+          margin-top: 20px;
+        }
+
+        .offer-toolbar {
+          display: grid;
+          gap: 10px;
+        }
+
+        .offer-search {
+          width: 100%;
+        }
+
+        .stat {
+          min-height: 72px;
+          padding: 10px 8px;
+          transform: none;
+        }
+
+        .stat strong {
+          font-size: 18px;
+        }
+
+        .stat span {
+          font-size: 11px;
+        }
+
+        .compare-grid,
+        .offer-grid,
+        .step-grid,
+        .feature-grid,
+        .social-grid {
+          grid-template-columns: 1fr;
+        }
+
+        section {
+          padding: 46px 0;
+        }
+
+        .section-head h2,
+        .final h2 {
+          font-size: 28px;
+        }
+
+        .offer-card,
+        .offer-card:hover,
+        .compare-card,
+        .compare-card:hover,
+        .social-card,
+        .social-card:hover,
+        .step,
+        .step:hover {
+          transform: none;
+        }
+
+        .brand-badge {
+          height: 164px;
+        }
+
+        .btn {
+          width: 100%;
+        }
+
+        .sticky-inner {
+          min-height: 86px;
+        }
+
+        .sticky-copy span {
+          display: none;
+        }
+
+        .sticky-inner .btn {
+          width: auto;
+          min-width: 150px;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .brand-name {
+          display: none;
+        }
+      }
+
+      @media (max-width: 380px) {
+        h1 {
+          font-size: 34px;
+        }
+
+        .stat strong {
+          font-size: 16px;
+        }
+
+        .stat span {
+          font-size: 10px;
+        }
+
+        .sticky-inner .btn {
+          min-width: 128px;
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.001ms !important;
+        }
+
+        .hero-3d-card,
+        .offer-card,
+        .compare-card,
+        .social-card,
+        .step {
+          transform: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="shell nav">
+        <a class="brand" href="#top" aria-label="Free Credit Slot Malaysia">
+          <span class="brand-mark">RM</span>
+          <span class="brand-name">Free Credit Slot Malaysia</span>
+        </a>
+        <div class="nav-actions">
+          <nav class="nav-links" aria-label="Primary">
+            <a href="#quick-comparison">快速比较</a>
+            <a href="#top-offers">热门优惠</a>
+            <a href="#steps">领取步骤</a>
+            <a href="#faq">FAQ</a>
+            <a href="#community">Join Our</a>
+          </nav>
+          <time class="malaysia-clock" datetime="" data-malaysia-clock aria-label="Malaysia date and time">
+            <span class="clock-flag" aria-hidden="true">
+              <span class="flag-crescent"></span>
+              <span class="flag-star"></span>
+            </span>
+            <span class="clock-divider" aria-hidden="true"></span>
+            <span class="clock-copy">
+              <span class="clock-date" data-clock-date>19/07/2026</span>
+              <span class="clock-time" data-clock-time>09:42:48 pm</span>
+            </span>
+          </time>
+          <div class="language-switch" aria-label="Language selector">
+            <button class="lang-btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+            <button class="lang-btn" type="button" data-lang="ms" aria-pressed="false">BM</button>
+            <button class="lang-btn" type="button" data-lang="zh" aria-pressed="true">中文</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-label="Free credit slot landing page" data-section="hero">
+        <div class="shell">
+          <div class="hero-layout">
+            <div class="hero-content">
+              <p class="eyebrow">Malaysia 2026 | No Deposit Free Credit</p>
+              <h1>Free Credit Slot Malaysia</h1>
+              <p class="hero-copy">
+                精简版优惠入口：新会员免费信用、每日 free credit、e-wallet 快速领取。少一点长文章，多一点马上加入的理由。
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="#top-offers">马上看优惠</a>
+                <a class="btn btn-secondary" href="#quick-comparison">快速比较优惠</a>
+              </div>
+              <div class="stats" aria-label="Key selling points">
+                <div class="stat">
+                  <strong>RM5-RM50</strong>
+                  <span>热门新会员 free credit</span>
+                </div>
+                <div class="stat">
+                  <strong>No Deposit</strong>
+                  <span>先领取，再决定是否存款</span>
+                </div>
+                <div class="stat">
+                  <strong>Mobile</strong>
+                  <span>手机注册和 e-wallet 领取</span>
+                </div>
+              </div>
+            </div>
+            <div class="hero-stage" aria-hidden="true">
+              <div class="hero-3d-card">
+                <div class="hero-mini-card top">
+                  <b>FAST</b>
+                  <span>e-wallet claim</span>
+                </div>
+                <div class="hero-mini-card bottom">
+                  <b>RM50</b>
+                  <span>new member</span>
+                </div>
+                <div class="hero-chip">
+                  <strong>3D Bonus Hub</strong>
+                  <span>Modern free credit landing</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="comparison" id="quick-comparison" data-section="quickComparison">
+        <div class="shell">
+          <div class="section-head">
+            <h2>快速优惠比较</h2>
+            <p>先看重点金额、欢迎奖励、评分和领取按钮，再进入完整公司列表。</p>
+          </div>
+          <div class="quick-table-wrap">
+            <table class="quick-table" aria-label="Quick bonus comparison">
+              <thead>
+                <tr>
+                  <th data-quick-column="company">Company</th>
+                  <th data-quick-column="amount">Free Credit</th>
+                  <th data-quick-column="bonus">Bonus</th>
+                  <th data-quick-column="rating">Rating</th>
+                  <th data-quick-column="action">Action</th>
+                </tr>
+              </thead>
+              <tbody data-comparison-body>
+                <tr>
+                  <td colspan="5">Loading offers...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="offers" id="top-offers" data-section="offers">
+        <div class="shell">
+          <div class="section-head">
+            <h2>热门 Free Credit 优惠</h2>
+            <p>把用户最关心的金额、每日奖励、领取方式放在同一张卡里，让访客不用滚很久就能决定加入。</p>
+          </div>
+          <div class="offer-toolbar">
+            <input class="offer-search" data-offer-search type="search" placeholder="搜索公司或优惠" aria-label="Search offers" />
+            <div class="offer-filters" aria-label="Offer filters">
+              <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All</button>
+              <button class="filter-btn" type="button" data-filter="featured" aria-pressed="false">Featured</button>
+              <button class="filter-btn" type="button" data-filter="popular" aria-pressed="false">Popular</button>
+              <button class="filter-btn" type="button" data-filter="new" aria-pressed="false">New</button>
+            </div>
+          </div>
+          <div class="offer-grid">
+            <p class="empty-offers">正在读取后台资料...</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="steps" id="steps" data-section="steps">
+        <div class="shell">
+          <div class="section-head">
+            <h2>3 步领取 Free Credit</h2>
+            <p>简单流程会比长篇介绍更能推动加入，尤其适合手机广告流量。</p>
+          </div>
+          <div class="step-grid">
+            <article class="step">
+              <div class="step-num">01</div>
+              <h3>选择优惠</h3>
+              <p>先看 RM 金额、daily free credit 和注册条件，选择最适合自己的平台。</p>
+            </article>
+            <article class="step">
+              <div class="step-num">02</div>
+              <h3>注册账号</h3>
+              <p>点击领取按钮，使用手机号码完成新会员注册，并确认条款要求。</p>
+            </article>
+            <article class="step">
+              <div class="step-num">03</div>
+              <h3>领取奖励</h3>
+              <p>按平台指示领取 no deposit free credit，玩之前先检查流水和提款规则。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="why" data-section="why">
+        <div class="shell">
+          <div class="section-head">
+            <h2>为什么选择我们的优惠入口</h2>
+            <p>金额、条件、领取方式和官方入口集中展示，让新用户更快找到适合自己的平台。</p>
+          </div>
+          <div class="feature-grid">
+            <div class="feature">
+              <strong>第一屏就看到金额</strong>
+              <span>RM5-RM50、No Deposit、Mobile 直接出现，减少寻找成本。</span>
+            </div>
+            <div class="feature">
+              <strong>按钮重复但不混乱</strong>
+              <span>首屏、卡片、底部固定 CTA 都指向领取动作。</span>
+            </div>
+            <div class="feature">
+              <strong>快速比较更清楚</strong>
+              <span>先看金额、评分和奖励重点，再决定进入哪一个平台。</span>
+            </div>
+            <div class="feature">
+              <strong>手机体验更短</strong>
+              <span>卡片式信息比长文章更适合广告点击后的快速决策。</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq" id="faq" data-section="faq">
+        <div class="shell">
+          <div class="section-head">
+            <h2>常见问题</h2>
+            <p>把犹豫点提前回答，可以减少用户点出去搜索的机会。</p>
+          </div>
+          <details open>
+            <summary>Free credit no deposit 是什么意思？</summary>
+            <p>通常指新会员不需要先存款，就可以按平台条件领取一小笔免费信用。每个平台条款不同，领取前要确认流水、游戏限制和提款规则。</p>
+          </details>
+          <details>
+            <summary>哪一个优惠最适合放第一位？</summary>
+            <p>建议把 RM50 或每日 free credit 较高的平台放第一位，因为金额清楚、吸引力强，比较容易产生点击。</p>
+          </details>
+          <details>
+            <summary>这个页面可以换成自己的链接吗？</summary>
+            <p>可以。所有按钮都在 HTML 里，替换成你的 WhatsApp、Telegram、affiliate link 或指定注册链接即可。</p>
+          </details>
+          <details>
+            <summary>需要注意什么？</summary>
+            <p>请只面向符合法定年龄和当地法规允许的用户。页面不保证盈利，所有优惠以平台最新条款为准。</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="community" id="community" data-section="community">
+        <div class="shell">
+          <div class="section-head">
+            <h2>Join Our 官方社群</h2>
+            <p>想更快收到最新优惠，可以加入 Telegram、Facebook 或 WhatsApp。后台可以更改每一个入口的 logo、字眼和完整 link。</p>
+          </div>
+          <div class="social-grid"></div>
+        </div>
+      </section>
+
+      <section class="final" id="join" data-section="final">
+        <div class="shell final-box">
+          <div>
+            <h2>准备好领取 free credit？</h2>
+            <p>先选择主推优惠，再把注册链接换成你的最终入口，这版就能当广告落地页使用。</p>
+          </div>
+          <div class="final-actions">
+            <a class="btn btn-primary" href="#top-offers">回到热门优惠</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer data-section="footer">
+      <div class="shell footer-row">
+        <span>Free Credit Slot Malaysia landing page concept.</span>
+        <span>18+ only. Terms apply. Play responsibly.</span>
+      </div>
+    </footer>
+
+    <div class="sticky-cta" aria-label="Fixed join action" data-section="stickyCta">
+      <div class="shell sticky-inner">
+        <div class="sticky-copy">
+          <strong>新会员 Free Credit 入口</strong>
+          <span>直接看 RM 金额，选择平台后马上注册。</span>
+        </div>
+        <a class="btn btn-primary" href="#top-offers">马上加入</a>
+      </div>
+    </div>
+
+    <script src="assets/offers-data.js"></script>
+    <script>
+      const languageCopy = {
+        zh: {
+          htmlLang: "zh-Hans",
+          title: "Free Credit Slot Malaysia | No Deposit Bonus 2026",
+          description:
+            "Malaysia free credit slot landing page with no deposit offers, fast e-wallet claim flow, and mobile-ready registration buttons.",
+          switchLabel: "语言选择",
+          text: {
+            ".brand-name": "Free Credit Slot Malaysia",
+            ".nav-links a[href='#quick-comparison']": "快速比较",
+            ".nav-links a[href='#top-offers']": "热门优惠",
+            ".nav-links a[href='#steps']": "领取步骤",
+            ".nav-links a[href='#faq']": "FAQ",
+            ".nav-links a[href='#community']": "加入社群",
+            ".eyebrow": "Malaysia 2026 | No Deposit Free Credit",
+            ".hero h1": "Free Credit Slot Malaysia",
+            ".hero-copy":
+              "精简版优惠入口：新会员免费信用、每日 free credit、e-wallet 快速领取。少一点长文章，多一点马上加入的理由。",
+            ".hero-actions .btn-primary": "马上看优惠",
+            ".hero-actions .btn-secondary": "快速比较优惠",
+            ".stat:nth-child(1) span": "热门新会员 free credit",
+            ".stat:nth-child(2) span": "先领取，再决定是否存款",
+            ".stat:nth-child(3) span": "手机注册和 e-wallet 领取",
+            ".comparison .section-head h2": "快速优惠比较",
+            ".comparison .section-head p":
+              "先看金额、评分和领取按钮，再选择适合自己的平台。",
+            ".compare-card.recommended .label": "主推优惠",
+            ".compare-card.recommended p":
+              "把 RM 金额、免费信用和注册链接集中展示，方便用户马上比较。",
+            ".compare-card.recommended li:nth-child(1)": "金额和奖励重点清楚",
+            ".compare-card.recommended li:nth-child(2)": "适合手机快速浏览",
+            ".compare-card.recommended li:nth-child(3)": "领取按钮更集中",
+            ".compare-card:not(.recommended) .label": "更多选择",
+            ".compare-card:not(.recommended) p":
+              "每家公司都可以设置自己的 logo、字眼、完整链接、星星和 bonus page。",
+            ".compare-card:not(.recommended) li:nth-child(1)": "支持完整注册链接",
+            ".compare-card:not(.recommended) li:nth-child(2)": "支持三语内容",
+            ".compare-card:not(.recommended) li:nth-child(3)": "后台随时更新",
+            ".offers .section-head h2": "热门 Free Credit 优惠",
+            ".offers .section-head p":
+              "把用户最关心的金额、每日奖励、领取方式放在同一张卡里，让访客不用滚很久就能决定加入。",
+            ".offer-card:nth-child(1) .rank": "⭐⭐⭐⭐⭐",
+            ".offer-card:nth-child(1) .bonus span": "New register free credit",
+            ".offer-card:nth-child(1) .ticks li:nth-child(1)": "Daily free credit up to RM30",
+            ".offer-card:nth-child(1) .ticks li:nth-child(2)": "Mobile friendly claim flow",
+            ".offer-card:nth-child(1) .ticks li:nth-child(3)": "适合主打高金额优惠",
+            ".offer-card:nth-child(1) .btn": "领取 M2Cuci",
+            ".offer-card:nth-child(2) .rank": "⭐⭐⭐⭐⭐",
+            ".offer-card:nth-child(2) .bonus span": "Free register new member",
+            ".offer-card:nth-child(2) .ticks li:nth-child(1)": "Free credit no deposit up to RM20",
+            ".offer-card:nth-child(2) .ticks li:nth-child(2)": "E-wallet withdrawal focus",
+            ".offer-card:nth-child(2) .ticks li:nth-child(3)": "适合作为第一屏主推",
+            ".offer-card:nth-child(2) .btn": "领取 447Duit",
+            ".offer-card:nth-child(3) .rank": "⭐⭐⭐⭐",
+            ".offer-card:nth-child(3) .bonus span": "New member free credit",
+            ".offer-card:nth-child(3) .ticks li:nth-child(1)": "Daily free credit listed",
+            ".offer-card:nth-child(3) .ticks li:nth-child(2)": "Instant e-wallet angle",
+            ".offer-card:nth-child(3) .ticks li:nth-child(3)": "适合强调简单注册",
+            ".offer-card:nth-child(3) .btn": "领取 Mykad99",
+            ".offer-card:nth-child(4) .rank": "⭐⭐⭐⭐",
+            ".offer-card:nth-child(4) .bonus span": "Free register new member",
+            ".offer-card:nth-child(4) .ticks li:nth-child(1)": "Daily app free credit angle",
+            ".offer-card:nth-child(4) .ticks li:nth-child(2)": "Good mobile compatibility",
+            ".offer-card:nth-child(4) .ticks li:nth-child(3)": "金额有记忆点，容易点击",
+            ".offer-card:nth-child(4) .btn": "领取 Dadu44",
+            ".offer-card:nth-child(5) .rank": "⭐⭐⭐⭐",
+            ".offer-card:nth-child(5) .bonus span": "New register free credit",
+            ".offer-card:nth-child(5) .ticks li:nth-child(1)": "Free credit 365 Hari up to RM20",
+            ".offer-card:nth-child(5) .ticks li:nth-child(2)": "Low entry barrier message",
+            ".offer-card:nth-child(5) .ticks li:nth-child(3)": "适合每日回访玩家",
+            ".offer-card:nth-child(5) .btn": "领取 Chagee88",
+            ".offer-card:nth-child(6) .rank": "⭐⭐⭐",
+            ".offer-card:nth-child(6) .bonus span": "Free register new member",
+            ".offer-card:nth-child(6) .ticks li:nth-child(1)": "365 days free credit rewards",
+            ".offer-card:nth-child(6) .ticks li:nth-child(2)": "Welcome bonus up to 180%",
+            ".offer-card:nth-child(6) .ticks li:nth-child(3)": "适合做备用推荐位",
+            ".offer-card:nth-child(6) .btn": "领取 Squeen668",
+            ".steps .section-head h2": "3 步领取 Free Credit",
+            ".steps .section-head p":
+              "简单流程会比长篇介绍更能推动加入，尤其适合手机广告流量。",
+            ".step:nth-child(1) h3": "选择优惠",
+            ".step:nth-child(1) p": "先看 RM 金额、daily free credit 和注册条件，选择最适合自己的平台。",
+            ".step:nth-child(2) h3": "注册账号",
+            ".step:nth-child(2) p": "点击领取按钮，使用手机号码完成新会员注册，并确认条款要求。",
+            ".step:nth-child(3) h3": "领取奖励",
+            ".step:nth-child(3) p": "按平台指示领取 no deposit free credit，玩之前先检查流水和提款规则。",
+            ".why .section-head h2": "为什么选择我们的优惠入口",
+            ".why .section-head p": "金额、条件、领取方式和官方入口集中展示，让新用户更快找到适合自己的平台。",
+            ".feature:nth-child(1) strong": "第一屏就看到金额",
+            ".feature:nth-child(1) span": "RM5-RM50、No Deposit、Mobile 直接出现，减少寻找成本。",
+            ".feature:nth-child(2) strong": "按钮重复但不混乱",
+            ".feature:nth-child(2) span": "首屏、卡片、底部固定 CTA 都指向领取动作。",
+            ".feature:nth-child(3) strong": "快速比较更清楚",
+            ".feature:nth-child(3) span": "先看金额、评分和奖励重点，再决定进入哪一个平台。",
+            ".feature:nth-child(4) strong": "手机体验更短",
+            ".feature:nth-child(4) span": "卡片式信息比长文章更适合广告点击后的快速决策。",
+            ".faq .section-head h2": "常见问题",
+            ".faq .section-head p": "把犹豫点提前回答，可以减少用户点出去搜索的机会。",
+            ".faq details:nth-of-type(1) summary": "Free credit no deposit 是什么意思？",
+            ".faq details:nth-of-type(1) p":
+              "通常指新会员不需要先存款，就可以按平台条件领取一小笔免费信用。每个平台条款不同，领取前要确认流水、游戏限制和提款规则。",
+            ".faq details:nth-of-type(2) summary": "哪一个优惠最适合放第一位？",
+            ".faq details:nth-of-type(2) p":
+              "建议把 RM50 或每日 free credit 较高的平台放第一位，因为金额清楚、吸引力强，比较容易产生点击。",
+            ".faq details:nth-of-type(3) summary": "这个页面可以换成自己的链接吗？",
+            ".faq details:nth-of-type(3) p":
+              "可以。所有按钮都在 HTML 里，替换成你的 WhatsApp、Telegram、affiliate link 或指定注册链接即可。",
+            ".faq details:nth-of-type(4) summary": "需要注意什么？",
+            ".faq details:nth-of-type(4) p":
+              "请只面向符合法定年龄和当地法规允许的用户。页面不保证盈利，所有优惠以平台最新条款为准。",
+            ".final h2": "准备好领取 free credit？",
+            ".final p": "先选择主推优惠，再把注册链接换成你的最终入口，这版就能当广告落地页使用。",
+            ".final-actions .btn-primary": "回到热门优惠",
+            "footer span:nth-child(1)": "Free Credit Slot Malaysia landing page concept.",
+            "footer span:nth-child(2)": "18+ only. Terms apply. Play responsibly.",
+            ".sticky-copy strong": "新会员 Free Credit 入口",
+            ".sticky-copy span": "直接看 RM 金额，选择平台后马上注册。",
+            ".sticky-cta .btn": "马上加入"
+          }
+        },
+        en: {
+          htmlLang: "en",
+          title: "Free Credit Slot Malaysia | No Deposit Bonus 2026",
+          description:
+            "A conversion-focused Malaysia free credit slot landing page with no deposit offers, fast e-wallet claim flow, and mobile-ready sign-up buttons.",
+          switchLabel: "Language selector",
+          text: {
+            ".brand-name": "Free Credit Slot Malaysia",
+            ".nav-links a[href='#quick-comparison']": "Compare",
+            ".nav-links a[href='#top-offers']": "Top Offers",
+            ".nav-links a[href='#steps']": "How to Claim",
+            ".nav-links a[href='#faq']": "FAQ",
+            ".nav-links a[href='#community']": "Join Our",
+            ".eyebrow": "Malaysia 2026 | No Deposit Free Credit",
+            ".hero h1": "Free Credit Slot Malaysia",
+            ".hero-copy":
+              "A faster offer page for new member free credit, daily rewards, and e-wallet claims. Less scrolling, clearer reasons to join now.",
+            ".hero-actions .btn-primary": "View Offers",
+            ".hero-actions .btn-secondary": "Compare Offers",
+            ".stat:nth-child(1) span": "Popular new member free credit",
+            ".stat:nth-child(2) span": "Claim first, deposit only if you choose",
+            ".stat:nth-child(3) span": "Mobile sign-up and e-wallet claim",
+            ".comparison .section-head h2": "Quick Bonus Comparison",
+            ".comparison .section-head p":
+              "Compare the amount, rating, and claim button before choosing a platform.",
+            ".compare-card.recommended .label": "Featured Offer",
+            ".compare-card.recommended p":
+              "RM amounts, free credit highlights, and registration links are grouped for faster comparison.",
+            ".compare-card.recommended li:nth-child(1)": "Clear amount and reward focus",
+            ".compare-card.recommended li:nth-child(2)": "Built for quick mobile browsing",
+            ".compare-card.recommended li:nth-child(3)": "Claim buttons stay easy to find",
+            ".compare-card:not(.recommended) .label": "More Choices",
+            ".compare-card:not(.recommended) p":
+              "Each company can have its own logo, wording, full link, rating, and bonus page.",
+            ".compare-card:not(.recommended) li:nth-child(1)": "Supports full registration links",
+            ".compare-card:not(.recommended) li:nth-child(2)": "Supports three languages",
+            ".compare-card:not(.recommended) li:nth-child(3)": "Editable anytime in admin",
+            ".offers .section-head h2": "Popular Free Credit Offers",
+            ".offers .section-head p":
+              "Put the amount, daily reward, and claim method in one card so visitors can decide quickly without reading a long page.",
+            ".offer-card:nth-child(1) .rank": "⭐⭐⭐⭐⭐",
+            ".offer-card:nth-child(1) .bonus span": "New register free credit",
+            ".offer-card:nth-child(1) .ticks li:nth-child(1)": "Daily free credit up to RM30",
+            ".offer-card:nth-child(1) .ticks li:nth-child(2)": "Mobile friendly claim flow",
+            ".offer-card:nth-child(1) .ticks li:nth-child(3)": "Good for promoting higher-value offers",
+            ".offer-card:nth-child(1) .btn": "Claim M2Cuci",
+            ".offer-card:nth-child(2) .rank": "⭐⭐⭐⭐⭐",
+            ".offer-card:nth-child(2) .bonus span": "Free register new member",
+            ".offer-card:nth-child(2) .ticks li:nth-child(1)": "Free credit no deposit up to RM20",
+            ".offer-card:nth-child(2) .ticks li:nth-child(2)": "E-wallet withdrawal focus",
+            ".offer-card:nth-child(2) .ticks li:nth-child(3)": "Strong choice for the first screen",
+            ".offer-card:nth-child(2) .btn": "Claim 447Duit",
+            ".offer-card:nth-child(3) .rank": "⭐⭐⭐⭐",
+            ".offer-card:nth-child(3) .bonus span": "New member free credit",
+            ".offer-card:nth-child(3) .ticks li:nth-child(1)": "Daily free credit listed",
+            ".offer-card:nth-child(3) .ticks li:nth-child(2)": "Instant e-wallet angle",
+            ".offer-card:nth-child(3) .ticks li:nth-child(3)": "Good for simple sign-up messaging",
+            ".offer-card:nth-child(3) .btn": "Claim Mykad99",
+            ".offer-card:nth-child(4) .rank": "⭐⭐⭐⭐",
+            ".offer-card:nth-child(4) .bonus span": "Free register new member",
+            ".offer-card:nth-child(4) .ticks li:nth-child(1)": "Daily app free credit angle",
+            ".offer-card:nth-child(4) .ticks li:nth-child(2)": "Good mobile compatibility",
+            ".offer-card:nth-child(4) .ticks li:nth-child(3)": "Memorable amount that is easy to click",
+            ".offer-card:nth-child(4) .btn": "Claim Dadu44",
+            ".offer-card:nth-child(5) .rank": "⭐⭐⭐⭐",
+            ".offer-card:nth-child(5) .bonus span": "New register free credit",
+            ".offer-card:nth-child(5) .ticks li:nth-child(1)": "Free credit 365 Hari up to RM20",
+            ".offer-card:nth-child(5) .ticks li:nth-child(2)": "Low entry barrier message",
+            ".offer-card:nth-child(5) .ticks li:nth-child(3)": "Good for daily returning players",
+            ".offer-card:nth-child(5) .btn": "Claim Chagee88",
+            ".offer-card:nth-child(6) .rank": "⭐⭐⭐",
+            ".offer-card:nth-child(6) .bonus span": "Free register new member",
+            ".offer-card:nth-child(6) .ticks li:nth-child(1)": "365 days free credit rewards",
+            ".offer-card:nth-child(6) .ticks li:nth-child(2)": "Welcome bonus up to 180%",
+            ".offer-card:nth-child(6) .ticks li:nth-child(3)": "Good as a backup recommendation",
+            ".offer-card:nth-child(6) .btn": "Claim Squeen668",
+            ".steps .section-head h2": "Claim Free Credit in 3 Steps",
+            ".steps .section-head p":
+              "A simple flow works better than long explanations, especially for mobile ad traffic.",
+            ".step:nth-child(1) h3": "Choose an Offer",
+            ".step:nth-child(1) p": "Compare the RM amount, daily free credit, and registration terms before choosing a platform.",
+            ".step:nth-child(2) h3": "Register Account",
+            ".step:nth-child(2) p": "Tap the claim button, sign up with your mobile number, and confirm the terms.",
+            ".step:nth-child(3) h3": "Claim Reward",
+            ".step:nth-child(3) p": "Follow the platform instructions to claim no deposit free credit, then check turnover and withdrawal rules before playing.",
+            ".why .section-head h2": "Why Use Our Offer Portal",
+            ".why .section-head p": "Key amounts, claim conditions, and direct registration links are organised in one mobile-friendly page.",
+            ".feature:nth-child(1) strong": "Amount appears above the fold",
+            ".feature:nth-child(1) span": "RM5-RM50, No Deposit, and Mobile are visible immediately.",
+            ".feature:nth-child(2) strong": "Repeated CTAs stay clear",
+            ".feature:nth-child(2) span": "Hero, offer cards, and fixed bottom button all point to the same claim action.",
+            ".feature:nth-child(3) strong": "Clear comparison",
+            ".feature:nth-child(3) span": "Check the amount, rating, and reward highlights before choosing a platform.",
+            ".feature:nth-child(4) strong": "Shorter mobile journey",
+            ".feature:nth-child(4) span": "Card-based information fits fast decisions after an ad click.",
+            ".faq .section-head h2": "Frequently Asked Questions",
+            ".faq .section-head p": "Answering doubts early reduces the chance that users leave to search elsewhere.",
+            ".faq details:nth-of-type(1) summary": "What does free credit no deposit mean?",
+            ".faq details:nth-of-type(1) p":
+              "It usually means new members can claim a small amount of credit without depositing first. Terms vary by platform, so check turnover, game limits, and withdrawal rules before claiming.",
+            ".faq details:nth-of-type(2) summary": "Which offer should be placed first?",
+            ".faq details:nth-of-type(2) p":
+              "Put the RM50 offer or the strongest daily free credit offer first because clear amounts attract more clicks.",
+            ".faq details:nth-of-type(3) summary": "Can I replace the links with my own?",
+            ".faq details:nth-of-type(3) p":
+              "Yes. Replace the button links with your WhatsApp, Telegram, affiliate link, or final registration URL.",
+            ".faq details:nth-of-type(4) summary": "What should I be careful about?",
+            ".faq details:nth-of-type(4) p":
+              "Only target users who meet the legal age and local rules. This page does not guarantee profit, and all offers depend on the platform's latest terms.",
+            ".final h2": "Ready to claim free credit?",
+            ".final p": "Choose the main offer first, then replace the registration links with your final destination. This version can be used as an ad landing page.",
+            ".final-actions .btn-primary": "Back to Top Offers",
+            "footer span:nth-child(1)": "Free Credit Slot Malaysia landing page concept.",
+            "footer span:nth-child(2)": "18+ only. Terms apply. Play responsibly.",
+            ".sticky-copy strong": "New Member Free Credit",
+            ".sticky-copy span": "View the RM amount, choose a platform, and register right away.",
+            ".sticky-cta .btn": "Join Now"
+          }
+        },
+        ms: {
+          htmlLang: "ms",
+          title: "Free Credit Slot Malaysia | Bonus Tanpa Deposit 2026",
+          description:
+            "Halaman landing free credit slot Malaysia dengan tawaran tanpa deposit, tuntutan e-wallet pantas, dan butang daftar mesra telefon.",
+          switchLabel: "Pilihan bahasa",
+          text: {
+            ".brand-name": "Free Credit Slot Malaysia",
+            ".nav-links a[href='#quick-comparison']": "Banding",
+            ".nav-links a[href='#top-offers']": "Promosi Popular",
+            ".nav-links a[href='#steps']": "Cara Claim",
+            ".nav-links a[href='#faq']": "FAQ",
+            ".nav-links a[href='#community']": "Join Our",
+            ".eyebrow": "Malaysia 2026 | Free Credit Tanpa Deposit",
+            ".hero h1": "Free Credit Slot Malaysia",
+            ".hero-copy":
+              "Halaman promosi yang lebih ringkas untuk ahli baru, daily free credit, dan claim melalui e-wallet. Kurang scroll, lebih jelas kenapa perlu daftar sekarang.",
+            ".hero-actions .btn-primary": "Lihat Promosi",
+            ".hero-actions .btn-secondary": "Banding Promosi",
+            ".stat:nth-child(1) span": "Free credit popular untuk ahli baru",
+            ".stat:nth-child(2) span": "Claim dahulu, deposit ikut pilihan",
+            ".stat:nth-child(3) span": "Daftar telefon dan claim e-wallet",
+            ".comparison .section-head h2": "Perbandingan Bonus Pantas",
+            ".comparison .section-head p":
+              "Bandingkan jumlah, rating, dan butang claim sebelum memilih platform.",
+            ".compare-card.recommended .label": "Promosi Utama",
+            ".compare-card.recommended p":
+              "Jumlah RM, sorotan free credit, dan link daftar disusun supaya lebih mudah dibandingkan.",
+            ".compare-card.recommended li:nth-child(1)": "Jumlah dan ganjaran lebih jelas",
+            ".compare-card.recommended li:nth-child(2)": "Sesuai untuk browsing telefon",
+            ".compare-card.recommended li:nth-child(3)": "Butang claim mudah dicari",
+            ".compare-card:not(.recommended) .label": "Pilihan Lain",
+            ".compare-card:not(.recommended) p":
+              "Setiap syarikat boleh ada logo, teks, link penuh, rating, dan bonus page sendiri.",
+            ".compare-card:not(.recommended) li:nth-child(1)": "Sokong link daftar penuh",
+            ".compare-card:not(.recommended) li:nth-child(2)": "Sokong tiga bahasa",
+            ".compare-card:not(.recommended) li:nth-child(3)": "Boleh ubah bila-bila masa",
+            ".offers .section-head h2": "Promosi Free Credit Popular",
+            ".offers .section-head p":
+              "Letakkan jumlah, ganjaran harian, dan cara claim dalam satu kad supaya pelawat boleh buat keputusan dengan cepat.",
+            ".offer-card:nth-child(1) .rank": "⭐⭐⭐⭐⭐",
+            ".offer-card:nth-child(1) .bonus span": "Free credit daftar ahli baru",
+            ".offer-card:nth-child(1) .ticks li:nth-child(1)": "Daily free credit sehingga RM30",
+            ".offer-card:nth-child(1) .ticks li:nth-child(2)": "Aliran claim mesra telefon",
+            ".offer-card:nth-child(1) .ticks li:nth-child(3)": "Sesuai untuk promosi nilai tinggi",
+            ".offer-card:nth-child(1) .btn": "Claim M2Cuci",
+            ".offer-card:nth-child(2) .rank": "⭐⭐⭐⭐⭐",
+            ".offer-card:nth-child(2) .bonus span": "Daftar ahli baru percuma",
+            ".offer-card:nth-child(2) .ticks li:nth-child(1)": "Free credit tanpa deposit sehingga RM20",
+            ".offer-card:nth-child(2) .ticks li:nth-child(2)": "Fokus pengeluaran e-wallet",
+            ".offer-card:nth-child(2) .ticks li:nth-child(3)": "Sesuai sebagai promosi utama skrin pertama",
+            ".offer-card:nth-child(2) .btn": "Claim 447Duit",
+            ".offer-card:nth-child(3) .rank": "⭐⭐⭐⭐",
+            ".offer-card:nth-child(3) .bonus span": "Free credit ahli baru",
+            ".offer-card:nth-child(3) .ticks li:nth-child(1)": "Daily free credit disenaraikan",
+            ".offer-card:nth-child(3) .ticks li:nth-child(2)": "Sudut e-wallet segera",
+            ".offer-card:nth-child(3) .ticks li:nth-child(3)": "Sesuai tekankan daftar mudah",
+            ".offer-card:nth-child(3) .btn": "Claim Mykad99",
+            ".offer-card:nth-child(4) .rank": "⭐⭐⭐⭐",
+            ".offer-card:nth-child(4) .bonus span": "Daftar ahli baru percuma",
+            ".offer-card:nth-child(4) .ticks li:nth-child(1)": "Sudut daily app free credit",
+            ".offer-card:nth-child(4) .ticks li:nth-child(2)": "Keserasian telefon yang baik",
+            ".offer-card:nth-child(4) .ticks li:nth-child(3)": "Jumlah mudah diingat dan mudah diklik",
+            ".offer-card:nth-child(4) .btn": "Claim Dadu44",
+            ".offer-card:nth-child(5) .rank": "⭐⭐⭐⭐",
+            ".offer-card:nth-child(5) .bonus span": "Free credit daftar ahli baru",
+            ".offer-card:nth-child(5) .ticks li:nth-child(1)": "Free credit 365 Hari sehingga RM20",
+            ".offer-card:nth-child(5) .ticks li:nth-child(2)": "Mesej masuk mudah",
+            ".offer-card:nth-child(5) .ticks li:nth-child(3)": "Sesuai untuk pemain harian",
+            ".offer-card:nth-child(5) .btn": "Claim Chagee88",
+            ".offer-card:nth-child(6) .rank": "⭐⭐⭐",
+            ".offer-card:nth-child(6) .bonus span": "Daftar ahli baru percuma",
+            ".offer-card:nth-child(6) .ticks li:nth-child(1)": "Ganjaran free credit 365 hari",
+            ".offer-card:nth-child(6) .ticks li:nth-child(2)": "Welcome bonus sehingga 180%",
+            ".offer-card:nth-child(6) .ticks li:nth-child(3)": "Sesuai sebagai cadangan tambahan",
+            ".offer-card:nth-child(6) .btn": "Claim Squeen668",
+            ".steps .section-head h2": "Claim Free Credit Dalam 3 Langkah",
+            ".steps .section-head p":
+              "Aliran yang mudah lebih mendorong daftar berbanding penerangan panjang, terutama untuk trafik iklan telefon.",
+            ".step:nth-child(1) h3": "Pilih Promosi",
+            ".step:nth-child(1) p": "Bandingkan jumlah RM, daily free credit, dan syarat daftar sebelum memilih platform.",
+            ".step:nth-child(2) h3": "Daftar Akaun",
+            ".step:nth-child(2) p": "Tekan butang claim, daftar dengan nombor telefon, dan semak syarat promosi.",
+            ".step:nth-child(3) h3": "Claim Ganjaran",
+            ".step:nth-child(3) p": "Ikut arahan platform untuk claim no deposit free credit, kemudian semak turnover dan syarat pengeluaran sebelum bermain.",
+            ".why .section-head h2": "Kenapa Versi Ini Lebih Mudah Menarik Daftar",
+            ".why .section-head p": "Pelawat bukan datang untuk baca artikel panjang. Mereka mahu tahu jumlah, boleh claim atau tidak, klik di mana, dan adakah ia meyakinkan.",
+            ".feature:nth-child(1) strong": "Jumlah jelas pada skrin pertama",
+            ".feature:nth-child(1) span": "RM5-RM50, No Deposit, dan Mobile terus kelihatan.",
+            ".feature:nth-child(2) strong": "Butang berulang tetapi jelas",
+            ".feature:nth-child(2) span": "Hero, kad promosi, dan CTA bawah semuanya menuju aksi claim.",
+            ".feature:nth-child(3) strong": "Perbandingan bina kepercayaan",
+            ".feature:nth-child(3) span": "Terangkan kenapa page ini dipilih supaya landing page nampak lebih tersusun.",
+            ".feature:nth-child(4) strong": "Pengalaman telefon lebih pendek",
+            ".feature:nth-child(4) span": "Maklumat berbentuk kad lebih sesuai untuk keputusan pantas selepas klik iklan.",
+            ".faq .section-head h2": "Soalan Lazim",
+            ".faq .section-head p": "Jawab keraguan lebih awal supaya pengguna tidak keluar mencari maklumat di tempat lain.",
+            ".faq details:nth-of-type(1) summary": "Apa maksud free credit no deposit?",
+            ".faq details:nth-of-type(1) p":
+              "Biasanya ia bermaksud ahli baru boleh claim sedikit kredit tanpa deposit dahulu. Syarat berbeza mengikut platform, jadi semak turnover, had permainan, dan peraturan pengeluaran sebelum claim.",
+            ".faq details:nth-of-type(2) summary": "Promosi mana patut diletakkan dahulu?",
+            ".faq details:nth-of-type(2) p":
+              "Letakkan promosi RM50 atau daily free credit paling kuat dahulu kerana jumlah yang jelas lebih mudah menarik klik.",
+            ".faq details:nth-of-type(3) summary": "Boleh tukar kepada link sendiri?",
+            ".faq details:nth-of-type(3) p":
+              "Boleh. Tukar link butang kepada WhatsApp, Telegram, affiliate link, atau URL pendaftaran terakhir anda.",
+            ".faq details:nth-of-type(4) summary": "Apa yang perlu diberi perhatian?",
+            ".faq details:nth-of-type(4) p":
+              "Sasarkan hanya pengguna yang cukup umur dan dibenarkan oleh undang-undang setempat. Halaman ini tidak menjamin keuntungan, dan semua promosi tertakluk kepada syarat terkini platform.",
+            ".final h2": "Sedia claim free credit?",
+            ".final p": "Pilih promosi utama dahulu, kemudian tukar link daftar kepada destinasi akhir anda. Versi ini boleh digunakan sebagai landing page iklan.",
+            ".final-actions .btn-primary": "Kembali ke Promosi",
+            "footer span:nth-child(1)": "Konsep landing page Free Credit Slot Malaysia.",
+            "footer span:nth-child(2)": "18+ sahaja. Tertakluk kepada syarat. Bermain secara bertanggungjawab.",
+            ".sticky-copy strong": "Free Credit Ahli Baru",
+            ".sticky-copy span": "Lihat jumlah RM, pilih platform, dan daftar segera.",
+            ".sticky-cta .btn": "Daftar Sekarang"
+          }
+        }
+      };
+
+      const offerStorageKey = window.offerStorageKey || "landingOffers";
+      const siteSettingsStorageKey = window.siteSettingsStorageKey || "landingSiteSettings";
+      const socialStorageKey = window.socialStorageKey || "landingSocialLinks";
+      const previewMode = new URLSearchParams(window.location.search).get("preview") === "1";
+      const colorVariableMap = {
+        pageBackground: "--bg",
+        headerBackground: "--topbar-bg",
+        cardBackground: "--panel",
+        cardAltBackground: "--panel-2",
+        borderColor: "--line",
+        logoFrameBackground: "--logo-frame-bg",
+        logoImageBackground: "--logo-image-bg",
+        mainText: "--paper",
+        bodyText: "--white",
+        mutedText: "--muted",
+        primaryColor: "--gold",
+        primaryDarkColor: "--gold-2",
+        accentColor: "--teal",
+        buttonText: "--ink",
+        communityBackground: "--community-bg",
+        finalBackground: "--final-bg",
+        footerBackground: "--footer-bg",
+        stickyBackground: "--sticky-bg",
+        liveBackground: "--live-bg",
+        liveBorderColor: "--live-border",
+        liveTitleBackground: "--live-title-bg",
+        liveTitleText: "--live-title-text",
+        liveBadgeBackground: "--live-badge-bg",
+        liveBadgeText: "--live-badge-text",
+        liveTopHeaderBackground: "--live-top-head-bg",
+        liveTopHeaderText: "--live-top-head-text",
+        liveWithdrawHeaderBackground: "--live-withdraw-head-bg",
+        liveWithdrawHeaderText: "--live-withdraw-head-text",
+        liveRowText: "--live-row-text",
+        liveAmountText: "--live-amount-text"
+      };
+      let activeLanguage = "zh";
+      let offerSearchQuery = "";
+      let offerFilterMode = "all";
+      let liveTransactionsEnabled = true;
+      let serverSiteData = null;
+      const liveTransactionRows = new Map();
+      const liveTickerTimers = new Map();
+      const bonusSliderTimers = new Map();
+      const bonusPageLabels = {
+        zh: {
+          title: "BONUS PAGE",
+          badge: "自动滑动",
+          loading: "正在读取 Bonus Page...",
+          fallback: "这个 Bonus Page 暂时不能自动读取。",
+          button: "打开 Bonus Page"
+        },
+        en: {
+          title: "BONUS PAGE",
+          badge: "Auto Slide",
+          loading: "Loading bonus page...",
+          fallback: "This bonus page cannot be loaded automatically right now.",
+          button: "Open Bonus Page"
+        },
+        ms: {
+          title: "BONUS PAGE",
+          badge: "Auto Slide",
+          loading: "Sedang memuatkan bonus page...",
+          fallback: "Bonus page ini belum boleh dibaca secara automatik.",
+          button: "Buka Bonus Page"
+        }
+      };
+
+      function mergeSettings(defaultSettings, savedSettings) {
+        const merged = JSON.parse(JSON.stringify(defaultSettings || {}));
+        if (!savedSettings || typeof savedSettings !== "object") {
+          return merged;
+        }
+
+        Object.entries(savedSettings).forEach(([key, value]) => {
+          if (value && typeof value === "object" && !Array.isArray(value)) {
+            merged[key] = mergeSettings(merged[key] || {}, value);
+          } else if (value !== undefined && value !== null && value !== "") {
+            merged[key] = value;
+          }
+        });
+
+        return merged;
+      }
+
+      function getSavedSiteSettings() {
+        if (serverSiteData && !previewMode) {
+          return mergeSettings(window.defaultSiteSettings || {}, serverSiteData.siteSettings || {});
+        }
+
+        try {
+          const savedSettings = JSON.parse(localStorage.getItem(siteSettingsStorageKey) || "null");
+          return mergeSettings(window.defaultSiteSettings || {}, savedSettings);
+        } catch (error) {
+          console.warn("Site settings could not be loaded.", error);
+          return mergeSettings(window.defaultSiteSettings || {}, {});
+        }
+      }
+
+      function getSafeLanguage(language, settings = getSavedSiteSettings()) {
+        const fallback = settings.defaultLanguage || window.defaultSiteSettings?.defaultLanguage || "zh";
+        const enabled = settings.enabledLanguages || {};
+        const candidate = languageCopy[language] ? language : fallback;
+        if (enabled[candidate] === false) {
+          return Object.keys(languageCopy).find((item) => enabled[item] !== false && languageCopy[item]) || "zh";
+        }
+        return languageCopy[candidate] ? candidate : "zh";
+      }
+
+      function getPublicLanguage(settings = getSavedSiteSettings()) {
+        return getSafeLanguage(settings.activeLanguage || settings.defaultLanguage || "zh", settings);
+      }
+
+      function sanitizePublicCopy(copy, language) {
+        const defaults = window.defaultSiteSettings?.copy?.[language] || window.defaultSiteSettings?.copy?.zh || {};
+        const blocked = [
+          "我的判断",
+          "拿来改",
+          "推荐基础",
+          "转化阻力",
+          "这版",
+          "读论文",
+          "My Pick",
+          "Use the First Site",
+          "Version Gets More Joins",
+          "long essay",
+          "Pilihan Saya",
+          "Site Pertama",
+          "Versi Ini",
+          "baca artikel"
+        ];
+        const cleaned = { ...copy };
+        ["whyTitle", "whyDescription", "feature3Title", "feature3Text", "secondaryButton"].forEach((key) => {
+          if (blocked.some((fragment) => String(cleaned[key] || "").includes(fragment))) {
+            cleaned[key] = defaults[key] || "";
+          }
+        });
+        return cleaned;
+      }
+
+      function applySectionVisibility(settings) {
+        const sections = settings.sections || {};
+        document.querySelectorAll("[data-section]").forEach((section) => {
+          const key = section.dataset.section;
+          section.hidden = sections[key] === false;
+        });
+      }
+
+      function getOfferFilterControls(settings = getSavedSiteSettings()) {
+        return {
+          all: true,
+          featured: true,
+          popular: true,
+          new: true,
+          ...(settings.offerFilterControls || {})
+        };
+      }
+
+      function getOfferTagControls(settings = getSavedSiteSettings()) {
+        return {
+          featured: true,
+          popular: true,
+          new: true,
+          ...(settings.offerTagControls || {})
+        };
+      }
+
+      function getQuickComparisonColumns(settings = getSavedSiteSettings()) {
+        const controls = {
+          company: true,
+          amount: true,
+          bonus: true,
+          rating: true,
+          action: true,
+          ...(settings.quickComparisonColumns || {})
+        };
+        const columns = ["company", "amount", "bonus", "rating", "action"].filter((key) => controls[key] !== false);
+        return columns.length ? columns : ["company"];
+      }
+
+      function getQuickComparisonHeader(copy, key) {
+        const labels = {
+          company: copy.quickComparisonCompanyHeader || "Company",
+          amount: copy.quickComparisonAmountHeader || "Free Credit",
+          bonus: copy.quickComparisonBonusHeader || "Bonus",
+          rating: copy.quickComparisonRatingHeader || "Rating",
+          action: copy.quickComparisonActionHeader || "Action"
+        };
+        return labels[key] || key;
+      }
+
+      function applyOfferControls(settings, copy) {
+        const filterControls = getOfferFilterControls(settings);
+        if (filterControls[offerFilterMode] === false) {
+          offerFilterMode = "all";
+        }
+
+        const filterLabels = {
+          all: copy.offerFilterAll || "All",
+          featured: copy.offerFilterFeatured || "Featured",
+          popular: copy.offerFilterPopular || "Popular",
+          new: copy.offerFilterNew || "New"
+        };
+
+        document.querySelectorAll("[data-filter]").forEach((button) => {
+          const key = button.dataset.filter;
+          button.hidden = filterControls[key] === false;
+          button.textContent = filterLabels[key] || key;
+          button.setAttribute("aria-pressed", key === offerFilterMode ? "true" : "false");
+        });
+
+        const columns = getQuickComparisonColumns(settings);
+        document.querySelectorAll("[data-quick-column]").forEach((cell) => {
+          const key = cell.dataset.quickColumn;
+          cell.hidden = !columns.includes(key);
+          cell.textContent = getQuickComparisonHeader(copy, key);
+        });
+      }
+
+      function getSavedOffers() {
+        if (serverSiteData && !previewMode && Array.isArray(serverSiteData.offers)) {
+          return normalizePublicOffers(serverSiteData.offers);
+        }
+
+        try {
+          const savedOffers = JSON.parse(localStorage.getItem(offerStorageKey) || "null");
+          if (Array.isArray(savedOffers)) {
+            return normalizePublicOffers(savedOffers);
+          }
+        } catch (error) {
+          console.warn("Offer data could not be loaded.", error);
+        }
+
+        return normalizePublicOffers(Array.isArray(window.defaultOffers) ? window.defaultOffers : []);
+      }
+
+      function normalizePublicOffers(offers) {
+        const defaults = Array.isArray(window.defaultOffers) ? window.defaultOffers : [];
+
+        return offers.map((offer) => {
+          const defaultOffer = defaults.find((item) => item.id === offer.id) || {};
+          const mergedOffer = mergeSettings(defaultOffer, offer);
+          return {
+            ...mergedOffer,
+            showStars: mergedOffer.showStars !== false,
+            live: normalizeLiveConfig(mergedOffer.live, mergedOffer.name),
+            bonusPage: normalizeBonusPageConfig(mergedOffer.bonusPage)
+          };
+        });
+      }
+
+      function createDefaultLiveFallback(name) {
+        const label = String(name || "LIVE").replace(/\s+/g, "").slice(0, 10) || "LIVE";
+        return [
+          `60******803 | RM12.00 | 60******495 | RM30.07 | ${label}`,
+          `60******432 | RM8.00 | 60******821 | RM70.19 | LIVE`,
+          `60******391 | RM5.00 | 60******685 | RM5.03 | SLOT`,
+          `60******239 | RM15.00 | 60******669 | RM90.26 | MEGA888`,
+          `60******281 | RM10.00 | 60******328 | RM5.00 | JILI3`,
+          `60******437 | RM5.00 | 60******961 | RM140.04 | JILI3`
+        ].join("\n");
+      }
+
+      function normalizeLiveConfig(live, name = "LIVE") {
+        const config = live && typeof live === "object" ? live : {};
+        const rows = Number(config.rows || 3);
+        return {
+          enabled: config.enabled === true,
+          url: String(config.url || "").trim(),
+          rows: Number.isFinite(rows) ? Math.max(2, Math.min(3, Math.round(rows))) : 3,
+          fallback: config.fallback || createDefaultLiveFallback(name)
+        };
+      }
+
+      function normalizeBonusPageConfig(bonusPage) {
+        const config = bonusPage && typeof bonusPage === "object" ? bonusPage : {};
+        return {
+          enabled: config.enabled === true,
+          url: String(config.url || "").trim()
+        };
+      }
+
+      function getSavedSocialLinks() {
+        if (serverSiteData && !previewMode && Array.isArray(serverSiteData.socialLinks)) {
+          return normalizePublicSocialLinks(serverSiteData.socialLinks);
+        }
+
+        try {
+          const savedLinks = JSON.parse(localStorage.getItem(socialStorageKey) || "null");
+          if (Array.isArray(savedLinks)) {
+            return normalizePublicSocialLinks(savedLinks);
+          }
+        } catch (error) {
+          console.warn("Social links could not be loaded.", error);
+        }
+
+        return normalizePublicSocialLinks(Array.isArray(window.defaultSocialLinks) ? window.defaultSocialLinks : []);
+      }
+
+      function normalizePublicSocialLinks(links) {
+        const defaults = Array.isArray(window.defaultSocialLinks) ? window.defaultSocialLinks : [];
+
+        return links.map((link) => {
+          const defaultLink = defaults.find((item) => item.id === link.id) || {};
+          return mergeSettings(defaultLink, link);
+        });
+      }
+
+      function getLocalizedValue(value, language) {
+        if (!value || typeof value !== "object") {
+          return value || "";
+        }
+
+        return value[language] || value.zh || value.en || value.ms || "";
+      }
+
+      function escapeHtml(value) {
+        return String(value || "").replace(/[&<>"']/g, (character) => {
+          const map = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+          };
+          return map[character];
+        });
+      }
+
+      function cssUrl(value) {
+        return `url("${String(value || "assets/slot-hero.png").replace(/["\\]/g, "\\$&")}")`;
+      }
+
+      function setText(selector, value) {
+        const element = document.querySelector(selector);
+        if (element && value) {
+          element.textContent = value;
+        }
+      }
+
+      function applySiteSettings(language) {
+        const settings = getSavedSiteSettings();
+        const copy = sanitizePublicCopy(settings.copy?.[language] || settings.copy?.zh || {}, language);
+        const siteName = getLocalizedValue(settings.siteName, language);
+        const metaTitle = getLocalizedValue(settings.metaTitle, language);
+        const metaDescription = getLocalizedValue(settings.metaDescription, language);
+        liveTransactionsEnabled = settings.liveTransactionsEnabled !== false;
+        applySectionVisibility(settings);
+
+        Object.entries(settings.colors || {}).forEach(([key, value]) => {
+          const variable = colorVariableMap[key];
+          if (variable && value) {
+            document.documentElement.style.setProperty(variable, value);
+          }
+        });
+
+        const backgroundImage = settings.backgroundImage || "assets/slot-hero.png";
+        document.documentElement.style.setProperty("--hero-image", cssUrl(backgroundImage));
+        document.documentElement.style.setProperty("--hero-3d-image", cssUrl(settings.hero3dImage || backgroundImage));
+
+        if (metaTitle) {
+          document.title = metaTitle;
+        }
+
+        const description = document.querySelector('meta[name="description"]');
+        if (description && metaDescription) {
+          description.setAttribute("content", metaDescription);
+        }
+
+        setText(".brand-name", siteName);
+        const brandMark = document.querySelector(".brand-mark");
+        if (brandMark) {
+          brandMark.innerHTML = settings.siteLogoUrl
+            ? `<img src="${escapeHtml(settings.siteLogoUrl)}" alt="${escapeHtml(siteName)} logo" />`
+            : escapeHtml(settings.brandMarkText || "RM");
+        }
+        setText(".hero h1", copy.heroTitle || siteName);
+        setText(".eyebrow", copy.heroEyebrow);
+        setText(".hero-copy", copy.heroCopy);
+        setText(".nav-links a[href='#quick-comparison']", copy.quickComparisonNav || copy.quickComparisonTitle);
+        setText(".nav-links a[href='#top-offers']", copy.offersNav || copy.offersTitle);
+        setText(".nav-links a[href='#steps']", copy.stepsNav || copy.stepsTitle);
+        setText(".nav-links a[href='#faq']", copy.faqNav || copy.faqTitle);
+        setText(".nav-links a[href='#community']", copy.communityNav || "Join Our");
+        setText(".hero-actions .btn-primary", copy.primaryButton);
+        setText(".hero-actions .btn-secondary", copy.secondaryButton);
+        setText(".offers .section-head h2", copy.offersTitle);
+        setText(".offers .section-head p", copy.offersDescription);
+        setText(".comparison .section-head h2", copy.quickComparisonTitle);
+        setText(".comparison .section-head p", copy.quickComparisonDescription);
+        const offerSearch = document.querySelector("[data-offer-search]");
+        if (offerSearch) {
+          offerSearch.placeholder = copy.offerSearchPlaceholder || "Search offers";
+          offerSearch.setAttribute("aria-label", copy.offerSearchPlaceholder || "Search offers");
+        }
+        applyOfferControls(settings, copy);
+        setText(".community .section-head h2", copy.communityTitle);
+        setText(".community .section-head p", copy.communityDescription);
+        setText(".final h2", copy.finalTitle);
+        setText(".final p", copy.finalText);
+        setText(".sticky-copy strong", copy.stickyTitle);
+        setText(".sticky-copy span", copy.stickyText);
+        setText(".sticky-cta .btn", copy.stickyButton);
+        setText(".stat:nth-child(1) strong", copy.stat1Value);
+        setText(".stat:nth-child(1) span", copy.stat1Text);
+        setText(".stat:nth-child(2) strong", copy.stat2Value);
+        setText(".stat:nth-child(2) span", copy.stat2Text);
+        setText(".stat:nth-child(3) strong", copy.stat3Value);
+        setText(".stat:nth-child(3) span", copy.stat3Text);
+        setText(".steps .section-head h2", copy.stepsTitle);
+        setText(".steps .section-head p", copy.stepsDescription);
+        setText(".step-grid .step:nth-child(1) h3", copy.step1Title);
+        setText(".step-grid .step:nth-child(1) p", copy.step1Text);
+        setText(".step-grid .step:nth-child(2) h3", copy.step2Title);
+        setText(".step-grid .step:nth-child(2) p", copy.step2Text);
+        setText(".step-grid .step:nth-child(3) h3", copy.step3Title);
+        setText(".step-grid .step:nth-child(3) p", copy.step3Text);
+        setText(".why .section-head h2", copy.whyTitle);
+        setText(".why .section-head p", copy.whyDescription);
+        setText(".feature-grid .feature:nth-child(1) strong", copy.feature1Title);
+        setText(".feature-grid .feature:nth-child(1) span", copy.feature1Text);
+        setText(".feature-grid .feature:nth-child(2) strong", copy.feature2Title);
+        setText(".feature-grid .feature:nth-child(2) span", copy.feature2Text);
+        setText(".feature-grid .feature:nth-child(3) strong", copy.feature3Title);
+        setText(".feature-grid .feature:nth-child(3) span", copy.feature3Text);
+        setText(".feature-grid .feature:nth-child(4) strong", copy.feature4Title);
+        setText(".feature-grid .feature:nth-child(4) span", copy.feature4Text);
+        setText(".faq .section-head h2", copy.faqTitle);
+        setText(".faq .section-head p", copy.faqDescription);
+        setText(".faq details:nth-of-type(1) summary", copy.faq1Question);
+        setText(".faq details:nth-of-type(1) p", copy.faq1Answer);
+        setText(".faq details:nth-of-type(2) summary", copy.faq2Question);
+        setText(".faq details:nth-of-type(2) p", copy.faq2Answer);
+        setText(".faq details:nth-of-type(3) summary", copy.faq3Question);
+        setText(".faq details:nth-of-type(3) p", copy.faq3Answer);
+        setText(".faq details:nth-of-type(4) summary", copy.faq4Question);
+        setText(".faq details:nth-of-type(4) p", copy.faq4Answer);
+        setText("footer span:nth-child(1)", copy.footerLeft);
+        setText("footer span:nth-child(2)", copy.footerRight);
+      }
+
+      function getClaimText(language, companyName) {
+        const labels = {
+          zh: "领取",
+          en: "Claim",
+          ms: "Claim"
+        };
+
+        return `${labels[language] || labels.zh} ${companyName}`;
+      }
+
+      function getOfferButtonText(offer, language) {
+        return getLocalizedValue(offer.buttonText, language) || getClaimText(language, offer.name);
+      }
+
+      function getOfferUrl(offer) {
+        const link = String(offer.url || "").trim();
+        return link || "#join";
+      }
+
+      function getStarRating(value) {
+        const count = Number(value || 0);
+        if (!Number.isFinite(count)) {
+          return 0;
+        }
+
+        return Math.max(0, Math.min(5, Math.round(count * 10) / 10));
+      }
+
+      function formatRating(value) {
+        const rating = getStarRating(value);
+        return Number.isInteger(rating) ? String(rating) : rating.toFixed(1);
+      }
+
+      function renderRatingStars(value) {
+        const rating = getStarRating(value);
+        if (rating <= 0) {
+          return "";
+        }
+
+        const width = Math.max(0, Math.min(100, (rating / 5) * 100));
+        const label = formatRating(rating);
+        return `<div class="rating-stars" style="--rating-width: ${width}%" aria-label="${label} / 5"><span aria-hidden="true">★★★★★</span><span class="stars-fill" aria-hidden="true">★★★★★</span></div>`;
+      }
+
+      function renderRatingBlock(value) {
+        const stars = renderRatingStars(value);
+        if (!stars) {
+          return "";
+        }
+
+        return `<div class="offer-rating">${stars}<span class="rating-score">${formatRating(value)}/5</span></div>`;
+      }
+
+      function clearLiveTickerTimers() {
+        liveTickerTimers.forEach((timer) => clearInterval(timer));
+        liveTickerTimers.clear();
+        liveTransactionRows.clear();
+      }
+
+      function clearBonusSliderTimers() {
+        bonusSliderTimers.forEach((timer) => clearInterval(timer));
+        bonusSliderTimers.clear();
+      }
+
+      function getBonusLabels(language = activeLanguage) {
+        return bonusPageLabels[language] || bonusPageLabels.zh;
+      }
+
+      function renderBonusPagePanel(offer, language) {
+        const bonusPage = normalizeBonusPageConfig(offer.bonusPage);
+        if (!bonusPage.enabled || !bonusPage.url) {
+          return "";
+        }
+
+        const labels = getBonusLabels(language);
+        return `
+          <div class="bonus-page-panel" data-bonus-page="${escapeHtml(offer.id)}" data-bonus-url="${escapeHtml(bonusPage.url)}">
+            <div class="bonus-page-head">
+              <span>${escapeHtml(labels.title)}</span>
+              <small>${escapeHtml(labels.badge)}</small>
+            </div>
+            <div class="bonus-page-slider">
+              <div class="bonus-page-state">${escapeHtml(labels.loading)}</div>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderBonusPageFallback(panel, url, labels) {
+        const slider = panel.querySelector(".bonus-page-slider");
+        if (!slider) {
+          return;
+        }
+
+        slider.innerHTML = `
+          <div class="bonus-page-state">
+            <span>${escapeHtml(labels.fallback)}</span>
+            <a class="bonus-page-link" href="${escapeHtml(url)}" target="_blank" rel="noopener nofollow">${escapeHtml(labels.button)}</a>
+          </div>
+        `;
+      }
+
+      function getSlideSource(slide) {
+        return typeof slide === "string" ? slide : slide?.src || "";
+      }
+
+      function startBonusSlider(panel, slides, url, labels) {
+        const slider = panel.querySelector(".bonus-page-slider");
+        const panelId = panel.dataset.bonusPage;
+        if (!slider || !panelId || !Array.isArray(slides) || !slides.length) {
+          renderBonusPageFallback(panel, url, labels);
+          return;
+        }
+
+        if (bonusSliderTimers.has(panelId)) {
+          clearInterval(bonusSliderTimers.get(panelId));
+          bonusSliderTimers.delete(panelId);
+        }
+
+        let safeSlides = slides.slice(0, 8).filter((slide) => /^https?:\/\//i.test(getSlideSource(slide)));
+        let index = 0;
+        let timer = null;
+
+        const clearTimer = () => {
+          if (timer) {
+            clearInterval(timer);
+            timer = null;
+          }
+          if (bonusSliderTimers.get(panelId)) {
+            clearInterval(bonusSliderTimers.get(panelId));
+            bonusSliderTimers.delete(panelId);
+          }
+        };
+
+        const drawSlider = () => {
+          clearTimer();
+          if (!safeSlides.length) {
+            renderBonusPageFallback(panel, url, labels);
+            return;
+          }
+
+          index = Math.min(index, safeSlides.length - 1);
+          slider.innerHTML = `
+            <div class="bonus-page-track">
+              ${safeSlides
+                .map((slide, slideIndex) => {
+                  const src = getSlideSource(slide);
+                  const alt = typeof slide === "string" ? `${labels.title} ${slideIndex + 1}` : slide.alt || `${labels.title} ${slideIndex + 1}`;
+                  const imageSrc = `/api/bonus-image?url=${encodeURIComponent(src)}`;
+                  return `<a class="bonus-page-slide" href="${escapeHtml(url)}" target="_blank" rel="noopener nofollow"><img src="${escapeHtml(imageSrc)}" data-original-src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" loading="lazy" /></a>`;
+                })
+                .join("")}
+            </div>
+            <div class="bonus-page-dots">${safeSlides.map((_, dotIndex) => `<span class="bonus-page-dot${dotIndex === index ? " active" : ""}"></span>`).join("")}</div>
+          `;
+
+          const track = slider.querySelector(".bonus-page-track");
+          const dots = Array.from(slider.querySelectorAll(".bonus-page-dot"));
+          const draw = () => {
+            if (track) {
+              track.style.transform = `translateX(-${index * 100}%)`;
+            }
+            dots.forEach((dot, dotIndex) => dot.classList.toggle("active", dotIndex === index));
+          };
+
+          slider.querySelectorAll("img[data-original-src]").forEach((image) => {
+            image.addEventListener(
+              "error",
+              () => {
+                const failedSource = image.dataset.originalSrc || "";
+                safeSlides = safeSlides.filter((slide) => getSlideSource(slide) !== failedSource);
+                index = 0;
+                drawSlider();
+              },
+              { once: true }
+            );
+          });
+
+          draw();
+
+          if (safeSlides.length > 1) {
+            timer = setInterval(() => {
+              index = (index + 1) % safeSlides.length;
+              draw();
+            }, 2600);
+            bonusSliderTimers.set(panelId, timer);
+          }
+        };
+
+        drawSlider();
+      }
+
+      async function hydrateBonusPages(language = activeLanguage) {
+        const labels = getBonusLabels(language);
+        const panels = document.querySelectorAll("[data-bonus-page][data-bonus-url]");
+        panels.forEach(async (panel) => {
+          const url = panel.dataset.bonusUrl || "";
+          if (!/^https?:\/\//i.test(url)) {
+            renderBonusPageFallback(panel, url, labels);
+            return;
+          }
+
+          try {
+            const response = await fetch(`/api/bonus-page?url=${encodeURIComponent(url)}`, { cache: "no-store" });
+            const result = await response.json();
+            if (result.ok && Array.isArray(result.slides) && result.slides.length) {
+              startBonusSlider(panel, result.slides, url, labels);
+              return;
+            }
+          } catch (error) {
+            console.warn("Bonus page could not be loaded.", error);
+          }
+
+          renderBonusPageFallback(panel, url, labels);
+        });
+      }
+
+      function parseLiveFallback(value) {
+        if (Array.isArray(value)) {
+          return value;
+        }
+
+        return String(value || "")
+          .split(/\r?\n/)
+          .map((line) => {
+            const parts = line.split("|").map((part) => part.trim());
+            return {
+              topUser: parts[0] || "",
+              topAmount: parts[1] || "",
+              withdrawUser: parts[2] || "",
+              withdrawAmount: parts[3] || "",
+              game: parts[4] || ""
+            };
+          })
+          .filter((row) => row.topUser || row.topAmount || row.withdrawUser || row.withdrawAmount);
+      }
+
+      function getLiveRows(offer) {
+        const live = normalizeLiveConfig(offer.live);
+        return parseLiveFallback(live.fallback).slice(0, live.rows);
+      }
+
+      function renderLiveRows(rows) {
+        return rows
+          .map((row) => {
+            const topUser = escapeHtml(row.topUser || "-");
+            const topAmount = escapeHtml(row.topAmount || "-");
+            const withdrawUser = escapeHtml(row.withdrawUser || "-");
+            const withdrawAmount = escapeHtml(row.withdrawAmount || "-");
+            const game = escapeHtml(row.game || "");
+            return `
+              <div class="live-row">
+                <span class="live-cell">${topUser}</span>
+                <strong class="live-cell">${topAmount}</strong>
+                <span class="live-cell">${withdrawUser}</span>
+                <strong class="live-cell">${withdrawAmount}</strong>
+                <span class="live-cell">${game || "-"}</span>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      function renderLivePanel(offer) {
+        if (!liveTransactionsEnabled) {
+          return "";
+        }
+
+        const live = normalizeLiveConfig(offer.live);
+        if (!live.enabled) {
+          return "";
+        }
+
+        const fallbackRows = getLiveRows({ live });
+        liveTransactionRows.set(offer.id, fallbackRows);
+        const rows = fallbackRows.length
+          ? renderLiveRows(fallbackRows.slice(0, live.rows))
+          : `<div class="live-row"><span class="live-cell">LIVE</span><strong class="live-cell">...</strong><span class="live-cell">LIVE</span><strong class="live-cell">...</strong><span class="live-cell">...</span></div>`;
+        return `
+          <div class="live-panel" data-live-card="${escapeHtml(offer.id)}" data-live-url="${escapeHtml(live.url)}" data-live-rows="${live.rows}">
+            <div class="live-title"><span>LIVE TRANSACTION</span><small>LANGSUNG</small></div>
+            <div class="live-head"><span>TOP UP</span><span>WITHDRAW</span></div>
+            <div class="live-body">${rows}</div>
+          </div>
+        `;
+      }
+
+      function offerMatchesFilter(offer) {
+        if (offerFilterMode === "featured") {
+          return offer.featured === true;
+        }
+        if (offerFilterMode === "popular") {
+          return offer.popular === true;
+        }
+        if (offerFilterMode === "new") {
+          return offer.isNew === true;
+        }
+        return true;
+      }
+
+      function offerMatchesSearch(offer, language) {
+        const query = offerSearchQuery.trim().toLowerCase();
+        if (!query) {
+          return true;
+        }
+
+        const haystack = [
+          offer.name,
+          offer.amount,
+          offer.badge,
+          getLocalizedValue(offer.bonusLabel, language),
+          getLocalizedValue(offer.rank, language),
+          ...(Array.isArray(getLocalizedValue(offer.bullets, language)) ? getLocalizedValue(offer.bullets, language) : [])
+        ]
+          .join(" ")
+          .toLowerCase();
+
+        return haystack.includes(query);
+      }
+
+      function getVisibleOffers(language, options = {}) {
+        const applySearch = options.search !== false;
+        return getSavedOffers()
+          .filter((offer) => offer && offer.active !== false)
+          .filter((offer) => !applySearch || (offerMatchesFilter(offer) && offerMatchesSearch(offer, language)))
+          .sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
+      }
+
+      function getOfferTags(offer, language) {
+        const settings = getSavedSiteSettings();
+        const copy = sanitizePublicCopy(settings.copy?.[language] || settings.copy?.zh || {}, language);
+        const controls = getOfferTagControls(settings);
+        const tags = [];
+        if (controls.featured !== false && offer.featured === true) {
+          tags.push({ text: copy.offerTagFeatured || "Featured", className: "" });
+        }
+        if (controls.popular !== false && offer.popular === true) {
+          tags.push({ text: copy.offerTagPopular || "Popular", className: "secondary" });
+        }
+        if (controls.new !== false && offer.isNew === true) {
+          tags.push({ text: copy.offerTagNew || "New", className: "secondary" });
+        }
+        return tags.slice(0, 3);
+      }
+
+      function renderQuickComparison(language) {
+        const body = document.querySelector("[data-comparison-body]");
+        if (!body) {
+          return;
+        }
+
+        const settings = getSavedSiteSettings();
+        const copy = sanitizePublicCopy(settings.copy?.[language] || settings.copy?.zh || {}, language);
+        const columns = getQuickComparisonColumns(settings);
+        const limit = Math.max(1, Math.min(20, Math.round(Number(settings.quickComparisonLimit || 6))));
+        const rows = getVisibleOffers(language, { search: false }).slice(0, limit);
+        applyOfferControls(settings, copy);
+        if (!rows.length) {
+          body.innerHTML = `<tr><td colspan="${columns.length}">${escapeHtml(copy.quickComparisonEmpty || copy.emptyOffersText || "No active offers yet.")}</td></tr>`;
+          return;
+        }
+
+        body.innerHTML = rows
+          .map((offer, index) => {
+            const name = escapeHtml(offer.name);
+            const amount = escapeHtml(offer.amount || "-");
+            const bonus = escapeHtml(getLocalizedValue(offer.bonusLabel, language) || "-");
+            const rating = getStarRating(offer.starRating) ? `${formatRating(offer.starRating)}/5` : "-";
+            const actionText = escapeHtml(copy.quickComparisonAction || "View");
+            const cells = {
+              company: `<td data-label="${escapeHtml(getQuickComparisonHeader(copy, "company"))}"><span class="quick-brand"><span class="quick-rank">#${index + 1}</span>${name}</span></td>`,
+              amount: `<td data-label="${escapeHtml(getQuickComparisonHeader(copy, "amount"))}"><span class="quick-amount">${amount}</span></td>`,
+              bonus: `<td data-label="${escapeHtml(getQuickComparisonHeader(copy, "bonus"))}">${bonus}</td>`,
+              rating: `<td data-label="${escapeHtml(getQuickComparisonHeader(copy, "rating"))}">${escapeHtml(rating)}</td>`,
+              action: `<td data-label="${escapeHtml(getQuickComparisonHeader(copy, "action"))}"><a class="quick-action" href="${escapeHtml(getOfferUrl(offer))}">${actionText}</a></td>`
+            };
+            return `<tr>${columns.map((column) => cells[column]).join("")}</tr>`;
+          })
+          .join("");
+      }
+
+      function startLiveTicker(panel, rows, visibleRows) {
+        const liveBody = panel.querySelector(".live-body");
+        const panelId = panel.dataset.liveCard;
+        if (!liveBody || !panelId || !Array.isArray(rows) || !rows.length) {
+          return;
+        }
+
+        if (liveTickerTimers.has(panelId)) {
+          clearInterval(liveTickerTimers.get(panelId));
+          liveTickerTimers.delete(panelId);
+        }
+
+        const limit = Math.max(2, Math.min(3, Number(visibleRows || 3)));
+        let offset = 0;
+        const draw = () => {
+          const visible = Array.from({ length: Math.min(limit, rows.length) }, (_, index) => rows[(offset + index) % rows.length]);
+          liveBody.innerHTML = renderLiveRows(visible);
+        };
+
+        draw();
+
+        if (rows.length > limit) {
+          const timer = setInterval(() => {
+            offset = (offset + 1) % rows.length;
+            draw();
+          }, 1800);
+          liveTickerTimers.set(panelId, timer);
+        }
+      }
+
+      async function hydrateLiveTransactions() {
+        const panels = document.querySelectorAll("[data-live-card][data-live-url]");
+        panels.forEach(async (panel) => {
+          const url = panel.dataset.liveUrl;
+          const visibleRows = Math.max(2, Math.min(3, Number(panel.dataset.liveRows || 3)));
+          const fallbackRows = liveTransactionRows.get(panel.dataset.liveCard) || [];
+          startLiveTicker(panel, fallbackRows, visibleRows);
+
+          if (!url || !/^https?:\/\//i.test(url)) {
+            return;
+          }
+
+          try {
+            const fetchRows = Math.max(8, visibleRows);
+            const response = await fetch(`/api/live-transactions?url=${encodeURIComponent(url)}&rows=${fetchRows}`);
+            const result = await response.json();
+            if (result.ok && Array.isArray(result.rows) && result.rows.length) {
+              startLiveTicker(panel, result.rows, visibleRows);
+            }
+          } catch (error) {
+            console.warn("Live transactions could not be loaded.", error);
+          }
+        });
+      }
+
+      function renderOffers(language) {
+        const offerGrid = document.querySelector(".offer-grid");
+        if (!offerGrid) {
+          return;
+        }
+
+        clearLiveTickerTimers();
+        clearBonusSliderTimers();
+
+        const offers = getVisibleOffers(language);
+
+        if (!offers.length) {
+          const emptyText = {
+            zh: "后台暂时没有启用的公司。",
+            en: "No active companies are available yet.",
+            ms: "Tiada syarikat aktif buat masa ini."
+          };
+          offerGrid.innerHTML = `<p class="empty-offers">${escapeHtml(emptyText[language] || emptyText.zh)}</p>`;
+          return;
+        }
+
+        offerGrid.innerHTML = offers
+          .map((offer, index) => {
+            const name = escapeHtml(offer.name);
+            const ratingBlock = offer.showStars === false ? "" : renderRatingBlock(offer.starRating);
+            const bonusLabel = escapeHtml(getLocalizedValue(offer.bonusLabel, language));
+            const buttonText = escapeHtml(getOfferButtonText(offer, language));
+            const offerUrl = escapeHtml(getOfferUrl(offer));
+            const bullets = getLocalizedValue(offer.bullets, language);
+            const livePanel = renderLivePanel(offer);
+            const bonusPagePanel = renderBonusPagePanel(offer, language);
+            const showBonusLabel = offer.showBonusLabel !== false;
+            const showBullets = offer.showBullets !== false;
+            const bulletLimit = Math.max(0, Math.min(3, Math.round(Number(offer.bulletLimit ?? 3) || 0)));
+            const logo = offer.logoUrl
+              ? `<img src="${escapeHtml(offer.logoUrl)}" alt="${name} logo" loading="lazy" />`
+              : escapeHtml(offer.badge || name.slice(0, 2).toUpperCase());
+            const bulletItems = showBullets ? (Array.isArray(bullets) ? bullets : [])
+              .filter(Boolean)
+              .slice(0, bulletLimit)
+              .map((bullet) => `<li>${escapeHtml(bullet)}</li>`)
+              .join("") : "";
+            const bonusText = showBonusLabel && bonusLabel ? `<span>${bonusLabel}</span>` : "";
+            const bulletList = bulletItems ? `<ul class="ticks">${bulletItems}</ul>` : "";
+            const tags = getOfferTags(offer, language)
+              .map((tag) => `<span class="offer-tag ${escapeHtml(tag.className)}">${escapeHtml(tag.text)}</span>`)
+              .join("");
+            const tagBlock = tags ? `<div class="offer-tags">${tags}</div>` : "";
+
+            return `
+              <article class="offer-card">
+                <div class="offer-top">
+                  <div class="brand-badge">${logo}</div>
+                  ${tagBlock}
+                  <div class="offer-meta">
+                    ${ratingBlock}
+                  </div>
+                </div>
+                <div class="bonus">
+                  <strong>${name}</strong>
+                  ${bonusText}
+                </div>
+                ${bulletList}
+                ${bonusPagePanel}
+                ${livePanel}
+                <a class="btn btn-primary" href="${offerUrl}">${buttonText}</a>
+              </article>
+            `;
+          })
+          .join("");
+        hydrateBonusPages(language);
+        hydrateLiveTransactions();
+      }
+
+      function getSocialButtonText(link, language) {
+        return getLocalizedValue(link.buttonText, language) || getLocalizedValue(link.title, language) || link.name;
+      }
+
+      function renderSocialLinks(language) {
+        const socialGrid = document.querySelector(".social-grid");
+        if (!socialGrid) {
+          return;
+        }
+
+        const links = getSavedSocialLinks()
+          .filter((link) => link && link.active !== false)
+          .sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
+
+        if (!links.length) {
+          const emptyText = {
+            zh: "后台暂时没有启用社群入口。",
+            en: "No active social channels are available yet.",
+            ms: "Tiada channel sosial aktif buat masa ini."
+          };
+          socialGrid.innerHTML = `<p class="empty-offers">${escapeHtml(emptyText[language] || emptyText.zh)}</p>`;
+          return;
+        }
+
+        socialGrid.innerHTML = links
+          .map((link) => {
+            const name = escapeHtml(link.name);
+            const title = escapeHtml(getLocalizedValue(link.title, language) || link.name);
+            const description = escapeHtml(getLocalizedValue(link.description, language));
+            const buttonText = escapeHtml(getSocialButtonText(link, language));
+            const socialUrl = escapeHtml(getOfferUrl(link));
+            const logo = link.logoUrl
+              ? `<img src="${escapeHtml(link.logoUrl)}" alt="${name} logo" loading="lazy" />`
+              : escapeHtml(link.badge || name.slice(0, 2).toUpperCase());
+
+            return `
+              <article class="social-card">
+                <div class="social-top">
+                  <div class="social-icon">${logo}</div>
+                  <h3>${title}</h3>
+                </div>
+                <p>${description}</p>
+                <a class="btn btn-secondary" href="${socialUrl}">${buttonText}</a>
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      async function loadServerSiteData() {
+        try {
+          const response = await fetch("/api/site-data", { cache: "no-store" });
+          if (!response.ok) {
+            return false;
+          }
+
+          const result = await response.json();
+          if (result.ok && result.hasServerData && result.data) {
+            serverSiteData = result.data;
+            return true;
+          }
+        } catch (error) {
+          console.warn("Server site data could not be loaded.", error);
+        }
+
+        return false;
+      }
+
+      function getInitialLanguage() {
+        return getPublicLanguage();
+      }
+
+      function setLanguage(language) {
+        const copy = languageCopy[language] || languageCopy.zh;
+        activeLanguage = language;
+        document.documentElement.lang = copy.htmlLang;
+        document.title = copy.title;
+
+        const description = document.querySelector('meta[name="description"]');
+        if (description) {
+          description.setAttribute("content", copy.description);
+        }
+
+        const switcher = document.querySelector(".language-switch");
+        if (switcher) {
+          switcher.setAttribute("aria-label", copy.switchLabel);
+        }
+
+        Object.entries(copy.text).forEach(([selector, value]) => {
+          const element = document.querySelector(selector);
+          if (element) {
+            element.textContent = value;
+          }
+        });
+
+        applySiteSettings(language);
+        renderQuickComparison(language);
+        renderOffers(language);
+        renderSocialLinks(language);
+      }
+
+      document.querySelectorAll(".lang-btn").forEach((button) => {
+        button.addEventListener("click", () => setLanguage(button.dataset.lang));
+      });
+
+      const offerSearchInput = document.querySelector("[data-offer-search]");
+      if (offerSearchInput) {
+        offerSearchInput.addEventListener("input", () => {
+          offerSearchQuery = offerSearchInput.value || "";
+          renderOffers(activeLanguage);
+        });
+      }
+
+      document.querySelectorAll("[data-filter]").forEach((button) => {
+        button.addEventListener("click", () => {
+          offerFilterMode = button.dataset.filter || "all";
+          document.querySelectorAll("[data-filter]").forEach((item) => {
+            item.setAttribute("aria-pressed", item === button ? "true" : "false");
+          });
+          renderOffers(activeLanguage);
+        });
+      });
+
+      function startMalaysiaClock() {
+        const clock = document.querySelector("[data-malaysia-clock]");
+        const dateTarget = document.querySelector("[data-clock-date]");
+        const timeTarget = document.querySelector("[data-clock-time]");
+        if (!clock || !dateTarget || !timeTarget) {
+          return;
+        }
+
+        const dateFormatter = new Intl.DateTimeFormat("en-GB", {
+          timeZone: "Asia/Kuala_Lumpur",
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric"
+        });
+        const timeFormatter = new Intl.DateTimeFormat("en-MY", {
+          timeZone: "Asia/Kuala_Lumpur",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true
+        });
+
+        const updateClock = () => {
+          const now = new Date();
+          dateTarget.textContent = dateFormatter.format(now);
+          timeTarget.textContent = timeFormatter.format(now).replace(/\s+/g, " ").toLowerCase();
+          clock.dateTime = now.toISOString();
+        };
+
+        updateClock();
+        setInterval(updateClock, 1000);
+      }
+
+      window.addEventListener("storage", (event) => {
+        if (event.key === offerStorageKey || event.key === siteSettingsStorageKey || event.key === socialStorageKey) {
+          applySiteSettings(activeLanguage);
+          renderQuickComparison(activeLanguage);
+          renderOffers(activeLanguage);
+          renderSocialLinks(activeLanguage);
+        }
+      });
+
+      async function initializePage() {
+        await loadServerSiteData();
+        activeLanguage = getInitialLanguage();
+        setLanguage(activeLanguage);
+        if (typeof window.releaseLandingLanguage === "function") {
+          window.releaseLandingLanguage();
+        } else {
+          document.documentElement.classList.remove("language-pending");
+          document.documentElement.classList.add("language-ready");
+        }
+      }
+
+      startMalaysiaClock();
+      initializePage();
+    </script>
+  </body>
+</html>
