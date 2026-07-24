@@ -2024,11 +2024,11 @@
             <table class="quick-table" aria-label="Quick bonus comparison">
               <thead>
                 <tr>
-                  <th>Company</th>
-                  <th>Free Credit</th>
-                  <th>Bonus</th>
-                  <th>Rating</th>
-                  <th>Action</th>
+                  <th data-quick-column="company">Company</th>
+                  <th data-quick-column="amount">Free Credit</th>
+                  <th data-quick-column="bonus">Bonus</th>
+                  <th data-quick-column="rating">Rating</th>
+                  <th data-quick-column="action">Action</th>
                 </tr>
               </thead>
               <tbody data-comparison-body>
@@ -2690,6 +2690,77 @@
         });
       }
 
+      function getOfferFilterControls(settings = getSavedSiteSettings()) {
+        return {
+          all: true,
+          featured: true,
+          popular: true,
+          new: true,
+          ...(settings.offerFilterControls || {})
+        };
+      }
+
+      function getOfferTagControls(settings = getSavedSiteSettings()) {
+        return {
+          featured: true,
+          popular: true,
+          new: true,
+          ...(settings.offerTagControls || {})
+        };
+      }
+
+      function getQuickComparisonColumns(settings = getSavedSiteSettings()) {
+        const controls = {
+          company: true,
+          amount: true,
+          bonus: true,
+          rating: true,
+          action: true,
+          ...(settings.quickComparisonColumns || {})
+        };
+        const columns = ["company", "amount", "bonus", "rating", "action"].filter((key) => controls[key] !== false);
+        return columns.length ? columns : ["company"];
+      }
+
+      function getQuickComparisonHeader(copy, key) {
+        const labels = {
+          company: copy.quickComparisonCompanyHeader || "Company",
+          amount: copy.quickComparisonAmountHeader || "Free Credit",
+          bonus: copy.quickComparisonBonusHeader || "Bonus",
+          rating: copy.quickComparisonRatingHeader || "Rating",
+          action: copy.quickComparisonActionHeader || "Action"
+        };
+        return labels[key] || key;
+      }
+
+      function applyOfferControls(settings, copy) {
+        const filterControls = getOfferFilterControls(settings);
+        if (filterControls[offerFilterMode] === false) {
+          offerFilterMode = "all";
+        }
+
+        const filterLabels = {
+          all: copy.offerFilterAll || "All",
+          featured: copy.offerFilterFeatured || "Featured",
+          popular: copy.offerFilterPopular || "Popular",
+          new: copy.offerFilterNew || "New"
+        };
+
+        document.querySelectorAll("[data-filter]").forEach((button) => {
+          const key = button.dataset.filter;
+          button.hidden = filterControls[key] === false;
+          button.textContent = filterLabels[key] || key;
+          button.setAttribute("aria-pressed", key === offerFilterMode ? "true" : "false");
+        });
+
+        const columns = getQuickComparisonColumns(settings);
+        document.querySelectorAll("[data-quick-column]").forEach((cell) => {
+          const key = cell.dataset.quickColumn;
+          cell.hidden = !columns.includes(key);
+          cell.textContent = getQuickComparisonHeader(copy, key);
+        });
+      }
+
       function getSavedOffers() {
         if (serverSiteData && !previewMode && Array.isArray(serverSiteData.offers)) {
           return normalizePublicOffers(serverSiteData.offers);
@@ -2866,6 +2937,7 @@
           offerSearch.placeholder = copy.offerSearchPlaceholder || "Search offers";
           offerSearch.setAttribute("aria-label", copy.offerSearchPlaceholder || "Search offers");
         }
+        applyOfferControls(settings, copy);
         setText(".community .section-head h2", copy.communityTitle);
         setText(".community .section-head p", copy.communityDescription);
         setText(".final h2", copy.finalTitle);
@@ -3200,14 +3272,13 @@
 
       function offerMatchesFilter(offer) {
         if (offerFilterMode === "featured") {
-          return offer.featured === true || Number(offer.order || 0) === 1;
+          return offer.featured === true;
         }
         if (offerFilterMode === "popular") {
-          return offer.popular === true || getStarRating(offer.starRating) >= 4.8;
+          return offer.popular === true;
         }
         if (offerFilterMode === "new") {
-          const rankText = `${getLocalizedValue(offer.rank, activeLanguage)} ${offer.badge || ""}`.toLowerCase();
-          return offer.isNew === true || rankText.includes("new") || rankText.includes("baru") || rankText.includes("新");
+          return offer.isNew === true;
         }
         return true;
       }
@@ -3240,16 +3311,19 @@
           .sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
       }
 
-      function getOfferTags(offer, index) {
+      function getOfferTags(offer, language) {
+        const settings = getSavedSiteSettings();
+        const copy = sanitizePublicCopy(settings.copy?.[language] || settings.copy?.zh || {}, language);
+        const controls = getOfferTagControls(settings);
         const tags = [];
-        if (offer.featured === true || index === 0) {
-          tags.push({ text: "Featured", className: "" });
+        if (controls.featured !== false && offer.featured === true) {
+          tags.push({ text: copy.offerTagFeatured || "Featured", className: "" });
         }
-        if (offer.popular === true || getStarRating(offer.starRating) >= 4.8) {
-          tags.push({ text: "Popular", className: "secondary" });
+        if (controls.popular !== false && offer.popular === true) {
+          tags.push({ text: copy.offerTagPopular || "Popular", className: "secondary" });
         }
-        if (offer.isNew === true) {
-          tags.push({ text: "New", className: "secondary" });
+        if (controls.new !== false && offer.isNew === true) {
+          tags.push({ text: copy.offerTagNew || "New", className: "secondary" });
         }
         return tags.slice(0, 3);
       }
@@ -3262,9 +3336,12 @@
 
         const settings = getSavedSiteSettings();
         const copy = sanitizePublicCopy(settings.copy?.[language] || settings.copy?.zh || {}, language);
-        const rows = getVisibleOffers(language, { search: false }).slice(0, 6);
+        const columns = getQuickComparisonColumns(settings);
+        const limit = Math.max(1, Math.min(20, Math.round(Number(settings.quickComparisonLimit || 6))));
+        const rows = getVisibleOffers(language, { search: false }).slice(0, limit);
+        applyOfferControls(settings, copy);
         if (!rows.length) {
-          body.innerHTML = `<tr><td colspan="5">${escapeHtml(copy.emptyOffersText || "No active offers yet.")}</td></tr>`;
+          body.innerHTML = `<tr><td colspan="${columns.length}">${escapeHtml(copy.quickComparisonEmpty || copy.emptyOffersText || "No active offers yet.")}</td></tr>`;
           return;
         }
 
@@ -3275,15 +3352,14 @@
             const bonus = escapeHtml(getLocalizedValue(offer.bonusLabel, language) || "-");
             const rating = getStarRating(offer.starRating) ? `${formatRating(offer.starRating)}/5` : "-";
             const actionText = escapeHtml(copy.quickComparisonAction || "View");
-            return `
-              <tr>
-                <td data-label="Company"><span class="quick-brand"><span class="quick-rank">#${index + 1}</span>${name}</span></td>
-                <td data-label="Free Credit"><span class="quick-amount">${amount}</span></td>
-                <td data-label="Bonus">${bonus}</td>
-                <td data-label="Rating">${escapeHtml(rating)}</td>
-                <td data-label="Action"><a class="quick-action" href="${escapeHtml(getOfferUrl(offer))}">${actionText}</a></td>
-              </tr>
-            `;
+            const cells = {
+              company: `<td data-label="${escapeHtml(getQuickComparisonHeader(copy, "company"))}"><span class="quick-brand"><span class="quick-rank">#${index + 1}</span>${name}</span></td>`,
+              amount: `<td data-label="${escapeHtml(getQuickComparisonHeader(copy, "amount"))}"><span class="quick-amount">${amount}</span></td>`,
+              bonus: `<td data-label="${escapeHtml(getQuickComparisonHeader(copy, "bonus"))}">${bonus}</td>`,
+              rating: `<td data-label="${escapeHtml(getQuickComparisonHeader(copy, "rating"))}">${escapeHtml(rating)}</td>`,
+              action: `<td data-label="${escapeHtml(getQuickComparisonHeader(copy, "action"))}"><a class="quick-action" href="${escapeHtml(getOfferUrl(offer))}">${actionText}</a></td>`
+            };
+            return `<tr>${columns.map((column) => cells[column]).join("")}</tr>`;
           })
           .join("");
       }
@@ -3387,7 +3463,7 @@
               .join("") : "";
             const bonusText = showBonusLabel && bonusLabel ? `<span>${bonusLabel}</span>` : "";
             const bulletList = bulletItems ? `<ul class="ticks">${bulletItems}</ul>` : "";
-            const tags = getOfferTags(offer, index)
+            const tags = getOfferTags(offer, language)
               .map((tag) => `<span class="offer-tag ${escapeHtml(tag.className)}">${escapeHtml(tag.text)}</span>`)
               .join("");
             const tagBlock = tags ? `<div class="offer-tags">${tags}</div>` : "";

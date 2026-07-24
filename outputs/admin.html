@@ -917,6 +917,39 @@
                   <label class="check-row"><input id="section-sticky-cta" type="checkbox" checked /><span>手机底部固定按钮</span></label>
                 </div>
               </div>
+              <div class="field full">
+                <label>优惠筛选按钮开关</label>
+                <div class="form-grid compact-grid">
+                  <label class="check-row"><input id="filter-all" type="checkbox" checked /><span>All / 全部</span></label>
+                  <label class="check-row"><input id="filter-featured" type="checkbox" checked /><span>Featured / 主推</span></label>
+                  <label class="check-row"><input id="filter-popular" type="checkbox" checked /><span>Popular / 热门</span></label>
+                  <label class="check-row"><input id="filter-new" type="checkbox" checked /><span>New / 新优惠</span></label>
+                </div>
+                <p class="hint">这里只控制前台筛选按钮显示；公司是否属于主推 / 热门 / 新优惠，要在每家公司资料里单独勾。</p>
+              </div>
+              <div class="field full">
+                <label>公司卡片标签开关</label>
+                <div class="form-grid compact-grid">
+                  <label class="check-row"><input id="tag-featured" type="checkbox" checked /><span>显示主推标签</span></label>
+                  <label class="check-row"><input id="tag-popular" type="checkbox" checked /><span>显示热门标签</span></label>
+                  <label class="check-row"><input id="tag-new" type="checkbox" checked /><span>显示新优惠标签</span></label>
+                </div>
+                <p class="hint">前台不会再自动判断标签，只会显示公司资料里有勾选的标签。</p>
+              </div>
+              <div class="field full">
+                <label>Quick Bonus Comparison 栏目开关</label>
+                <div class="form-grid compact-grid">
+                  <label class="check-row"><input id="quick-column-company" type="checkbox" checked /><span>Company</span></label>
+                  <label class="check-row"><input id="quick-column-amount" type="checkbox" checked /><span>Free Credit</span></label>
+                  <label class="check-row"><input id="quick-column-bonus" type="checkbox" checked /><span>Bonus</span></label>
+                  <label class="check-row"><input id="quick-column-rating" type="checkbox" checked /><span>Rating</span></label>
+                  <label class="check-row"><input id="quick-column-action" type="checkbox" checked /><span>Action</span></label>
+                </div>
+              </div>
+              <div class="field">
+                <label for="quick-comparison-limit">Quick Bonus 显示几家公司</label>
+                <input id="quick-comparison-limit" type="number" min="1" max="20" step="1" />
+              </div>
             </div>
 
             <div class="color-settings">
@@ -1863,6 +1896,24 @@
         footer: "section-footer",
         stickyCta: "section-sticky-cta"
       };
+      const offerFilterFields = {
+        all: "filter-all",
+        featured: "filter-featured",
+        popular: "filter-popular",
+        new: "filter-new"
+      };
+      const offerTagFields = {
+        featured: "tag-featured",
+        popular: "tag-popular",
+        new: "tag-new"
+      };
+      const quickComparisonColumnFields = {
+        company: "quick-column-company",
+        amount: "quick-column-amount",
+        bonus: "quick-column-bonus",
+        rating: "quick-column-rating",
+        action: "quick-column-action"
+      };
       const basicCopyFields = {
         heroEyebrow: "hero-eyebrow",
         heroTitle: "hero-title",
@@ -1902,7 +1953,20 @@
             ["quickComparisonTitle", "快速比较标题", "quick-comparison-title"],
             ["quickComparisonDescription", "快速比较说明", "quick-comparison-description", "textarea"],
             ["quickComparisonAction", "快速比较按钮文字", "quick-comparison-action"],
-            ["offerSearchPlaceholder", "搜索框提示", "offer-search-placeholder"]
+            ["quickComparisonCompanyHeader", "表头：公司", "quick-comparison-company-header"],
+            ["quickComparisonAmountHeader", "表头：Free Credit", "quick-comparison-amount-header"],
+            ["quickComparisonBonusHeader", "表头：Bonus", "quick-comparison-bonus-header"],
+            ["quickComparisonRatingHeader", "表头：Rating", "quick-comparison-rating-header"],
+            ["quickComparisonActionHeader", "表头：Action", "quick-comparison-action-header"],
+            ["quickComparisonEmpty", "快速比较没资料时文字", "quick-comparison-empty"],
+            ["offerSearchPlaceholder", "搜索框提示", "offer-search-placeholder"],
+            ["offerFilterAll", "筛选按钮：全部", "offer-filter-all"],
+            ["offerFilterFeatured", "筛选按钮：主推", "offer-filter-featured"],
+            ["offerFilterPopular", "筛选按钮：热门", "offer-filter-popular"],
+            ["offerFilterNew", "筛选按钮：新优惠", "offer-filter-new"],
+            ["offerTagFeatured", "卡片标签：主推", "offer-tag-featured"],
+            ["offerTagPopular", "卡片标签：热门", "offer-tag-popular"],
+            ["offerTagNew", "卡片标签：新优惠", "offer-tag-new"]
           ]
         },
         {
@@ -3050,6 +3114,25 @@
             checkbox.checked = siteSettings.sections?.[key] !== false;
           }
         });
+        Object.entries(offerFilterFields).forEach(([key, id]) => {
+          const checkbox = document.querySelector(`#${id}`);
+          if (checkbox) {
+            checkbox.checked = siteSettings.offerFilterControls?.[key] !== false;
+          }
+        });
+        Object.entries(offerTagFields).forEach(([key, id]) => {
+          const checkbox = document.querySelector(`#${id}`);
+          if (checkbox) {
+            checkbox.checked = siteSettings.offerTagControls?.[key] !== false;
+          }
+        });
+        Object.entries(quickComparisonColumnFields).forEach(([key, id]) => {
+          const checkbox = document.querySelector(`#${id}`);
+          if (checkbox) {
+            checkbox.checked = siteSettings.quickComparisonColumns?.[key] !== false;
+          }
+        });
+        setValue("quick-comparison-limit", siteSettings.quickComparisonLimit || 6);
 
         Object.entries(colorFields).forEach(([key, id]) => {
           setValue(id, siteSettings.colors?.[key]);
@@ -3076,6 +3159,10 @@
           defaultLanguage: getValue("default-language") || "zh",
           enabledLanguages: {},
           sections: {},
+          offerFilterControls: {},
+          offerTagControls: {},
+          quickComparisonColumns: {},
+          quickComparisonLimit: Math.max(1, Math.min(20, Math.round(Number(getValue("quick-comparison-limit") || 6)))),
           liveTransactionsEnabled: document.querySelector("#live-transactions-enabled").checked,
           colors: {},
           siteName: {},
@@ -3093,6 +3180,15 @@
         });
         Object.entries(sectionFields).forEach(([key, id]) => {
           nextSettings.sections[key] = document.querySelector(`#${id}`)?.checked !== false;
+        });
+        Object.entries(offerFilterFields).forEach(([key, id]) => {
+          nextSettings.offerFilterControls[key] = document.querySelector(`#${id}`)?.checked !== false;
+        });
+        Object.entries(offerTagFields).forEach(([key, id]) => {
+          nextSettings.offerTagControls[key] = document.querySelector(`#${id}`)?.checked !== false;
+        });
+        Object.entries(quickComparisonColumnFields).forEach(([key, id]) => {
+          nextSettings.quickComparisonColumns[key] = document.querySelector(`#${id}`)?.checked !== false;
         });
 
         languages.forEach((language) => {

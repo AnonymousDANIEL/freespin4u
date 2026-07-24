@@ -127,6 +127,9 @@ SESSION_SECRET=自己生成一串很长的随机文字
 - 前台语言可以在后台指定，语言切换按钮会隐藏，客人不会看到三语切换按钮
 - 首页增加快速比较表、搜索和 Featured / Popular / New 过滤，让客人更快找到要加入的平台
 - 后台可以 Save Draft、Preview、Publish，并可开关 Hero、快速比较、优惠列表、步骤、FAQ、Join Our、底部 CTA、Footer、手机底部固定按钮等区块
+- Featured / Popular / New 不会再由前台自动判断；只有后台每家公司勾选了，对应标签和筛选结果才会出现
+- 后台可单独开关 All / Featured / Popular / New 筛选按钮，也可单独开关公司卡片上的主推 / 热门 / 新优惠标签
+- Quick Bonus Comparison 可在后台更改标题、说明、按钮文字、表头文字、空资料文字、显示公司数量，并可开关 Company / Free Credit / Bonus / Rating / Action 每一栏
 
 ## Domain 自动连接说明
 
