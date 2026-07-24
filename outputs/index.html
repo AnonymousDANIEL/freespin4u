@@ -16,14 +16,8 @@
           root.classList.add("language-ready");
         };
 
-        try {
-          var saved = localStorage.getItem("landingLanguage");
-          var language = saved === "en" || saved === "ms" || saved === "zh" ? saved : "zh";
-          root.dataset.savedLanguage = language;
-          root.lang = language === "en" ? "en" : language === "ms" ? "ms" : "zh-Hans";
-        } catch (error) {
-          root.dataset.savedLanguage = "zh";
-        }
+        root.dataset.savedLanguage = "zh";
+        root.lang = "zh-Hans";
 
         root.classList.add("language-pending");
         window.releaseLandingLanguage = release;
@@ -344,7 +338,7 @@
       }
 
       .language-switch {
-        display: inline-flex;
+        display: none;
         align-items: center;
         gap: 4px;
         padding: 4px;
@@ -695,6 +689,75 @@
           #0c1118;
       }
 
+      [data-section][hidden] {
+        display: none !important;
+      }
+
+      .quick-table-wrap {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        overflow: hidden;
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)),
+          var(--panel);
+        box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      }
+
+      .quick-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .quick-table th,
+      .quick-table td {
+        padding: 14px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--muted);
+        text-align: left;
+        vertical-align: middle;
+      }
+
+      .quick-table th {
+        color: var(--paper);
+        background: rgba(255, 255, 255, 0.055);
+        font-size: 13px;
+        text-transform: uppercase;
+      }
+
+      .quick-table tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .quick-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--paper);
+        font-weight: 900;
+      }
+
+      .quick-rank {
+        min-width: 34px;
+        color: var(--gold);
+      }
+
+      .quick-amount {
+        color: var(--gold);
+        font-weight: 900;
+      }
+
+      .quick-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 34px;
+        padding: 8px 12px;
+        border-radius: 7px;
+        color: var(--ink);
+        background: linear-gradient(180deg, var(--gold), var(--gold-2));
+        font-weight: 900;
+      }
+
       .compare-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -767,6 +830,55 @@
         background:
           linear-gradient(180deg, rgba(31, 224, 197, 0.035), transparent 32%),
           var(--bg);
+      }
+
+      .offer-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .offer-search {
+        width: min(100%, 360px);
+        min-height: 44px;
+        padding: 10px 13px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.07);
+        outline: 0;
+      }
+
+      .offer-search:focus {
+        border-color: rgba(31, 224, 197, 0.55);
+        box-shadow: 0 0 0 3px rgba(31, 224, 197, 0.12);
+      }
+
+      .offer-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .filter-btn {
+        min-height: 38px;
+        padding: 8px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.065);
+        font: inherit;
+        font-size: 13px;
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      .filter-btn[aria-pressed="true"] {
+        color: var(--ink);
+        border-color: rgba(255, 209, 92, 0.66);
+        background: linear-gradient(180deg, var(--gold), var(--gold-2));
       }
 
       .offer-grid {
@@ -868,6 +980,32 @@
         margin: 0;
         font-size: 22px;
         letter-spacing: 0;
+      }
+
+      .offer-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 2px;
+      }
+
+      .offer-tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 24px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        color: var(--ink);
+        background: linear-gradient(180deg, var(--gold), var(--gold-2));
+        font-size: 11px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .offer-tag.secondary {
+        color: var(--paper);
+        background: rgba(31, 224, 197, 0.18);
+        border: 1px solid rgba(31, 224, 197, 0.28);
       }
 
       .rank {
@@ -1513,6 +1651,52 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
+        .quick-table {
+          min-width: 0;
+        }
+
+        .quick-table-wrap {
+          overflow: hidden;
+        }
+
+        .quick-table thead {
+          display: none;
+        }
+
+        .quick-table,
+        .quick-table tbody,
+        .quick-table tr,
+        .quick-table td {
+          display: block;
+          width: 100%;
+        }
+
+        .quick-table tr {
+          padding: 12px 14px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .quick-table tr:last-child {
+          border-bottom: 0;
+        }
+
+        .quick-table td {
+          display: flex;
+          justify-content: space-between;
+          gap: 14px;
+          padding: 6px 0;
+          border-bottom: 0;
+        }
+
+        .quick-table td::before {
+          content: attr(data-label);
+          color: var(--muted);
+          font-size: 12px;
+          font-weight: 900;
+          text-transform: uppercase;
+        }
+        }
+
         .final-actions {
           margin-top: 18px;
         }
@@ -1627,6 +1811,15 @@
           margin-top: 20px;
         }
 
+        .offer-toolbar {
+          display: grid;
+          gap: 10px;
+        }
+
+        .offer-search {
+          width: 100%;
+        }
+
         .stat {
           min-height: 72px;
           padding: 10px 8px;
@@ -1716,6 +1909,25 @@
           padding-right: 12px;
         }
       }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.001ms !important;
+        }
+
+        .hero-3d-card,
+        .offer-card,
+        .compare-card,
+        .social-card,
+        .step {
+          transform: none !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1727,7 +1939,7 @@
         </a>
         <div class="nav-actions">
           <nav class="nav-links" aria-label="Primary">
-            <a href="#comparison">网页判断</a>
+            <a href="#quick-comparison">快速比较</a>
             <a href="#top-offers">热门优惠</a>
             <a href="#steps">领取步骤</a>
             <a href="#faq">FAQ</a>
@@ -1754,7 +1966,7 @@
     </header>
 
     <main id="top">
-      <section class="hero" aria-label="Free credit slot landing page">
+      <section class="hero" aria-label="Free credit slot landing page" data-section="hero">
         <div class="shell">
           <div class="hero-layout">
             <div class="hero-content">
@@ -1765,7 +1977,7 @@
               </p>
               <div class="hero-actions">
                 <a class="btn btn-primary" href="#top-offers">马上看优惠</a>
-                <a class="btn btn-secondary" href="#comparison">先看哪个网页更好</a>
+                <a class="btn btn-secondary" href="#quick-comparison">快速比较优惠</a>
               </div>
               <div class="stats" aria-label="Key selling points">
                 <div class="stat">
@@ -1802,42 +2014,47 @@
         </div>
       </section>
 
-      <section class="comparison" id="comparison">
+      <section class="comparison" id="quick-comparison" data-section="quickComparison">
         <div class="shell">
           <div class="section-head">
-            <h2>我的判断：第一个站更适合拿来改</h2>
-            <p>第一个站有完整优惠资料，但需要把内容重新包装成更快转化的落地页。第二个站目前先出现验证页，用户还没看到优惠就会流失。</p>
+            <h2>快速优惠比较</h2>
+            <p>先看重点金额、欢迎奖励、评分和领取按钮，再进入完整公司列表。</p>
           </div>
-          <div class="compare-grid">
-            <article class="compare-card recommended">
-              <span class="label">推荐基础</span>
-              <h3>365 Free Kredit No Deposit</h3>
-              <p>优势是优惠数量多、平台名和 RM 金额清楚，适合作为内容来源。问题是页面太长，第一屏 CTA 不够集中。</p>
-              <ul>
-                <li>可直接提炼 RM5-RM50 的主打优惠</li>
-                <li>适合做成对比卡片和快速注册流程</li>
-                <li>需要减少重复文字，让按钮更明显</li>
-              </ul>
-            </article>
-            <article class="compare-card">
-              <span class="label warn">转化阻力</span>
-              <h3>Free Credit Slot Malaysia</h3>
-              <p>目前访问时先进入验证等待页。对广告流量来说，这会让访客还没看到福利就离开。</p>
-              <ul>
-                <li>第一眼没有看到 free credit 金额</li>
-                <li>验证页会降低信任和耐心</li>
-                <li>不适合作为首选落地页体验</li>
-              </ul>
-            </article>
+          <div class="quick-table-wrap">
+            <table class="quick-table" aria-label="Quick bonus comparison">
+              <thead>
+                <tr>
+                  <th>Company</th>
+                  <th>Free Credit</th>
+                  <th>Bonus</th>
+                  <th>Rating</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody data-comparison-body>
+                <tr>
+                  <td colspan="5">Loading offers...</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      <section class="offers" id="top-offers">
+      <section class="offers" id="top-offers" data-section="offers">
         <div class="shell">
           <div class="section-head">
             <h2>热门 Free Credit 优惠</h2>
             <p>把用户最关心的金额、每日奖励、领取方式放在同一张卡里，让访客不用滚很久就能决定加入。</p>
+          </div>
+          <div class="offer-toolbar">
+            <input class="offer-search" data-offer-search type="search" placeholder="搜索公司或优惠" aria-label="Search offers" />
+            <div class="offer-filters" aria-label="Offer filters">
+              <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All</button>
+              <button class="filter-btn" type="button" data-filter="featured" aria-pressed="false">Featured</button>
+              <button class="filter-btn" type="button" data-filter="popular" aria-pressed="false">Popular</button>
+              <button class="filter-btn" type="button" data-filter="new" aria-pressed="false">New</button>
+            </div>
           </div>
           <div class="offer-grid">
             <p class="empty-offers">正在读取后台资料...</p>
@@ -1845,7 +2062,7 @@
         </div>
       </section>
 
-      <section class="steps" id="steps">
+      <section class="steps" id="steps" data-section="steps">
         <div class="shell">
           <div class="section-head">
             <h2>3 步领取 Free Credit</h2>
@@ -1871,11 +2088,11 @@
         </div>
       </section>
 
-      <section class="why">
+      <section class="why" data-section="why">
         <div class="shell">
           <div class="section-head">
-            <h2>为什么这版更容易吸引加入</h2>
-            <p>用户不是来读论文的。他们想知道：有多少、能不能拿、点哪里、靠不靠谱。</p>
+            <h2>为什么选择我们的优惠入口</h2>
+            <p>金额、条件、领取方式和官方入口集中展示，让新用户更快找到适合自己的平台。</p>
           </div>
           <div class="feature-grid">
             <div class="feature">
@@ -1887,8 +2104,8 @@
               <span>首屏、卡片、底部固定 CTA 都指向领取动作。</span>
             </div>
             <div class="feature">
-              <strong>对比卡建立信任</strong>
-              <span>说明为什么选这个方向，让访客觉得页面有筛选能力。</span>
+              <strong>快速比较更清楚</strong>
+              <span>先看金额、评分和奖励重点，再决定进入哪一个平台。</span>
             </div>
             <div class="feature">
               <strong>手机体验更短</strong>
@@ -1898,7 +2115,7 @@
         </div>
       </section>
 
-      <section class="faq" id="faq">
+      <section class="faq" id="faq" data-section="faq">
         <div class="shell">
           <div class="section-head">
             <h2>常见问题</h2>
@@ -1923,7 +2140,7 @@
         </div>
       </section>
 
-      <section class="community" id="community">
+      <section class="community" id="community" data-section="community">
         <div class="shell">
           <div class="section-head">
             <h2>Join Our 官方社群</h2>
@@ -1933,7 +2150,7 @@
         </div>
       </section>
 
-      <section class="final" id="join">
+      <section class="final" id="join" data-section="final">
         <div class="shell final-box">
           <div>
             <h2>准备好领取 free credit？</h2>
@@ -1946,14 +2163,14 @@
       </section>
     </main>
 
-    <footer>
+    <footer data-section="footer">
       <div class="shell footer-row">
         <span>Free Credit Slot Malaysia landing page concept.</span>
         <span>18+ only. Terms apply. Play responsibly.</span>
       </div>
     </footer>
 
-    <div class="sticky-cta" aria-label="Fixed join action">
+    <div class="sticky-cta" aria-label="Fixed join action" data-section="stickyCta">
       <div class="shell sticky-inner">
         <div class="sticky-copy">
           <strong>新会员 Free Credit 入口</strong>
@@ -1974,7 +2191,7 @@
           switchLabel: "语言选择",
           text: {
             ".brand-name": "Free Credit Slot Malaysia",
-            ".nav-links a[href='#comparison']": "网页判断",
+            ".nav-links a[href='#quick-comparison']": "快速比较",
             ".nav-links a[href='#top-offers']": "热门优惠",
             ".nav-links a[href='#steps']": "领取步骤",
             ".nav-links a[href='#faq']": "FAQ",
@@ -1984,25 +2201,25 @@
             ".hero-copy":
               "精简版优惠入口：新会员免费信用、每日 free credit、e-wallet 快速领取。少一点长文章，多一点马上加入的理由。",
             ".hero-actions .btn-primary": "马上看优惠",
-            ".hero-actions .btn-secondary": "先看哪个网页更好",
+            ".hero-actions .btn-secondary": "快速比较优惠",
             ".stat:nth-child(1) span": "热门新会员 free credit",
             ".stat:nth-child(2) span": "先领取，再决定是否存款",
             ".stat:nth-child(3) span": "手机注册和 e-wallet 领取",
-            ".comparison .section-head h2": "我的判断：第一个站更适合拿来改",
+            ".comparison .section-head h2": "快速优惠比较",
             ".comparison .section-head p":
-              "第一个站有完整优惠资料，但需要把内容重新包装成更快转化的落地页。第二个站目前先出现验证页，用户还没看到优惠就会流失。",
-            ".compare-card.recommended .label": "推荐基础",
+              "先看金额、评分和领取按钮，再选择适合自己的平台。",
+            ".compare-card.recommended .label": "主推优惠",
             ".compare-card.recommended p":
-              "优势是优惠数量多、平台名和 RM 金额清楚，适合作为内容来源。问题是页面太长，第一屏 CTA 不够集中。",
-            ".compare-card.recommended li:nth-child(1)": "可直接提炼 RM5-RM50 的主打优惠",
-            ".compare-card.recommended li:nth-child(2)": "适合做成对比卡片和快速注册流程",
-            ".compare-card.recommended li:nth-child(3)": "需要减少重复文字，让按钮更明显",
-            ".compare-card:not(.recommended) .label": "转化阻力",
+              "把 RM 金额、免费信用和注册链接集中展示，方便用户马上比较。",
+            ".compare-card.recommended li:nth-child(1)": "金额和奖励重点清楚",
+            ".compare-card.recommended li:nth-child(2)": "适合手机快速浏览",
+            ".compare-card.recommended li:nth-child(3)": "领取按钮更集中",
+            ".compare-card:not(.recommended) .label": "更多选择",
             ".compare-card:not(.recommended) p":
-              "目前访问时先进入验证等待页。对广告流量来说，这会让访客还没看到福利就离开。",
-            ".compare-card:not(.recommended) li:nth-child(1)": "第一眼没有看到 free credit 金额",
-            ".compare-card:not(.recommended) li:nth-child(2)": "验证页会降低信任和耐心",
-            ".compare-card:not(.recommended) li:nth-child(3)": "不适合作为首选落地页体验",
+              "每家公司都可以设置自己的 logo、字眼、完整链接、星星和 bonus page。",
+            ".compare-card:not(.recommended) li:nth-child(1)": "支持完整注册链接",
+            ".compare-card:not(.recommended) li:nth-child(2)": "支持三语内容",
+            ".compare-card:not(.recommended) li:nth-child(3)": "后台随时更新",
             ".offers .section-head h2": "热门 Free Credit 优惠",
             ".offers .section-head p":
               "把用户最关心的金额、每日奖励、领取方式放在同一张卡里，让访客不用滚很久就能决定加入。",
@@ -2051,14 +2268,14 @@
             ".step:nth-child(2) p": "点击领取按钮，使用手机号码完成新会员注册，并确认条款要求。",
             ".step:nth-child(3) h3": "领取奖励",
             ".step:nth-child(3) p": "按平台指示领取 no deposit free credit，玩之前先检查流水和提款规则。",
-            ".why .section-head h2": "为什么这版更容易吸引加入",
-            ".why .section-head p": "用户不是来读论文的。他们想知道：有多少、能不能拿、点哪里、靠不靠谱。",
+            ".why .section-head h2": "为什么选择我们的优惠入口",
+            ".why .section-head p": "金额、条件、领取方式和官方入口集中展示，让新用户更快找到适合自己的平台。",
             ".feature:nth-child(1) strong": "第一屏就看到金额",
             ".feature:nth-child(1) span": "RM5-RM50、No Deposit、Mobile 直接出现，减少寻找成本。",
             ".feature:nth-child(2) strong": "按钮重复但不混乱",
             ".feature:nth-child(2) span": "首屏、卡片、底部固定 CTA 都指向领取动作。",
-            ".feature:nth-child(3) strong": "对比卡建立信任",
-            ".feature:nth-child(3) span": "说明为什么选这个方向，让访客觉得页面有筛选能力。",
+            ".feature:nth-child(3) strong": "快速比较更清楚",
+            ".feature:nth-child(3) span": "先看金额、评分和奖励重点，再决定进入哪一个平台。",
             ".feature:nth-child(4) strong": "手机体验更短",
             ".feature:nth-child(4) span": "卡片式信息比长文章更适合广告点击后的快速决策。",
             ".faq .section-head h2": "常见问题",
@@ -2093,7 +2310,7 @@
           switchLabel: "Language selector",
           text: {
             ".brand-name": "Free Credit Slot Malaysia",
-            ".nav-links a[href='#comparison']": "Page Review",
+            ".nav-links a[href='#quick-comparison']": "Compare",
             ".nav-links a[href='#top-offers']": "Top Offers",
             ".nav-links a[href='#steps']": "How to Claim",
             ".nav-links a[href='#faq']": "FAQ",
@@ -2103,25 +2320,25 @@
             ".hero-copy":
               "A faster offer page for new member free credit, daily rewards, and e-wallet claims. Less scrolling, clearer reasons to join now.",
             ".hero-actions .btn-primary": "View Offers",
-            ".hero-actions .btn-secondary": "See Page Review",
+            ".hero-actions .btn-secondary": "Compare Offers",
             ".stat:nth-child(1) span": "Popular new member free credit",
             ".stat:nth-child(2) span": "Claim first, deposit only if you choose",
             ".stat:nth-child(3) span": "Mobile sign-up and e-wallet claim",
-            ".comparison .section-head h2": "My Pick: Use the First Site as the Base",
+            ".comparison .section-head h2": "Quick Bonus Comparison",
             ".comparison .section-head p":
-              "The first site has fuller offer information, but it needs to be repackaged into a faster landing page. The second site shows a verification screen first, which can lose visitors before they see the offer.",
-            ".compare-card.recommended .label": "Best Base",
+              "Compare the amount, rating, and claim button before choosing a platform.",
+            ".compare-card.recommended .label": "Featured Offer",
             ".compare-card.recommended p":
-              "Its strength is the number of offers, clear platform names, and visible RM amounts. The weakness is a long page and a first screen that does not focus enough on the call to action.",
-            ".compare-card.recommended li:nth-child(1)": "Easy to highlight RM5-RM50 main offers",
-            ".compare-card.recommended li:nth-child(2)": "Works well as comparison cards and a quick registration flow",
-            ".compare-card.recommended li:nth-child(3)": "Needs less repeated copy and stronger buttons",
-            ".compare-card:not(.recommended) .label": "Conversion Friction",
+              "RM amounts, free credit highlights, and registration links are grouped for faster comparison.",
+            ".compare-card.recommended li:nth-child(1)": "Clear amount and reward focus",
+            ".compare-card.recommended li:nth-child(2)": "Built for quick mobile browsing",
+            ".compare-card.recommended li:nth-child(3)": "Claim buttons stay easy to find",
+            ".compare-card:not(.recommended) .label": "More Choices",
             ".compare-card:not(.recommended) p":
-              "At the moment, visitors first land on a verification waiting page. For ad traffic, that can make people leave before seeing the benefits.",
-            ".compare-card:not(.recommended) li:nth-child(1)": "No free credit amount is visible at first glance",
-            ".compare-card:not(.recommended) li:nth-child(2)": "Verification can reduce trust and patience",
-            ".compare-card:not(.recommended) li:nth-child(3)": "Not ideal as the first-choice landing page experience",
+              "Each company can have its own logo, wording, full link, rating, and bonus page.",
+            ".compare-card:not(.recommended) li:nth-child(1)": "Supports full registration links",
+            ".compare-card:not(.recommended) li:nth-child(2)": "Supports three languages",
+            ".compare-card:not(.recommended) li:nth-child(3)": "Editable anytime in admin",
             ".offers .section-head h2": "Popular Free Credit Offers",
             ".offers .section-head p":
               "Put the amount, daily reward, and claim method in one card so visitors can decide quickly without reading a long page.",
@@ -2170,14 +2387,14 @@
             ".step:nth-child(2) p": "Tap the claim button, sign up with your mobile number, and confirm the terms.",
             ".step:nth-child(3) h3": "Claim Reward",
             ".step:nth-child(3) p": "Follow the platform instructions to claim no deposit free credit, then check turnover and withdrawal rules before playing.",
-            ".why .section-head h2": "Why This Version Gets More Joins",
-            ".why .section-head p": "Visitors are not here to read a long essay. They want to know how much, whether they can claim, where to click, and whether it feels reliable.",
+            ".why .section-head h2": "Why Use Our Offer Portal",
+            ".why .section-head p": "Key amounts, claim conditions, and direct registration links are organised in one mobile-friendly page.",
             ".feature:nth-child(1) strong": "Amount appears above the fold",
             ".feature:nth-child(1) span": "RM5-RM50, No Deposit, and Mobile are visible immediately.",
             ".feature:nth-child(2) strong": "Repeated CTAs stay clear",
             ".feature:nth-child(2) span": "Hero, offer cards, and fixed bottom button all point to the same claim action.",
-            ".feature:nth-child(3) strong": "Comparison builds trust",
-            ".feature:nth-child(3) span": "Explaining the page choice makes the landing page feel filtered and intentional.",
+            ".feature:nth-child(3) strong": "Clear comparison",
+            ".feature:nth-child(3) span": "Check the amount, rating, and reward highlights before choosing a platform.",
             ".feature:nth-child(4) strong": "Shorter mobile journey",
             ".feature:nth-child(4) span": "Card-based information fits fast decisions after an ad click.",
             ".faq .section-head h2": "Frequently Asked Questions",
@@ -2212,7 +2429,7 @@
           switchLabel: "Pilihan bahasa",
           text: {
             ".brand-name": "Free Credit Slot Malaysia",
-            ".nav-links a[href='#comparison']": "Semakan Page",
+            ".nav-links a[href='#quick-comparison']": "Banding",
             ".nav-links a[href='#top-offers']": "Promosi Popular",
             ".nav-links a[href='#steps']": "Cara Claim",
             ".nav-links a[href='#faq']": "FAQ",
@@ -2222,25 +2439,25 @@
             ".hero-copy":
               "Halaman promosi yang lebih ringkas untuk ahli baru, daily free credit, dan claim melalui e-wallet. Kurang scroll, lebih jelas kenapa perlu daftar sekarang.",
             ".hero-actions .btn-primary": "Lihat Promosi",
-            ".hero-actions .btn-secondary": "Lihat Semakan Page",
+            ".hero-actions .btn-secondary": "Banding Promosi",
             ".stat:nth-child(1) span": "Free credit popular untuk ahli baru",
             ".stat:nth-child(2) span": "Claim dahulu, deposit ikut pilihan",
             ".stat:nth-child(3) span": "Daftar telefon dan claim e-wallet",
-            ".comparison .section-head h2": "Pilihan Saya: Guna Site Pertama Sebagai Asas",
+            ".comparison .section-head h2": "Perbandingan Bonus Pantas",
             ".comparison .section-head p":
-              "Site pertama ada maklumat promosi yang lebih lengkap, tetapi perlu dibungkus semula sebagai landing page yang cepat convert. Site kedua menunjukkan halaman verifikasi dahulu, jadi pelawat mungkin keluar sebelum nampak promosi.",
-            ".compare-card.recommended .label": "Asas Terbaik",
+              "Bandingkan jumlah, rating, dan butang claim sebelum memilih platform.",
+            ".compare-card.recommended .label": "Promosi Utama",
             ".compare-card.recommended p":
-              "Kelebihannya ialah promosi banyak, nama platform jelas, dan jumlah RM mudah nampak. Kekurangannya ialah page terlalu panjang dan CTA pada skrin pertama kurang fokus.",
-            ".compare-card.recommended li:nth-child(1)": "Mudah tonjolkan promosi utama RM5-RM50",
-            ".compare-card.recommended li:nth-child(2)": "Sesuai dijadikan kad perbandingan dan aliran daftar pantas",
-            ".compare-card.recommended li:nth-child(3)": "Perlu kurangkan teks berulang dan kuatkan butang",
-            ".compare-card:not(.recommended) .label": "Halangan Convert",
+              "Jumlah RM, sorotan free credit, dan link daftar disusun supaya lebih mudah dibandingkan.",
+            ".compare-card.recommended li:nth-child(1)": "Jumlah dan ganjaran lebih jelas",
+            ".compare-card.recommended li:nth-child(2)": "Sesuai untuk browsing telefon",
+            ".compare-card.recommended li:nth-child(3)": "Butang claim mudah dicari",
+            ".compare-card:not(.recommended) .label": "Pilihan Lain",
             ".compare-card:not(.recommended) p":
-              "Buat masa ini, pelawat masuk ke halaman tunggu verifikasi dahulu. Untuk trafik iklan, ini boleh menyebabkan mereka keluar sebelum melihat manfaat.",
-            ".compare-card:not(.recommended) li:nth-child(1)": "Jumlah free credit tidak terus kelihatan",
-            ".compare-card:not(.recommended) li:nth-child(2)": "Verifikasi boleh mengurangkan percaya dan sabar",
-            ".compare-card:not(.recommended) li:nth-child(3)": "Kurang sesuai sebagai landing page utama",
+              "Setiap syarikat boleh ada logo, teks, link penuh, rating, dan bonus page sendiri.",
+            ".compare-card:not(.recommended) li:nth-child(1)": "Sokong link daftar penuh",
+            ".compare-card:not(.recommended) li:nth-child(2)": "Sokong tiga bahasa",
+            ".compare-card:not(.recommended) li:nth-child(3)": "Boleh ubah bila-bila masa",
             ".offers .section-head h2": "Promosi Free Credit Popular",
             ".offers .section-head p":
               "Letakkan jumlah, ganjaran harian, dan cara claim dalam satu kad supaya pelawat boleh buat keputusan dengan cepat.",
@@ -2328,6 +2545,7 @@
       const offerStorageKey = window.offerStorageKey || "landingOffers";
       const siteSettingsStorageKey = window.siteSettingsStorageKey || "landingSiteSettings";
       const socialStorageKey = window.socialStorageKey || "landingSocialLinks";
+      const previewMode = new URLSearchParams(window.location.search).get("preview") === "1";
       const colorVariableMap = {
         pageBackground: "--bg",
         headerBackground: "--topbar-bg",
@@ -2361,6 +2579,8 @@
         liveAmountText: "--live-amount-text"
       };
       let activeLanguage = "zh";
+      let offerSearchQuery = "";
+      let offerFilterMode = "all";
       let liveTransactionsEnabled = true;
       let serverSiteData = null;
       const liveTransactionRows = new Map();
@@ -2408,7 +2628,7 @@
       }
 
       function getSavedSiteSettings() {
-        if (serverSiteData) {
+        if (serverSiteData && !previewMode) {
           return mergeSettings(window.defaultSiteSettings || {}, serverSiteData.siteSettings || {});
         }
 
@@ -2421,8 +2641,57 @@
         }
       }
 
+      function getSafeLanguage(language, settings = getSavedSiteSettings()) {
+        const fallback = settings.defaultLanguage || window.defaultSiteSettings?.defaultLanguage || "zh";
+        const enabled = settings.enabledLanguages || {};
+        const candidate = languageCopy[language] ? language : fallback;
+        if (enabled[candidate] === false) {
+          return Object.keys(languageCopy).find((item) => enabled[item] !== false && languageCopy[item]) || "zh";
+        }
+        return languageCopy[candidate] ? candidate : "zh";
+      }
+
+      function getPublicLanguage(settings = getSavedSiteSettings()) {
+        return getSafeLanguage(settings.activeLanguage || settings.defaultLanguage || "zh", settings);
+      }
+
+      function sanitizePublicCopy(copy, language) {
+        const defaults = window.defaultSiteSettings?.copy?.[language] || window.defaultSiteSettings?.copy?.zh || {};
+        const blocked = [
+          "我的判断",
+          "拿来改",
+          "推荐基础",
+          "转化阻力",
+          "这版",
+          "读论文",
+          "My Pick",
+          "Use the First Site",
+          "Version Gets More Joins",
+          "long essay",
+          "Pilihan Saya",
+          "Site Pertama",
+          "Versi Ini",
+          "baca artikel"
+        ];
+        const cleaned = { ...copy };
+        ["whyTitle", "whyDescription", "feature3Title", "feature3Text", "secondaryButton"].forEach((key) => {
+          if (blocked.some((fragment) => String(cleaned[key] || "").includes(fragment))) {
+            cleaned[key] = defaults[key] || "";
+          }
+        });
+        return cleaned;
+      }
+
+      function applySectionVisibility(settings) {
+        const sections = settings.sections || {};
+        document.querySelectorAll("[data-section]").forEach((section) => {
+          const key = section.dataset.section;
+          section.hidden = sections[key] === false;
+        });
+      }
+
       function getSavedOffers() {
-        if (serverSiteData && Array.isArray(serverSiteData.offers)) {
+        if (serverSiteData && !previewMode && Array.isArray(serverSiteData.offers)) {
           return normalizePublicOffers(serverSiteData.offers);
         }
 
@@ -2485,7 +2754,7 @@
       }
 
       function getSavedSocialLinks() {
-        if (serverSiteData && Array.isArray(serverSiteData.socialLinks)) {
+        if (serverSiteData && !previewMode && Array.isArray(serverSiteData.socialLinks)) {
           return normalizePublicSocialLinks(serverSiteData.socialLinks);
         }
 
@@ -2544,11 +2813,12 @@
 
       function applySiteSettings(language) {
         const settings = getSavedSiteSettings();
-        const copy = settings.copy?.[language] || settings.copy?.zh || {};
+        const copy = sanitizePublicCopy(settings.copy?.[language] || settings.copy?.zh || {}, language);
         const siteName = getLocalizedValue(settings.siteName, language);
         const metaTitle = getLocalizedValue(settings.metaTitle, language);
         const metaDescription = getLocalizedValue(settings.metaDescription, language);
         liveTransactionsEnabled = settings.liveTransactionsEnabled !== false;
+        applySectionVisibility(settings);
 
         Object.entries(settings.colors || {}).forEach(([key, value]) => {
           const variable = colorVariableMap[key];
@@ -2580,10 +2850,22 @@
         setText(".hero h1", copy.heroTitle || siteName);
         setText(".eyebrow", copy.heroEyebrow);
         setText(".hero-copy", copy.heroCopy);
+        setText(".nav-links a[href='#quick-comparison']", copy.quickComparisonNav || copy.quickComparisonTitle);
+        setText(".nav-links a[href='#top-offers']", copy.offersNav || copy.offersTitle);
+        setText(".nav-links a[href='#steps']", copy.stepsNav || copy.stepsTitle);
+        setText(".nav-links a[href='#faq']", copy.faqNav || copy.faqTitle);
+        setText(".nav-links a[href='#community']", copy.communityNav || "Join Our");
         setText(".hero-actions .btn-primary", copy.primaryButton);
         setText(".hero-actions .btn-secondary", copy.secondaryButton);
         setText(".offers .section-head h2", copy.offersTitle);
         setText(".offers .section-head p", copy.offersDescription);
+        setText(".comparison .section-head h2", copy.quickComparisonTitle);
+        setText(".comparison .section-head p", copy.quickComparisonDescription);
+        const offerSearch = document.querySelector("[data-offer-search]");
+        if (offerSearch) {
+          offerSearch.placeholder = copy.offerSearchPlaceholder || "Search offers";
+          offerSearch.setAttribute("aria-label", copy.offerSearchPlaceholder || "Search offers");
+        }
         setText(".community .section-head h2", copy.communityTitle);
         setText(".community .section-head p", copy.communityDescription);
         setText(".final h2", copy.finalTitle);
@@ -2597,20 +2879,6 @@
         setText(".stat:nth-child(2) span", copy.stat2Text);
         setText(".stat:nth-child(3) strong", copy.stat3Value);
         setText(".stat:nth-child(3) span", copy.stat3Text);
-        setText(".comparison .section-head h2", copy.comparisonTitle);
-        setText(".comparison .section-head p", copy.comparisonDescription);
-        setText(".compare-card.recommended .label", copy.comparisonLeftLabel);
-        setText(".compare-card.recommended h3", copy.comparisonLeftTitle);
-        setText(".compare-card.recommended p", copy.comparisonLeftText);
-        setText(".compare-card.recommended li:nth-child(1)", copy.comparisonLeftBullet1);
-        setText(".compare-card.recommended li:nth-child(2)", copy.comparisonLeftBullet2);
-        setText(".compare-card.recommended li:nth-child(3)", copy.comparisonLeftBullet3);
-        setText(".compare-card:not(.recommended) .label", copy.comparisonRightLabel);
-        setText(".compare-card:not(.recommended) h3", copy.comparisonRightTitle);
-        setText(".compare-card:not(.recommended) p", copy.comparisonRightText);
-        setText(".compare-card:not(.recommended) li:nth-child(1)", copy.comparisonRightBullet1);
-        setText(".compare-card:not(.recommended) li:nth-child(2)", copy.comparisonRightBullet2);
-        setText(".compare-card:not(.recommended) li:nth-child(3)", copy.comparisonRightBullet3);
         setText(".steps .section-head h2", copy.stepsTitle);
         setText(".steps .section-head p", copy.stepsDescription);
         setText(".step-grid .step:nth-child(1) h3", copy.step1Title);
@@ -2930,6 +3198,96 @@
         `;
       }
 
+      function offerMatchesFilter(offer) {
+        if (offerFilterMode === "featured") {
+          return offer.featured === true || Number(offer.order || 0) === 1;
+        }
+        if (offerFilterMode === "popular") {
+          return offer.popular === true || getStarRating(offer.starRating) >= 4.8;
+        }
+        if (offerFilterMode === "new") {
+          const rankText = `${getLocalizedValue(offer.rank, activeLanguage)} ${offer.badge || ""}`.toLowerCase();
+          return offer.isNew === true || rankText.includes("new") || rankText.includes("baru") || rankText.includes("新");
+        }
+        return true;
+      }
+
+      function offerMatchesSearch(offer, language) {
+        const query = offerSearchQuery.trim().toLowerCase();
+        if (!query) {
+          return true;
+        }
+
+        const haystack = [
+          offer.name,
+          offer.amount,
+          offer.badge,
+          getLocalizedValue(offer.bonusLabel, language),
+          getLocalizedValue(offer.rank, language),
+          ...(Array.isArray(getLocalizedValue(offer.bullets, language)) ? getLocalizedValue(offer.bullets, language) : [])
+        ]
+          .join(" ")
+          .toLowerCase();
+
+        return haystack.includes(query);
+      }
+
+      function getVisibleOffers(language, options = {}) {
+        const applySearch = options.search !== false;
+        return getSavedOffers()
+          .filter((offer) => offer && offer.active !== false)
+          .filter((offer) => !applySearch || (offerMatchesFilter(offer) && offerMatchesSearch(offer, language)))
+          .sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
+      }
+
+      function getOfferTags(offer, index) {
+        const tags = [];
+        if (offer.featured === true || index === 0) {
+          tags.push({ text: "Featured", className: "" });
+        }
+        if (offer.popular === true || getStarRating(offer.starRating) >= 4.8) {
+          tags.push({ text: "Popular", className: "secondary" });
+        }
+        if (offer.isNew === true) {
+          tags.push({ text: "New", className: "secondary" });
+        }
+        return tags.slice(0, 3);
+      }
+
+      function renderQuickComparison(language) {
+        const body = document.querySelector("[data-comparison-body]");
+        if (!body) {
+          return;
+        }
+
+        const settings = getSavedSiteSettings();
+        const copy = sanitizePublicCopy(settings.copy?.[language] || settings.copy?.zh || {}, language);
+        const rows = getVisibleOffers(language, { search: false }).slice(0, 6);
+        if (!rows.length) {
+          body.innerHTML = `<tr><td colspan="5">${escapeHtml(copy.emptyOffersText || "No active offers yet.")}</td></tr>`;
+          return;
+        }
+
+        body.innerHTML = rows
+          .map((offer, index) => {
+            const name = escapeHtml(offer.name);
+            const amount = escapeHtml(offer.amount || "-");
+            const bonus = escapeHtml(getLocalizedValue(offer.bonusLabel, language) || "-");
+            const rating = getStarRating(offer.starRating) ? `${formatRating(offer.starRating)}/5` : "-";
+            const actionText = escapeHtml(copy.quickComparisonAction || "View");
+            return `
+              <tr>
+                <td data-label="Company"><span class="quick-brand"><span class="quick-rank">#${index + 1}</span>${name}</span></td>
+                <td data-label="Free Credit"><span class="quick-amount">${amount}</span></td>
+                <td data-label="Bonus">${bonus}</td>
+                <td data-label="Rating">${escapeHtml(rating)}</td>
+                <td data-label="Action"><a class="quick-action" href="${escapeHtml(getOfferUrl(offer))}">${actionText}</a></td>
+              </tr>
+            `;
+          })
+          .join("");
+      }
+
       function startLiveTicker(panel, rows, visibleRows) {
         const liveBody = panel.querySelector(".live-body");
         const panelId = panel.dataset.liveCard;
@@ -2994,9 +3352,7 @@
         clearLiveTickerTimers();
         clearBonusSliderTimers();
 
-        const offers = getSavedOffers()
-          .filter((offer) => offer && offer.active !== false)
-          .sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
+        const offers = getVisibleOffers(language);
 
         if (!offers.length) {
           const emptyText = {
@@ -3009,7 +3365,7 @@
         }
 
         offerGrid.innerHTML = offers
-          .map((offer) => {
+          .map((offer, index) => {
             const name = escapeHtml(offer.name);
             const ratingBlock = offer.showStars === false ? "" : renderRatingBlock(offer.starRating);
             const bonusLabel = escapeHtml(getLocalizedValue(offer.bonusLabel, language));
@@ -3031,11 +3387,16 @@
               .join("") : "";
             const bonusText = showBonusLabel && bonusLabel ? `<span>${bonusLabel}</span>` : "";
             const bulletList = bulletItems ? `<ul class="ticks">${bulletItems}</ul>` : "";
+            const tags = getOfferTags(offer, index)
+              .map((tag) => `<span class="offer-tag ${escapeHtml(tag.className)}">${escapeHtml(tag.text)}</span>`)
+              .join("");
+            const tagBlock = tags ? `<div class="offer-tags">${tags}</div>` : "";
 
             return `
               <article class="offer-card">
                 <div class="offer-top">
                   <div class="brand-badge">${logo}</div>
+                  ${tagBlock}
                   <div class="offer-meta">
                     ${ratingBlock}
                   </div>
@@ -3125,13 +3486,7 @@
       }
 
       function getInitialLanguage() {
-        const earlyLanguage = document.documentElement.dataset.savedLanguage;
-        if (languageCopy[earlyLanguage]) {
-          return earlyLanguage;
-        }
-
-        const saved = localStorage.getItem("landingLanguage");
-        return languageCopy[saved] ? saved : "zh";
+        return getPublicLanguage();
       }
 
       function setLanguage(language) {
@@ -3158,18 +3513,31 @@
         });
 
         applySiteSettings(language);
-        document.querySelectorAll(".lang-btn").forEach((button) => {
-          const active = button.dataset.lang === language;
-          button.setAttribute("aria-pressed", active ? "true" : "false");
-        });
-
+        renderQuickComparison(language);
         renderOffers(language);
         renderSocialLinks(language);
-        localStorage.setItem("landingLanguage", language);
       }
 
       document.querySelectorAll(".lang-btn").forEach((button) => {
         button.addEventListener("click", () => setLanguage(button.dataset.lang));
+      });
+
+      const offerSearchInput = document.querySelector("[data-offer-search]");
+      if (offerSearchInput) {
+        offerSearchInput.addEventListener("input", () => {
+          offerSearchQuery = offerSearchInput.value || "";
+          renderOffers(activeLanguage);
+        });
+      }
+
+      document.querySelectorAll("[data-filter]").forEach((button) => {
+        button.addEventListener("click", () => {
+          offerFilterMode = button.dataset.filter || "all";
+          document.querySelectorAll("[data-filter]").forEach((item) => {
+            item.setAttribute("aria-pressed", item === button ? "true" : "false");
+          });
+          renderOffers(activeLanguage);
+        });
       });
 
       function startMalaysiaClock() {
@@ -3208,14 +3576,15 @@
       window.addEventListener("storage", (event) => {
         if (event.key === offerStorageKey || event.key === siteSettingsStorageKey || event.key === socialStorageKey) {
           applySiteSettings(activeLanguage);
+          renderQuickComparison(activeLanguage);
           renderOffers(activeLanguage);
           renderSocialLinks(activeLanguage);
         }
       });
 
       async function initializePage() {
-        activeLanguage = getInitialLanguage();
         await loadServerSiteData();
+        activeLanguage = getInitialLanguage();
         setLanguage(activeLanguage);
         if (typeof window.releaseLandingLanguage === "function") {
           window.releaseLandingLanguage();

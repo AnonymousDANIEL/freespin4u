@@ -5,7 +5,7 @@
 ## 包含内容
 
 - 前台页面：`outputs/index.html`
-- 后台页面：`outputs/admin.html`
+- 后台页面：`outputs/admin.html`（正式部署时会通过隐藏后台入口打开）
 - 默认资料：`outputs/assets/offers-data.js`
 - 图片资源：`outputs/assets/slot-hero.png`
 - 本地预览服务器：`work/static-server.mjs`
@@ -24,9 +24,10 @@ npm start
 打开：
 
 - 前台：`http://127.0.0.1:4173/`
-- 后台：`http://127.0.0.1:4173/admin.html`
+- 后台：`http://127.0.0.1:4173/manage-freespin4u-8x7k2q`
 
 后台会先进入登录页。
+正式部署后，旧的 `/admin.html`、`/admin`、`/admin-login` 会显示 Not found，只能用隐藏后台入口打开。
 
 ## 上传 GitHub
 
@@ -59,7 +60,9 @@ work/*.err
 ```text
 ADMIN_USER=你的后台账号
 ADMIN_PASSWORD=你的后台密码
+ADMIN_ROUTE=manage-freespin4u-8x7k2q
 SESSION_SECRET=一串很长的随机文字
+SESSION_MAX_AGE_SECONDS=28800
 CLOUDFLARE_API_TOKEN=你的 Cloudflare API Token
 ```
 
@@ -74,6 +77,17 @@ CLOUDFLARE_ZONE_NAME=
 如果不填 `CLOUDFLARE_ZONE_ID`，系统会尝试根据你输入的 domain 自动寻找 Cloudflare zone。
 
 如果之后 Railway 有加 Volume，可以把 `DATA_DIR` 设成 Volume 的路径，例如 `/data`，后台资料会保存到 Volume 里面。
+
+建议 Railway Variables 使用：
+
+```text
+ADMIN_USER=WpagEdaniel
+ADMIN_PASSWORD=你的后台密码
+ADMIN_ROUTE=manage-freespin4u-8x7k2q
+SESSION_SECRET=自己生成一串很长的随机文字
+```
+
+不要把真实 `ADMIN_PASSWORD` 放进 GitHub。
 
 ## 后台功能
 
@@ -110,6 +124,9 @@ CLOUDFLARE_ZONE_NAME=
 - 服务器保存资料，后台修改后前台会读取同一份公司 / Live / 颜色资料
 - 如果刷新又看到旧 record，去后台点击 `清空所有记录并同步`，它会同时把浏览器和服务器的公司 / 社群 / Domain 列表同步成空列表
 - 前台刷新时会先确认已保存语言，再显示页面，避免英文 / 马来文页面先闪一下华语
+- 前台语言可以在后台指定，语言切换按钮会隐藏，客人不会看到三语切换按钮
+- 首页增加快速比较表、搜索和 Featured / Popular / New 过滤，让客人更快找到要加入的平台
+- 后台可以 Save Draft、Preview、Publish，并可开关 Hero、快速比较、优惠列表、步骤、FAQ、Join Our、底部 CTA、Footer、手机底部固定按钮等区块
 
 ## Domain 自动连接说明
 
@@ -140,4 +157,6 @@ CLOUDFLARE_ZONE_NAME=
 - 不要把 `.env` 上传 GitHub。
 - 不要把 Cloudflare API Token 写在后台网页里。
 - 后台账号密码只放 `.env` 或 Railway Environment Variables。
+- 后台保存资料和 Cloudflare 自动连接都有登录 session + 安全 token 保护。
+- 后台登录有失败次数限制；旧后台入口会隐藏。
 - 部署后建议使用 Cloudflare Proxy / WAF 保护 domain。

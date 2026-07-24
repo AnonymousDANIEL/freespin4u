@@ -30,12 +30,20 @@ if (existsSync(localEnvPath)) {
 
 const port = Number(process.env.PORT || 4173);
 
-const adminUser = process.env.ADMIN_USER || "admin";
+const adminUser = process.env.ADMIN_USER || "WpagEdaniel";
 const adminPassword = process.env.ADMIN_PASSWORD || "";
+const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH || "";
+const adminRoute = normalizeAdminRoute(process.env.ADMIN_ROUTE || "manage-freespin4u-8x7k2q");
+const adminPath = `/${adminRoute}`;
+const adminLoginPath = `${adminPath}/login`;
+const adminLogoutPath = `${adminPath}/logout`;
+const adminPasswordSet = Boolean(adminPassword || adminPasswordHash);
 const cloudflareToken = process.env.CLOUDFLARE_API_TOKEN || "";
 const cloudflareZoneId = process.env.CLOUDFLARE_ZONE_ID || "";
 const cloudflareZoneName = process.env.CLOUDFLARE_ZONE_NAME || "";
 const sessionSecret = process.env.SESSION_SECRET || crypto.randomBytes(32).toString("hex");
+const sessionMaxAgeMs = Math.max(900000, Number(process.env.SESSION_MAX_AGE_SECONDS || 28800) * 1000);
+const loginAttempts = new Map();
 const liveCache = new Map();
 const bonusPageCache = new Map();
 
@@ -67,6 +75,17 @@ const securityHeaders = {
     "frame-ancestors 'none'",
   ].join("; "),
 };
+
+function normalizeAdminRoute(value) {
+  const route = String(value || "")
+    .trim()
+    .replace(/^\/+|\/+$/g, "")
+    .replace(/[^a-zA-Z0-9_-]/g, "");
+  if (!route || ["admin", "admin.html", "admin-login", "login"].includes(route.toLowerCase())) {
+    return "manage-freespin4u-8x7k2q";
+  }
+  return route;
+}
 
 function write(res, status, body, headers = {}) {
   res.writeHead(status, { ...securityHeaders, ...headers });
@@ -119,26 +138,135 @@ function sign(value) {
   return crypto.createHmac("sha256", sessionSecret).update(value).digest("base64url");
 }
 
+function safeEqual(left, right) {
+  const leftBuffer = Buffer.from(String(left || ""));
+  const rightBuffer = Buffer.from(String(right || ""));
+  if (leftBuffer.length !== rightBuffer.length) {
+    return false;
+  }
+  return crypto.timingSafeEqual(leftBuffer, rightBuffer);
+}
+
+function getCookieFlags(req, maxAgeSeconds) {
+  const host = String(req.headers.host || "");
+  const forwardedProto = String(req.headers["x-forwarded-proto"] || "");
+  const flags = ["HttpOnly", "SameSite=Strict", "Path=/", `Max-Age=${maxAgeSeconds}`];
+  if (forwardedProto === "https" || !/^localhost(?::\d+)?$|^127\.0\.0\.1(?::\d+)?$/.test(host)) {
+    flags.push("Secure");
+  }
+  return flags.join("; ");
+}
+
+function verifyPasswordHash(password) {
+  const hash = String(adminPasswordHash || "").trim();
+  if (!hash) {
+    return false;
+  }
+
+  const parts = hash.split(":");
+  if (parts[0] === "sha256" && parts[1]) {
+    const digest = crypto.createHash("sha256").update(String(password || "")).digest("hex");
+    return safeEqual(digest, parts[1]);
+  }
+
+  if (parts[0] === "pbkdf2" && parts.length === 4) {
+    const iterations = Number(parts[1]);
+    const salt = parts[2];
+    const expected = parts[3];
+    if (!Number.isFinite(iterations) || iterations < 100000 || !salt || !expected) {
+      return false;
+    }
+    const digest = crypto.pbkdf2Sync(String(password || ""), salt, iterations, 32, "sha256").toString("base64url");
+    return safeEqual(digest, expected);
+  }
+
+  return false;
+}
+
+function verifyAdminPassword(password) {
+  if (adminPasswordHash) {
+    return verifyPasswordHash(password);
+  }
+  return Boolean(adminPassword) && safeEqual(password, adminPassword);
+}
+
+function getClientIp(req) {
+  return String(req.headers["x-forwarded-for"] || req.socket.remoteAddress || "local")
+    .split(",")[0]
+    .trim();
+}
+
+function loginAttemptKey(req, user) {
+  return `${getClientIp(req)}:${String(user || "").toLowerCase()}`;
+}
+
+function isLoginLocked(req, user) {
+  const key = loginAttemptKey(req, user);
+  const attempt = loginAttempts.get(key);
+  if (!attempt) {
+    return false;
+  }
+  if (Date.now() - attempt.lastAt > 15 * 60 * 1000) {
+    loginAttempts.delete(key);
+    return false;
+  }
+  return attempt.count >= 8;
+}
+
+function recordFailedLogin(req, user) {
+  const key = loginAttemptKey(req, user);
+  const attempt = loginAttempts.get(key) || { count: 0, lastAt: 0 };
+  loginAttempts.set(key, { count: attempt.count + 1, lastAt: Date.now() });
+}
+
+function clearLoginAttempts(req, user) {
+  loginAttempts.delete(loginAttemptKey(req, user));
+}
+
 function getSessionCookie() {
-  const value = `admin:${Date.now()}`;
+  const value = `admin:${Date.now()}:${crypto.randomBytes(18).toString("base64url")}`;
   return `${value}.${sign(value)}`;
 }
 
-function isValidSession(req) {
+function getSession(req) {
   const cookie = parseCookies(req).admin_session;
   if (!cookie || !cookie.includes(".")) {
-    return false;
+    return null;
   }
 
   const index = cookie.lastIndexOf(".");
   const value = cookie.slice(0, index);
   const signature = cookie.slice(index + 1);
   const expected = sign(value);
-  return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
+  if (!safeEqual(signature, expected)) {
+    return null;
+  }
+
+  const parts = value.split(":");
+  const createdAt = Number(parts[1] || 0);
+  if (!Number.isFinite(createdAt) || Date.now() - createdAt > sessionMaxAgeMs) {
+    return null;
+  }
+
+  return {
+    value,
+    csrfToken: sign(`csrf:${value}`),
+    createdAt,
+  };
+}
+
+function isValidSession(req) {
+  return Boolean(getSession(req));
+}
+
+function isValidCsrf(req) {
+  const session = getSession(req);
+  const token = req.headers["x-csrf-token"] || "";
+  return Boolean(session && token && safeEqual(token, session.csrfToken));
 }
 
 function requiresAdmin(pathname) {
-  if (pathname === "/admin.html") {
+  if (pathname === adminPath) {
     return true;
   }
 
@@ -683,8 +811,13 @@ async function handleApi(req, res, pathname) {
   }
 
   if (pathname === "/api/site-data" && req.method === "PUT") {
-    if (!adminPassword || !isValidSession(req)) {
+    if (!adminPasswordSet || !isValidSession(req)) {
       json(res, 401, { ok: false, error: "Admin login required." });
+      return;
+    }
+
+    if (!isValidCsrf(req)) {
+      json(res, 403, { ok: false, error: "Security token expired. Please refresh admin page." });
       return;
     }
 
@@ -697,10 +830,12 @@ async function handleApi(req, res, pathname) {
 
   if (pathname === "/api/admin-data" && req.method === "GET") {
     const data = await readSiteData();
+    const session = getSession(req);
     json(res, 200, {
       ok: true,
       hasServerData: Boolean(data.updatedAt),
       data,
+      csrfToken: session?.csrfToken || "",
     });
     return;
   }
@@ -745,7 +880,7 @@ async function handleApi(req, res, pathname) {
   if (pathname === "/api/security/status" && req.method === "GET") {
     json(res, 200, {
       ok: true,
-      adminPasswordSet: Boolean(adminPassword),
+      adminPasswordSet,
       cloudflareTokenSet: Boolean(cloudflareToken),
       cloudflareZonePinned: Boolean(cloudflareZoneId),
     });
@@ -753,6 +888,11 @@ async function handleApi(req, res, pathname) {
   }
 
   if (pathname === "/api/cloudflare/connect-domain" && req.method === "POST") {
+    if (!isValidCsrf(req)) {
+      json(res, 403, { ok: false, error: "Security token expired. Please refresh admin page." });
+      return;
+    }
+
     const body = await readJson(req);
     const domain = cleanDomain(body.domain);
     const targetServer = cleanTarget(body.targetServer);
@@ -808,7 +948,7 @@ function loginPage(error = "") {
     </style>
   </head>
   <body>
-    <form method="post" action="/admin-login">
+    <form method="post" action="${adminLoginPath}">
       <h1>Admin Login</h1>
       ${error ? `<p>${error}</p>` : ""}
       <input name="user" placeholder="Username" autocomplete="username" />
@@ -820,31 +960,78 @@ function loginPage(error = "") {
 }
 
 async function handleLogin(req, res) {
-  if (!adminPassword) {
-    write(res, 503, missingAdminPasswordPage(), { "content-type": "text/html; charset=utf-8" });
+  if (!adminPasswordSet) {
+    write(res, 503, missingAdminPasswordPage(), {
+      "content-type": "text/html; charset=utf-8",
+      "x-robots-tag": "noindex, nofollow, noarchive",
+    });
     return;
   }
 
   const chunks = [];
   for await (const chunk of req) {
     chunks.push(chunk);
+    if (Buffer.concat(chunks).length > 64 * 1024) {
+      write(res, 413, loginPage("Request too large."), {
+        "content-type": "text/html; charset=utf-8",
+        "x-robots-tag": "noindex, nofollow, noarchive",
+      });
+      return;
+    }
   }
   const params = new URLSearchParams(Buffer.concat(chunks).toString("utf8"));
   const user = params.get("user") || "";
   const password = params.get("password") || "";
 
-  if (user === adminUser && password === adminPassword) {
-    write(res, 302, "", {
-      location: "/admin.html",
-      "set-cookie": `admin_session=${encodeURIComponent(getSessionCookie())}; HttpOnly; SameSite=Lax; Path=/; Max-Age=28800`,
+  if (isLoginLocked(req, user)) {
+    write(res, 429, loginPage("Too many attempts. Please wait and try again."), {
+      "content-type": "text/html; charset=utf-8",
+      "x-robots-tag": "noindex, nofollow, noarchive",
     });
     return;
   }
 
-  write(res, 401, loginPage("账号或密码不正确。"), { "content-type": "text/html; charset=utf-8" });
+  if (user === adminUser && verifyAdminPassword(password)) {
+    clearLoginAttempts(req, user);
+    write(res, 302, "", {
+      location: adminPath,
+      "set-cookie": `admin_session=${encodeURIComponent(getSessionCookie())}; ${getCookieFlags(req, Math.floor(sessionMaxAgeMs / 1000))}`,
+    });
+    return;
+  }
+
+  recordFailedLogin(req, user);
+  write(res, 401, loginPage("账号或密码不正确。"), {
+    "content-type": "text/html; charset=utf-8",
+    "x-robots-tag": "noindex, nofollow, noarchive",
+  });
+}
+
+function handleLogout(req, res) {
+  write(res, 302, "", {
+    location: adminLoginPath,
+    "set-cookie": `admin_session=; ${getCookieFlags(req, 0)}`,
+  });
+}
+
+async function serveAdminPage(res) {
+  try {
+    const body = await readFile(path.resolve(root, "admin.html"));
+    write(res, 200, body, {
+      "content-type": "text/html; charset=utf-8",
+      "x-robots-tag": "noindex, nofollow, noarchive",
+    });
+  } catch {
+    write(res, 404, "Not found");
+  }
 }
 
 async function serveFile(res, rawPath) {
+  if (["/admin.html", "/admin", "/admin-login"].includes(rawPath)) {
+    write(res, 404, "Not found");
+    return;
+  }
+
   const relative = rawPath === "/" ? "index.html" : rawPath.slice(1);
   const filePath = path.resolve(root, relative);
 
@@ -866,19 +1053,40 @@ const server = http.createServer(async (req, res) => {
     const url = new URL(req.url, `http://${req.headers.host}`);
     const rawPath = decodeURIComponent(url.pathname);
 
-    if (rawPath === "/admin-login" && req.method === "POST") {
+    if (["/admin.html", "/admin", "/admin-login"].includes(rawPath)) {
+      write(res, 404, "Not found");
+      return;
+    }
+
+    if (rawPath === `${adminPath}/`) {
+      write(res, 302, "", { location: adminPath });
+      return;
+    }
+
+    if (rawPath === adminLoginPath && req.method === "POST") {
       await handleLogin(req, res);
       return;
     }
 
-    if (rawPath === "/admin-login" && req.method === "GET") {
-      write(res, 200, loginPage(), { "content-type": "text/html; charset=utf-8" });
+    if (rawPath === adminLoginPath && req.method === "GET") {
+      write(res, 200, loginPage(), {
+        "content-type": "text/html; charset=utf-8",
+        "x-robots-tag": "noindex, nofollow, noarchive",
+      });
+      return;
+    }
+
+    if (rawPath === adminLogoutPath) {
+      handleLogout(req, res);
       return;
     }
 
     if (requiresAdmin(rawPath)) {
-      if (!adminPassword) {
-        write(res, 503, missingAdminPasswordPage(), { "content-type": "text/html; charset=utf-8" });
+      if (!adminPasswordSet) {
+        write(res, 503, missingAdminPasswordPage(), {
+          "content-type": "text/html; charset=utf-8",
+          "x-robots-tag": "noindex, nofollow, noarchive",
+        });
         return;
       }
 
@@ -886,8 +1094,13 @@ const server = http.createServer(async (req, res) => {
         if (rawPath.startsWith("/api/")) {
           json(res, 401, { ok: false, error: "Admin login required." });
         } else {
-          write(res, 302, "", { location: "/admin-login" });
+          write(res, 302, "", { location: adminLoginPath });
         }
+        return;
+      }
+
+      if (rawPath === adminPath) {
+        await serveAdminPage(res);
         return;
       }
     }

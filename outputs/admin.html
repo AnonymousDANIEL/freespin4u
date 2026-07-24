@@ -233,6 +233,11 @@
         gap: 12px;
       }
 
+      .compact-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+
       .field {
         display: grid;
         gap: 6px;
@@ -762,13 +767,14 @@
   <body>
     <header class="topbar">
       <div class="shell nav">
-        <a class="brand" href="admin.html" aria-label="Offer Admin">
+        <a class="brand" href="#" aria-label="Offer Admin">
           <span class="brand-mark">AD</span>
           <span>Offer Admin 后台</span>
         </a>
         <div class="nav-actions">
-          <a class="btn btn-secondary" href="index.html" target="_blank" rel="noopener">前台预览</a>
+          <a class="btn btn-secondary" href="/index.html" target="_blank" rel="noopener">前台预览</a>
           <button class="btn btn-primary" type="button" data-export>导出资料</button>
+          <button class="btn btn-secondary" type="button" data-logout>退出</button>
         </div>
       </div>
     </header>
@@ -792,6 +798,18 @@
             <div class="stat">
               <strong data-hidden>0</strong>
               <span>已停用</span>
+            </div>
+            <div class="stat">
+              <strong data-featured>0</strong>
+              <span>Featured</span>
+            </div>
+            <div class="stat">
+              <strong data-current-language>华语</strong>
+              <span>前台语言</span>
+            </div>
+            <div class="stat">
+              <strong data-last-updated>-</strong>
+              <span>最后更新</span>
             </div>
           </div>
         </section>
@@ -859,6 +877,46 @@
                 <input id="live-transactions-enabled" type="checkbox" checked />
                 <span>全站显示 Live Transaction</span>
               </label>
+              <div class="field">
+                <label for="front-language">当前前台语言</label>
+                <select id="front-language">
+                  <option value="zh">华语</option>
+                  <option value="en">English</option>
+                  <option value="ms">Bahasa Malaysia</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="default-language">默认语言</label>
+                <select id="default-language">
+                  <option value="zh">华语</option>
+                  <option value="en">English</option>
+                  <option value="ms">Bahasa Malaysia</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label>启用语言</label>
+                <div class="form-grid compact-grid">
+                  <label class="check-row"><input id="language-enabled-zh" type="checkbox" checked /><span>华语</span></label>
+                  <label class="check-row"><input id="language-enabled-en" type="checkbox" checked /><span>English</span></label>
+                  <label class="check-row"><input id="language-enabled-ms" type="checkbox" checked /><span>Bahasa Malaysia</span></label>
+                </div>
+                <p class="hint">前台不会显示语言按钮，只显示这里指定的当前语言。</p>
+              </div>
+              <div class="field full">
+                <label>前台区块开关</label>
+                <div class="form-grid compact-grid">
+                  <label class="check-row"><input id="section-hero" type="checkbox" checked /><span>Hero 第一屏</span></label>
+                  <label class="check-row"><input id="section-quick-comparison" type="checkbox" checked /><span>快速比较</span></label>
+                  <label class="check-row"><input id="section-offers" type="checkbox" checked /><span>优惠列表</span></label>
+                  <label class="check-row"><input id="section-steps" type="checkbox" checked /><span>领取步骤</span></label>
+                  <label class="check-row"><input id="section-why" type="checkbox" checked /><span>为什么选择</span></label>
+                  <label class="check-row"><input id="section-faq" type="checkbox" checked /><span>FAQ</span></label>
+                  <label class="check-row"><input id="section-community" type="checkbox" checked /><span>Join Our</span></label>
+                  <label class="check-row"><input id="section-final" type="checkbox" checked /><span>底部 CTA</span></label>
+                  <label class="check-row"><input id="section-footer" type="checkbox" checked /><span>Footer</span></label>
+                  <label class="check-row"><input id="section-sticky-cta" type="checkbox" checked /><span>手机底部固定按钮</span></label>
+                </div>
+              </div>
             </div>
 
             <div class="color-settings">
@@ -1239,7 +1297,9 @@
             <div class="advanced-copy" data-advanced-copy></div>
 
             <div class="form-actions">
-              <button class="btn btn-primary" type="submit">保存网站设置</button>
+              <button class="btn btn-secondary" type="button" data-save-site-draft>Save Draft</button>
+              <a class="btn btn-secondary" href="/index.html?preview=1" target="_blank" rel="noopener">Preview</a>
+              <button class="btn btn-primary" type="submit">Publish 设置</button>
             </div>
           </div>
         </form>
@@ -1288,11 +1348,23 @@
                 <div class="field">
                   <label for="star-rating">星星数量 (0-5)</label>
                   <input id="star-rating" type="number" min="0" max="5" step="0.1" placeholder="例如 4.9" />
-                  <p class="hint">可以填 0.1-5，例如 1.1 / 4.2 / 4.9；满星最高 5。前台只显示星星和分数，不显示 Best / Hot 标签。</p>
+                  <p class="hint">可以填 0.1-5，例如 1.1 / 4.2 / 4.9；满星最高 5。前台只显示星星和分数，不显示旧排名标签。</p>
                 </div>
                 <label class="check-row">
                   <input id="show-stars" type="checkbox" checked />
                   <span>显示星星评分</span>
+                </label>
+                <label class="check-row">
+                  <input id="offer-featured" type="checkbox" />
+                  <span>Featured 主推</span>
+                </label>
+                <label class="check-row">
+                  <input id="offer-popular" type="checkbox" />
+                  <span>Popular 热门</span>
+                </label>
+                <label class="check-row">
+                  <input id="offer-new" type="checkbox" />
+                  <span>New 新优惠</span>
                 </label>
                 <label class="check-row">
                   <input id="show-bonus-label" type="checkbox" checked />
@@ -1342,15 +1414,15 @@
                 </div>
                 <div class="field">
                   <label for="rank-zh">备用标签 / 排名 中文（前台不显示）</label>
-                  <input id="rank-zh" placeholder="Top 1 / Hot" />
+                  <input id="rank-zh" placeholder="例如 ★★★★★ / 主推" />
                 </div>
                 <div class="field">
                   <label for="rank-en">备用标签 / 排名 EN（前台不显示）</label>
-                  <input id="rank-en" placeholder="Top 1 / Hot" />
+                  <input id="rank-en" placeholder="Example ★★★★★ / Featured" />
                 </div>
                 <div class="field">
                   <label for="rank-ms">备用标签 / 排名 BM（前台不显示）</label>
-                  <input id="rank-ms" placeholder="Top 1 / Pantas" />
+                  <input id="rank-ms" placeholder="Contoh ★★★★★ / Utama" />
                 </div>
                 <label class="check-row">
                   <input id="active" type="checkbox" checked />
@@ -1741,6 +1813,7 @@
       const defaultDomains = Array.isArray(window.defaultDomains) ? window.defaultDomains : [];
       const defaultSiteSettings = window.defaultSiteSettings || {};
       const languages = ["zh", "en", "ms"];
+      let csrfToken = "";
       const languageLabels = {
         zh: "华语",
         en: "English",
@@ -1778,6 +1851,18 @@
         liveRowText: "color-live-row-text",
         liveAmountText: "color-live-amount-text"
       };
+      const sectionFields = {
+        hero: "section-hero",
+        quickComparison: "section-quick-comparison",
+        offers: "section-offers",
+        steps: "section-steps",
+        why: "section-why",
+        faq: "section-faq",
+        community: "section-community",
+        final: "section-final",
+        footer: "section-footer",
+        stickyCta: "section-sticky-cta"
+      };
       const basicCopyFields = {
         heroEyebrow: "hero-eyebrow",
         heroTitle: "hero-title",
@@ -1807,22 +1892,17 @@
           ]
         },
         {
-          title: "网页判断区",
+          title: "导航 / 快速比较区",
           fields: [
-            ["comparisonTitle", "区块标题", "comparison-title"],
-            ["comparisonDescription", "区块说明", "comparison-description", "textarea"],
-            ["comparisonLeftLabel", "左卡标签", "comparison-left-label"],
-            ["comparisonLeftTitle", "左卡标题", "comparison-left-title"],
-            ["comparisonLeftText", "左卡说明", "comparison-left-text", "textarea"],
-            ["comparisonLeftBullet1", "左卡卖点 1", "comparison-left-bullet-1"],
-            ["comparisonLeftBullet2", "左卡卖点 2", "comparison-left-bullet-2"],
-            ["comparisonLeftBullet3", "左卡卖点 3", "comparison-left-bullet-3"],
-            ["comparisonRightLabel", "右卡标签", "comparison-right-label"],
-            ["comparisonRightTitle", "右卡标题", "comparison-right-title"],
-            ["comparisonRightText", "右卡说明", "comparison-right-text", "textarea"],
-            ["comparisonRightBullet1", "右卡卖点 1", "comparison-right-bullet-1"],
-            ["comparisonRightBullet2", "右卡卖点 2", "comparison-right-bullet-2"],
-            ["comparisonRightBullet3", "右卡卖点 3", "comparison-right-bullet-3"]
+            ["quickComparisonNav", "导航：快速比较", "quick-comparison-nav"],
+            ["offersNav", "导航：优惠", "offers-nav"],
+            ["stepsNav", "导航：步骤", "steps-nav"],
+            ["faqNav", "导航：FAQ", "faq-nav"],
+            ["communityNav", "导航：社群", "community-nav"],
+            ["quickComparisonTitle", "快速比较标题", "quick-comparison-title"],
+            ["quickComparisonDescription", "快速比较说明", "quick-comparison-description", "textarea"],
+            ["quickComparisonAction", "快速比较按钮文字", "quick-comparison-action"],
+            ["offerSearchPlaceholder", "搜索框提示", "offer-search-placeholder"]
           ]
         },
         {
@@ -1839,7 +1919,7 @@
           ]
         },
         {
-          title: "为什么加入区",
+          title: "为什么选择区",
           fields: [
             ["whyTitle", "区块标题", "why-title"],
             ["whyDescription", "区块说明", "why-description", "textarea"],
@@ -1999,6 +2079,9 @@
           amount: offer.amount || "RM0",
           url: normalizeLink(offer.url || "#join"),
           starRating: normalizeStars(offer.starRating),
+          featured: offer.featured === true,
+          popular: offer.popular === true,
+          isNew: offer.isNew === true,
           showStars: offer.showStars !== false,
           showBonusLabel: offer.showBonusLabel !== false,
           showBullets: offer.showBullets !== false,
@@ -2244,9 +2327,28 @@
       }
 
       function saveSiteSettings() {
+        siteSettings.publish = {
+          ...(siteSettings.publish || {}),
+          status: "published",
+          lastSavedAt: new Date().toISOString(),
+          lastPublishedAt: new Date().toISOString(),
+          lastPublishedBy: "admin"
+        };
         localStorage.setItem(siteSettingsStorageKey, JSON.stringify(siteSettings));
         scheduleServerSave();
         fillSiteForm();
+        render();
+      }
+
+      function saveSiteDraft() {
+        siteSettings.publish = {
+          ...(siteSettings.publish || {}),
+          status: "draft",
+          lastSavedAt: new Date().toISOString()
+        };
+        localStorage.setItem(siteSettingsStorageKey, JSON.stringify(siteSettings));
+        fillSiteForm();
+        render();
       }
 
       function getDataBundle() {
@@ -2262,7 +2364,10 @@
         try {
           const response = await fetch("/api/site-data", {
             method: "PUT",
-            headers: { "content-type": "application/json" },
+            headers: {
+              "content-type": "application/json",
+              "x-csrf-token": csrfToken
+            },
             body: JSON.stringify(getDataBundle())
           });
 
@@ -2289,6 +2394,8 @@
           if (!result.ok) {
             return false;
           }
+
+          csrfToken = result.csrfToken || csrfToken;
 
           if (!result.hasServerData || !result.data) {
             scheduleServerSave();
@@ -2415,9 +2522,14 @@
       function renderStats() {
         const total = offers.length;
         const active = offers.filter((offer) => offer.active).length;
+        const featured = offers.filter((offer, index) => offer.featured === true || index === 0).length;
+        const language = siteSettings.activeLanguage || siteSettings.defaultLanguage || "zh";
         document.querySelector("[data-total]").textContent = total;
         document.querySelector("[data-active]").textContent = active;
         document.querySelector("[data-hidden]").textContent = total - active;
+        document.querySelector("[data-featured]").textContent = featured;
+        document.querySelector("[data-current-language]").textContent = languageLabels[language] || language;
+        document.querySelector("[data-last-updated]").textContent = formatDateTime(siteSettings.publish?.lastSavedAt || siteSettings.publish?.lastPublishedAt || "");
       }
 
       function renderList() {
@@ -2433,6 +2545,11 @@
             const statusText = offer.active ? "启用" : "停用";
             const rankDisplay = offer.showStars === false ? "星星隐藏" : getStars(offer.starRating) || offer.rank.zh || offer.rank.en;
             const liveText = offer.live?.enabled ? `Live ${offer.live.rows || 3} 行` : "Live OFF";
+            const promoTags = [
+              offer.featured ? "Featured" : "",
+              offer.popular ? "Popular" : "",
+              offer.isNew ? "New" : ""
+            ].filter(Boolean);
             const logo = offer.logoUrl
               ? `<img src="${escapeHtml(offer.logoUrl)}" alt="${escapeHtml(offer.name)} logo" loading="lazy" />`
               : escapeHtml(offer.badge);
@@ -2446,6 +2563,7 @@
                     <span class="chip">${escapeHtml(rankDisplay)}</span>
                     <span class="chip ${statusClass}">${statusText}</span>
                     <span class="chip">${escapeHtml(liveText)}</span>
+                    ${promoTags.map((tag) => `<span class="chip">${escapeHtml(tag)}</span>`).join("")}
                     <span>排序 ${escapeHtml(offer.order)}</span>
                   </div>
                 </div>
@@ -2672,6 +2790,9 @@
         setValue("amount", offer.amount);
         setValue("order", offer.order);
         setValue("star-rating", offer.starRating);
+        document.querySelector("#offer-featured").checked = offer.featured === true;
+        document.querySelector("#offer-popular").checked = offer.popular === true;
+        document.querySelector("#offer-new").checked = offer.isNew === true;
         document.querySelector("#show-stars").checked = offer.showStars !== false;
         document.querySelector("#show-bonus-label").checked = offer.showBonusLabel !== false;
         document.querySelector("#show-bullets").checked = offer.showBullets !== false;
@@ -2708,6 +2829,9 @@
         setValue("order", offers.length + 1);
         setValue("star-rating", 0);
         document.querySelector("#show-stars").checked = true;
+        document.querySelector("#offer-featured").checked = false;
+        document.querySelector("#offer-popular").checked = false;
+        document.querySelector("#offer-new").checked = false;
         document.querySelector("#show-bonus-label").checked = true;
         document.querySelector("#show-bullets").checked = true;
         setValue("bullet-limit", 3);
@@ -2732,6 +2856,9 @@
           amount: getValue("amount"),
           url: getValue("url"),
           starRating: getValue("star-rating"),
+          featured: document.querySelector("#offer-featured").checked,
+          popular: document.querySelector("#offer-popular").checked,
+          isNew: document.querySelector("#offer-new").checked,
           showStars: document.querySelector("#show-stars").checked,
           showBonusLabel: document.querySelector("#show-bonus-label").checked,
           showBullets: document.querySelector("#show-bullets").checked,
@@ -2909,6 +3036,20 @@
         setValue("site-logo-url", siteSettings.siteLogoUrl);
         setPreview("[data-site-logo-preview]", siteSettings.siteLogoUrl, "暂无 logo");
         document.querySelector("#live-transactions-enabled").checked = siteSettings.liveTransactionsEnabled !== false;
+        setValue("front-language", siteSettings.activeLanguage || siteSettings.defaultLanguage || "zh");
+        setValue("default-language", siteSettings.defaultLanguage || "zh");
+        languages.forEach((language) => {
+          const checkbox = document.querySelector(`#language-enabled-${language}`);
+          if (checkbox) {
+            checkbox.checked = siteSettings.enabledLanguages?.[language] !== false;
+          }
+        });
+        Object.entries(sectionFields).forEach(([key, id]) => {
+          const checkbox = document.querySelector(`#${id}`);
+          if (checkbox) {
+            checkbox.checked = siteSettings.sections?.[key] !== false;
+          }
+        });
 
         Object.entries(colorFields).forEach(([key, id]) => {
           setValue(id, siteSettings.colors?.[key]);
@@ -2931,6 +3072,10 @@
           hero3dImage: getValue("hero-3d-image"),
           brandMarkText: getValue("brand-mark-text"),
           siteLogoUrl: getValue("site-logo-url"),
+          activeLanguage: getValue("front-language") || "zh",
+          defaultLanguage: getValue("default-language") || "zh",
+          enabledLanguages: {},
+          sections: {},
           liveTransactionsEnabled: document.querySelector("#live-transactions-enabled").checked,
           colors: {},
           siteName: {},
@@ -2941,6 +3086,13 @@
 
         Object.entries(colorFields).forEach(([key, id]) => {
           nextSettings.colors[key] = getValue(id);
+        });
+
+        languages.forEach((language) => {
+          nextSettings.enabledLanguages[language] = document.querySelector(`#language-enabled-${language}`)?.checked !== false;
+        });
+        Object.entries(sectionFields).forEach(([key, id]) => {
+          nextSettings.sections[key] = document.querySelector(`#${id}`)?.checked !== false;
         });
 
         languages.forEach((language) => {
@@ -3030,7 +3182,10 @@
         try {
           const response = await fetch("/api/cloudflare/connect-domain", {
             method: "POST",
-            headers: { "content-type": "application/json" },
+            headers: {
+              "content-type": "application/json",
+              "x-csrf-token": csrfToken
+            },
             body: JSON.stringify({
               domain: nextDomain.domain,
               targetServer: nextDomain.targetServer,
@@ -3349,6 +3504,16 @@
         event.preventDefault();
         siteSettings = readSiteForm();
         saveSiteSettings();
+      });
+
+      document.querySelector("[data-save-site-draft]").addEventListener("click", () => {
+        siteSettings = readSiteForm();
+        saveSiteDraft();
+      });
+
+      document.querySelector("[data-logout]").addEventListener("click", () => {
+        const basePath = window.location.pathname.replace(/\/$/, "");
+        window.location.href = `${basePath}/logout`;
       });
 
       document.querySelector("[data-new]").addEventListener("click", resetOfferForm);
