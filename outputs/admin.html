@@ -50,6 +50,149 @@
         margin: 0 auto;
       }
 
+      .admin-shell {
+        width: min(1500px, calc(100% - 32px));
+        display: grid;
+        grid-template-columns: 260px minmax(0, 1fr);
+        gap: 18px;
+        margin: 0 auto;
+      }
+
+      .admin-sidebar {
+        position: sticky;
+        top: 84px;
+        align-self: start;
+        max-height: calc(100vh - 104px);
+        overflow: auto;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background: linear-gradient(180deg, #094c68, #07364d);
+        box-shadow: 0 18px 38px rgba(0, 0, 0, 0.28);
+      }
+
+      .sidebar-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        color: var(--white);
+        font-size: 18px;
+        font-weight: 900;
+      }
+
+      .sidebar-logo {
+        width: 40px;
+        height: 32px;
+        display: grid;
+        place-items: center;
+        border-radius: 7px;
+        background: #071018;
+        color: var(--gold);
+        font-size: 12px;
+      }
+
+      .sidebar-nav {
+        display: grid;
+        gap: 14px;
+        padding: 14px;
+      }
+
+      .sidebar-group {
+        display: grid;
+        gap: 7px;
+      }
+
+      .sidebar-group-title {
+        color: rgba(247, 243, 230, 0.62);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .sidebar-link {
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 9px 11px;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .sidebar-link::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        flex: 0 0 8px;
+        border-radius: 50%;
+        background: rgba(245, 196, 90, 0.7);
+        box-shadow: 0 0 0 4px rgba(245, 196, 90, 0.1);
+      }
+
+      .sidebar-link:hover,
+      .sidebar-link:focus,
+      .sidebar-link.active {
+        border-color: rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+      }
+
+      .admin-content {
+        min-width: 0;
+      }
+
+      .admin-section {
+        scroll-margin-top: 88px;
+      }
+
+      .category-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 18px;
+        margin: 22px 0 12px;
+        padding: 14px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.045);
+      }
+
+      .category-heading:first-child {
+        margin-top: 0;
+      }
+
+      .category-heading span {
+        display: inline-flex;
+        width: fit-content;
+        margin-bottom: 5px;
+        padding: 4px 8px;
+        border-radius: 7px;
+        background: rgba(245, 196, 90, 0.13);
+        color: var(--gold);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .category-heading h2 {
+        margin: 0;
+        color: var(--paper);
+        font-size: 22px;
+      }
+
+      .category-heading p {
+        max-width: 620px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
       .topbar {
         position: sticky;
         top: 0;
@@ -245,6 +388,30 @@
 
       .field.full {
         grid-column: 1 / -1;
+      }
+
+      .form-break {
+        grid-column: 1 / -1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 4px;
+        padding: 10px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-left: 4px solid var(--gold);
+        border-radius: 8px;
+        background: rgba(245, 196, 90, 0.08);
+      }
+
+      .form-break strong {
+        color: var(--paper);
+        font-size: 14px;
+      }
+
+      .form-break span {
+        color: var(--muted);
+        font-size: 12px;
       }
 
       label {
@@ -704,6 +871,19 @@
       }
 
       @media (max-width: 980px) {
+        .admin-shell {
+          grid-template-columns: 1fr;
+        }
+
+        .admin-sidebar {
+          position: static;
+          max-height: none;
+        }
+
+        .sidebar-nav {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
         .hero,
         .layout {
           grid-template-columns: 1fr;
@@ -715,6 +895,19 @@
       }
 
       @media (max-width: 640px) {
+        .admin-shell {
+          width: min(100% - 24px, 1500px);
+        }
+
+        .sidebar-nav {
+          grid-template-columns: 1fr;
+        }
+
+        .category-heading {
+          align-items: start;
+          flex-direction: column;
+        }
+
         .shell {
           width: min(100% - 28px, 1240px);
         }
@@ -780,8 +973,42 @@
     </header>
 
     <main>
-      <div class="shell">
-        <section class="hero">
+      <div class="admin-shell">
+        <aside class="admin-sidebar" aria-label="后台分类菜单">
+          <div class="sidebar-title">
+            <span class="sidebar-logo">AD</span>
+            <span>Admin Portal</span>
+          </div>
+          <nav class="sidebar-nav">
+            <div class="sidebar-group">
+              <div class="sidebar-group-title">SYSTEM</div>
+              <a class="sidebar-link" href="#dashboard">总览 Dashboard</a>
+              <a class="sidebar-link" href="#site-form">网站整体设置</a>
+            </div>
+            <div class="sidebar-group">
+              <div class="sidebar-group-title">FRONT PAGE</div>
+              <a class="sidebar-link" href="#site-form">Logo / 背景 / 颜色</a>
+              <a class="sidebar-link" href="#site-form">语言 / 文案 / 区块开关</a>
+            </div>
+            <div class="sidebar-group">
+              <div class="sidebar-group-title">COMPANY</div>
+              <a class="sidebar-link" href="#company-manager">公司优惠管理</a>
+              <a class="sidebar-link" href="#company-manager">公司列表 / JSON</a>
+            </div>
+            <div class="sidebar-group">
+              <div class="sidebar-group-title">MARKETING</div>
+              <a class="sidebar-link" href="#social-manager">Join Our 社群入口</a>
+              <a class="sidebar-link" href="#test-id-manager">测试 ID 管理</a>
+            </div>
+            <div class="sidebar-group">
+              <div class="sidebar-group-title">DOMAIN</div>
+              <a class="sidebar-link" href="#domain-manager">Domain / Cloudflare</a>
+            </div>
+          </nav>
+        </aside>
+
+        <div class="admin-content">
+        <section class="hero admin-section" id="dashboard">
           <div>
             <h1>公司优惠管理</h1>
             <p>这里可以新增公司、修改奖金金额、注册链接、排序和三语优惠文案。保存后，前台页面刷新就会读取最新资料。</p>
@@ -814,13 +1041,25 @@
           </div>
         </section>
 
-        <form class="panel site-panel" id="site-form">
+        <div class="category-heading">
+          <div>
+            <span>WEBSITE</span>
+            <h2>网站整体设置</h2>
+          </div>
+          <p>集中管理首页图片、Logo、语言、颜色、区块开关、Quick Bonus 和三语文案。</p>
+        </div>
+
+        <form class="panel site-panel admin-section" id="site-form">
           <div class="panel-head">
             <h2>网站整体设置</h2>
             <button class="btn btn-secondary btn-small" type="button" data-reset-site>恢复网站默认</button>
           </div>
           <div class="panel-body">
             <div class="form-grid">
+              <div class="form-break">
+                <strong>图片 / Logo / 第一屏</strong>
+                <span>首页背景、右边 3D 图、网站 Logo</span>
+              </div>
               <div class="field full">
                 <label for="background-image">首页背景图 URL</label>
                 <input id="background-image" placeholder="assets/slot-hero.png 或上传图片" />
@@ -873,6 +1112,10 @@
                 <label>网站 logo 预览</label>
                 <div class="image-preview logo-preview" data-site-logo-preview>暂无 logo</div>
               </div>
+              <div class="form-break">
+                <strong>语言 / 全站显示</strong>
+                <span>前台显示语言、语言启用和 Live 总开关</span>
+              </div>
               <label class="check-row">
                 <input id="live-transactions-enabled" type="checkbox" checked />
                 <span>全站显示 Live Transaction</span>
@@ -916,6 +1159,10 @@
                   <label class="check-row"><input id="section-footer" type="checkbox" checked /><span>Footer</span></label>
                   <label class="check-row"><input id="section-sticky-cta" type="checkbox" checked /><span>手机底部固定按钮</span></label>
                 </div>
+              </div>
+              <div class="form-break">
+                <strong>优惠筛选 / 标签 / Quick Bonus</strong>
+                <span>筛选按钮、卡片标签和比较表栏目</span>
               </div>
               <div class="field full">
                 <label>优惠筛选按钮开关</label>
@@ -1337,7 +1584,15 @@
           </div>
         </form>
 
-        <section class="layout">
+        <div class="category-heading">
+          <div>
+            <span>COMPANY</span>
+            <h2>公司优惠管理</h2>
+          </div>
+          <p>新增公司、上传公司 Logo、设置星星、标签、Bonus Page、Live Transaction 和注册链接。</p>
+        </div>
+
+        <section class="layout admin-section" id="company-manager">
           <form class="panel" id="offer-form">
             <div class="panel-head">
               <h2 data-form-title>新增公司</h2>
@@ -1346,6 +1601,10 @@
             <div class="panel-body">
               <input type="hidden" id="offer-id" />
               <div class="form-grid">
+                <div class="form-break">
+                  <strong>公司基本资料</strong>
+                  <span>名字、Logo、金额、排序</span>
+                </div>
                 <div class="field">
                   <label for="name">公司名字</label>
                   <input id="name" required placeholder="例如 M2Cuci" />
@@ -1383,6 +1642,10 @@
                   <input id="star-rating" type="number" min="0" max="5" step="0.1" placeholder="例如 4.9" />
                   <p class="hint">可以填 0.1-5，例如 1.1 / 4.2 / 4.9；满星最高 5。前台只显示星星和分数，不显示旧排名标签。</p>
                 </div>
+                <div class="form-break">
+                  <strong>前台卡片显示</strong>
+                  <span>星星、标签、小字和卖点行数</span>
+                </div>
                 <label class="check-row">
                   <input id="show-stars" type="checkbox" checked />
                   <span>显示星星评分</span>
@@ -1416,6 +1679,10 @@
                   <label for="url">注册链接</label>
                   <input id="url" required placeholder="例如 https://syabas99.com" />
                   <p class="hint">请填完整链接；系统不会自动修改。站内位置才用 #join。</p>
+                </div>
+                <div class="form-break">
+                  <strong>链接 / Bonus Page / Live Transaction</strong>
+                  <span>注册链接、自动滑动 Bonus、Live 网页和备用资料</span>
                 </div>
                 <label class="check-row">
                   <input id="bonus-page-enabled" type="checkbox" />
@@ -1461,6 +1728,11 @@
                   <input id="active" type="checkbox" checked />
                   <span>启用在前台显示</span>
                 </label>
+              </div>
+
+              <div class="form-break language-break">
+                <strong>三语公司文案</strong>
+                <span>华语 / English / Bahasa Melayu 分开填写</span>
               </div>
 
               <div class="language-group">
@@ -1575,7 +1847,15 @@
           </section>
         </section>
 
-        <section class="layout social-layout">
+        <div class="category-heading">
+          <div>
+            <span>SOCIAL</span>
+            <h2>Join Our 社群入口</h2>
+          </div>
+          <p>管理 Telegram、Facebook、WhatsApp 等社群入口，每个入口都能改 Logo、文案和完整链接。</p>
+        </div>
+
+        <section class="layout social-layout admin-section" id="social-manager">
           <form class="panel" id="social-form">
             <div class="panel-head">
               <h2 data-social-form-title>新增社群入口</h2>
@@ -1584,6 +1864,10 @@
             <div class="panel-body">
               <input type="hidden" id="social-id" />
               <div class="form-grid">
+                <div class="form-break">
+                  <strong>社群基本资料</strong>
+                  <span>入口名字、Logo、排序和完整链接</span>
+                </div>
                 <div class="field">
                   <label for="social-name">入口名字</label>
                   <input id="social-name" required placeholder="例如 Telegram" />
@@ -1621,6 +1905,11 @@
                   <input id="social-active" type="checkbox" checked />
                   <span>启用在前台显示</span>
                 </label>
+              </div>
+
+              <div class="form-break language-break">
+                <strong>三语社群文案</strong>
+                <span>标题、说明和按钮文字分开管理</span>
               </div>
 
               <div class="language-group">
@@ -1689,7 +1978,15 @@
           </section>
         </section>
 
-        <section class="layout social-layout" id="test-id-manager">
+        <div class="category-heading">
+          <div>
+            <span>TEST</span>
+            <h2>测试 ID 管理</h2>
+          </div>
+          <p>分开保存测试 ID、测试额度、游戏链接和备注，避免和正式公司资料混在一起。</p>
+        </div>
+
+        <section class="layout social-layout admin-section" id="test-id-manager">
           <form class="panel" id="test-id-form">
             <div class="panel-head">
               <h2>测试 ID 管理</h2>
@@ -1698,6 +1995,10 @@
             <div class="panel-body">
               <input type="hidden" id="test-original-id" />
               <div class="form-grid">
+                <div class="form-break">
+                  <strong>测试账号资料</strong>
+                  <span>Test ID、额度、游戏链接和备注</span>
+                </div>
                 <div class="field">
                   <label for="test-id">Test ID</label>
                   <input id="test-id" placeholder="点击生成，或自己填写" />
@@ -1743,7 +2044,15 @@
           </section>
         </section>
 
-        <section class="panel domain-panel" id="domain-manager">
+        <div class="category-heading">
+          <div>
+            <span>DOMAIN</span>
+            <h2>Domain 网页管理</h2>
+          </div>
+          <p>管理主域名、备用域名、Cloudflare Proxy、到期日和自动连接 Cloudflare。</p>
+        </div>
+
+        <section class="panel domain-panel admin-section" id="domain-manager">
           <div class="panel-head">
             <h2>Domain 网页管理</h2>
             <div class="domain-toolbar">
@@ -1756,6 +2065,10 @@
             <form id="domain-form">
               <input type="hidden" id="domain-id" />
               <div class="form-grid">
+                <div class="form-break">
+                  <strong>Domain 基本资料</strong>
+                  <span>域名、服务器、状态、到期日和 Cloudflare</span>
+                </div>
                 <div class="field">
                   <label for="domain-name">Domain *</label>
                   <input id="domain-name" required placeholder="例如 yourdomain.com" />
@@ -1831,6 +2144,7 @@
             </p>
           </div>
         </section>
+        </div>
       </div>
     </main>
 
@@ -3610,6 +3924,13 @@
       document.querySelector("[data-logout]").addEventListener("click", () => {
         const basePath = window.location.pathname.replace(/\/$/, "");
         window.location.href = `${basePath}/logout`;
+      });
+
+      document.querySelectorAll(".sidebar-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          document.querySelectorAll(".sidebar-link").forEach((item) => item.classList.remove("active"));
+          link.classList.add("active");
+        });
       });
 
       document.querySelector("[data-new]").addEventListener("click", resetOfferForm);
