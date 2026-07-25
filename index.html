@@ -1445,6 +1445,296 @@
           width: auto;
         }
       }
+
+      .sidebar-mobile-open,
+      .sidebar-scrim {
+        display: none;
+      }
+
+      .admin-hidden {
+        display: none !important;
+      }
+
+      .admin-shell,
+      .admin-sidebar,
+      .admin-content {
+        transition: grid-template-columns 0.22s ease, transform 0.22s ease, width 0.22s ease;
+      }
+
+      .sidebar-title {
+        position: relative;
+      }
+
+      .sidebar-collapse {
+        width: 32px;
+        height: 32px;
+        display: inline-grid;
+        place-items: center;
+        margin-left: auto;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 9px;
+        color: rgba(255, 255, 255, 0.86);
+        background: rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .sidebar-search {
+        padding: 14px 16px 0;
+      }
+
+      .sidebar-search input {
+        min-height: 38px;
+        border-color: rgba(255, 255, 255, 0.18);
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .sidebar-search input::placeholder {
+        color: rgba(255, 255, 255, 0.58);
+      }
+
+      .sidebar-nav {
+        gap: 10px;
+      }
+
+      .sidebar-group {
+        display: grid;
+        gap: 0;
+        padding: 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.055);
+        overflow: hidden;
+      }
+
+      .sidebar-group.is-search-hidden,
+      .sidebar-link.is-search-hidden {
+        display: none !important;
+      }
+
+      .sidebar-group-toggle,
+      .sidebar-link {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        border: 0;
+        cursor: pointer;
+        font: inherit;
+        text-align: left;
+      }
+
+      .sidebar-group-toggle {
+        min-height: 46px;
+        gap: 10px;
+        padding: 10px 12px;
+        color: rgba(255, 255, 255, 0.9);
+        background: transparent;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.06em;
+      }
+
+      .sidebar-group-icon,
+      .sidebar-link-icon {
+        width: 28px;
+        height: 28px;
+        display: inline-grid;
+        flex: 0 0 28px;
+        place-items: center;
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.12);
+        color: var(--gold);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0;
+      }
+
+      .sidebar-arrow {
+        margin-left: auto;
+        color: rgba(255, 255, 255, 0.62);
+        transition: transform 0.2s ease;
+      }
+
+      .sidebar-group.is-open .sidebar-arrow {
+        transform: rotate(180deg);
+      }
+
+      .sidebar-submenu {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.24s ease, opacity 0.2s ease;
+      }
+
+      .sidebar-group.is-open .sidebar-submenu {
+        max-height: 560px;
+        opacity: 1;
+      }
+
+      .sidebar-link {
+        min-height: 42px;
+        gap: 10px;
+        padding: 8px 12px 8px 18px;
+        border-radius: 0;
+        color: rgba(255, 255, 255, 0.78);
+        background: transparent;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .sidebar-link::before {
+        display: none;
+      }
+
+      .sidebar-link:hover,
+      .sidebar-link:focus,
+      .sidebar-link.active {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .sidebar-link.active .sidebar-link-icon {
+        color: #102236;
+        background: linear-gradient(180deg, var(--gold), var(--gold-2));
+      }
+
+      .sidebar-group.has-active {
+        border-color: rgba(245, 196, 90, 0.42);
+        background: rgba(245, 196, 90, 0.1);
+      }
+
+      .admin-shell.sidebar-collapsed {
+        grid-template-columns: 78px minmax(0, 1fr);
+      }
+
+      .admin-shell.sidebar-collapsed .admin-sidebar {
+        overflow: visible;
+      }
+
+      .admin-shell.sidebar-collapsed .sidebar-title {
+        justify-content: center;
+        padding: 14px 10px;
+      }
+
+      .admin-shell.sidebar-collapsed .sidebar-title-text,
+      .admin-shell.sidebar-collapsed .sidebar-search,
+      .admin-shell.sidebar-collapsed .sidebar-group-label,
+      .admin-shell.sidebar-collapsed .sidebar-link-label,
+      .admin-shell.sidebar-collapsed .sidebar-arrow {
+        display: none;
+      }
+
+      .admin-shell.sidebar-collapsed .sidebar-logo {
+        width: 42px;
+      }
+
+      .admin-shell.sidebar-collapsed .sidebar-collapse {
+        position: absolute;
+        right: -13px;
+        top: 18px;
+        z-index: 2;
+        width: 26px;
+        height: 26px;
+        font-size: 17px;
+        transform: rotate(180deg);
+      }
+
+      .admin-shell.sidebar-collapsed .sidebar-nav {
+        padding: 12px 10px;
+      }
+
+      .admin-shell.sidebar-collapsed .sidebar-group {
+        border-radius: 12px;
+      }
+
+      .admin-shell.sidebar-collapsed .sidebar-group-toggle,
+      .admin-shell.sidebar-collapsed .sidebar-link {
+        justify-content: center;
+        padding: 8px;
+      }
+
+      .admin-shell.sidebar-collapsed .sidebar-submenu {
+        max-height: 560px;
+        opacity: 1;
+      }
+
+      @media (min-width: 981px) {
+        .sidebar-mobile-open {
+          display: none !important;
+        }
+      }
+
+      @media (max-width: 980px) {
+        body.sidebar-drawer-open {
+          overflow: hidden;
+        }
+
+        .sidebar-mobile-open {
+          display: inline-flex;
+        }
+
+        .admin-shell,
+        .admin-shell.sidebar-collapsed {
+          width: min(100% - 24px, 1500px);
+          display: block;
+        }
+
+        .admin-sidebar,
+        .admin-shell.sidebar-collapsed .admin-sidebar {
+          position: fixed;
+          inset: 0 auto 0 0;
+          z-index: 50;
+          width: min(86vw, 330px);
+          max-height: none;
+          border-radius: 0 16px 16px 0;
+          transform: translateX(-108%);
+        }
+
+        body.sidebar-drawer-open .admin-sidebar {
+          transform: translateX(0);
+        }
+
+        .admin-shell.sidebar-collapsed .sidebar-title-text,
+        .admin-shell.sidebar-collapsed .sidebar-search,
+        .admin-shell.sidebar-collapsed .sidebar-group-label,
+        .admin-shell.sidebar-collapsed .sidebar-link-label,
+        .admin-shell.sidebar-collapsed .sidebar-arrow {
+          display: inline-flex;
+        }
+
+        .admin-shell.sidebar-collapsed .sidebar-collapse {
+          position: static;
+          width: 32px;
+          height: 32px;
+          transform: none;
+        }
+
+        .admin-shell.sidebar-collapsed .sidebar-group-toggle,
+        .admin-shell.sidebar-collapsed .sidebar-link {
+          justify-content: flex-start;
+          padding: 8px 12px;
+        }
+
+        .sidebar-scrim {
+          position: fixed;
+          inset: 0;
+          z-index: 40;
+          display: block;
+          border: 0;
+          background: rgba(15, 23, 42, 0.54);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.2s ease;
+        }
+
+        body.sidebar-drawer-open .sidebar-scrim {
+          opacity: 1;
+          pointer-events: auto;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1455,6 +1745,7 @@
           <span>Offer Admin 后台</span>
         </a>
         <div class="nav-actions">
+          <button class="btn btn-secondary sidebar-mobile-open" type="button" data-sidebar-open>菜单</button>
           <a class="btn btn-secondary" href="/index.html" target="_blank" rel="noopener">前台预览</a>
           <button class="btn btn-primary" type="button" data-export>导出资料</button>
           <button class="btn btn-secondary" type="button" data-logout>退出</button>
@@ -1464,46 +1755,136 @@
 
     <main>
       <div class="admin-shell">
-        <aside class="admin-sidebar" aria-label="后台分类菜单">
+        <aside class="admin-sidebar" aria-label="后台分类菜单" data-sidebar>
           <div class="sidebar-title">
             <span class="sidebar-logo">AD</span>
-            <span>Admin Portal</span>
+            <span class="sidebar-title-text">Admin Portal</span>
+            <button class="sidebar-collapse" type="button" data-sidebar-toggle aria-label="收起侧边栏" title="收起 / 展开菜单">‹</button>
+          </div>
+          <div class="sidebar-search">
+            <input data-menu-search type="search" placeholder="搜索后台菜单" aria-label="搜索后台菜单" />
           </div>
           <nav class="sidebar-nav">
-            <div class="sidebar-group">
-              <div class="sidebar-group-title">SYSTEM</div>
-              <a class="sidebar-link" href="#dashboard">总览 Dashboard</a>
-              <a class="sidebar-link" href="#site-form">网站整体设置</a>
-            </div>
-            <div class="sidebar-group">
-              <div class="sidebar-group-title">FRONT PAGE</div>
-              <a class="sidebar-link" href="#website-visual">图片 / Logo / 第一屏</a>
-              <a class="sidebar-link" href="#website-display">语言 / 区块开关</a>
-              <a class="sidebar-link" href="#website-bonus">标签 / Quick Bonus</a>
-              <a class="sidebar-link" href="#website-colors">网页颜色设置</a>
-              <a class="sidebar-link" href="#website-copy">首页三语文案</a>
-            </div>
-            <div class="sidebar-group">
-              <div class="sidebar-group-title">COMPANY</div>
-              <a class="sidebar-link" href="#company-basic">公司基本资料</a>
-              <a class="sidebar-link" href="#company-card">卡片显示 / 标签</a>
-              <a class="sidebar-link" href="#company-links">链接 / Bonus / Live</a>
-              <a class="sidebar-link" href="#company-copy">三语公司文案</a>
-              <a class="sidebar-link" href="#company-list-panel">公司列表 / JSON</a>
-            </div>
-            <div class="sidebar-group">
-              <div class="sidebar-group-title">MARKETING</div>
-              <a class="sidebar-link" href="#social-basic">Join Our 基本资料</a>
-              <a class="sidebar-link" href="#social-copy">Join Our 三语文案</a>
-              <a class="sidebar-link" href="#test-basic">测试 ID 管理</a>
-            </div>
-            <div class="sidebar-group">
-              <div class="sidebar-group-title">DOMAIN</div>
-              <a class="sidebar-link" href="#domain-basic">Domain 基本资料</a>
-              <a class="sidebar-link" href="#domain-table-panel">Domain 列表</a>
-            </div>
+            <section class="sidebar-group is-open" data-menu-group>
+              <button class="sidebar-group-toggle" type="button" title="SYSTEM">
+                <span class="sidebar-group-icon">S</span>
+                <span class="sidebar-group-label">SYSTEM</span>
+                <span class="sidebar-arrow">⌄</span>
+              </button>
+              <div class="sidebar-submenu">
+                <button class="sidebar-link active" type="button" data-view-target="dashboard" title="总览 Dashboard">
+                  <span class="sidebar-link-icon">总</span>
+                  <span class="sidebar-link-label">总览 Dashboard</span>
+                </button>
+              </div>
+            </section>
+            <section class="sidebar-group is-open" data-menu-group>
+              <button class="sidebar-group-toggle" type="button" title="WEBSITE">
+                <span class="sidebar-group-icon">W</span>
+                <span class="sidebar-group-label">WEBSITE</span>
+                <span class="sidebar-arrow">⌄</span>
+              </button>
+              <div class="sidebar-submenu">
+                <button class="sidebar-link" type="button" data-view-target="website-visual" title="图片 / Logo / 第一屏">
+                  <span class="sidebar-link-icon">图</span>
+                  <span class="sidebar-link-label">图片 / Logo / 第一屏</span>
+                </button>
+                <button class="sidebar-link" type="button" data-view-target="website-display" title="语言 / 区块开关">
+                  <span class="sidebar-link-icon">语</span>
+                  <span class="sidebar-link-label">语言 / 区块开关</span>
+                </button>
+                <button class="sidebar-link" type="button" data-view-target="website-bonus" title="标签 / Quick Bonus">
+                  <span class="sidebar-link-icon">标</span>
+                  <span class="sidebar-link-label">标签 / Quick Bonus</span>
+                </button>
+                <button class="sidebar-link" type="button" data-view-target="website-colors" title="网页颜色设置">
+                  <span class="sidebar-link-icon">色</span>
+                  <span class="sidebar-link-label">网页颜色设置</span>
+                </button>
+                <button class="sidebar-link" type="button" data-view-target="website-copy" title="首页三语文案">
+                  <span class="sidebar-link-icon">文</span>
+                  <span class="sidebar-link-label">首页三语文案</span>
+                </button>
+              </div>
+            </section>
+            <section class="sidebar-group" data-menu-group>
+              <button class="sidebar-group-toggle" type="button" title="COMPANY">
+                <span class="sidebar-group-icon">C</span>
+                <span class="sidebar-group-label">COMPANY</span>
+                <span class="sidebar-arrow">⌄</span>
+              </button>
+              <div class="sidebar-submenu">
+                <button class="sidebar-link" type="button" data-view-target="company-basic" title="公司基本资料">
+                  <span class="sidebar-link-icon">基</span>
+                  <span class="sidebar-link-label">公司基本资料</span>
+                </button>
+                <button class="sidebar-link" type="button" data-view-target="company-card" title="卡片显示 / 标签">
+                  <span class="sidebar-link-icon">卡</span>
+                  <span class="sidebar-link-label">卡片显示 / 标签</span>
+                </button>
+                <button class="sidebar-link" type="button" data-view-target="company-links" title="链接 / Bonus / Live">
+                  <span class="sidebar-link-icon">链</span>
+                  <span class="sidebar-link-label">链接 / Bonus / Live</span>
+                </button>
+                <button class="sidebar-link" type="button" data-view-target="company-copy" title="三语公司文案">
+                  <span class="sidebar-link-icon">文</span>
+                  <span class="sidebar-link-label">三语公司文案</span>
+                </button>
+                <button class="sidebar-link" type="button" data-view-target="company-list-panel" title="公司列表 / JSON">
+                  <span class="sidebar-link-icon">列</span>
+                  <span class="sidebar-link-label">公司列表 / JSON</span>
+                </button>
+              </div>
+            </section>
+            <section class="sidebar-group" data-menu-group>
+              <button class="sidebar-group-toggle" type="button" title="MARKETING">
+                <span class="sidebar-group-icon">M</span>
+                <span class="sidebar-group-label">MARKETING</span>
+                <span class="sidebar-arrow">⌄</span>
+              </button>
+              <div class="sidebar-submenu">
+                <button class="sidebar-link" type="button" data-view-target="social-basic" title="Join Our 基本资料">
+                  <span class="sidebar-link-icon">社</span>
+                  <span class="sidebar-link-label">Join Our 基本资料</span>
+                </button>
+                <button class="sidebar-link" type="button" data-view-target="social-copy" title="Join Our 三语文案">
+                  <span class="sidebar-link-icon">文</span>
+                  <span class="sidebar-link-label">Join Our 三语文案</span>
+                </button>
+                <button class="sidebar-link" type="button" data-view-target="social-list-panel" title="社群入口列表">
+                  <span class="sidebar-link-icon">列</span>
+                  <span class="sidebar-link-label">社群入口列表</span>
+                </button>
+                <button class="sidebar-link" type="button" data-view-target="test-basic" title="测试 ID 管理">
+                  <span class="sidebar-link-icon">测</span>
+                  <span class="sidebar-link-label">测试 ID 管理</span>
+                </button>
+                <button class="sidebar-link" type="button" data-view-target="test-list-panel" title="测试 ID 列表">
+                  <span class="sidebar-link-icon">列</span>
+                  <span class="sidebar-link-label">测试 ID 列表</span>
+                </button>
+              </div>
+            </section>
+            <section class="sidebar-group" data-menu-group>
+              <button class="sidebar-group-toggle" type="button" title="DOMAIN">
+                <span class="sidebar-group-icon">D</span>
+                <span class="sidebar-group-label">DOMAIN</span>
+                <span class="sidebar-arrow">⌄</span>
+              </button>
+              <div class="sidebar-submenu">
+                <button class="sidebar-link" type="button" data-view-target="domain-basic" title="Domain 基本资料">
+                  <span class="sidebar-link-icon">域</span>
+                  <span class="sidebar-link-label">Domain 基本资料</span>
+                </button>
+                <button class="sidebar-link" type="button" data-view-target="domain-table-panel" title="Domain 列表">
+                  <span class="sidebar-link-icon">列</span>
+                  <span class="sidebar-link-label">Domain 列表</span>
+                </button>
+              </div>
+            </section>
           </nav>
         </aside>
+        <button class="sidebar-scrim" type="button" data-sidebar-close aria-label="关闭菜单"></button>
 
         <div class="admin-content">
         <section class="hero admin-section" id="dashboard">
@@ -2178,14 +2559,14 @@
                   <input id="bullet-limit" type="number" min="0" max="3" step="1" placeholder="3" />
                   <p class="hint">填 0 就不显示；填 1/2/3 就限制显示几行。</p>
                 </div>
+                <div class="form-break" id="company-links">
+                  <strong>链接 / Bonus Page / Live Transaction</strong>
+                  <span>注册链接、自动滑动 Bonus、Live 网页和备用资料</span>
+                </div>
                 <div class="field full">
                   <label for="url">注册链接</label>
                   <input id="url" required placeholder="例如 https://syabas99.com" />
                   <p class="hint">请填完整链接；系统不会自动修改。站内位置才用 #join。</p>
-                </div>
-                <div class="form-break" id="company-links">
-                  <strong>链接 / Bonus Page / Live Transaction</strong>
-                  <span>注册链接、自动滑动 Bonus、Live 网页和备用资料</span>
                 </div>
                 <label class="check-row">
                   <input id="bonus-page-enabled" type="checkbox" />
@@ -2470,7 +2851,7 @@
             </div>
           </form>
 
-          <section class="panel">
+          <section class="panel" id="social-list-panel">
             <div class="panel-head">
               <h2>社群入口列表</h2>
               <button class="btn btn-secondary btn-small" type="button" data-reset-social>恢复默认</button>
@@ -2536,7 +2917,7 @@
             </div>
           </form>
 
-          <section class="panel">
+          <section class="panel" id="test-list-panel">
             <div class="panel-head">
               <h2>测试 ID 列表</h2>
               <button class="btn btn-secondary btn-small" type="button" data-reset-test-ids>清空测试 ID</button>
@@ -4357,10 +4738,20 @@
 
       function exportBundle() {
         jsonData.value = JSON.stringify({ siteSettings, offers, socialLinks, domains, testIds }, null, 2);
+        setActiveAdminView("company-list-panel", { updateHash: true, scroll: false });
       }
 
       offerForm.addEventListener("submit", (event) => {
         event.preventDefault();
+        if (!validateRequiredField("company-basic", "name", "请先填写公司名字。")) {
+          return;
+        }
+        if (!validateRequiredField("company-basic", "amount", "请先填写奖金金额。")) {
+          return;
+        }
+        if (!validateRequiredField("company-links", "url", "请先填写完整注册链接。")) {
+          return;
+        }
         const offer = readOfferForm();
         const existingIndex = findIndex(offer.id);
         if (existingIndex >= 0) {
@@ -4374,6 +4765,12 @@
 
       socialForm.addEventListener("submit", (event) => {
         event.preventDefault();
+        if (!validateRequiredField("social-basic", "social-name", "请先填写社群入口名字。")) {
+          return;
+        }
+        if (!validateRequiredField("social-basic", "social-url", "请先填写社群完整链接。")) {
+          return;
+        }
         const link = readSocialForm();
         const existingIndex = findSocialIndex(link.id);
         if (existingIndex >= 0) {
@@ -4387,6 +4784,9 @@
 
       domainForm.addEventListener("submit", (event) => {
         event.preventDefault();
+        if (!validateRequiredField("domain-basic", "domain-name", "请先填写 Domain。")) {
+          return;
+        }
         const domain = readDomainForm();
         const existingIndex = findDomainIndex(domain.id);
         if (existingIndex >= 0) {
@@ -4429,18 +4829,285 @@
         window.location.href = `${basePath}/logout`;
       });
 
-      document.querySelectorAll(".sidebar-link").forEach((link) => {
-        link.addEventListener("click", () => {
-          document.querySelectorAll(".sidebar-link").forEach((item) => item.classList.remove("active"));
-          link.classList.add("active");
+      const adminViewMap = {
+        dashboard: { area: "dashboard" },
+        "website-visual": { area: "site", type: "range", id: "website-visual" },
+        "website-display": { area: "site", type: "range", id: "website-display" },
+        "website-bonus": { area: "site", type: "range", id: "website-bonus" },
+        "website-colors": { area: "site", type: "direct", selector: "#website-colors" },
+        "website-copy": { area: "site", type: "copy", id: "website-copy" },
+        "company-basic": { area: "company", type: "range", id: "company-basic" },
+        "company-card": { area: "company", type: "range", id: "company-card" },
+        "company-links": { area: "company", type: "range", id: "company-links" },
+        "company-copy": { area: "company", type: "copy", id: "company-copy" },
+        "company-list-panel": { area: "company-list", selector: "#company-list-panel" },
+        "social-basic": { area: "social", type: "range", id: "social-basic" },
+        "social-copy": { area: "social", type: "copy", id: "social-copy" },
+        "social-list-panel": { area: "social-list", selector: "#social-list-panel" },
+        "test-basic": { area: "test", selector: "#test-id-form" },
+        "test-list-panel": { area: "test-list", selector: "#test-list-panel" },
+        "domain-basic": { area: "domain", type: "form" },
+        "domain-table-panel": { area: "domain", type: "table" }
+      };
+
+      offerForm.noValidate = true;
+      socialForm.noValidate = true;
+      domainForm.noValidate = true;
+
+      function setAdminHidden(element, hidden = true) {
+        if (element) {
+          element.classList.toggle("admin-hidden", hidden);
+        }
+      }
+
+      function setChildrenHidden(parent, hidden = true) {
+        if (!parent) {
+          return;
+        }
+        Array.from(parent.children).forEach((child) => setAdminHidden(child, hidden));
+      }
+
+      function showRangeFromBreak(startId) {
+        const start = document.querySelector(`#${startId}`);
+        if (!start) {
+          return;
+        }
+
+        let current = start;
+        while (current) {
+          setAdminHidden(current, false);
+          current = current.nextElementSibling;
+          if (current?.classList.contains("form-break")) {
+            break;
+          }
+        }
+      }
+
+      function resetAdminViews() {
+        document.querySelectorAll(".category-heading").forEach((heading) => setAdminHidden(heading, true));
+        ["#dashboard", "#site-form", "#company-manager", "#social-manager", "#test-id-manager", "#domain-manager"].forEach((selector) => {
+          setAdminHidden(document.querySelector(selector), true);
         });
-      });
+
+        const siteBody = siteForm.querySelector(".panel-body");
+        const siteGrid = siteForm.querySelector(".panel-body > .form-grid");
+        setChildrenHidden(siteGrid, true);
+        setChildrenHidden(siteBody, true);
+        setAdminHidden(siteGrid, true);
+        setAdminHidden(siteBody.querySelector(".form-actions"), false);
+
+        const offerBody = offerForm.querySelector(".panel-body");
+        const offerGrid = offerForm.querySelector(".panel-body > .form-grid");
+        setChildrenHidden(offerGrid, true);
+        setChildrenHidden(offerBody, true);
+        setAdminHidden(offerGrid, true);
+        setAdminHidden(offerBody.querySelector(".form-actions"), false);
+
+        const socialBody = socialForm.querySelector(".panel-body");
+        const socialGrid = socialForm.querySelector(".panel-body > .form-grid");
+        setChildrenHidden(socialGrid, true);
+        setChildrenHidden(socialBody, true);
+        setAdminHidden(socialGrid, true);
+        setAdminHidden(socialBody.querySelector(".form-actions"), false);
+
+        setAdminHidden(offerForm, true);
+        setAdminHidden(document.querySelector("#company-list-panel"), true);
+        setAdminHidden(socialForm, true);
+        setAdminHidden(document.querySelector("#social-list-panel"), true);
+        setAdminHidden(testIdForm, true);
+        setAdminHidden(document.querySelector("#test-list-panel"), true);
+        setAdminHidden(domainForm, true);
+        setAdminHidden(document.querySelector("#domain-table-panel"), true);
+        setAdminHidden(document.querySelector("#domain-manager .notice"), true);
+      }
+
+      function showSiteView(view) {
+        const siteGrid = siteForm.querySelector(".panel-body > .form-grid");
+        setAdminHidden(siteForm, false);
+        if (view.type === "range") {
+          setAdminHidden(siteGrid, false);
+          showRangeFromBreak(view.id);
+        }
+        if (view.type === "direct") {
+          setAdminHidden(document.querySelector(view.selector), false);
+        }
+        if (view.type === "copy") {
+          setAdminHidden(document.querySelector(`#${view.id}`), false);
+          const siteBody = siteForm.querySelector(".panel-body");
+          Array.from(siteBody.children).forEach((child) => {
+            if (child.classList.contains("language-group") || child.classList.contains("advanced-copy")) {
+              setAdminHidden(child, false);
+            }
+          });
+        }
+      }
+
+      function showCompanyView(view) {
+        setAdminHidden(document.querySelector("#company-manager"), false);
+        if (view.area === "company-list") {
+          setAdminHidden(document.querySelector("#company-list-panel"), false);
+          return;
+        }
+
+        const offerGrid = offerForm.querySelector(".panel-body > .form-grid");
+        setAdminHidden(offerForm, false);
+        if (view.type === "range") {
+          setAdminHidden(offerGrid, false);
+          showRangeFromBreak(view.id);
+        }
+        if (view.type === "copy") {
+          setAdminHidden(document.querySelector(`#${view.id}`), false);
+          const offerBody = offerForm.querySelector(".panel-body");
+          Array.from(offerBody.children).forEach((child) => {
+            if (child.classList.contains("language-group")) {
+              setAdminHidden(child, false);
+            }
+          });
+        }
+      }
+
+      function showSocialView(view) {
+        setAdminHidden(document.querySelector("#social-manager"), false);
+        if (view.area === "social-list") {
+          setAdminHidden(document.querySelector("#social-list-panel"), false);
+          return;
+        }
+
+        const socialGrid = socialForm.querySelector(".panel-body > .form-grid");
+        setAdminHidden(socialForm, false);
+        if (view.type === "range") {
+          setAdminHidden(socialGrid, false);
+          showRangeFromBreak(view.id);
+        }
+        if (view.type === "copy") {
+          setAdminHidden(document.querySelector(`#${view.id}`), false);
+          const socialBody = socialForm.querySelector(".panel-body");
+          Array.from(socialBody.children).forEach((child) => {
+            if (child.classList.contains("language-group")) {
+              setAdminHidden(child, false);
+            }
+          });
+        }
+      }
+
+      function setActiveMenu(targetId) {
+        document.querySelectorAll(".sidebar-link").forEach((link) => {
+          link.classList.toggle("active", link.dataset.viewTarget === targetId);
+        });
+        document.querySelectorAll("[data-menu-group]").forEach((group) => {
+          const hasActive = Boolean(group.querySelector(`.sidebar-link[data-view-target="${targetId}"]`));
+          group.classList.toggle("has-active", hasActive);
+          if (hasActive) {
+            group.classList.add("is-open");
+          }
+        });
+      }
+
+      function setActiveAdminView(targetId, options = {}) {
+        const view = adminViewMap[targetId] || adminViewMap.dashboard;
+        resetAdminViews();
+
+        if (view.area === "dashboard") {
+          setAdminHidden(document.querySelector("#dashboard"), false);
+        } else if (view.area === "site") {
+          showSiteView(view);
+        } else if (view.area === "company" || view.area === "company-list") {
+          showCompanyView(view);
+        } else if (view.area === "social" || view.area === "social-list") {
+          showSocialView(view);
+        } else if (view.area === "test") {
+          setAdminHidden(document.querySelector("#test-id-manager"), false);
+          setAdminHidden(testIdForm, false);
+        } else if (view.area === "test-list") {
+          setAdminHidden(document.querySelector("#test-id-manager"), false);
+          setAdminHidden(document.querySelector("#test-list-panel"), false);
+        } else if (view.area === "domain") {
+          setAdminHidden(document.querySelector("#domain-manager"), false);
+          if (view.type === "form") {
+            setAdminHidden(domainForm, false);
+          } else {
+            setAdminHidden(document.querySelector("#domain-table-panel"), false);
+            setAdminHidden(document.querySelector("#domain-manager .notice"), false);
+          }
+        }
+
+        setActiveMenu(targetId);
+        document.body.classList.remove("sidebar-drawer-open");
+        if (options.updateHash !== false) {
+          history.replaceState(null, "", `#${targetId}`);
+        }
+        if (options.scroll !== false) {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
+
+      function focusRequiredField(viewId, fieldId, message) {
+        setActiveAdminView(viewId, { updateHash: true, scroll: false });
+        alert(message);
+        setTimeout(() => document.querySelector(`#${fieldId}`)?.focus(), 30);
+      }
+
+      function validateRequiredField(viewId, fieldId, message) {
+        if (getValue(fieldId)) {
+          return true;
+        }
+        focusRequiredField(viewId, fieldId, message);
+        return false;
+      }
+
+      function setupAdminPortalNavigation() {
+        const shell = document.querySelector(".admin-shell");
+        const searchInput = document.querySelector("[data-menu-search]");
+        document.querySelectorAll(".sidebar-group-toggle").forEach((button) => {
+          button.addEventListener("click", () => {
+            button.closest("[data-menu-group]")?.classList.toggle("is-open");
+          });
+        });
+
+        document.querySelectorAll(".sidebar-link").forEach((link) => {
+          link.addEventListener("click", () => setActiveAdminView(link.dataset.viewTarget));
+        });
+
+        document.querySelector("[data-sidebar-toggle]")?.addEventListener("click", () => {
+          shell.classList.toggle("sidebar-collapsed");
+        });
+
+        document.querySelector("[data-sidebar-open]")?.addEventListener("click", () => {
+          document.body.classList.add("sidebar-drawer-open");
+        });
+
+        document.querySelector("[data-sidebar-close]")?.addEventListener("click", () => {
+          document.body.classList.remove("sidebar-drawer-open");
+        });
+
+        searchInput?.addEventListener("input", () => {
+          const query = searchInput.value.trim().toLowerCase();
+          document.querySelectorAll("[data-menu-group]").forEach((group) => {
+            let hasVisibleLink = false;
+            group.querySelectorAll(".sidebar-link").forEach((link) => {
+              const text = `${link.textContent} ${link.title}`.toLowerCase();
+              const matched = !query || text.includes(query);
+              link.classList.toggle("is-search-hidden", !matched);
+              if (matched) {
+                hasVisibleLink = true;
+              }
+            });
+            group.classList.toggle("is-search-hidden", !hasVisibleLink);
+            if (query && hasVisibleLink) {
+              group.classList.add("is-open");
+            }
+          });
+        });
+
+        const initialTarget = window.location.hash.replace("#", "");
+        setActiveAdminView(adminViewMap[initialTarget] ? initialTarget : "dashboard", { updateHash: false, scroll: false });
+      }
 
       document.querySelector("[data-new]").addEventListener("click", resetOfferForm);
       document.querySelector("[data-new-social]").addEventListener("click", resetSocialForm);
       document.querySelector("[data-new-domain]").addEventListener("click", () => {
         resetDomainForm();
-        window.scrollTo({ top: document.querySelector("#domain-manager").offsetTop - 80, behavior: "smooth" });
+        setActiveAdminView("domain-basic", { updateHash: true, scroll: false });
       });
       document.querySelector("[data-generate-test-id]").addEventListener("click", () => {
         setValue("test-original-id", "");
@@ -4513,7 +5180,7 @@
 
         if (action === "edit") {
           fillOfferForm(offers[index]);
-          window.scrollTo({ top: document.querySelector("#offer-form").offsetTop - 80, behavior: "smooth" });
+          setActiveAdminView("company-basic", { updateHash: true, scroll: false });
         }
 
         if (action === "toggle") {
@@ -4550,7 +5217,7 @@
 
         if (action === "edit") {
           fillSocialForm(socialLinks[index]);
-          window.scrollTo({ top: document.querySelector("#social-form").offsetTop - 80, behavior: "smooth" });
+          setActiveAdminView("social-basic", { updateHash: true, scroll: false });
         }
 
         if (action === "toggle") {
@@ -4611,7 +5278,7 @@
 
         if (action === "edit") {
           fillTestForm(test);
-          window.scrollTo({ top: document.querySelector("#test-id-manager").offsetTop - 80, behavior: "smooth" });
+          setActiveAdminView("test-basic", { updateHash: true, scroll: false });
         }
 
         if (action === "delete" && confirm(`删除 ${test.id}？`)) {
@@ -4635,7 +5302,7 @@
 
         if (action === "edit") {
           fillDomainForm(domains[index]);
-          window.scrollTo({ top: document.querySelector("#domain-manager").offsetTop - 80, behavior: "smooth" });
+          setActiveAdminView("domain-basic", { updateHash: true, scroll: false });
         }
 
         if (action === "connect") {
@@ -4782,6 +5449,7 @@
 
       renderAdvancedCopyFields();
       colorLanguageGroups();
+      setupAdminPortalNavigation();
 
       async function initializeAdmin() {
         const loadedServerData = await loadServerBundle();
